@@ -11,6 +11,7 @@ import { FaGooglePlay } from 'react-icons/fa'
 import DesktopFooter from '@/components/DesktopFooter'
 import FilterForm from "./FilterForm";
 import { BiSearch } from "react-icons/bi";
+import { MdOutlineNotifications } from "react-icons/md";
 
 
 
@@ -18,12 +19,14 @@ export default function HomePage() {
    const [showFilterCard, setShowFilterCard] = useState(false)
   
   return (
-   <div className='flex flex-col md:grid grid-cols md:grid-cols-2 gap-4 px-2b items-center  md:px-16' >
-       <div className='flex justify-between col-span-2   p-4 ' >
+   <div className='flex flex-col overflow-x-hidden  md:grid grid-cols md:grid-cols-2 gap-4 px-2b items-center  md:px-16' >
+       <div className='flex justify-between col-span-2 items-center w-screen px-10  p-4 ' >
             <div className='flex-1 w-full '>
-               <p className='font-normal text-sm text-grey-light mb-3' > Hey James</p>
+               <p className='font-normal  text-sm text-grey-light mb-3' > Hey James</p>
              <h2 className="text-blue-800 w-full text-2xl font-bold mt-4 ">Lets start Exploring</h2>
              </div> 
+           
+                <MdOutlineNotifications size={30}  className="text-grey-light"/>
       </div>
       <div className=' text-grey-light flex  items-center border border-grey-light rounded-md w-[85vw] mx-4 px-2 h-16  '>
          <BiSearch size={28} className='text-grey-light  '/>

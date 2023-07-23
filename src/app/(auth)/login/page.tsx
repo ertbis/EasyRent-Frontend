@@ -137,7 +137,7 @@ const Login = () => {
         </button>
       </div>
         <div className='mt-3  w-full'>
-           <p className='text-center  text-grey-light text-sm'>Dont have an account?<a  className='text-green-700 cursor-pointer'>SignUp</a> </p>
+           <p className='text-center  text-grey-light text-sm'>Dont have an account?<a href='/signup' className='text-green-700 cursor-pointer'>SignUp</a> </p>
       </div>
       </>
           )}

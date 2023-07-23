@@ -19,7 +19,7 @@ const SignUp = () => {
     email: '',
     password: '',
     confirm_password: '',
-    isLandLord: false, 
+    role: "landload", 
   });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -58,10 +58,10 @@ const SignUp = () => {
   };
 
   return (
-    <div className="relative bg-cover" style={{ backgroundImage: 'url("/formbg.png")' }}>
+    <div className="relative bg-cbover" style={{ backgroundImage: 'url("/formbg.png")' }}>
       <DesktopHeader />
       <div className="flex items-center justify-end min-h-screen w-full ">
-        <div className="pt-16 md:pt-4 w-full m-0 h-screen md:h-full  md:w-[45%]    lg:w-[38%] px-8 md:py-4 bg-white md:rounded-xl shadow-lg md:py-2 md:pb-6 md:mr-16 md:mt-12  text-grey-light">
+      <div className="pt-16 md:pt-4 w-full m-0 h-screen md:h-full  md:w-[45%]  lg:py-12  lg:w-[38%] px-8 md:py-4 bg-white md:rounded-xl shadow-lg md:py-2 md:pb-6 md:mr-16 md:mt-12  text-grey-light">
           {loading ? (
             <Loading />
           ) : (
@@ -140,13 +140,13 @@ const SignUp = () => {
                 <div className="flex items-center">
                   <input
                     type="checkbox"
-                    id="isLandLord"
-                    name="isLandLord"
+                    id="role"
+                    name="role"
                     className="mr-2"
-                    checked={inputData.isLandLord}
+                    checked={inputData.role == "landload"}
                     onChange={handleChange}
                   />
-                  <label htmlFor="isLandLord">I am a Landlord</label>
+                  <label htmlFor="role">I am a Landlord</label>
                 </div>
 
                 <button
@@ -177,11 +177,11 @@ const SignUp = () => {
                   <FaFacebook size={27} className="text-[#1877F2]" />
                   <p className="md:hidden text-grey-light ml-4">Continue With Facebook</p>
                 </button>
-              </div>
+              </div>landload
               <div className="mt-3  w-full">
                 <p className="text-center  text-grey-light text-sm">
                   Already have an account?
-                  <a className="text-green-700 cursor-pointer">Login</a>
+                  <a href="/login" className="text-green-700 cursor-pointer">Login</a>
                 </p>
               </div>
             </>

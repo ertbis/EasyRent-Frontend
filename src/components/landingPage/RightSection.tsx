@@ -13,7 +13,7 @@ import Image from 'next/image';
 const RightSection :FC = () => {
     const selectedHouse = useSelector((state: RootState) => state.selectedHouse.selectedHouse)
     return ( 
-        <div className='hidden  sm:flex-1 bg-[#F5F4F8] md:h-[62rem] w-full  p-4 rounded-xl  ' >
+        <div className='  sm:flex-1 bg-[#F5F4F8] md:h-[62rem] w-full  p-4 rounded-xl  ' >
 
 <div className=" grid grid-cols-1 md:grid-rows-2 md:grid-cols-2 gap-4 md:mr-4 h-[20rem]">
       <div className="relative row-span-2 w-full aspect-w-1 aspect-h-1 rounded-xl">

@@ -20,7 +20,7 @@ export default function HomePage() {
 
    // Function to check if the screen size is mobile or desktop
    const handleResize = () => {
-     setIsMobileView(window.innerWidth <= 768); // You can adjust the breakpoint as needed
+     setIsMobileView(window.innerWidth <= 800); // You can adjust the breakpoint as needed
    };
  
    // Add event listener to handle window resize

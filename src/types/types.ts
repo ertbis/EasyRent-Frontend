@@ -25,3 +25,7 @@ export type logInDetailsType = {
   email: string
   password: string,
 }
+
+export type TokenUserType = {
+  email : string
+}

@@ -7,6 +7,7 @@ import { VerifyOTPCode } from '../../../../utils/data/endpoints';
 import { getUser } from '../../../../utils/auth';
 import { useRouter } from 'next/navigation';
 import Loading from '@/components/Loading';
+import { TokenUserType } from '@/types/types';
 
 
 
@@ -14,6 +15,7 @@ const VerifyOtp = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [User, setUser] = useState<TokenUserType | null>(null);
 
   const [otp, setOtp] = useState<string[]>([]);
   const otpInputs = useRef<Array<HTMLInputElement | null>>(Array(4).fill(null));
@@ -24,6 +26,7 @@ const VerifyOtp = () => {
     // Perform necessary actions with the OTP
     const otpString = otp.join('')
     const user = getUser()
+    setUser(user)
     const reqBody = {
       email : user.email,
       temp_code : otpString
@@ -83,7 +86,7 @@ const VerifyOtp = () => {
             <>
 
         <h2 className="text-blue-800 w-[70%] text-2xl font-bold mt-4 ">Enter the code</h2>
-        <p className='font-normal text-sm text-grey-light mb-3' > Enter the Code sent to<span className='font-semibold'> Emmygmail.com</span></p>
+        <p className='font-normal text-sm text-grey-light mb-3' > Enter the Code sent to<span className='font-semibold'> {User?.email  ? User?.email : "No email"}</span></p>
         <form onSubmit={handleSubmit} className="flex flex-wrap  flex-col justify-between h-[90%] md:space-y-4">
               <div className="flex  space-x-4 my-10">
                 {Array.from({ length: 6 }, (_, index) => (

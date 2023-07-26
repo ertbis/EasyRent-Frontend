@@ -47,11 +47,11 @@ const addtoFavourite = async () => {
                 }
 
                  </div>
-                 <div className='w-full h-full rounded-xl'>
-                  <img
+                 <div className='w-[9rem] h-[10rem]  md:w-full md:h-full rounded-xl'>
+                  <Image
                     src={house.images[0]}
                     alt={house.apartment}
-                    
+                    fill
                     className='w-full h-full rounded-xl'
                   />
                 </div>

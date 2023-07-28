@@ -45,8 +45,8 @@ export default function HomePage() {
 
 const MobileView = () => {
    return (
-      <div className='flex flex-col overflow-x-hidden  md:grid grid-cols md:grid-cols-2 gap-4 px-2 items-center  md:px-8' >
-      <div className='flex justify-between col-span-2 items-center w-screen px-8  p-4 ' >
+      <div className='flex flex-col overflow-x-hidden  gap-4 px-4 items-center  ' >
+      <div className='flex justify-between col-span-2 items-center w-[100%]  p-4 ' >
            <div className='flex-1 w-full '>
               <p className='font-normal  text-sm text-grey-light mb-3' > Hey James</p>
             <h2 className="text-blue-800 w-full text-2xl font-bold mt-4 ">Lets start Exploring</h2>
@@ -54,31 +54,32 @@ const MobileView = () => {
           
                <MdOutlineNotifications size={30}  className="text-grey-light"/>
      </div>
-     <div className=' text-grey-light flex  items-center border border-grey-light rounded-md w-[85vw] mx-4 px-2 h-16  '>
+     <div className=' text-grey-light flex  items-center border border-grey-light rounded-md w-[85vw]  p-2  h-16  '>
         <BiSearch size={28} className='text-grey-light  '/>
            <input
            type="search"
            id="search"
            name="search"
            placeholder='Search Apartment'
-           className=" outline-none p-4 h-[70%] flex-1"
+           className=" outline-none p-4 h-[70%] w-full"
            
            />
    <BsFilterRight size={30} className="mr-2 cursor-pointer  border-l pl-2 border-grey-light ml-2 "/>
 
        </div>
 
-       <div className="flex p-0 m-0 px-8 w-full font-[400] text-[1rem] justify-between mx-auto">
+       <div className="flex p-0 m-0 px-4 w-full font-[400] text-[1rem] justify-between mx-auto">
          <h3 className="text-blue-800 p-0 m-0">Current Location</h3>
-         <h3 className="text-green-700 p-0 m-0">See all</h3>
+         <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
        </div>
        <div className="w-[90vw] mx-auto p-0 m-0 ">
       <LeftSection/>
   
       </div>
-      <div className="flex p-0 m-0 px-8 w-full font-[400] text-[1rem] justify-between mx-auto">
+      <div className="flex p-0 m-0 px-4 w-full font-[400] text-[1rem] justify-between mx-auto">
             <h3 className="text-blue-800 p-0 m-0">Top Location</h3>
-            <h3 className="text-green-700 p-0 m-0">See all</h3>
+            <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
+
          </div>
 
       <div className="flex w-[85vw]  mx-auto overflow-x-scroll">
@@ -102,9 +103,9 @@ const MobileView = () => {
       </div>
 
 
-      <div className="flex p-0 m-0  mt-[1rem] px-8 w-full font-[400] text-[1rem] justify-between mx-auto">
+      <div className="flex p-0 m-0  mt-[1rem] px-4 w-full font-[400] text-[1rem] justify-between mx-auto">
          <h3 className="text-blue-800 p-0 m-0">Popular</h3>
-         <h3 className="text-green-700 p-0 m-0">See all</h3>
+         <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
       </div>
 
       <div className="w-[90vw] mx-auto p-0 m-0 ">

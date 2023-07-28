@@ -60,19 +60,19 @@ const RightSection :FC = () => {
             {selectedHouse.mainFeatures.light   &&
                     <div className="flex h-6 bg-white  mr-4  justify-center items-center rounded-xl p-[0.4rem] " >
                         <HiOutlineLightBulb  className='w-4 h-4 mr-[0.6rem]' />
-                        <p className="text-grey-light text-xs ">24 hrs light</p>
+                        <p className="hidden lg:block text-grey-light text-xs ">24 hrs light</p>
                     </div>
             }
             {selectedHouse.mainFeatures.school   &&
                     <div className="flex h-6 bg-white mr-4  justify-center items-center rounded-xl p-[0.4rem] " >
                         <FaWalking  className='w-4 h-4 mr-[0.6rem]' />
-                        <p className="text-grey-light text-xs" >School in 30mins</p>
+                        <p className=" hidden  lg:block text-grey-light text-xs" >School in 30mins</p>
                     </div>
             }
             {selectedHouse.mainFeatures.carPack   &&
                     <div className="flex h-6 bg-white mr-4   justify-center items-center rounded-xl p-[0.4rem] " >
                         <AiFillCar   className='w-4 h-4 mr-[0.6rem]'  />
-                        <p className="text-grey-light text-xs">Car Park</p>
+                        <p className="hidden  lg:block text-grey-light text-xs">Car Park</p>
                     </div>
             }
             </div>

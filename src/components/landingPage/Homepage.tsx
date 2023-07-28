@@ -20,15 +20,23 @@ export default function HomePage() {
 
    // Function to check if the screen size is mobile or desktop
    const handleResize = () => {
-     setIsMobileView(window.innerWidth <= 800); // You can adjust the breakpoint as needed
+      if (typeof window !== 'undefined') {
+
+         setIsMobileView(window.innerWidth <= 800);
+         console.log(isMobileView) // You can adjust the breakpoint as needed
+      }
    };
  
    // Add event listener to handle window resize
    useEffect(() => {
-     window.addEventListener('resize', handleResize);
-     handleResize(); // Call it initially to set the initial view
-     return () => {
-       window.removeEventListener('resize', handleResize);
+
+      if (typeof window !== 'undefined') {
+
+         window.addEventListener('resize', handleResize);
+         handleResize(); // Call it initially to set the initial view
+         return () => {
+           window.removeEventListener('resize', handleResize);
+      }
      };
    }, []);
   

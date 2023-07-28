@@ -57,30 +57,30 @@ const addtoFavourite = async () => {
                 </div>
              </div>
              <div className="flex  mx-2">
-                <p className='flex-1 text-blue-800 w-[70%]  text-[0.75rem] md:text-lg font-bold ' >{` #${house.amount}`}<span className=' text-[0.5rem] md:text-sm'>/Year</span></p>
+                <p className='flex-1 text-blue-800 w-[70%]  text-[0.75rem] lg:text-lg font-bold ' >{` #${house.amount}`}<span className=' text-[0.5rem] lg:text-sm'>/Year</span></p>
                <div className='flex flex-[0.5] justify-start items-center text-grey-light text-sm w-full'>
                     <CiLocationOn size={15}  className='ml-4 text-blue-800'/>
-                    <p className=' flex text-[0.5rem] md:text-sm'> Damico</p>
+                    <p className=' flex text-[0.5rem] lg:text-sm'> Damico</p>
                </div>
             </div>
               <p className='text-[0.5rem] md:text-sm text-grey-light mx-2 md:font-bold'>{house.apartment}</p>
               <div className='hidden  md:grid grid-cols-3 gap-1  justify-start items-center' >
                   {house.mainFeatures.light &&  
-                    <div className="flex h-6 bg-white w-full  mr-2  justify-center items-center rounded-xl p-[0.3rem] " >
+                    <div  title='24 hrs light' className="flex h-6 bg-white w-full  mr-2  justify-center items-center rounded-xl p-[0.3rem] " >
                         <HiOutlineLightBulb  className='w-3 h-3 text-grey-light mr-2 ' />
-                        <p className="text-grey-light text-[0.5rem]">24 hrs light</p>
+                        <p  className="hidden   lg:block  text-grey-light text-[0.5rem]">24 hrs light</p>
                     </div>
                   }  
                   {house.mainFeatures.school &&
-                    <div className="flex h-6 bg-white mr-1 w-full  justify-center items-center rounded-xl p-[0.3rem] " >
+                    <div title='School in 30mins' className="flex h-6 bg-white mr-1 w-full  justify-center items-center rounded-xl p-[0.3rem] " >
                         <FaWalking  className='w-3 h-3 text-grey-light mr-1 ' />
-                        <p className="text-grey-light text-[0.5rem]" >School in 30mins</p>
+                        <p  className="hidden   lg:block text-grey-light md:text-[0.5rem]" >School in 30mins</p>
                     </div>
                   }
                   {house.mainFeatures.carPack &&
-                    <div className="flex h-6 bg-white  mr-1 w-full    justify-center items-center rounded-xl p-[0.3rem] " >
+                    <div title='Car Park' className="flex h-6 bg-white  mr-1 w-full    justify-center items-center rounded-xl p-[0.3rem] " >
                         <AiFillCar   className='w-3 h-3 text-grey-light mr-1'  />
-                        <p className="text-grey-light text-[0.5rem]">Car Park</p>
+                        <p  className="hidden   lg:block   text-grey-light text-[0.5rem]">Car Park</p>
                     </div>
                   }
             </div>

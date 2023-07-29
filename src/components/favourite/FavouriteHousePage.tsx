@@ -41,7 +41,7 @@ const FavouriteHousePage = () => {
             </div>
           </div>
         </div>
-          <h2 data-aos="fade-up" className="text-blue-800 text-2xl font-semibold">You don’t have any saved house</h2>
+          <h2 data-aos="fade-up" className="text-blue-800  text-center text-2xl font-semibold">You don’t have any saved house</h2>
           <p data-aos="fade-up" className="text-grey-light text-center text-lg">Click the add button above to start exploring and choose your favorite estates.</p>
       </div>
       

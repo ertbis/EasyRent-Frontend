@@ -10,34 +10,28 @@ import { AiFillApple } from 'react-icons/ai'
 import { FaGooglePlay } from 'react-icons/fa'
 import DesktopFooter from '@/components/DesktopFooter'
 import FilterForm from "./FilterForm";
-import { BiSearch } from "react-icons/bi";
+import { BiSearch ,BiHomeAlt } from "react-icons/bi";
 import { MdOutlineNotifications } from "react-icons/md";
 
 
 
 export default function HomePage() {
-   const [isMobileView, setIsMobileView] = React.useState(false);
+   const [isMobileView, setIsMobileView] = React.useState(true);
 
    // Function to check if the screen size is mobile or desktop
    const handleResize = () => {
-      if (typeof window !== 'undefined') {
 
-         setIsMobileView(window.innerWidth <= 800);
-         console.log(isMobileView) // You can adjust the breakpoint as needed
-      }
+   //   setIsMobileView(window.innerWidth <= 800);
+   //   console.log(window.innerWidth) // You can adjust the breakpoint as needed
    };
  
    // Add event listener to handle window resize
    useEffect(() => {
 
-      if (typeof window !== 'undefined') {
-
-         window.addEventListener('resize', handleResize);
-         handleResize(); // Call it initially to set the initial view
-         return () => {
-           window.removeEventListener('resize', handleResize);
-      }
-     };
+     handleResize(); // Call it initially to set the initial view
+   //   return () => {
+   //     window.removeEventListener('resize', handleResize);
+   //   };
    }, []);
   
   return (
@@ -53,8 +47,8 @@ export default function HomePage() {
 
 const MobileView = () => {
    return (
-      <div className='flex flex-col overflow-x-hidden  md:grid grid-cols md:grid-cols-2 gap-4 px-2b items-center  md:px-16' >
-      <div className='flex justify-between col-span-2 items-center w-screen px-10  p-4 ' >
+      <div className='flex flex-col overflow-x-hidden  gap-4 px-4 items-center  ' >
+      <div className='flex justify-between col-span-2 items-center w-[100%]  p-4 ' >
            <div className='flex-1 w-full '>
               <p className='font-normal  text-sm text-grey-light mb-3' > Hey James</p>
             <h2 className="text-blue-800 w-full text-2xl font-bold mt-4 ">Lets start Exploring</h2>
@@ -62,23 +56,70 @@ const MobileView = () => {
           
                <MdOutlineNotifications size={30}  className="text-grey-light"/>
      </div>
-     <div className=' text-grey-light flex  items-center border border-grey-light rounded-md w-[85vw] mx-4 px-2 h-16  '>
+     <div className=' text-grey-light flex  items-center border border-grey-light rounded-md w-[85vw]  p-2  h-16  '>
         <BiSearch size={28} className='text-grey-light  '/>
            <input
            type="search"
            id="search"
            name="search"
            placeholder='Search Apartment'
-           className=" outline-none p-4 h-[70%] flex-1"
+           className=" outline-none p-4 h-[70%] w-full"
            
            />
    <BsFilterRight size={30} className="mr-2 cursor-pointer  border-l pl-2 border-grey-light ml-2 "/>
 
        </div>
-     <LeftSection/>
+
+       <div className="flex p-0 m-0 px-4 w-full font-[400] text-[1rem] justify-between mx-auto">
+         <h3 className="text-blue-800 p-0 m-0">Current Location</h3>
+         <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
+       </div>
+       <div className="w-[90vw] mx-auto p-0 m-0 ">
+      <LeftSection/>
+  
+      </div>
+      <div className="flex p-0 m-0 px-4 w-full font-[400] text-[1rem] justify-between mx-auto">
+            <h3 className="text-blue-800 p-0 m-0">Top Location</h3>
+            <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
+
+         </div>
+
+      <div className="flex w-[85vw]  mx-auto overflow-x-scroll">
+         <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center">
+            <BiHomeAlt size={18}  className=" text-grey-light"/>
+            <p className="text-[0.875]  text-grey-light">Damico</p>
+         </div>
+         <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center">
+            <BiHomeAlt size={18}  className=" text-grey-light"/>
+            <p className="text-[0.875]  text-grey-light">Damico</p>
+         </div>
+         <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center">
+            <BiHomeAlt size={18}  className=" text-grey-light"/>
+            <p className="text-[0.875]  text-grey-light">Damico</p>
+         </div>
+         <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center">
+            <BiHomeAlt size={18}  className=" text-grey-light"/>
+            <p className="text-[0.875]  text-grey-light">Damico</p>
+         </div>
+
+      </div>
+
+
+      <div className="flex p-0 m-0  mt-[1rem] px-4 w-full font-[400] text-[1rem] justify-between mx-auto">
+         <h3 className="text-blue-800 p-0 m-0">Popular</h3>
+         <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
+      </div>
+
+      <div className="w-[90vw] mx-auto p-0 m-0  mb-12 ">
+      <LeftSection/>
+      </div>
+       
+
+       
   </div>
    )
 }
+ 
 
 const DesktopView = ()=> {
    const [showFilterCard, setShowFilterCard] = useState(false)

@@ -17,7 +17,7 @@ const FilterForm: FC<FilterFormProp> = ({setShowFilterCard}) => {
         <div className="fixed z-[1000]  top-0 bg-[#a7a4a4b5] w-screen h-screen flex justify-center items-center" >
 
 
-     <div data-aos="zoom-in" className=" relative bg-white rounded-lg z-[10000] p-4 w-[20rem] h-[24rem]  ">
+     <div data-aos="zoom-in" className=" relative bg-white rounded-lg z-[10000] p-4 w-screen h-screen md:w-[20rem] md:h-[24rem]  ">
    
           <AiOutlineLeft size={18} onClick={()=>setShowFilterCard(false)} className="absolute text-gray-700 left-4 top-100  cursor-pointer"/>
         <h3  className="text-blue-800 text-center font-bold text-lg ">Filter</h3>

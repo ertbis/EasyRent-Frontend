@@ -103,7 +103,7 @@ const Login = () => {
         </div>
         <div className='mb-4'>
 
-         <a className='align-right  cursor-pointer text-green-700 text-medium'>Forgot Password</a>
+         <a href='/forgetpassword' className='align-right  cursor-pointer text-green-700 text-medium'>Forgot Password</a>
        </div>
 
         <button

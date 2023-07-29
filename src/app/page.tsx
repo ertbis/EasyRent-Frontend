@@ -12,11 +12,12 @@ import InboxPage from "@/components/inbox/InboxPage";
 
 import NotificationPage from "@/components/notification/NotificatinoPage";
 import ChatPage from "@/components/inbox/ChatPage";
+import MobileFooter from "@/components/common/MobileFooter";
 
 export default function Home() {
      const [tab , setTab] = useState<string>('home')
   return (
-    <main className=" flex bg-[#f5f4f8 ]  min-h-screen flex-col items-center justify-between ">
+    <main className="relative flex bg-[#f5f4f8 ]  min-h-screen flex-col items-center justify-between ">
        <Head>
         <title>ERT website</title>
         <meta property="og:title" content="My page title" key="title" />
@@ -27,10 +28,12 @@ export default function Home() {
        <LpHeader  setTab={setTab}/>
        {tab ==='home' && <HomePage/>}
        {tab ==='save' && <FavouriteHousePage/>}
-       {tab ==='inbox' && <ChatPage/>}
+       {tab ==='inbox' && <InboxPage/>}
        {tab ==='notification' && <NotificationPage/>}
+     
+       <MobileFooter  setTab={setTab}/>
 
-
+       
        <DesktopFooter/>
     </main>
   )

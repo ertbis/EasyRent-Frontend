@@ -3,6 +3,7 @@
 import { useState, useRef, ChangeEvent, KeyboardEvent, RefObject } from 'react';
 import DesktopHeader from '../../../components/DesktopHeader';
 import {BiTime} from "react-icons/bi"
+import { AiOutlineLeft } from 'react-icons/ai';
 
 
 const forgetPassword = () => {
@@ -46,10 +47,16 @@ const forgetPassword = () => {
 
   return (
     <div className=' relative  bg-cover ' style={{ backgroundImage:'url("/formbg.png")'  }}>
-    <DesktopHeader/>
     <div className="flex   items-center justify-end min-h-screen w-full ">
-      <div className="flex flex-col justify-between pt-16 md:pt-0 w-full m-0 h-screen  md:h-[75vh]   md:w-[30%] px-8 py-10 bg-white md:rounded-xl shadow-lg  md:mr-16  text-grey-light">
-        <h2 className="text-blue-800 w-[70%] text-2xl font-bold mt-4 ">Forgot Password</h2>
+      <div className="flex flex-col justify-between  md:pt-0 w-full m-0 h-screen  md:h-[75vh]   md:w-[30%] px-8 py-4 bg-white md:rounded-xl shadow-lg  md:mr-16  text-grey-light">
+       
+      <div className=' text-grey-light flex  items-center  justify-start mb-2  w-full h-16  '>
+              <a href="/">
+              <AiOutlineLeft size={25} className='text-green-700  '/>
+            </a>
+
+       </div>
+        <h2 className="text-blue-800 w-[70%] text-2xl font-bold mt-0 ">Forgot Password</h2>
         <p className='font-normal text-sm text-grey-light mb-3' >Enter the email you used to create your
             account so we can send you instructions
             on how to reset your password.

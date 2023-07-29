@@ -8,6 +8,7 @@ import { getUser } from '../../../../utils/auth';
 import { useRouter } from 'next/navigation';
 import Loading from '@/components/Loading';
 import { TokenUserType } from '@/types/types';
+import { AiOutlineLeft } from 'react-icons/ai';
 
 
 
@@ -34,7 +35,7 @@ const VerifyOtp = () => {
     try {
       const resp = VerifyOTPCode(reqBody)
       console.log(resp)
-      router.push('/');
+      router.push('/uploaddp');
 
     } catch (error) {
        console.log(error)
@@ -76,20 +77,24 @@ const VerifyOtp = () => {
   return (
     <div className=' relative  bg-cover ' style={{ backgroundImage:'url("/formbg.png")'  }}>
 
-      <DesktopHeader/>
     <div className="flex   items-center justify-end min-h-screen w-full ">
-      <div className="pt-16 md:pt-0 w-full m-0 h-screen md:h-[78vh]  md:w-[33%] px-8 py-10 bg-[#F5F4F8] md:rounded-xl shadow-lg  md:mr-16 md:h-full  text-grey-light">
+      <div className=" md:pt-0 w-full m-0 h-screen md:h-[78vh]  md:w-[33%] px-4 py-4 bg-[#F5F4F8] md:rounded-xl shadow-lg  md:mr-16 md:h-full  text-grey-light">
       
       {loading ? (
             <Loading />
           ) : (
             <>
+       <div className=' text-grey-light flex  items-center  justify-between mb-2  w-full h-16  '>
+              <a href="/">
+              <AiOutlineLeft size={25} className='text-green-700  '/>
+            </a>
 
-        <h2 className="text-blue-800 w-[70%] text-2xl font-bold mt-4 ">Enter the code</h2>
-        <p className='font-normal text-sm text-grey-light mb-3' > Enter the Code sent to<span className='font-semibold'> {User?.email  ? User?.email : "No email"}</span></p>
+             <h2 className="text-blue-800 w-[70%] text-xl font-bold ">Enter the code</h2>
+       </div>
+        <p className='font-normal text-sm text-grey-light ' > Enter the Code sent to<span className='font-semibold'> {User?.email  ? User?.email : "No email"}</span></p>
         <form onSubmit={handleSubmit} className="flex flex-wrap  flex-col justify-between h-[90%] md:space-y-4">
               <div className="flex  space-x-4 my-10">
-                {Array.from({ length: 6}, (_, index) => (
+                {Array.from({ length: 4}, (_, index) => (
                   <input
                     key={index}
                     ref={(el) => (otpInputs.current[index] = el)}

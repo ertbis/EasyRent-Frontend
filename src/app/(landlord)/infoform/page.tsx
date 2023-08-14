@@ -3,13 +3,13 @@
 import React, { useState } from 'react';
 import { AiOutlineLeft } from 'react-icons/ai';
 
-interface PersonalInfoFormProps {
-  onSubmit: (firstName: string, lastName: string, gender: string) => void;
-}
+// interface PersonalInfoFormProps {
+//   onSubmit: (firstName: string, lastName: string, gender: string) => void;
+// }
 
 const genders = ['Male', 'Female', 'Other'];
 
-const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ onSubmit }) => {
+const PersonalInfoForm: React.FC<any> = ({ onSubmit }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [gender, setGender] = useState('');

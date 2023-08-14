@@ -3,13 +3,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import houseReducer from "./Features/house/houseSlice";
 import favHouseReducer from "./Features/favHouse//favHouseSlice";
-import selectedHouseProducer from "./Features/selectedHouse/selectedHouseSlice";
+import selectedHouseReducer from "./Features/selectedHouse/selectedHouseSlice";
+import houseUploadDataReducer   from "./Features/houseUploadData/houseUploadData"
+
 
 export const store = configureStore({
   reducer: {
     houses: houseReducer,
     favHouses: favHouseReducer,
-    selectedHouse : selectedHouseProducer,
+    selectedHouse : selectedHouseReducer,
+    houseUploadData : houseUploadDataReducer
   },
 });
 

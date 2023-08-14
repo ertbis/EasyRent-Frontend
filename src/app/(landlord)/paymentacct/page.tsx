@@ -3,13 +3,13 @@
 import React, { useState } from 'react';
 import { AiOutlineLeft } from 'react-icons/ai';
 
-interface PaymentInfoPropsType {
-  onSubmit: (bank: string, acctName: string, acctNumber: string) => void;
-}
+// interface PaymentInfoPropsType {
+//   onSubmit: (bank: string, acctName: string, acctNumber: string) => void;
+// }
 
 const genders = ['Male', 'Female', 'Other'];
 
-const Paymentinfo: React.FC<PaymentInfoPropsType> = ({ onSubmit }) => {
+const Paymentinfo: React.FC<any> = ({ onSubmit }) => {
   const [bank, setbank] = useState('');
   const [acctName, setacctName] = useState('');
   const [acctNumber, setGender] = useState('');

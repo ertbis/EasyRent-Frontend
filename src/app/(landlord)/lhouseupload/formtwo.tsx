@@ -69,16 +69,16 @@ const FormTwo :FC<FormTwoProps>  = ({houseData,  setHouseData, setFormPage}) => 
                         <p className='flex-1 text-center  cursor-pointer text-[1.rem] font-[700] text-blue-800'> List Your Property</p>
                     
                     </div>
-                    <form className='flex-1  m-8 mx-6 flex flex-col justify-between items-between' > 
+                    <form className='flex-1  m-8 mx-6 flex text-grey-light  flex-col justify-between items-between' > 
 
                     <div className='space-y-8  mt-2 mb-8' >
 
                         <div className='flex flex-col space-y-4' > 
                                 <p className='flex  items-center '> Features and Amenities</p>
-                            <div className='flex justify-between flex-wrap space-x-4 space-y-3'>
+                            <div className='flex justify-between flex-wrap space-x-2 space-y-3'>
                                {features.map((data, index) => {
                                 return (
-                                <p className='px-[1.2rem] py-[0.5rem]  border border-green-700 rounded-lg'>
+                                <p className='px-[1rem] py-[0.5rem] m-0 text-[0.85rem] flex items-center border border-green-700 rounded-lg'>
                                         {data}
                                 </p>
 
@@ -116,7 +116,7 @@ const FormTwo :FC<FormTwoProps>  = ({houseData,  setHouseData, setFormPage}) => 
                        <div  className='grid grid-cols-2 space-x-4 space-y-4  w-full '>
 
                             <div className='h-36 w-full my-4 rounded-[0.625rem] border border-green-700 flex justify-center items-center'>
-                                    <label htmlFor="upload-photos" className='flex cursor-pointer justify-items items-center space-x-4'>
+                                    <label htmlFor="upload-photos" className='flex cursor-pointer justify-items items-center space-x-2'>
                                         <BiCamera size={30} className='text-green-700' />
                                         <p>Add Photos</p>
                                     </label>

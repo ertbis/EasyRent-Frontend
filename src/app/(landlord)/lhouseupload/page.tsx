@@ -21,7 +21,7 @@ images:[
 
 amount:"100,000",
 location:"Damico",
-about :"his self-contained apartment offers a cozy and private living space that is perfect for individuals or couples. With all the amenities",
+about :"",
 features:["kitchen", "Gym House", "Packing lot", "AC", "Personal Metre", "DSTV"],
  mainFeatures: {
         light :true,

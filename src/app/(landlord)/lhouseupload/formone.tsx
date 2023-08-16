@@ -34,7 +34,7 @@ const FormOne :FC<FormOneProps>  = ({houseData,  setHouseData , setFormPage}) =>
                         <p className='flex-1 text-center text-[1.rem] font-[700] text-blue-800'> List Your Property</p>
                     
                     </div>
-                    <form className='flex-1  m-8   flex flex-col justify-between items-between' > 
+                    <form className='flex-1  m-8  text-grey-light  flex flex-col justify-between items-between' > 
 
                     <div className='space-y-8'>
 
@@ -45,7 +45,7 @@ const FormOne :FC<FormOneProps>  = ({houseData,  setHouseData , setFormPage}) =>
                                 id="location"
                                 name="location"
                                 placeholder="location"
-                                className="border focus:border-green-700 border-grey-light outline-none rounded-md px-4 py-[1.2rem] md:py-2 w-full"
+                                className="border focus:border-green-700 border-grey-light outline-none rounded-md px-4 py-[1rem] md:py-2 w-full"
                                 value={houseData.location}
                                 onChange={(e) => setHouseData({ ...houseData, location: e.target.value })}
                                 required
@@ -56,17 +56,17 @@ const FormOne :FC<FormOneProps>  = ({houseData,  setHouseData , setFormPage}) =>
                             <div className='flex justify-between '>
                                 <p   
                                 onClick={() => setHouseData({ ...houseData, apartment: "Duplex"})}                                
-                                className={`px-[1.25rem] py-[0.5rem]  border border-green-700 rounded-lg ${houseData.apartment == "Duplex" && "bg-green-700  text-white"}`}>
+                                className={`px-[1rem] py-[0.5rem] flex items-center text-[0.8rem] border border-green-700 rounded-lg ${houseData.apartment == "Duplex" && "bg-green-700  text-white"}`}>
                                         Duplex
                                 </p>
                                 <p   
                                 onClick={() => setHouseData({ ...houseData, apartment: "Self Contain"})}                                
-                                className={`px-[1.25rem] py-[0.5rem]  border border-green-700 rounded-lg ${houseData.apartment == "Self Contain" && "bg-green-700  text-white"}`}>
+                                className={`px-[1rem] py-[0.35rem] flex items-center text-[0.8rem] border border-green-700 rounded-lg  ${houseData.apartment == "Self Contain" && "bg-green-700  text-white"}`}>
                                         Self Contain
                                 </p>
                                 <p   
                                 onClick={() => setHouseData({ ...houseData, apartment: "Flat"})}                                
-                                className={`px-[1.25rem] py-[0.5rem]  border border-green-700 rounded-lg ${houseData.apartment == "Flat" && "bg-green-700  text-white"}`}>
+                                className={`px-[1rem] py-[0.5rem] flex items-center text-[0.8rem] border border-green-700 rounded-lg  ${houseData.apartment == "Flat" && "bg-green-700  text-white"}`}>
                                         Flat
                                 </p>
                               
@@ -80,7 +80,7 @@ const FormOne :FC<FormOneProps>  = ({houseData,  setHouseData , setFormPage}) =>
                                 id="price"
                                 name="price"
                                 placeholder="Enter price"
-                                className="border focus:border-green-700 border-grey-light outline-none rounded-md px-4 py-[1.2rem] md:py-2 w-full"
+                                className="border focus:border-green-700 border-grey-light outline-none rounded-md px-4 py-[1rem] md:py-2 w-full"
                                 value={houseData.amount}
                                 onChange={(e) => setHouseData({ ...houseData, amount: e.target.value })}
                                 required

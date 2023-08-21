@@ -26,15 +26,15 @@ const FormOne :FC<FormOneProps>  = ({houseData,  setHouseData , setFormPage}) =>
 
         return (
         
-                    <div  className='flex flex-col h-screen'>
-                        <div className=' text-grey-light flex  items-center  justify-between px-4 rounded-md w-full h-16  '>
+                    <div  className='flex flex-col min-h-screen'>
+                        <div className=' text-grey-light flex  items-center  justify-between px-3 rounded-md w-full h-16  '>
                         <a href="/">
                     <AiOutlineLeft size={30} className='text-green-700 '/>
                         </a>
                         <p className='flex-1 text-center text-[1.rem] font-[700] text-blue-800'> List Your Property</p>
                     
                     </div>
-                    <form className='flex-1  m-8  text-grey-light  flex flex-col justify-between items-between' > 
+                    <form className='flex-1  m-8  mx-5 text-grey-light  flex flex-col justify-between items-between' > 
 
                     <div className='space-y-8'>
 
@@ -137,7 +137,9 @@ const FormOne :FC<FormOneProps>  = ({houseData,  setHouseData , setFormPage}) =>
                     <div className=''>
 
                         <button
-                                    onClick={() => setFormPage("two")}
+                                    onClick={(e) => {
+                                       e.preventDefault()
+                                     setFormPage( "two")}}
                                     className="h-[3.75rem] bg-green-700 text-white w-full rounded-lg" >
                                     Next
                         </button>

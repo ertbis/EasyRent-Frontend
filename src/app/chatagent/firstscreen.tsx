@@ -1,8 +1,17 @@
 "use client"
 
+import { FC } from "react";
 
-const ChatAgent = () => {
+
+
+interface ScreenProps {
+      
+        setScreen:React.Dispatch<React.SetStateAction<string>>;
+      }
+
+const FirstScreen :FC<ScreenProps> = ({setScreen}) => {
     return ( 
+        
         <div className="h-screen text-grey-light flex flex-col justify-center items-center" >
             <div className="rounded-full h-[10rem] w-[10rem] mb-4">
                 <img src="/profiledp.png" className="w-full h-full rounded-full"/>
@@ -27,6 +36,7 @@ const ChatAgent = () => {
            </div>    
                 <button
                     type="submit"
+                    onClick={() => setScreen("chat")}
                     className="bg-green-700  hover:opacity-[0.5] text-white py-2 py-3 mt-8 md:py-2 rounded-md w-[80%]"
                     >
                     Login
@@ -35,4 +45,4 @@ const ChatAgent = () => {
      );
 }
  
-export default ChatAgent;
+export default FirstScreen;

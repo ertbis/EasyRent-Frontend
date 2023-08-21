@@ -19,7 +19,7 @@ const uploaddp = () => {
         <div className="pt-16 md:pt-0 w-full m-0 h-screen md:h-[31rem] md:w-[33%] px-8 py-16 bg-white md:rounded-xl shadow-lg md:mr-16 md:h-full text-grey">
         <div className=' text-grey-light flex  items-center  justify-between mb-2  w-full h-16  '>
                     <a href="/">
-                    <AiOutlineLeft size={25} className='text-green-700  '/>
+                    <AiOutlineLeft size={25} className='text-white  '/>
                   </a>
                 <a  href='/'>
                 <button className='bg-green-700 text-white font-semibold flex justify-center items-center h-4 rounded-3xl  w-20  py-4' >skip</button>

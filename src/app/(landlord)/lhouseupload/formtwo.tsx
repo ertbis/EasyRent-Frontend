@@ -162,7 +162,9 @@ const FormTwo :FC<FormTwoProps>  = ({houseData,  setHouseData, setFormPage}) => 
                         </button>
 
                         <button
-                                    onClick={()=> setFormPage("preview")}
+                                    onClick={(e)=> {
+                                      e.preventDefault()
+                                      setFormPage("preview")}}
                                     className="h-[4rem] text-green-700 bg-white  border  border-green-700 w-full rounded-lg" >
                                     Preview
                         </button>

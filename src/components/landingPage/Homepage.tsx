@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useEffect, useState} from "react"
+import React, {useEffect, useState, FC} from "react"
 import LeftSection from '@/components/landingPage/LeftSection'
 import RightSection from '@/components/landingPage/RightSection'
 import {BsFilterRight} from "react-icons/bs"
@@ -15,7 +15,13 @@ import { MdOutlineNotifications } from "react-icons/md";
 
 
 
-export default function HomePage() {
+   interface LpHomeProps {
+      setTab: React.Dispatch<React.SetStateAction<string>>;
+    }
+    
+    
+    
+ const HomePage :FC<LpHomeProps>  = ({setTab}) => {
    const [isMobileView, setIsMobileView] = React.useState(true);
 
    // Function to check if the screen size is mobile or desktop
@@ -36,7 +42,7 @@ export default function HomePage() {
   
   return (
   <>
-    {isMobileView ? <MobileView/> : <DesktopView/> }
+    {isMobileView ? <MobileView  setTab={setTab}/> : <DesktopView/> }
   </>
   
           
@@ -45,7 +51,8 @@ export default function HomePage() {
 
 
 
-const MobileView = () => {
+
+const MobileView :FC<LpHomeProps>  = ({setTab}) => {
    return (
       <div className='flex flex-col overflow-x-hidden  gap-4 px-4 items-center  ' >
       <div className='flex justify-between col-span-2 items-center w-[100%]  p-4 ' >
@@ -54,7 +61,9 @@ const MobileView = () => {
             <h2 className="text-blue-800 w-full text-2xl font-bold mt-4 ">Lets start Exploring</h2>
             </div> 
           
-               <MdOutlineNotifications size={30}  className="text-grey-light"/>
+               <MdOutlineNotifications size={30}
+                 onClick={() => setTab("notification")}
+               className="text-grey-light"/>
      </div>
      <div className=' text-grey-light flex  items-center border border-grey-light rounded-md w-[85vw]  p-2  h-16  '>
         <BiSearch size={28} className='text-grey-light  '/>
@@ -213,3 +222,7 @@ const DesktopView = ()=> {
    </>
    )
 }
+
+
+
+export default HomePage

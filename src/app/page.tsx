@@ -26,7 +26,7 @@ export default function Home() {
       
      
        <LpHeader  setTab={setTab}/>
-       {tab ==='home' && <HomePage/>}
+       {tab ==='home' && <HomePage  setTab={setTab}/>}
        {tab ==='save' && <FavouriteHousePage/>}
        {tab ==='inbox' && <InboxPage/>}
        {tab ==='notification' && <NotificationPage/>}

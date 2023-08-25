@@ -1,10 +1,14 @@
+"use client"
 import { AiOutlineLeft } from "react-icons/ai";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { FC, useState } from 'react';
+import TermsAndCondition from "./TermsAndCondition";
+import Policies from "./Policies";
+import FAQs from "./FAQs";
 
 
 const Legal = () => {
-    const [page, setPage] = useState("")
+    const [page, setPage] = useState("termsandcondition")
     return ( 
         <div className="">
             
@@ -18,21 +22,33 @@ const Legal = () => {
             </div> 
 
             <div  className="mt-1   mx-2" >
-                    <div className=" flex py-3 border-b border-gray-300 items-center  text-gray-600">
+                    <div
+                      onClick={() => setPage("termsandcondition")}
+                     className=" flex py-3 border-b border-gray-300 items-center  text-gray-600">
                        <p  className="flex-1  text-lg ml-4">Terms and Conditions</p>
                         <MdKeyboardArrowRight  size={24} className=""/>
                     </div>
-                    <div className=" flex py-3 border-b border-gray-300 items-center  text-gray-600">
+                    <div 
+                    onClick={() => setPage("policies")}
+                    className=" flex py-3 border-b border-gray-300 items-center  text-gray-600">
                        <p  className="flex-1  text-[1rem] ml-4">Policies</p>
                         <MdKeyboardArrowRight   size={24} className=""/>
                     </div>
-                    <div className=" flex py-3 border-b border-gray-300 items-center  text-gray-600">
+                    <div 
+                    onClick={() => setPage("FAQs")}
+                    className=" flex py-3 border-b border-gray-300 items-center  text-gray-600">
                        <p  className="flex-1  text-[1rem] ml-4">FAQS</p>
                         <MdKeyboardArrowRight  size={24} className=""/>
                     </div>
-                </div>
+                </div>  
            </>
            }
+
+
+           {page === "termsandcondition" && <TermsAndCondition  setPage={setPage}/>}
+           {page === "policies" && <Policies setPage={setPage}/>}
+           {page === "FAQs" && <FAQs setPage={setPage}/>}
+
            
         </div>
 

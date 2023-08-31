@@ -21,6 +21,8 @@ const uploaddp = () => {
   };
 
 
+
+
   return (
     <div className=' relative  bg-cover ' style={{ backgroundImage:'url("/formbg.png")'  }}>
 
@@ -68,7 +70,7 @@ const uploaddp = () => {
                             type="submit"
                             className="bg-green-700 text-white  rounded-md  px-4 py-4   md:py-2 w-full"
                           >
-                            Verify
+                            Submit
                           </button>
                         </div>
               </form>

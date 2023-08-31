@@ -5,7 +5,7 @@ import { useState } from 'react';
 import DesktopHeader from '../../../components/DesktopHeader';
 import { FaApple, FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineLeft } from 'react-icons/ai';
 import { signUpDetailsType } from '../../../../utils/types';
 import { createUser } from '../../../../utils/data/endpoints';
 import Loading from '@/components/Loading';
@@ -19,7 +19,7 @@ const SignUp = () => {
     email: '',
     password: '',
     confirm_password: '',
-    role: "landload", 
+    role: "", 
   });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -48,6 +48,10 @@ const SignUp = () => {
     }
   };
 
+  const setRole = (param: string)  => {
+    setInputData({...inputData , role :param})
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setError(null);
@@ -58,6 +62,40 @@ const SignUp = () => {
   };
 
   return (
+
+    <>
+       {inputData.role == "" ?  
+    <div className='flex flex-col mx-6 h-[90vh]  pt-4 '>
+      <div className=' text-grey-light flex   items-center  justify-start mb-2  w-full h-16  '>
+                 <a href="/">
+                 <AiOutlineLeft size={25} className='text-gray-light  '/>
+               </a>           
+          </div>
+
+          <div className='flex justify-between space-x-4'>
+           <div className='w-[50%]'>
+             <img src='Rectangle 2.png' alt='' className='w-full h-full'/>
+           </div>
+           <div className='w-[50%]'>
+             <img src='Rectangle 3.png' alt='' className='w-full h-full'/>
+           </div>
+          </div>
+          <div className='flex-1 flex flex-col justify-between space-y-4 my-12'>
+            <h1 className='text-[1.5rem] font-[600]  text-blue-800'>Ready to Explore</h1>
+            <button onClick={(e)=> setRole("student")}
+                 className="bg-green-700 text-white  py-4 md:py-2 rounded-md w-full"
+               >
+                  Student
+           </button>
+           <button  onClick={(e)=> setRole("landlord")}
+                 className="bg-transparent  border border-green-700  text-green-700 py-4 md:py-2 rounded-md w-full"
+               >
+                  Landlord
+           </button>
+          </div>
+    </div>
+        :
+       
     <div className="relative bg-cbover" style={{ backgroundImage: 'url("/formbg.png")' }}>
       <DesktopHeader />
       <div className="flex items-center justify-end min-h-screen w-full ">
@@ -177,7 +215,7 @@ const SignUp = () => {
                   <FaFacebook size={27} className="text-[#1877F2]" />
                   <p className="md:hidden text-grey-light ml-4">Continue With Facebook</p>
                 </button>
-              </div>landload
+              </div>
               <div className="mt-3  w-full">
                 <p className="text-center  text-grey-light text-sm">
                   Already have an account?
@@ -189,6 +227,12 @@ const SignUp = () => {
         </div>
       </div>
     </div>
+       }
+
+    
+    </>
+
+
   );
 };
 

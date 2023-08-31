@@ -94,7 +94,7 @@ const VerifyOtp = () => {
         <p className='font-normal text-sm text-grey-light ' > Enter the Code sent to<span className='font-semibold'> {User?.email  ? User?.email : "No email"}</span></p>
         <form onSubmit={handleSubmit} className="flex flex-wrap  flex-col justify-between h-[90%] md:space-y-4">
               <div className="flex  space-x-4 my-10">
-                {Array.from({ length: 4}, (_, index) => (
+                {Array.from({ length: 5}, (_, index) => (
                   <input
                     key={index}
                     ref={(el) => (otpInputs.current[index] = el)}

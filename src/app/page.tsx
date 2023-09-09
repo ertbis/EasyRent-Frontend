@@ -23,7 +23,7 @@ export default function Home() {
         <meta property="og:title" content="My page title" key="title" />
         <script src="https://kit.fontawesome.com/3b89073561.js" ></script>
       </Head>
-      <div className="hidden md:flex  w-screen h-screen bg-[#fff]  justify-center  items-center  text-xl">
+      <div className=" hidden fixed md:flex  w-screen h-screen bg-[#fff]  justify-center  items-center  text-xl">
          This web app  only work on mobile screen, kindly switch to a smaller screen size      </div>
      
        <LpHeader  setTab={setTab}/>

@@ -175,17 +175,7 @@ const SignUp = () => {
                   )}
                 </div>
 
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    id="role"
-                    name="role"
-                    className="mr-2"
-                    checked={inputData.role == "landload"}
-                    onChange={handleChange}
-                  />
-                  <label htmlFor="role">I am a Landlord</label>
-                </div>
+              
 
                 <button
                   type="submit"

@@ -62,7 +62,7 @@ interface LpHeaderProps {
                 <RiArrowDropDownLine size={20} className='text-gray' />
                 <ul className='absolute z-50 bottom-[4rem] right-8 h-40 w-40 flex flex-col justify-center items-center bg-white shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
                     <li className='font-semibold h-8 cursor-pointer'><a  href='/login'>Login</a></li>
-                    <li className='font-semibold h-8 cursor-pointer'><a  href="/signin">Sign Up</a></li>
+                    <li className='font-semibold h-8 cursor-pointer'><a  href="/signup">Sign Up</a></li>
                 </ul>
                 </div>   }
 

@@ -17,6 +17,6 @@ export const logInUser = async (param : logInDetailsType)  => {
 }
 
 export const VerifyOTPCode = async (param : any)  => {
-    const resp = await http.post("/apis/user/validate",  param )
+    const resp = await http.post("/apis/user/validate_mail",  param )
     return resp
 }

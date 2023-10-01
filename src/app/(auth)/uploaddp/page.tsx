@@ -4,6 +4,7 @@ import { useState , ChangeEvent } from 'react';
 import DesktopHeader from '../../../components/DesktopHeader';
 import {BiTime} from "react-icons/bi"
 import { AiOutlineLeft } from 'react-icons/ai';
+import { UploadDP } from '../../../../utils/data/endpoints';
 
 
 const uploaddp = () => {
@@ -19,7 +20,16 @@ const uploaddp = () => {
       reader.readAsDataURL(file);
     }
   };
-
+const submitDP = async (e: any)=>{
+    e.preventDefault()  
+     try {
+       const resp = await UploadDP(image) ;
+       console.log(resp)
+     } catch (error) {
+        console.log(error) ;
+     }
+}
+  console.log(image)
 
 
 
@@ -46,7 +56,7 @@ const uploaddp = () => {
                   <p className='font-normal text-sm text-grey-light mb-3' > Choose a photo that represents you</p>
            </div>
         </div>
-        <form  className="flex-1 flex flex-wrap  flex-col items-between m-auto  w-full md:space-y-4">
+        <form  onSubmit={submitDP} className="flex-1 flex flex-wrap  flex-col items-between m-auto  w-full md:space-y-4">
             <label htmlFor="image" className="  w-40  h-40 relative  m-auto rounded-full overflow-hidden">
             {image ? (
               <img src={image} alt="Uploaded"  className="  object-cover w-full h-full " />

@@ -4,46 +4,40 @@ import { useState, useRef, ChangeEvent, KeyboardEvent, RefObject } from 'react';
 import DesktopHeader from '../../../components/DesktopHeader';
 import {BiTime} from "react-icons/bi"
 import { AiOutlineLeft } from 'react-icons/ai';
+import { ForgetPassword } from '../../../../utils/data/endpoints';
+import Loading from '@/components/Loading';
 
 
 const forgetPassword = () => {
-  const [otp, setOtp] = useState<string[]>([]);
-  const otpInputs = useRef<Array<HTMLInputElement | null>>(Array(4).fill(null));
+  const [email , setEmail] = useState("") ;
+  const [loading , setLoading]  = useState(false)
+  const [error , setError]  = useState<string | null >(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleSubmit =async (e: React.FormEvent) => {
     e.preventDefault();
-    // Perform necessary actions with the OTP
-    console.log('OTP:', otp);
-    // Reset the OTP input fields
-    setOtp([]);
-    clearOtpInputs();
-  };
+    if(!email ){
+      setError("Kindly input your email")
+    }else{
 
-  const handleChange = (index: number, value: string) => {
-    setOtp((prevOtp) => {
-      const updatedOtp = [...prevOtp];
-      updatedOtp[index] = value;
-      return updatedOtp;
-    });
-
-    // Move focus to the next input
-    if (value !== '' && otpInputs.current[index + 1]) {
-      otpInputs.current[index + 1]!.focus();
-    }
-  };
-
-  const handleKeyDown = (index: number, e: KeyboardEvent) => {
-    if (e.key === 'Backspace' && otp[index] === '') {
-      // Move focus to the previous input on Backspace press
-      if (otpInputs.current[index - 1]) {
-        otpInputs.current[index - 1]!.focus();
+      setLoading(true)
+      try {
+        const data = {email}
+        console.log(data)
+        const resp = await ForgetPassword(data);
+        console.log(resp)
+      } catch (e : any) {
+         console.log(e)
+         setLoading(false)
+        //  setError(Object.values<any>(JSON.parse(e.response.data.data))[0][0])
+         console.log(error)   
       }
     }
   };
 
-  const clearOtpInputs = () => {
-    otpInputs.current.forEach((input) => (input!.value = ''));
-  };
+    
+  
+
 
   return (
     <div className=' relative  bg-cover ' style={{ backgroundImage:'url("/formbg.png")'  }}>
@@ -61,8 +55,10 @@ const forgetPassword = () => {
             account so we can send you instructions
             on how to reset your password.
          </p>
+         {loading && <Loading/>}
         <form onSubmit={handleSubmit} className="flex flex-1 flex-wrap  flex-col justify-between h-[100%] md:space-y-4">
-              <div className="  space-x-4 ">
+              <div className="flex flex-col   ">
+                <p className='text-[red]  text-xs'>{error}</p>
                <div>
          
                     <input
@@ -71,7 +67,8 @@ const forgetPassword = () => {
                     name="email"
                     placeholder='Email Address'
                     className="border border-grey-light   focus:border-green-700 outline-none rounded-md mt-4  px-4 py-4 md:py-2 w-full"
-                    
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
                     />
               </div>
               </div>
@@ -84,12 +81,13 @@ const forgetPassword = () => {
                 >
                   Send
                 </button>
-                <button
+                <a href='/login'
                   type="submit"
-                  className="bg-transparent border border-green-700 text-grey-light  rounded-md  px-4 py-4 md:py-2 w-full"
+                  className="bg-transparent border border-green-700 text-grey-light text-center rounded-md  px-4 py-4 md:py-2 w-full"
                 >
                   Go back to Login
-                </button>
+                
+                </a>
               </div>
     </form>
 

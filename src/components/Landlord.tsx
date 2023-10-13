@@ -4,14 +4,15 @@
 import { FiUser } from "react-icons/fi";
 import { MdKeyboardArrowRight, MdOutlineNotifications, MdOutlinePayments } from "react-icons/md";
 import { SlHome } from "react-icons/sl";
-import LandlordHousesComponent from "./lanlordhousesComponent";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/GlobalRedux/store";
 import MobileFeaturedCard from "@/components/common/MobileFeatureCard";
-import EmptyLandlord from "./emptylandlord";
-import Lprofile from "./lprofile";
+
 import { useState } from "react";
-import { getMyProperty } from "../../../../utils/data/endpoints";
+import { getMyProperty } from "../../utils/data/endpoints";
+import Lprofile from "@/app/(landlord)/ldashboard/lprofile";
+import EmptyLandlord from "@/app/(landlord)/ldashboard/emptylandlord";
+
 
 const LandLordDashboard = () => {
    const houses = useSelector((state: RootState) => state.houses.houses)

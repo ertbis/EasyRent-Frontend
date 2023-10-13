@@ -5,6 +5,7 @@ import houseReducer from "./Features/house/houseSlice";
 import favHouseReducer from "./Features/favHouse//favHouseSlice";
 import selectedHouseReducer from "./Features/selectedHouse/selectedHouseSlice";
 import houseUploadDataReducer   from "./Features/houseUploadData/houseUploadData"
+import loggedInUserReducer from "./Features/user/userSlice";
 
 
 export const store = configureStore({
@@ -12,7 +13,8 @@ export const store = configureStore({
     houses: houseReducer,
     favHouses: favHouseReducer,
     selectedHouse : selectedHouseReducer,
-    houseUploadData : houseUploadDataReducer
+    houseUploadData : houseUploadDataReducer,
+    loggedInUser : loggedInUserReducer
   },
 });
 

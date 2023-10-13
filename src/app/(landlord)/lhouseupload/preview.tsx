@@ -11,6 +11,8 @@ import CarouselDatePicker from '@/components/landingPage/Calender';
 import DesktopFooter from '@/components/DesktopFooter';
 import Image from 'next/image';
 import { HouseType } from '@/types/types';
+import { housesData } from '@/demodata/data';
+import { postLandlordProperty } from '../../../../utils/data/endpoints';
 
 
 interface PreviewProps {
@@ -22,11 +24,25 @@ interface PreviewProps {
   
   const Preview :FC<PreviewProps>  = ({houseData, setFormPage}) => {   
     //  const houseData = useSelector((state: RootState) => state.selectedHouse.selectedHouse)
+
+    const postProperty = async() => {
+       const  data : any = houseData
+       data.features = JSON.stringify(data.features)
+       data.images = JSON.stringify(data.images)
+       data.amount = parseInt(data.amount)
+       try {
+        const resp = await postLandlordProperty(data)
+        console.log(resp)
+       } catch (error) {
+        console.log(error)
+       }
+         
+    }
     return ( 
         
         <div>
                 <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-grey-light px-4 rounded-md w-full h-16  '>
-                <a href="/">
+                <a onClick={()=> setFormPage("two")}>
                 <AiOutlineLeft size={30} className='text-green-700  '/>
                 </a>
                  <p className='flex-1 text-center text-[1.4rem] font-[700] text-blue-800'> Preview</p>
@@ -123,7 +139,7 @@ interface PreviewProps {
 
         
         <div className='m-4  mb-8 flex justify-between w-[90vw]'>
-        <button className='bg-green-700 text-white font-bold rounded-lg w-[100%]  h-16' >Post Property</button>          
+        <button onClick ={postProperty} className='bg-green-700 text-white font-bold rounded-lg w-[100%]  h-16' >Post Property</button>          
               
         </div>
         </div>

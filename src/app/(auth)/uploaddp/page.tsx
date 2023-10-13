@@ -5,9 +5,11 @@ import DesktopHeader from '../../../components/DesktopHeader';
 import {BiTime} from "react-icons/bi"
 import { AiOutlineLeft } from 'react-icons/ai';
 import { UploadDP } from '../../../../utils/data/endpoints';
+import { useRouter } from 'next/navigation';
 
 
 const uploaddp = () => {
+  const router = useRouter();
   const [image, setImage] = useState<string | null >('/profiledp.png');
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -25,6 +27,7 @@ const submitDP = async (e: any)=>{
      try {
        const resp = await UploadDP(image) ;
        console.log(resp)
+       router.push('/paymentacct');
      } catch (error) {
         console.log(error) ;
      }

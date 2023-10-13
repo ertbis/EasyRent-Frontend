@@ -8,15 +8,18 @@ import {AiOutlineEye, AiOutlineEyeInvisible }  from 'react-icons/ai'
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { logInDetailsType } from '@/types/types';
-import { logInUser } from '../../../../utils/data/endpoints';
+import { getMyDetails, logInUser } from '../../../../utils/data/endpoints';
 import { useRouter } from 'next/navigation';
 import { setToken, setUser } from '../../../../utils/auth';
 import Loading from '@/components/Loading';
+import { setLoggedInUser } from '@/app/GlobalRedux/Features/user/userSlice';
+import { useDispatch } from 'react-redux';
 
 
 
 const Login = () => {
   const router = useRouter();
+  const dispatch = useDispatch(); 
 
 
   const [inputData, setInputData] = useState<logInDetailsType >({
@@ -38,9 +41,18 @@ const Login = () => {
       const resp = await logInUser(inputData)
       setToken(resp.data.token)
       setUser({email :inputData.email })
-
-      console.log(resp)
-      router.push('/');
+      const role = await getMyDetails({
+        fetchset:["role"],
+        querypair:{}
+    })
+    const userData = {
+      name : "",
+      email : inputData.email,
+      role : role.data.data[0].role
+    }
+    dispatch(setLoggedInUser(userData)); 
+        router.push('/');
+      
     } catch (e : any) {
        console.log(e)
        setLoading(false)

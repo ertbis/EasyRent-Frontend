@@ -28,7 +28,7 @@ const FormOne :FC<FormOneProps>  = ({houseData,  setHouseData , setFormPage}) =>
         
                     <div  className='flex flex-col min-h-screen'>
                         <div className=' text-grey-light flex  items-center  justify-between px-3 rounded-md w-full h-16  '>
-                        <a href="/">
+                        <a href="/ldashboard">
                     <AiOutlineLeft size={30} className='text-green-700 '/>
                         </a>
                         <p className='flex-1 text-center text-[1.rem] font-[700] text-blue-800'> List Your Property</p>

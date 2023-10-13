@@ -32,3 +32,26 @@ export const UploadDP = async (param : any)  => {
     const resp = await http.post("/apis/user/upload_dp",  {b64_dp}  )
     return resp
 }
+
+export const updateLandlordPaymentAcct = async (param : any)  => {
+    
+    const resp = await http.post("/apis/user/update_account",  param  )
+    return resp
+}
+export const getMyDetails = async (param : any)  => {
+    
+    const resp = await http.post("/apis/user/fetch",  param  )
+    return resp
+} 
+
+export const postLandlordProperty = async (param : any)  => {
+    
+    const resp = await http.post("/apis/product/create",  param  )
+    return resp
+} 
+
+export const getMyProperty = async ()  => {
+    
+    const resp = await http.get("/apis/product/me")
+    return resp
+} 

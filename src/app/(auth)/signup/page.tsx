@@ -7,13 +7,16 @@ import { FaApple, FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineLeft } from 'react-icons/ai';
 import { signUpDetailsType } from '../../../../utils/types';
-import { createUser } from '../../../../utils/data/endpoints';
+import { createUser, getMyDetails } from '../../../../utils/data/endpoints';
 import Loading from '@/components/Loading';
 import { useRouter } from 'next/navigation';
 import { setToken, setUser } from '../../../../utils/auth';
+import { useDispatch } from 'react-redux';
+import { setLoggedInUser } from '@/app/GlobalRedux/Features/user/userSlice';
 
 const SignUp = () => {
   const router = useRouter();
+  const dispatch = useDispatch(); 
 
   const [inputData, setInputData] = useState<signUpDetailsType>({
     email: '',
@@ -36,6 +39,16 @@ const SignUp = () => {
       console.log(resp);
       setToken(resp.data.token)
       setUser({email :inputData.email })
+      const role = await getMyDetails({
+        fetchset:["role"],
+        querypair:{}
+    })
+      const userData = {
+        name : "",
+        email : inputData.email,
+        role : role.data.data[0].role
+      }
+      dispatch(setLoggedInUser(userData)); 
       router.push('/verifyotp');
     } catch (e: any) {
       console.log(e);

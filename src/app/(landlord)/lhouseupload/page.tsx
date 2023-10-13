@@ -16,10 +16,10 @@ import Preview from './preview';
 
 const houseObj = { apartment:"A room",
 images:[
-  '/Room/room (24).png', '/shape.png', '/shape.png'
+  '/profiledp.png', '/profiledp.png', '/profiledp.png'
 ],
 
-amount:"100,000",
+amount:"100000",
 location:"Damico",
 about :"",
 features:["kitchen", "Gym House", "Packing lot", "AC", "Personal Metre", "DSTV"],

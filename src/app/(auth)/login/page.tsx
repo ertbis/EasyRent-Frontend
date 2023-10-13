@@ -51,7 +51,11 @@ const Login = () => {
       role : role.data.data[0].role
     }
     dispatch(setLoggedInUser(userData)); 
+      if(role.data.data[0].role == 'landlord'){
+        router.push('/ldashboarrd');
+      }else {
         router.push('/');
+      }
       
     } catch (e : any) {
        console.log(e)

@@ -45,7 +45,7 @@ export const getMyDetails = async (param : any)  => {
 } 
 
 export const postLandlordProperty = async (param : any)  => {
-    
+    console.log(param)
     const resp = await http.post("/apis/product/create",  param  )
     return resp
 } 

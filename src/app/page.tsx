@@ -18,8 +18,7 @@ import { useSelector } from "react-redux";
 
 export default function Home() {
   const [tab , setTab] = useState<string>('home')
-  const loggedInUser = useSelector((state: RootState) => state.loggedInUser)
-  console.log(loggedInUser)
+
 
   return (
     <main className="relative flex bg-[#f5f4f8 ]  min-h-screen flex-col items-center justify-between ">

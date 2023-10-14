@@ -23,7 +23,7 @@ amount:"100000",
 location:"Damico",
 about :"",
 features:["kitchen", "Gym House", "Packing lot", "AC", "Personal Metre", "DSTV"],
- mainFeatures: {
+ main_features: {
         light :true,
         school: true,
         carPack : false

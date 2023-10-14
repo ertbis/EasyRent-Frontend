@@ -5,7 +5,7 @@ export interface HouseType {
     location: string;
     about: string;
     features: string[];
-    mainFeatures: {
+    main_features: {
       light: boolean;
       school: boolean;
       carPack: boolean;

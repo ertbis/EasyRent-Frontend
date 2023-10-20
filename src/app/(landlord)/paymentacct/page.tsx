@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { AiOutlineLeft } from 'react-icons/ai';
-import { UpdateUser, updateLandlordPaymentAcct } from '../../../../utils/data/endpoints';
+import { UpdateUser } from '../../../../utils/data/endpoints';
 import { useRouter } from 'next/navigation';
 import Loading from '@/components/Loading';
 import uploaddp from '@/app/(auth)/location/page';

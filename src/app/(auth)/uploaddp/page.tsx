@@ -8,12 +8,13 @@ import { UploadDP } from '../../../../utils/data/endpoints';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { setProfilePicture } from '@/app/GlobalRedux/Features/user/userSlice';
+import Loading from '@/components/Loading';
 
 
 const uploaddp = () => {
   const router = useRouter();
   const dispatch = useDispatch(); 
-
+  const [loading , setLoading]  = useState(false)
   const [image, setImage] = useState<string | null >('/profiledp.png');
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -28,13 +29,15 @@ const uploaddp = () => {
   };
 const submitDP = async (e: any)=>{
     e.preventDefault()  
+    setLoading(true)
      try {
        const resp = await UploadDP(image) ;
        console.log(resp)    
-       dispatch(setProfilePicture(resp.data.user.profilePicture))
        router.push('/paymentacct');
+      //  dispatch(setProfilePicture(resp.data.user.profilePicture))
      } catch (error) {
         console.log(error) ;
+        setLoading(false)
      }
 }
 
@@ -55,7 +58,11 @@ const submitDP = async (e: any)=>{
 
            </a>
        </div>
-          
+       {loading ? (
+            <Loading />
+          ) : (
+      <>
+
         <div className='flex  items-center  '>
 
            <div className='flex-1'>
@@ -92,8 +99,8 @@ const submitDP = async (e: any)=>{
                           </button>
                         </div>
               </form>
-
-
+            </>
+       )}
       
   
      

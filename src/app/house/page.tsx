@@ -2,7 +2,7 @@
 import { FC } from 'react';
 import {CiLocationOn } from  'react-icons/ci'
 import {FaWalking} from 'react-icons/fa'
-import {AiFillCar, AiOutlineCheck, AiOutlineHeart}  from 'react-icons/ai'
+import {AiFillCar, AiOutlineCheck, AiOutlineHeart, AiOutlineLeft}  from 'react-icons/ai'
 import {HiOutlineLightBulb} from 'react-icons/hi'
 import {RxDotFilled} from "react-icons/rx"
 import { useSelector } from 'react-redux';
@@ -10,15 +10,37 @@ import { RootState } from '@/app/GlobalRedux/store';
 import CarouselDatePicker from '@/components/landingPage/Calender';
 import DesktopFooter from '@/components/DesktopFooter';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
 
+import { getUser } from '../../../utils/auth';
+
+type cookieUserType ={
+  email:string,
+  role : string
+}
 const HousePage :FC = () => {
     const selectedHouse = useSelector((state: RootState) => state.selectedHouse.selectedHouse)
+    const [user, setUser] =useState<cookieUserType >({email:"", role:""})
+   const fetchUser = async()=>{
+       const cookieUser = await getUser()
+       setUser(cookieUser)
+
+   }
+   
+    useEffect(() => {
+        fetchUser()
+    }, [])
+    
     return ( 
         
         <div>
 
         <div className='bg-[#F5F4F8]    w-full ' >
-
+        <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-12  '>
+            <a href="/ldashboard">
+            <AiOutlineLeft  size={30} className='text-green-700  '/>
+            </a>
+            </div> 
            <div className="m-4">
               <div className= "relative  w-[100%] h-[15rem] rounded-xl ">
                
@@ -84,6 +106,11 @@ const HousePage :FC = () => {
              </p>
         </div>
 
+        { user.role == "student"
+        && 
+        <>
+        
+
         <div className='m-4 w-[90vw] '>
              <h2 className="text-blue-800 w-[70%] text-sm font-medium mt-4 ">Steps to Acquire this Apartment</h2>
              <p className='flex flex-wrap text-grey-light'>
@@ -108,11 +135,16 @@ const HousePage :FC = () => {
               
           <CarouselDatePicker/>
         </div>
+
+       
         <div className='m-4  mb-8 flex justify-between w-[90vw]'>
+        
         <button className='bg-transparent text-green-700 font-bold rounded-lg border border-1 border-solid border-green-700 w-[40%]  h-10' >Help</button>          
         <button className='bg-green-700 text-white font-bold rounded-lg w-[40%]  h-10' >Proceed</button>          
               
         </div>
+        </>
+        }
         </div>
          <DesktopFooter/>
         </div>

@@ -42,7 +42,7 @@ const SignUp = () => {
     try {
       const resp = await createUser(inputData);
       setToken(resp.data.accessToken)
-      setUser({email :inputData.email })
+      setUser({email :inputData.email , role: resp.data.role})
      
       const userData = {
         name : "",
@@ -50,7 +50,7 @@ const SignUp = () => {
         role : resp.data.role,
         emailVerified: resp.data.emailVerified
       }
-      dispatch(setLoggedInUser(userData));
+      // dispatch(setLoggedInUser(userData));
       router.push('/verifyotp');
     } catch (e: any) {
       console.log(e);

@@ -10,18 +10,23 @@ import { RootState } from "@/app/GlobalRedux/store";
 import MobileFeaturedCard from "@/components/common/MobileFeatureCard";
 import EmptyLandlord from "./emptylandlord";
 import Lprofile from "./lprofile";
-import { useState } from "react";
-import { getMyDetails } from "../../../../utils/data/endpoints";
+import { useState, useEffect} from "react";
+import { getMyDetails, getMyProperty } from "../../../../utils/data/endpoints";
 
 const LandLordDashboard = () => {
-   const houses = useSelector((state: RootState) => state.houses.houses)
+   // const houses = useSelector((state: RootState) => state.houses.houses)
    const [tab, setTab] = useState("home")
    // const [houses,  setHouses] = useState([])
    const [user, setUser] = useState<any>(null)
    const [initial, setInitial] = useState("")
+   const [houses, setHouses] = useState<any>(null)
+
    const fetchMyProduct = async() => {
       const resp = await getMyDetails()
+      const resp1 = await getMyProperty()
       setUser(resp.data)
+      setHouses(resp1.data)
+      console.log(resp1)
       if(resp.data == "Female"){
          setInitial("Mrs") ;
       }else {
@@ -29,7 +34,11 @@ const LandLordDashboard = () => {
       }
       console.log(resp)
    }
-    fetchMyProduct();
+   useEffect(() => {
+      fetchMyProduct();
+    
+   }, [])
+   
 
     return ( 
         <div className='relative  flex flex-col h-[100vh]  overflow-x-hidden   ' >
@@ -48,11 +57,12 @@ const LandLordDashboard = () => {
               </div>
        </div> 
 
-           <EmptyLandlord/> 
-        {/* <div className="mt-4" >
+        { houses ?
+        
+        <div className="mt-4" >
            <LandlordHousesComponent/>
            <div   className='p-4 overflow-y-scroll ' >
-               {houses.map((data, index) => {
+               {houses.map((data :any, index:any) => {
                      return (
                         <MobileFeaturedCard  key={index} house={data}/>
 
@@ -60,7 +70,11 @@ const LandLordDashboard = () => {
                })}
 
         </div>
-        </div> */}
+        </div>  :
+
+                   <EmptyLandlord/> 
+
+        }
 
                    
             </>}

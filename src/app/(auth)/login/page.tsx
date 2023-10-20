@@ -41,7 +41,7 @@ const Login = () => {
       const resp = await logInUser(inputData)
       console.log(resp)
       setToken(resp.data.accessToken)
-      setUser({email :inputData.email })
+      setUser({email :inputData.email, role : resp.data.role })
    
     const userData = {
       name : "",

@@ -55,19 +55,14 @@ export const getMyDetails = async ()  => {
 
 
 //landlord enpoint
-export const updateLandlordPaymentAcct = async (param : any)  => {
+export const uploadProperty = async (param : any)  => {
     
-    const resp = await http.post("/apis/user/update_account",  param  )
+    const resp = await http.post("/apis/properties",  param  )
     return resp
 }
-export const postLandlordProperty = async (param : any)  => {
-    console.log(param)
-    const resp = await http.post("/apis/product/create",  param  )
-    return resp
-} 
 
 export const getMyProperty = async ()  => {
     
-    const resp = await http.get("/apis/product/me")
+    const resp = await http.get("/apis/properties/myprop")
     return resp
 } 

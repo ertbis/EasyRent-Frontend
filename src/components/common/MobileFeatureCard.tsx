@@ -22,9 +22,8 @@ const MobileFeaturedCard: FC<{ house: HouseType }> = ({ house }) => {
 
 
   useEffect(() => {
- 
     
-  }, [favHouses])
+  }, [])
   
 
 const handleCardClick = async () => {

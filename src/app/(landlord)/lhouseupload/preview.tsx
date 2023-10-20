@@ -1,5 +1,5 @@
 "use client"
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import {CiLocationOn } from  'react-icons/ci'
 import {FaWalking} from 'react-icons/fa'
 import {AiFillCar, AiOutlineCheck, AiOutlineHeart, AiOutlineLeft}  from 'react-icons/ai'
@@ -12,7 +12,10 @@ import DesktopFooter from '@/components/DesktopFooter';
 import Image from 'next/image';
 import { HouseType } from '@/types/types';
 import { housesData } from '@/demodata/data';
-import { postLandlordProperty } from '../../../../utils/data/endpoints';
+import { postLandlordProperty, uploadProperty } from '../../../../utils/data/endpoints';
+import { useRouter } from 'next/navigation';
+import Loading from '@/components/Loading';
+
 
 
 interface PreviewProps {
@@ -24,18 +27,25 @@ interface PreviewProps {
   
   const Preview :FC<PreviewProps>  = ({houseData, setFormPage}) => {   
     //  const houseData = useSelector((state: RootState) => state.selectedHouse.selectedHouse)
+    const router = useRouter();
+    const [loading , setLoading]  = useState<Boolean>(false)
+    const [error , setError]  = useState<string | null >(null)
+
 
     const postProperty = async() => {
-       const  data : any = houseData
-       data.features = JSON.stringify(data.features)
-       data.images = JSON.stringify(data.images)
-       data.amount = parseInt(data.amount)
-       data.mainFeatures = JSON.stringify(data.mainFeatures);
+        setLoading(true)
+
        try {
-        const resp = await postLandlordProperty(data)
-        console.log(resp)
-       } catch (error) {
+           console.log(houseData)
+           const resp = await uploadProperty(houseData);
+           console.log(resp)
+           router.push('/ldashboard');
+        
+       } catch (error: any) {
         console.log(error)
+        setLoading(false)
+        setError( error.response.data.message );
+        console.log(error)   
        }
          
     }
@@ -49,6 +59,11 @@ interface PreviewProps {
                  <p className='flex-1 text-center text-[1.4rem] font-[700] text-blue-800'> Preview</p>
 
                 </div>
+
+                {loading ? (
+            <Loading />
+          ) : (
+      <>
         <div className=' bg-white   w-full ' >
  
            <div className="m-4 mx-8  bg-[#F5F4F8]">
@@ -144,6 +159,8 @@ interface PreviewProps {
               
         </div>
         </div>
+        </>
+          )}
          <DesktopFooter/>
         </div>
      );

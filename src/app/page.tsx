@@ -70,7 +70,7 @@ const LoginModal = ({setLoginModal}:any) =>(
                 <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
                         Not registered?
                     </div>
-                    <a href="/signin" type="submit" className="bg-green-700 flex justify-center  hover:opacity-[0.5] text-white py-2 py-3 md:py-2 rounded-md w-full">
+                    <a href="/signup" type="submit" className="bg-green-700 flex justify-center  hover:opacity-[0.5] text-white py-2 py-3 md:py-2 rounded-md w-full">
                      Sign Up
                   </a>          
             </div>

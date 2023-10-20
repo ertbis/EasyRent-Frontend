@@ -2,9 +2,10 @@
 
 import React, { useState } from 'react';
 import { AiOutlineLeft } from 'react-icons/ai';
-import { updateLandlordPaymentAcct } from '../../../../utils/data/endpoints';
+import { UpdateUser, updateLandlordPaymentAcct } from '../../../../utils/data/endpoints';
 import { useRouter } from 'next/navigation';
 import Loading from '@/components/Loading';
+import uploaddp from '@/app/(auth)/location/page';
 
 // interface PaymentInfoPropsType {
 //   onSubmit: (bank: string, acctName: string, acctNumber: string) => void;
@@ -24,14 +25,14 @@ const Paymentinfo: React.FC<any> = ({ onSubmit }) => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setLoading(true);
+    const bankdetails ={
+      bankName : bank ,
+      acctName , acctNumber
+    }
     try {
-      const resp = await updateLandlordPaymentAcct({
-          bank_name:bank,
-          account_name: acctName,
-          account_number:acctNumber
-      }) 
+      const resp = await UpdateUser(bankdetails) 
       console.log(resp)
-      router.push('/ldashboard');
+      router.push('/infoform');
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -91,7 +92,7 @@ const Paymentinfo: React.FC<any> = ({ onSubmit }) => {
 
         <button
         type="submit"
-        className="bg-gray-100 text-gray-700  rounded-md  px-4 py-4   md:py-2 w-full"
+        className="bg-green-700 text-white mb-8  rounded-md  px-4 py-4   md:py-2 w-full"
         >
         save
         </button>

@@ -11,20 +11,29 @@ import MobileFeaturedCard from "@/components/common/MobileFeatureCard";
 import EmptyLandlord from "./emptylandlord";
 import Lprofile from "./lprofile";
 import { useState } from "react";
-import { getMyProperty } from "../../../../utils/data/endpoints";
+import { getMyDetails } from "../../../../utils/data/endpoints";
 
 const LandLordDashboard = () => {
    const houses = useSelector((state: RootState) => state.houses.houses)
    const [tab, setTab] = useState("home")
+   // const [houses,  setHouses] = useState([])
+   const [user, setUser] = useState<any>(null)
+   const [initial, setInitial] = useState("")
    const fetchMyProduct = async() => {
-      const myProp = await getMyProperty()
-      console.log(myProp)
+      const resp = await getMyDetails()
+      setUser(resp.data)
+      if(resp.data == "Female"){
+         setInitial("Mrs") ;
+      }else {
+         setInitial("Mr")
+      }
+      console.log(resp)
    }
     fetchMyProduct();
 
     return ( 
         <div className='relative  flex flex-col h-[100vh]  overflow-x-hidden   ' >
-            {tab === "profile"  && <Lprofile/> } 
+            {tab === "profile"  && <Lprofile user = {user}/> } 
               
             {tab === "home"  &&  
             <>
@@ -32,7 +41,7 @@ const LandLordDashboard = () => {
   <div className='flex justify-between h-[11rem] col-span-2 items-end w-[100%] bg-[#17A2B8]  px-[1rem] py-[2rem]  rounded-b-[0.6rem] ' >
              <div className='flex-1 w-full '>
                 <h1 className='  text-[1.25rem] text-white mb-3' > Good Morning</h1>
-              <h2 className="text-white w-full text-[1.5rem] font-bold mt-4 ">Mr Paul</h2>
+              <h2 className="text-white w-full text-[1.5rem] font-bold mt-4 ">{user ? initial + " " + user.lastName : "undefined"}</h2>
               </div> 
               <div   className="h-full flex items-center">
                  <MdOutlineNotifications size={33}  className="text-white"/>

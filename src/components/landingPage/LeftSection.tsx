@@ -15,8 +15,27 @@ const LeftSection :FC= ( ) => {
 
     return ( 
         <div className='  py-0  md:p-4 rounded-xl md:h-[62rem] overflow-x-hidden  overflow-y-scroll no-scrollbar ' >
-           
-        <div  className='  overflow-x-auto flex justify-center item-center md:grid  md:grid-cols-2  gap-4 w-full '>
+              {/* <style>
+         {`
+            .custom-scrollbar-container {
+               
+             
+               &::-webkit-scrollbar {
+                 width: 12px;
+               }
+             
+               &::-webkit-scrollbar-thumb {
+                 background: #4CAF50
+                 border-radius: 6px; 
+               }
+             
+               scrollbar-width: thin; 
+               scrollbar-color: #4CAF50 #333;
+
+         `}
+
+       </style> */}
+        <div  className='  overflow-x-auto flex justify-center item-center md:grid  md:grid-cols-2  gap-4 w-full custom-scrollbar-container '>
 
       {houses.map((data, i)=>{
         return(

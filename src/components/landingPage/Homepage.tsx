@@ -92,8 +92,29 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
             <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
 
          </div>
+{/*        
+       <style>
+         {`
+            .custom-scrollbar-container {
+               
+             
+               &::-webkit-scrollbar {
+                 width: 12px;
+               }
+             
+               &::-webkit-scrollbar-thumb {
+                 background: #4CAF50
+                 border-radius: 6px; 
+               }
+             
+               scrollbar-width: thin; 
+               scrollbar-color: #4CAF50 #333;
 
-      <div className="flex w-[85vw]  mx-auto overflow-x-scroll">
+         `}
+
+       </style> */}
+
+      <div className="flex w-[85vw]  mx-auto overflow-x-scroll  custom-scrollbar-container">
          <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center">
             <BiHomeAlt size={18}  className=" text-grey-light"/>
             <p className="text-[0.875]  text-grey-light">Damico</p>

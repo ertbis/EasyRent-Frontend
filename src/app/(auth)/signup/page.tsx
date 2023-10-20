@@ -32,31 +32,30 @@ const SignUp = () => {
     e.preventDefault();
     if (!inputData.email || !inputData.password || !inputData.confirm_password) {
       setError('Kindly input all values');
+      return
+    }
+    if (!(inputData.password == inputData.confirm_password)) {
+      setError("password does not match");
+      return
     }
     setLoading(true);
     try {
       const resp = await createUser(inputData);
-      console.log(resp);
-      setToken(resp.data.token)
+      setToken(resp.data.accessToken)
       setUser({email :inputData.email })
-      const role = await getMyDetails({
-        fetchset:["role"],
-        querypair:{}
-    })
+     
       const userData = {
         name : "",
         email : inputData.email,
-        role : role.data.data[0].role
+        role : resp.data.role,
+        emailVerified: resp.data.emailVerified
       }
-      dispatch(setLoggedInUser(userData)); 
+      dispatch(setLoggedInUser(userData));
       router.push('/verifyotp');
     } catch (e: any) {
       console.log(e);
       setLoading(false);
-      setError(
-        e.response.data.message ||
-          Object.values<any>(JSON.parse(e.response.data.data))[0][0]
-      );
+      setError( e.response.data.message );
       console.log(error);
     }
   };

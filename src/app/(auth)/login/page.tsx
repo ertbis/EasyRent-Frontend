@@ -39,24 +39,30 @@ const Login = () => {
     setLoading(true)
     try {
       const resp = await logInUser(inputData)
-      setToken(resp.data.token)
+      console.log(resp)
+      setToken(resp.data.accessToken)
       setUser({email :inputData.email })
-      const role = await getMyDetails({
-        fetchset:["role"],
-        querypair:{}
-    })
+   
     const userData = {
       name : "",
       email : inputData.email,
-      role : role.data.data[0].role
+      role : resp.data.role,
+      emailVerified:resp.data.user.emailVerified,
+      profilePicture : resp.data.user.profilePicture || null
     }
-    dispatch(setLoggedInUser(userData)); 
-        router.push('/');
+     const res = await dispatch(setLoggedInUser(userData)); 
+     console.log(res)
+
+    if(resp.data.role == "landlord"){
+      router.push('/ldashboard');
+    }else{
+      router.push('/');
+    }
       
     } catch (e : any) {
        console.log(e)
        setLoading(false)
-       setError(Object.values<any>(JSON.parse(e.response.data.data))[0][0])
+       setError( e.response.data.message );
        console.log(error)   
     }
   };

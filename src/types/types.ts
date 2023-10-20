@@ -5,7 +5,7 @@ export interface HouseType {
     location: string;
     about: string;
     features: string[];
-    main_features: {
+    mainFeatures: {
       light: boolean;
       school: boolean;
       carPack: boolean;
@@ -16,7 +16,9 @@ export interface HouseType {
 export interface UserType {
     name: string;
     role: string ;
-    email:string
+    email:string ;
+    emailVerified:boolean;
+    profilePicture: string | null
  
     };
 

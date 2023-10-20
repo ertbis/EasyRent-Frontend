@@ -10,11 +10,12 @@ import { FC, useEffect, useState } from "react";
 
 interface LpHeaderProps {
     setTab: React.Dispatch<React.SetStateAction<string>>;
+    setLoginModal:React.Dispatch<React.SetStateAction<boolean>>;
   }
   
   
   
-  const MobileFooter :FC<LpHeaderProps>  = ({setTab}) => {
+  const MobileFooter :FC<LpHeaderProps>  = ({setTab, setLoginModal}) => {
     const [isLogIn, setIsLogIn] = useState(false)
    
     useEffect(()=> {
@@ -57,36 +58,13 @@ interface LpHeaderProps {
                     <p className='text-xs'>Profile</p>
                 </div> 
                 :
-                // <div className='text-gray-light cursor-pointer flex justify-center items-center group'>
-                // <FiUser size={20} className='text-gray' />
-                // <RiArrowDropDownLine size={20} className='text-gray' />
-                // <ul className='absolute z-50 bottom-[4rem] right-8 h-40 w-40 flex flex-col justify-center items-center bg-white shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
-                //     <li className='font-semibold h-8 cursor-pointer'><a  href='/login'>Login</a></li>
-                //     <li className='font-semibold h-8 cursor-pointer'><a  href="/signup">Sign Up</a></li>
-                // </ul>
-                // </div>   
-                <>
-                <style>
-                  {`
-                    .dropdownbutton .loginCon {
-                      display: none;
-                    }
-                    .dropdownbutton:hover .loginCon {
-                      display: flex;
-                    }
-                  `}
-                </style>
-                <div className='text-gray-light cursor-pointer flex justify-center items-center dropdownbutton'>
+                
+              
+                <div onClick={() => setLoginModal(true)} className='text-gray-light cursor-pointer flex justify-center items-center dropdownbutton'>
                   <FiUser size={20} className='text-gray' />
                   <RiArrowDropDownLine size={20} className='text-gray' />
-                  <div className='relative'>
-                    <ul className='absolute z-50 bottom-[4rem] right-8 h-40 w-40  flex-col justify-center items-center bg-white shadow-md loginCon'>
-                      <li className='font-semibold h-8 cursor-pointer'><a href='/login'>Login</a></li>
-                      <li className='font-semibold h-8 cursor-pointer'><a href='/signup'>Sign Up</a></li>
-                    </ul>
-                  </div>
+                 
                 </div>
-              </>
               
                 
                 }

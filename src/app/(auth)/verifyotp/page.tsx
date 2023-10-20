@@ -21,32 +21,30 @@ const VerifyOtp = () => {
   const [otp, setOtp] = useState<string[]>([]);
   const otpInputs = useRef<Array<HTMLInputElement | null>>(Array(4).fill(null));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true)
     // Perform necessary actions with the OTP
     const otpString = otp.join('')
     const user = getUser()
     setUser(user)
+    console.log(otpString)
     const reqBody = {
-      email : user.email,
-      temp_code : otpString
+      otp : otpString
     }
     try {
       console.log(reqBody);
-      const resp = VerifyOTPCode(reqBody)
+      const resp = await VerifyOTPCode(reqBody)
       console.log(resp)
       router.push('/uploaddp');
 
-    } catch (error) {
+    } catch (error: any) {
        console.log(error)
        setLoading(false) 
+       setError( error.response.data.message );
     }
 
-    console.log(otpString);
-    // Reset the OTP input fields
-    setOtp([]);
-    clearOtpInputs();
+
   };
 
   const handleChange = (index: number, value: string) => {
@@ -93,14 +91,16 @@ const VerifyOtp = () => {
              <h2 className="text-blue-800 w-[70%] text-xl font-bold ">Enter the code</h2>
        </div>
         <p className='font-normal text-sm text-grey-light ' > Enter the Code sent to<span className='font-semibold'> {User?.email  ? User?.email : "No email"}</span></p>
+        <p style={{ color: 'red' }}>{error}</p>
+
         <form onSubmit={handleSubmit} className="flex flex-wrap  flex-col justify-between h-[90%] md:space-y-4">
               <div className="flex  space-x-4 my-10">
-                {Array.from({ length: 4}, (_, index) => (
+                {Array.from({ length: 5}, (_, index) => (
                   <input
                     key={index}
                     ref={(el) => (otpInputs.current[index] = el)}
                     type="text"
-                    className="bg-gray-200 outline-none rounded-md p-4 text-4xl w-full text-center"
+                    className="bg-gray-200 text-black outline-none rounded-md p-4 text-4xl w-full text-center"
                     maxLength={1}
                     value={otp[index] || ''}
                     onChange={(e: ChangeEvent<HTMLInputElement>) =>

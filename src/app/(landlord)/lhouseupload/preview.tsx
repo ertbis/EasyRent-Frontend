@@ -30,7 +30,7 @@ interface PreviewProps {
        data.features = JSON.stringify(data.features)
        data.images = JSON.stringify(data.images)
        data.amount = parseInt(data.amount)
-       data.main_features = JSON.stringify(data.main_features);
+       data.mainFeatures = JSON.stringify(data.mainFeatures);
        try {
         const resp = await postLandlordProperty(data)
         console.log(resp)

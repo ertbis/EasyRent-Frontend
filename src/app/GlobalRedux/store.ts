@@ -14,7 +14,7 @@ export const store = configureStore({
     favHouses: favHouseReducer,
     selectedHouse : selectedHouseReducer,
     houseUploadData : houseUploadDataReducer,
-    loggedInUser : loggedInUserReducer
+    loggedInUser : loggedInUserReducer,
   },
 });
 

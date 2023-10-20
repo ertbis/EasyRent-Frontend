@@ -6,10 +6,14 @@ import {BiTime} from "react-icons/bi"
 import { AiOutlineLeft } from 'react-icons/ai';
 import { UploadDP } from '../../../../utils/data/endpoints';
 import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { setProfilePicture } from '@/app/GlobalRedux/Features/user/userSlice';
 
 
 const uploaddp = () => {
   const router = useRouter();
+  const dispatch = useDispatch(); 
+
   const [image, setImage] = useState<string | null >('/profiledp.png');
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,13 +30,14 @@ const submitDP = async (e: any)=>{
     e.preventDefault()  
      try {
        const resp = await UploadDP(image) ;
-       console.log(resp)
+       console.log(resp)    
+       dispatch(setProfilePicture(resp.data.user.profilePicture))
        router.push('/paymentacct');
      } catch (error) {
         console.log(error) ;
      }
 }
-  console.log(image)
+
 
 
 

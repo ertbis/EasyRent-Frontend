@@ -12,7 +12,7 @@ import DesktopFooter from '@/components/DesktopFooter';
 import Image from 'next/image';
 import { HouseType } from '@/types/types';
 import { housesData } from '@/demodata/data';
-import { postLandlordProperty, uploadProperty } from '../../../../utils/data/endpoints';
+import { uploadProperty } from '../../../../utils/data/endpoints';
 import { useRouter } from 'next/navigation';
 import Loading from '@/components/Loading';
 

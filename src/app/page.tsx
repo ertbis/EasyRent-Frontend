@@ -28,6 +28,7 @@ export default function Home() {
   const loggedInUser = useSelector((state: RootState) => state.loggedInUser)
   console.log(loggedInUser)
    const [logInModal, setLoginModal] = useState(false)
+
   return (
     <main className="relative flex bg-[#f5f4f8 ]  min-h-screen flex-col items-center justify-between ">
        <Head>

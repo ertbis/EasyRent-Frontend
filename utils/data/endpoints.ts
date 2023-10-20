@@ -61,7 +61,7 @@ export const updateLandlordPaymentAcct = async (param : any)  => {
     return resp
 }
 export const postLandlordProperty = async (param : any)  => {
-    
+    console.log(param)
     const resp = await http.post("/apis/product/create",  param  )
     return resp
 } 

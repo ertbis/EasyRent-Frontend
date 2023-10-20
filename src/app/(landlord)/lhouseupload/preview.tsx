@@ -85,19 +85,19 @@ interface PreviewProps {
               <p className=' text-sm my-2 font-bond'>{houseData.apartment}</p>
          
           <div className=' flex justify-between items-center' >
-            {houseData.main_features.light   &&
+            {houseData.mainFeatures.light   &&
                     <div className="flex h-6 bg-white  mr-2  justify-center items-center rounded-xl p-[0.4rem] " >
                         <HiOutlineLightBulb  className='w-4 h-4 mr-[0.5rem]' />
                         <p className="text-grey-light text-[0.5rem] ">24 hrs light</p>
                     </div>
             }
-            {houseData.main_features.school   &&
+            {houseData.mainFeatures.school   &&
                     <div className="flex h-6 bg-white mr-2  justify-center items-center rounded-xl p-[0.4rem] " >
                         <FaWalking  className='w-4 h-4 mr-[0.5rem]' />
                         <p className="text-grey-light text-[0.5rem]" >School in 30mins</p>
                     </div>
             }
-            {houseData.main_features.carPack   &&
+            {houseData.mainFeatures.carPack   &&
                     <div className="flex h-6 bg-white mr-2   justify-center items-center rounded-xl p-[0.4rem] " >
                         <AiFillCar   className='w-4 h-4 mr-[0.5rem]'  />
                         <p className="text-grey-light text-[0.5rem]">Car Park</p>

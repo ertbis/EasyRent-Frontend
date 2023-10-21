@@ -41,10 +41,10 @@ const submitDP = async (e: any)=>{
        router.push('/paymentacct');
       //  dispatch(setProfilePicture(resp.data.user.profilePicture))
      } catch (error: any) {
+       setError( error.response.data.message)
       setLoginModal(true)
         console.log(error) ;
-        setLoading(false)
-        setError( error.response.data.message)
+       setLoading(false) 
      }
 }
 

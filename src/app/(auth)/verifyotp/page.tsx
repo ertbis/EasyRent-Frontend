@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import Loading from '@/components/Loading';
 import { TokenUserType } from '@/types/types';
 import { AiOutlineLeft } from 'react-icons/ai';
+import ErrorModal from '@/components/ErrorModal';
 
 
 
@@ -17,6 +18,7 @@ const VerifyOtp = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [User, setUser] = useState<TokenUserType | null>(null);
+  const [logInModal, setLoginModal] = useState<boolean>(false)
 
   const [otp, setOtp] = useState<string[]>([]);
   const otpInputs = useRef<Array<HTMLInputElement | null>>(Array(4).fill(null));
@@ -39,9 +41,10 @@ const VerifyOtp = () => {
       router.push('/uploaddp');
 
     } catch (error: any) {
+      setError( error.response.data.message );
+      setLoading(false) 
+      setLoginModal(true)
        console.log(error)
-       setLoading(false) 
-       setError( error.response.data.message );
     }
 
 
@@ -83,6 +86,9 @@ const VerifyOtp = () => {
             <Loading />
           ) : (
             <>
+
+       { (error && logInModal)  &&    <ErrorModal setLoginModal={setLoginModal} text={error}/>}
+
        <div className=' text-grey-light flex  items-center  justify-between mb-2  w-full h-16  '>
               <a href="/">
               <AiOutlineLeft size={25} className='text-green-700  '/>

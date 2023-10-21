@@ -16,6 +16,7 @@ import NotificationPage from "@/components/notification/NotificatinoPage";
 import { getUser } from "../../../../utils/auth";
 import SectionLoading from "@/components/SectionLoading";
 import { useRouter } from 'next/navigation';
+import { useProtectedRoute } from "@/app/useProtectedRoute";
 
 
 const LandLordDashboard = () => {
@@ -28,15 +29,13 @@ const LandLordDashboard = () => {
    const [houses, setHouses] = useState<any>(null)
    const [cookUser, setCookUser] = useState<any>({name:""})
    const [sectionLoading, setSectionLoading] = useState(true)
+   const userHook = useProtectedRoute(['landlord']);
 
 
    const fetchMyProduct = async() => {
       const cookieUser = getUser()
-      if(cookieUser){
          setCookUser(cookieUser)
-       }else (
-         router.push('/login')
-       )      
+        
        const resp = await getMyDetails()
       const resp1 = await getMyProperty()
       setUser(resp.data)

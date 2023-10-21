@@ -1,11 +1,14 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineLeft } from 'react-icons/ai';
 import { UpdateUser } from '../../../../utils/data/endpoints';
 import { useRouter } from 'next/navigation';
 import Loading from '@/components/Loading';
 import ErrorModal from '@/components/ErrorModal';
+import { useProtectedRoute } from '@/app/useProtectedRoute';
+import { TokenUserType } from '@/types/types';
+import { getUser } from '../../../../utils/auth';
 
 // interface PaymentInfoPropsType {
 //   onSubmit: (bank: string, acctName: string, acctNumber: string) => void;
@@ -15,6 +18,16 @@ const genders = ['Male', 'Female', 'Other'];
 
 const Paymentinfo: React.FC<any> = ({ onSubmit }) => {
   const router = useRouter();
+  const [cookUser, setCookUser] = useState<TokenUserType | null>(null)
+  const userHook = useProtectedRoute(['landlord', 'student']);
+
+  
+  useEffect(() => {
+      const cookieUser = getUser();
+        setCookUser(cookieUser)
+    
+   }, [])
+
 
   const [bank, setbank] = useState('');
   const [acctName, setacctName] = useState('');
@@ -33,7 +46,11 @@ const Paymentinfo: React.FC<any> = ({ onSubmit }) => {
     try {
       const resp = await UpdateUser(bankdetails) 
       console.log(resp)
-      router.push('/dashboard');
+      if(cookUser?.name == "No name" ){
+        router.push('/infoform');
+       }else {
+         router.push('/ldashboard');
+       }
     } catch (error:any) {
       setLoginModal(true)
         console.log(error) ;

@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { setName } from '@/app/GlobalRedux/Features/user/userSlice';
 import ErrorModal from '@/components/ErrorModal';
+import { useProtectedRoute } from '@/app/useProtectedRoute';
 
 // interface PersonalInfoFormProps {
 //   onSubmit: (firstName: string, lastName: string, gender: string) => void;
@@ -28,10 +29,11 @@ const PersonalInfoForm: React.FC<any> = () => {
   const [loading, setLoading] = useState(false);
   const [logInModal, setLoginModal] = useState<boolean>(false)
   const [error , setError]  = useState<string | null >(null)
+  const userHook = useProtectedRoute(['landlord', 'student']);
 
 
   const handleSubmit = async (event: React.FormEvent) => {
-    
+
     event.preventDefault();
     setLoading(true);
     const data = {firstName, lastName, gender};

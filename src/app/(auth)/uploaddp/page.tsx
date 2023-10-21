@@ -12,6 +12,7 @@ import Loading from '@/components/Loading';
 import ErrorModal from '@/components/ErrorModal';
 import { getUser } from '../../../../utils/auth';
 import { TokenUserType } from '@/types/types';
+import { useProtectedRoute } from '@/app/useProtectedRoute';
 
 
 const uploaddp = () => {
@@ -22,13 +23,13 @@ const uploaddp = () => {
   const [logInModal, setLoginModal] = useState<boolean>(false)
   const [error , setError]  = useState<string | null >(null)
   const [cookUser, setCookUser] = useState<TokenUserType | null>(null)
-   useEffect(() => {
+  const userHook = useProtectedRoute(['landlord', 'student']);
+
+  
+  useEffect(() => {
       const cookieUser = getUser();
-      if(cookieUser){
         setCookUser(cookieUser)
-      }else (
-        router.push('/login')
-      )
+    
    }, [])
 
 
@@ -49,7 +50,7 @@ const submitDP = async (e: any)=>{
        const resp = await UploadDP(image) ;
        console.log(resp) 
        if(cookUser?.name == "No name" ){
-        router.push('/infoform');
+        router.push('/paymentacct');
        }else {
          router.push('/ldashboard');
        }

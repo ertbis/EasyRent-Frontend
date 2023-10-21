@@ -10,6 +10,7 @@ import Loading from '@/components/Loading';
 import { TokenUserType } from '@/types/types';
 import { AiOutlineLeft } from 'react-icons/ai';
 import ErrorModal from '@/components/ErrorModal';
+import { useProtectedRoute } from '@/app/useProtectedRoute';
 
 
 
@@ -19,13 +20,11 @@ const VerifyOtp = () => {
   const [error, setError] = useState<string | null>(null);
   const [logInModal, setLoginModal] = useState<boolean>(false)
   const [cookUser, setCookUser] = useState<TokenUserType | null>(null)
-   useEffect(() => {
-      const cookieUser = getUser();
-      if(cookieUser){
+  const userHook = useProtectedRoute(['landlord', 'student']);
+
+  useEffect(() => {
+      const cookieUser = getUser(); 
         setCookUser(cookieUser)
-      }else (
-        router.push('/login')
-      )
    }, [])
 
 

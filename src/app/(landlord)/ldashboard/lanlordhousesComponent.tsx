@@ -8,7 +8,7 @@ const LandlordHousesComponent = () => {
 
         <>
         <div className="flex mb-4 p-0 m-0 px-4 w-full font-[400] text-[1rem] justify-between mx-auto">
-            <h3 className="text-blue-800 p-0 m-0">Your ApartMent</h3>
+            <h3 className="text-blue-800 p-0 m-0">Your Apartment</h3>
             <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
 
          </div>

@@ -14,6 +14,7 @@ import { useState, useEffect} from "react";
 import { getMyDetails, getMyProperty } from "../../../../utils/data/endpoints";
 import NotificationPage from "@/components/notification/NotificatinoPage";
 import { getUser } from "../../../../utils/auth";
+import SectionLoading from "@/components/SectionLoading";
 
 const LandLordDashboard = () => {
    // const houses = useSelector((state: RootState) => state.houses.houses)
@@ -23,6 +24,8 @@ const LandLordDashboard = () => {
    const [initial, setInitial] = useState("")
    const [houses, setHouses] = useState<any>(null)
    const [cookUser, setCookUser] = useState<any>({name:""})
+   const [sectionLoading, setSectionLoading] = useState(true)
+
 
    const fetchMyProduct = async() => {
       const cookieUser = getUser()
@@ -30,6 +33,7 @@ const LandLordDashboard = () => {
       const resp = await getMyDetails()
       const resp1 = await getMyProperty()
       setUser(resp.data)
+      setSectionLoading(false)
       setHouses(resp1.data)
       console.log(resp1)
       if(resp.data == "Female"){
@@ -61,25 +65,33 @@ const LandLordDashboard = () => {
                  <MdOutlineNotifications size={33}  className="text-white  animate-wiggle"/>
               </div>
        </div> 
-
-        { houses ?
+           <>
+           {sectionLoading  ? <SectionLoading/>:
+           <>
+             { houses ?
         
-        <div className="mt-4" >
-           <LandlordHousesComponent/>
-           <div   className='p-4 overflow-y-scroll ' >
-               {houses.map((data :any, index:any) => {
-                     return (
-                        <MobileFeaturedCard  key={index} house={data}/>
+               <div className="mt-4" >
+                  <LandlordHousesComponent/>
+                  <div   className='p-4 overflow-y-scroll ' >
+                        {houses.map((data :any, index:any) => {
+                              return (
+                                 <MobileFeaturedCard  key={index} house={data}/>
 
-                     )
-               })}
+                              )
+                        })}
 
-        </div>
-        </div>  :
+               </div>
+               </div>  :
 
-                   <EmptyLandlord/> 
+                           <EmptyLandlord/> 
 
-        }
+               }
+          </>
+
+           }
+           
+           </>
+      
 
                    
             </>}

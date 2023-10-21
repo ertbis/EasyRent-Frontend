@@ -15,8 +15,11 @@ import { getMyDetails, getMyProperty } from "../../../../utils/data/endpoints";
 import NotificationPage from "@/components/notification/NotificatinoPage";
 import { getUser } from "../../../../utils/auth";
 import SectionLoading from "@/components/SectionLoading";
+import { useRouter } from 'next/navigation';
+
 
 const LandLordDashboard = () => {
+   const router = useRouter();
    // const houses = useSelector((state: RootState) => state.houses.houses)
    const [tab, setTab] = useState("home")
    // const [houses,  setHouses] = useState([])
@@ -29,8 +32,12 @@ const LandLordDashboard = () => {
 
    const fetchMyProduct = async() => {
       const cookieUser = getUser()
-      setCookUser(cookieUser)
-      const resp = await getMyDetails()
+      if(cookieUser){
+         setCookUser(cookieUser)
+       }else (
+         router.push('/login')
+       )      
+       const resp = await getMyDetails()
       const resp1 = await getMyProperty()
       setUser(resp.data)
       setSectionLoading(false)

@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import { setToken, setUser } from '../../../../utils/auth';
 import { useDispatch } from 'react-redux';
 import { setLoggedInUser } from '@/app/GlobalRedux/Features/user/userSlice';
+import ErrorModal from '@/components/ErrorModal';
 
 const SignUp = () => {
   const router = useRouter();
@@ -27,6 +28,8 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [logInModal, setLoginModal] = useState<boolean>(false)
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,8 +45,10 @@ const SignUp = () => {
     try {
       const resp = await createUser(inputData);
       setToken(resp.data.accessToken)
-      setUser({email :inputData.email , role: resp.data.role})
-     
+      setUser({email :inputData.email, role : resp.data.role ,
+        name:resp.data.user.lastName || "No name", 
+        emailVerified:resp.data.user.emailVerified, })
+
       const userData = {
         name : "",
         email : inputData.email,
@@ -53,6 +58,7 @@ const SignUp = () => {
       // dispatch(setLoggedInUser(userData));
       router.push('/verifyotp');
     } catch (e: any) {
+      setLoginModal(true)
       console.log(e);
       setLoading(false);
       setError( e.response.data.message );
@@ -76,6 +82,11 @@ const SignUp = () => {
   return (
 
     <>
+
+    <>
+    { (error && logInModal)  &&    <ErrorModal setLoginModal={setLoginModal} text={error}/>}
+
+    </>
        {inputData.role == "" ?  
     <div className='flex flex-col mx-6 h-[90vh]  pt-4 '>
       <div className=' text-grey-light flex   items-center  justify-start mb-2  w-full h-16  '>

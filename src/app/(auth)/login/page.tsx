@@ -14,6 +14,7 @@ import { setToken, setUser } from '../../../../utils/auth';
 import Loading from '@/components/Loading';
 import { setLoggedInUser } from '@/app/GlobalRedux/Features/user/userSlice';
 import { useDispatch } from 'react-redux';
+import ErrorModal from '@/components/ErrorModal';
 
 
 
@@ -29,6 +30,8 @@ const Login = () => {
   const [showPassword, setShowPassword]   = useState(false)
   const [loading , setLoading]  = useState(false)
   const [error , setError]  = useState<string | null >(null)
+  const [logInModal, setLoginModal] = useState<boolean>(false)
+
 
 
   const handleSubmit =async (e: React.FormEvent) => {
@@ -41,7 +44,9 @@ const Login = () => {
       const resp = await logInUser(inputData)
       console.log(resp)
       setToken(resp.data.accessToken)
-      setUser({email :inputData.email, role : resp.data.role })
+      setUser({email :inputData.email, role : resp.data.role ,
+         name:resp.data.user.lastName || "No name", 
+         emailVerified:resp.data.user.emailVerified, })
    
     const userData = {
       name : "",
@@ -60,6 +65,7 @@ const Login = () => {
     }
       
     } catch (e : any) {
+      setLoginModal(true)
        console.log(e)
        setLoading(false)
        setError( e.response.data.message );
@@ -87,6 +93,9 @@ const Login = () => {
             <Loading />
           ) : (
       <>
+              { (error && logInModal)  &&    <ErrorModal setLoginModal={setLoginModal} text={error}/>}
+
+
         <h2 className="text-blue-800 w-[70%] text-2xl font-bold   ">Welcome, <br/>Let’s get started!</h2>
         <p className='font-normal text-sm text-grey-light mb-8' >  Signup to continue your home search</p>
       <form onSubmit={handleSubmit} className="space-y-2  mb-6 md:mb-0">

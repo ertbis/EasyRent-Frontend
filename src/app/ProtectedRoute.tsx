@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { UserType } from '@/types/types';
+import { getUser } from '../../utils/auth';
 
 interface ProtectedRouteProps {
   allowedRoles: string[];
@@ -8,15 +9,16 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles, children }) => {
-  const loggedInUser = useSelector((state: { loggedInUser: UserType | null }) => state.loggedInUser);
+     const user = getUser()
+       
   const router = useRouter();
 
-  if (!loggedInUser) {
+  if (!user) {
     router.push('/login');
     return null;
   }
 
-  if (!allowedRoles.includes(loggedInUser.role)) {
+  if (!allowedRoles.includes(user.role)) {
     return null;
   }
 

@@ -13,7 +13,6 @@ const loggedInUserSlice = createSlice({
   reducers: {
     setLoggedInUser: (state, action: PayloadAction<UserType>) => {
       // Directly update the state with the payload data
-      console.log(action.payload)
       return action.payload;
     },
     setProfilePicture: (state, action: PayloadAction<string>) => {

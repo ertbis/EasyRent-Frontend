@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { setProfilePicture } from '@/app/GlobalRedux/Features/user/userSlice';
 import Loading from '@/components/Loading';
+import ErrorModal from '@/components/ErrorModal';
 
 
 const uploaddp = () => {
@@ -16,6 +17,10 @@ const uploaddp = () => {
   const dispatch = useDispatch(); 
   const [loading , setLoading]  = useState(false)
   const [image, setImage] = useState<string | null >('/profiledp.png');
+  const [logInModal, setLoginModal] = useState<boolean>(false)
+  const [error , setError]  = useState<string | null >(null)
+
+
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] ;
@@ -35,9 +40,11 @@ const submitDP = async (e: any)=>{
        console.log(resp)    
        router.push('/paymentacct');
       //  dispatch(setProfilePicture(resp.data.user.profilePicture))
-     } catch (error) {
+     } catch (error: any) {
+      setLoginModal(true)
         console.log(error) ;
         setLoading(false)
+        setError( error.response.data.message)
      }
 }
 
@@ -62,6 +69,7 @@ const submitDP = async (e: any)=>{
             <Loading />
           ) : (
       <>
+              { (error && logInModal)  &&    <ErrorModal setLoginModal={setLoginModal} text={error}/>}
 
         <div className='flex  items-center  '>
 

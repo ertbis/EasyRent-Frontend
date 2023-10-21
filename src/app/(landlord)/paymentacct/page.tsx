@@ -5,7 +5,7 @@ import { AiOutlineLeft } from 'react-icons/ai';
 import { UpdateUser } from '../../../../utils/data/endpoints';
 import { useRouter } from 'next/navigation';
 import Loading from '@/components/Loading';
-import uploaddp from '@/app/(auth)/location/page';
+import ErrorModal from '@/components/ErrorModal';
 
 // interface PaymentInfoPropsType {
 //   onSubmit: (bank: string, acctName: string, acctNumber: string) => void;
@@ -20,7 +20,8 @@ const Paymentinfo: React.FC<any> = ({ onSubmit }) => {
   const [acctName, setacctName] = useState('');
   const [acctNumber, setAcctNumber] = useState('');
   const [loading, setLoading] = useState(false);
-
+  const [logInModal, setLoginModal] = useState<boolean>(false)
+  const [error , setError]  = useState<string | null >(null)
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -33,9 +34,11 @@ const Paymentinfo: React.FC<any> = ({ onSubmit }) => {
       const resp = await UpdateUser(bankdetails) 
       console.log(resp)
       router.push('/infoform');
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
+    } catch (error:any) {
+      setLoginModal(true)
+        console.log(error) ;
+        setLoading(false)
+        setError( error.response.data.message)
     }
   
     };
@@ -47,6 +50,8 @@ const Paymentinfo: React.FC<any> = ({ onSubmit }) => {
             <Loading />
           ) : (
             <>
+              { (error && logInModal)  &&    <ErrorModal setLoginModal={setLoginModal} text={error}/>}
+
               <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-16  '>
                 <a href="/">
                 <AiOutlineLeft size={30} className='text-green-700  '/>

@@ -7,6 +7,7 @@ import Loading from '@/components/Loading';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { setName } from '@/app/GlobalRedux/Features/user/userSlice';
+import ErrorModal from '@/components/ErrorModal';
 
 // interface PersonalInfoFormProps {
 //   onSubmit: (firstName: string, lastName: string, gender: string) => void;
@@ -18,13 +19,16 @@ const PersonalInfoForm: React.FC<any> = () => {
   const dispatch = useDispatch(); 
 
   const role = useSelector((state:any ) => state);
-  console.log(role)
+  // console.log(role)
   const router = useRouter();
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [gender, setGender] = useState('');
   const [loading, setLoading] = useState(false);
+  const [logInModal, setLoginModal] = useState<boolean>(false)
+  const [error , setError]  = useState<string | null >(null)
+
 
   const handleSubmit = async (event: React.FormEvent) => {
     
@@ -43,9 +47,12 @@ const PersonalInfoForm: React.FC<any> = () => {
       }else{
         router.push('/');
       }
-    } catch (error) {
+    } catch (error:any) {
+      setLoginModal(true)
       setLoading(false);
       console.log(error);
+      setError( error.response.data.message)
+
     }
   };
 
@@ -56,6 +63,7 @@ const PersonalInfoForm: React.FC<any> = () => {
             <Loading />
           ) : (
             <>
+              { (error && logInModal)  &&    <ErrorModal setLoginModal={setLoginModal} text={error}/>}
 
               <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-16  '>
                 <a href="/">
@@ -109,7 +117,7 @@ const PersonalInfoForm: React.FC<any> = () => {
         type="submit"
         className="bg-green-700 text-white  rounded-md  px-4 py-4   md:py-2 w-full"
         >
-        Verify
+        Save
         </button>
       </form>
         </>

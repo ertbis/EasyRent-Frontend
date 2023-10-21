@@ -12,6 +12,8 @@ import EmptyLandlord from "./emptylandlord";
 import Lprofile from "./lprofile";
 import { useState, useEffect} from "react";
 import { getMyDetails, getMyProperty } from "../../../../utils/data/endpoints";
+import NotificationPage from "@/components/notification/NotificatinoPage";
+import { getUser } from "../../../../utils/auth";
 
 const LandLordDashboard = () => {
    // const houses = useSelector((state: RootState) => state.houses.houses)
@@ -20,8 +22,11 @@ const LandLordDashboard = () => {
    const [user, setUser] = useState<any>(null)
    const [initial, setInitial] = useState("")
    const [houses, setHouses] = useState<any>(null)
+   const [cookUser, setCookUser] = useState<any>({name:""})
 
    const fetchMyProduct = async() => {
+      const cookieUser = getUser()
+      setCookUser(cookieUser)
       const resp = await getMyDetails()
       const resp1 = await getMyProperty()
       setUser(resp.data)
@@ -43,17 +48,17 @@ const LandLordDashboard = () => {
     return ( 
         <div className='relative  flex flex-col h-[100vh]  overflow-x-hidden   ' >
             {tab === "profile"  && <Lprofile user = {user}/> } 
-              
+            {tab ==="notification"  &&  <NotificationPage/>}
             {tab === "home"  &&  
             <>
   
-  <div className='flex justify-between h-[11rem] col-span-2 items-end w-[100%] bg-[#17A2B8]  px-[1rem] py-[2rem]  rounded-b-[0.6rem] ' >
+  <div className='flex justify-between h-[11rem] col-span-2 items-end w-[100%] bg-[#17A2B8]  px-[1.4rem] py-[2rem]  rounded-b-[0.6rem] ' >
              <div className='flex-1 w-full '>
                 <h1 className='  text-[1.25rem] text-white mb-3' > Good Morning</h1>
-              <h2 className="text-white w-full text-[1.5rem] font-bold mt-4 ">{user ? initial + " " + user.lastName : "undefined"}</h2>
+              <h2 className="text-white w-full text-[1.5rem] font-bold mt-4 ">{user ? initial + " " + user.lastName : cookUser.name}</h2>
               </div> 
-              <div   className="h-full flex items-center">
-                 <MdOutlineNotifications size={33}  className="text-white"/>
+              <div  onClick={() => setTab("notification")}  className=" h-full flex items-center">
+                 <MdOutlineNotifications size={33}  className="text-white  animate-wiggle"/>
               </div>
        </div> 
 

@@ -13,7 +13,7 @@ const LandlordHousesComponent = () => {
 
          </div>
 
-      <div className="flex space-x-6  mx-auto overflow-x-scroll">
+      <div className="flex space-x-6  mx-auto overflow-x-hidden">
          <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[6rem] p-[0.4rem] flex justify-around  items-center">
             <BiHomeAlt size={18}  className=" text-grey-light"/>
             <p className="text-[0.875]  text-grey-light">Damico</p>

@@ -2,7 +2,7 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <div className="fixed flex z-[1000] justify-center items-center  bg-[#ffffffb3]  md:h-[30rem] h-[100vh] w-[100vw] ">
+    <div className="fixed top-0 left-0  flex z-[1000] justify-center items-center  bg-[#ffffffb3]  md:h-[30rem] h-full w-[100vw] ">
       <style>
         {`
           .spinner {

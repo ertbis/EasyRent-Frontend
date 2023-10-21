@@ -52,5 +52,8 @@ export type logInDetailsType = {
 }
 
 export type TokenUserType = {
-  email : string
+  email : string,
+  role:string,
+  emailVerified:boolean,
+  name: string
 }

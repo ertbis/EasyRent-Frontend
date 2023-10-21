@@ -24,7 +24,11 @@ const uploaddp = () => {
   const [cookUser, setCookUser] = useState<TokenUserType | null>(null)
    useEffect(() => {
       const cookieUser = getUser();
-       setCookUser(cookieUser)
+      if(cookieUser){
+        setCookUser(cookieUser)
+      }else (
+        router.push('/login')
+      )
    }, [])
 
 

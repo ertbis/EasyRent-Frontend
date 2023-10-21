@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, ChangeEvent, KeyboardEvent, RefObject } from 'react';
+import { useState, useRef, ChangeEvent, KeyboardEvent, RefObject, useEffect } from 'react';
 import DesktopHeader from '../../../components/DesktopHeader';
 import {BiTime} from "react-icons/bi"
 import { VerifyOTPCode } from '../../../../utils/data/endpoints';
@@ -17,8 +17,17 @@ const VerifyOtp = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [User, setUser] = useState<TokenUserType | null>(null);
   const [logInModal, setLoginModal] = useState<boolean>(false)
+  const [cookUser, setCookUser] = useState<TokenUserType | null>(null)
+   useEffect(() => {
+      const cookieUser = getUser();
+      if(cookieUser){
+        setCookUser(cookieUser)
+      }else (
+        router.push('/login')
+      )
+   }, [])
+
 
   const [otp, setOtp] = useState<string[]>([]);
   const otpInputs = useRef<Array<HTMLInputElement | null>>(Array(4).fill(null));
@@ -28,8 +37,6 @@ const VerifyOtp = () => {
     setLoading(true)
     // Perform necessary actions with the OTP
     const otpString = otp.join('')
-    const user = getUser()
-    setUser(user)
     console.log(otpString)
     const reqBody = {
       otp : otpString
@@ -96,7 +103,7 @@ const VerifyOtp = () => {
 
              <h2 className="text-blue-800 w-[70%] text-xl font-bold ">Enter the code</h2>
        </div>
-        <p className='font-normal text-sm text-grey-light ' > Enter the Code sent to<span className='font-semibold'> {User?.email  ? User?.email : "No email"}</span></p>
+        <p className='font-normal text-sm text-grey-light ' > Enter the Code sent to<span className='font-semibold'> {cookUser?.email  ? cookUser.email : "No email"}</span></p>
         <p style={{ color: 'red' }}>{error}</p>
 
         <form onSubmit={handleSubmit} className="flex flex-wrap  flex-col justify-between h-[90%] md:space-y-4">

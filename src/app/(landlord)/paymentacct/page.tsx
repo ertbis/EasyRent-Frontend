@@ -33,7 +33,7 @@ const Paymentinfo: React.FC<any> = ({ onSubmit }) => {
     try {
       const resp = await UpdateUser(bankdetails) 
       console.log(resp)
-      router.push('/infoform');
+      router.push('/dashboard');
     } catch (error:any) {
       setLoginModal(true)
         console.log(error) ;

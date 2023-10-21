@@ -1,6 +1,6 @@
 "use client"
 
-import { useState , ChangeEvent } from 'react';
+import { useState , ChangeEvent , useEffect } from 'react';
 import DesktopHeader from '../../../components/DesktopHeader';
 import {BiTime} from "react-icons/bi"
 import { AiOutlineLeft } from 'react-icons/ai';
@@ -10,6 +10,8 @@ import { useDispatch } from 'react-redux';
 import { setProfilePicture } from '@/app/GlobalRedux/Features/user/userSlice';
 import Loading from '@/components/Loading';
 import ErrorModal from '@/components/ErrorModal';
+import { getUser } from '../../../../utils/auth';
+import { TokenUserType } from '@/types/types';
 
 
 const uploaddp = () => {
@@ -19,7 +21,11 @@ const uploaddp = () => {
   const [image, setImage] = useState<string | null >('/profiledp.png');
   const [logInModal, setLoginModal] = useState<boolean>(false)
   const [error , setError]  = useState<string | null >(null)
-
+  const [cookUser, setCookUser] = useState<TokenUserType | null>(null)
+   useEffect(() => {
+      const cookieUser = getUser();
+       setCookUser(cookieUser)
+   }, [])
 
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -37,8 +43,12 @@ const submitDP = async (e: any)=>{
     setLoading(true)
      try {
        const resp = await UploadDP(image) ;
-       console.log(resp)    
-       router.push('/paymentacct');
+       console.log(resp) 
+       if(cookUser?.name == "No name" ){
+        router.push('/infoform');
+       }else {
+         router.push('/ldashboard');
+       }
       //  dispatch(setProfilePicture(resp.data.user.profilePicture))
      } catch (error: any) {
        setError( error.response.data.message)

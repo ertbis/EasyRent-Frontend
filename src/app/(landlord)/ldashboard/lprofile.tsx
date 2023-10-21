@@ -5,6 +5,8 @@ import { MdKeyboardArrowRight, MdOutlinePayments, MdKeyboardArrowDown } from "re
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Loading from "@/components/Loading";
+import { removeToken, removeUser } from "../../../../utils/auth";
+import { useRouter } from "next/navigation";
 
 const DropdownProfileItem = ({user}: any) => (
   <div data-aos="flip-down" className="mx-2 flex-col py-3 border-b border-gray-300 items-center text-gray-600">
@@ -25,6 +27,10 @@ const DropdownBankItem = ({bankDetails}: any) => (
 );
 
 const Lprofile = ({ user }: any) => {
+  const router = useRouter();
+  const [loading , setLoading]  = useState(false)
+
+
   useEffect(() => {
     AOS.init();
     AOS.refresh();
@@ -35,10 +41,15 @@ const Lprofile = ({ user }: any) => {
   
 
   const logOut = ()=> {
+    setLoading(true)
     try {
-      
+      removeToken()
+      removeUser()
+      router.push('/');
+
     } catch (error) {
-      
+      setLoading(false)
+      console.log(error)
     }
   }
 
@@ -47,6 +58,10 @@ const Lprofile = ({ user }: any) => {
     {user ? 
   
     <>
+        {loading ? (
+            <Loading />
+          ) : (
+      <>
       <div data-aos="fade-right" className="w-full mt-3 flex flex-col h-[13rem] justify-center items-center">
         <div className="rounded-full h-[8rem] w-[8rem]">
           <img src={user.profilePicture ? user.profilePicture : "profiledp.png"} className="h-full w-full rounded-full" />
@@ -101,9 +116,13 @@ const Lprofile = ({ user }: any) => {
       <div className="mt-2  flex justify-center mb-32 w-full ">
         <a  onClick={logOut} className="mb-4  font-medium  text-center py-2 text-green-700"> Log Out</a>
       </div>
+      </>
+    )}
     </>  :
     <Loading/>
    }
+   
+
     </>
   );
 };

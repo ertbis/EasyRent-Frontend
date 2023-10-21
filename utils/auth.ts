@@ -48,6 +48,9 @@ export function getToken(): string | null {
 export function removeToken(): void {
   Cookies.remove('token');
 }
+export function removeUser(): void {
+  Cookies.remove('user');
+}
 
 export function setUser(user: any): void {
   Cookies.set('user', JSON.stringify(user));

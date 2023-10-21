@@ -115,7 +115,7 @@ export default function Home() {
 const LoginModal = ({setLoginModal}:any) =>(
 <div className="fixed z-[1000] flex items-center w-full h-full bg-white bg-opacity-70">
     <div data-aos="zoom-in" className="relative w-80 mx-4 bg-white rounded-lg shadow dark:bg-gray-700">
-        <FaTimes onClick={() => setLoginModal(false)} size={30} className="text-white absolute top-3 right-2.5" />
+        <FaTimes onClick={() => setLoginModal(false)} size={30} className="text-black  dark:text-white absolute top-3 right-2.5" />
 
         <div className="p-6 w-full h-full">
             <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">Ready to book a tour?</h3>

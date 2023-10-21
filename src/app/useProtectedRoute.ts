@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
-import { UserType } from '@/types/types';
-import { getUser } from '../../utils/auth';
+import { useRouter } from 'next/navigation';
+import { getToken, getUser } from '../../utils/auth';
 
 export const useProtectedRoute = (allowedRoles: string[]) => {
   const user = getUser();
+  const token = getToken()
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) {
+    if (!token) {
       router.push('/login');
       return;
     }

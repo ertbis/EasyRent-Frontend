@@ -30,7 +30,7 @@ const FormTwo :FC<FormTwoProps>  = ({houseData,  setHouseData, setFormPage}) => 
 
     const  addToFeatures = ( e:KeyboardEvent<HTMLInputElement>) => {
         e.preventDefault()
-      if(e.key ==="Enter" && fInput !== ""){
+      if(e.key ==="Enter" || event.keyCode === 13  && fInput !== ""){
        
         setFeatures([...features,   fInput.trim()]);
         setHouseData({...houseData, features})

@@ -12,6 +12,9 @@ import DesktopFooter from '@/components/DesktopFooter'
 import FilterForm from "./FilterForm";
 import { BiSearch ,BiHomeAlt } from "react-icons/bi";
 import { MdOutlineNotifications } from "react-icons/md";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/GlobalRedux/store";
+import MobileFeaturedCard from "../common/MobileFeatureCard";
 
 
 
@@ -53,8 +56,28 @@ import { MdOutlineNotifications } from "react-icons/md";
 
 
 const MobileView :FC<LpHomeProps>  = ({setTab}) => {
+   const [showFilterCard, setShowFilterCard ]  = useState(false)
+   const houses = useSelector((state: RootState) => state.houses.houses)
+   const [showSearch, setShowSearch] = useState(false)
+
+   const handleSearch  = (e:any)=>{
+      e.preventDefault()
+      if (e.target.value !== '' ){
+          setShowSearch(true)
+      }else {
+         setShowSearch(false)
+      }
+   }
+
+
    return (
       <div className='flex flex-col overflow-x-hidden  gap-4 px-4 items-center  ' >
+      
+      
+      {showFilterCard  &&    <FilterForm  setShowFilterCard={setShowFilterCard}/> }
+
+
+
       <div className='flex justify-between col-span-2 items-center w-[100%]  p-4 ' >
            <div className='flex-1 w-full '>
               <p className='font-normal  text-sm text-grey-light mb-3' > Hey James</p>
@@ -65,6 +88,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
                  onClick={() => setTab("notification")}
                className="text-grey-light"/>
      </div>
+
      <div className=' text-grey-light flex  items-center border border-grey-light rounded-md w-[85vw]  p-2  h-16  '>
         <BiSearch size={28} className='text-grey-light  '/>
            <input
@@ -73,12 +97,27 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
            name="search"
            placeholder='Search Apartment'
            className=" outline-none p-4 h-[70%] w-full"
+           onChange={handleSearch}
            
            />
-   <BsFilterRight size={30} className="mr-2 cursor-pointer  border-l pl-2 border-grey-light ml-2 "/>
+   <BsFilterRight  onClick={() => setShowFilterCard(true)} size={30} className="mr-2 cursor-pointer  border-l pl-2 border-grey-light ml-2 "/>
 
        </div>
 
+      {showSearch   ? 
+      <div className="h-[40rem]   overflow-y-scroll">
+       <div   className='p-4' >
+        {houses.map((data, index) => {
+            return (
+                <MobileFeaturedCard  key={index} house={data}/>
+
+            )
+        })}
+
+        </div>
+         </div>
+:
+   <>
        <div className="flex p-0 m-0 px-4 w-full font-[400] text-[1rem] justify-between mx-auto">
          <h3 className="text-blue-800 p-0 m-0">Current Location</h3>
          <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
@@ -92,27 +131,6 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
             <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
 
          </div>
-{/*        
-       <style>
-         {`
-            .custom-scrollbar-container {
-               
-             
-               &::-webkit-scrollbar {
-                 width: 12px;
-               }
-             
-               &::-webkit-scrollbar-thumb {
-                 background: #4CAF50
-                 border-radius: 6px; 
-               }
-             
-               scrollbar-width: thin; 
-               scrollbar-color: #4CAF50 #333;
-
-         `}
-
-       </style> */}
 
       <div className="flex w-[85vw]  mx-auto overflow-x-scroll  custom-scrollbar-container">
          <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center">
@@ -143,6 +161,10 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
       <div className="w-[90vw] mx-auto p-0 m-0  mb-12 ">
       <LeftSection/>
       </div>
+   </>
+   }
+
+
        
 
        

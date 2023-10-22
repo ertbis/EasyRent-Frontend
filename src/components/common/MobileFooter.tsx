@@ -32,7 +32,7 @@ interface LpHeaderProps {
         setTab(param)
     }
     return ( 
-        <div className='fixed z-50  py-[0.5rem] bg-white bottom-[0] text-grey-light flex-1 justify-around items-center flex w-screen mx-2' >
+        <div className='fixed z-[505]  py-[0.5rem] bg-white bottom-[0] text-grey-light flex-1 justify-around items-center flex w-screen mx-2' >
             <div   onClick={() => handletabClick("home")}
             className={` ${activeButton == "home" ? "text-green-700 border-b border-green-700" : "text-grey-light"} cursor-pointer   flex flex-col justify-center items-center`} >
                     <SlHome size={20}  className={activeButton =="home" ?  "text-green-700" : "text-grey-light"}/>

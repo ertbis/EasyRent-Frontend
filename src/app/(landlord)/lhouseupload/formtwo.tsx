@@ -11,6 +11,7 @@ import { RiPriceTag3Line } from 'react-icons/ri';
 import { BiCamera } from 'react-icons/bi';
 import Image from 'next/image';
 import { HouseType } from '@/types/types';
+import { FaPlus } from 'react-icons/fa';
 
 interface FormTwoProps {
   houseData: HouseType;
@@ -24,19 +25,22 @@ const FormTwo :FC<FormTwoProps>  = ({houseData,  setHouseData, setFormPage}) => 
     const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
     const [uploadedPhotos, setUploadedPhotos] = useState<string[]>([]);
     const [features, setFeatures] = useState<string[]>([
-        "kitchen", "Gym House", "Packing lot", "AC", "Personal Metre", "DSTV"
+        "kitchen","DSTV"
     ])
     const [fInput, setFInput] = useState<string>("")
 
-    const  addToFeatures = ( e:KeyboardEvent<HTMLInputElement>) => {
+    const  addToFeatures = ( e: any) => {
         e.preventDefault()
-      if(e.key ==="Enter" || e.keyCode === 13  && fInput !== ""){
-       
+      if(fInput !== ""){
         setFeatures([...features,   fInput.trim()]);
         setHouseData({...houseData, features})
         setFInput("")
       }
     }
+     const removeFeature = (featureToRemove: string) => {
+        const updatedFeatures = features.filter((feature) => feature !== featureToRemove);
+        setFeatures(updatedFeatures);
+      };
 
     const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
               const files = event.target.files;
@@ -74,11 +78,12 @@ const FormTwo :FC<FormTwoProps>  = ({houseData,  setHouseData, setFormPage}) => 
                     <div className='space-y-8  mt-2 mb-8' >
 
                         <div className='flex flex-col space-y-4' > 
-                                <p className='flex  items-center '> Features and Amenities</p>
+                                <p className='flex  items-center '> Features and Amenities    <span className='flex  items-center  text-[0.6rem]'>  (Tap to remove)</span></p>
+
                             <div className='flex justify-between flex-wrap space-x-2 space-y-3'>
                                {features.map((data, index) => {
                                 return (
-                                <p className='px-[1rem] py-[0.5rem] m-0 text-[0.85rem] flex items-center border border-green-700 rounded-lg'>
+                                <p key={index}  onTouchStart={()=> removeFeature(data)} className='px-[1rem] py-[0.5rem] m-0 text-[0.85rem] flex items-center border border-green-700 rounded-lg'>
                                         {data}
                                 </p>
 
@@ -86,17 +91,23 @@ const FormTwo :FC<FormTwoProps>  = ({houseData,  setHouseData, setFormPage}) => 
                                })}
                                
                             </div>
+                            <div className='flex'>
                             <input
                                 type="text"
                                 id="text"
                                 name="amenities"
                                 placeholder="Write More Amenities"
-                                className="border focus:border-green-700 border-grey-light outline-none rounded-md  px-4 py-[1.2rem] mt-3[['[]]] md:py-2 w-full"
+                                className="border focus:border-green-700 border-grey-light outline-none rounded-md  px-4 py-[1.2rem] md:py-2 w-full"
                                 value= {fInput}
                                 onChange = {e => setFInput(e.target.value)}
-                                onKeyPress={addToFeatures}
+                  
                                 
                                 />
+                                <button onClick={addToFeatures}  className='border border-gray-300 ml-2 p-2'>
+                                <FaPlus size={25}/>
+                                </button>
+
+                            </div>
                         </div>
 
                         <div className='' > 

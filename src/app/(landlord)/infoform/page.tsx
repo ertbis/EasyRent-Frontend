@@ -53,7 +53,7 @@ const PersonalInfoForm: React.FC<any> = () => {
       setLoginModal(true)
       setLoading(false);
       console.log(error);
-      setError( error.response.data.message)
+      setError( error?.response?.data?.message || "Try Again");
 
     }
   };

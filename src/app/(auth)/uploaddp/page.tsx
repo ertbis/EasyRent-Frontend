@@ -56,7 +56,7 @@ const submitDP = async (e: any)=>{
        }
       //  dispatch(setProfilePicture(resp.data.user.profilePicture))
      } catch (error: any) {
-       setError( error.response.data.message)
+      setError( error?.response?.data?.message || "Try Again");
       setLoginModal(true)
         console.log(error) ;
        setLoading(false) 

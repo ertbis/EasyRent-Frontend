@@ -61,7 +61,7 @@ const SignUp = () => {
       setLoginModal(true)
       console.log(e);
       setLoading(false);
-      setError( e.response.data.message );
+      setError( e?.response?.data?.message || "Try Again");
       console.log(error);
     }
   };

@@ -47,7 +47,7 @@ const VerifyOtp = () => {
       router.push('/uploaddp');
 
     } catch (error: any) {
-      setError( error.response.data.message );
+      setError( error?.response?.data?.message || "Try Again");
       setLoading(false) 
       setLoginModal(true)
        console.log(error)

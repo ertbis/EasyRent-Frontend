@@ -17,6 +17,7 @@ import { getUser } from "../../../../utils/auth";
 import SectionLoading from "@/components/SectionLoading";
 import { useRouter } from 'next/navigation';
 import { useProtectedRoute } from "@/app/useProtectedRoute";
+import ErrorModal from "@/components/ErrorModal";
 
 
 const LandLordDashboard = () => {
@@ -30,24 +31,34 @@ const LandLordDashboard = () => {
    const [cookUser, setCookUser] = useState<any>({name:""})
    const [sectionLoading, setSectionLoading] = useState(true)
    const userHook = useProtectedRoute(['landlord']);
-
+   const [error , setError]  = useState<string | null >(null)
+   const [logInModal, setLoginModal] = useState<boolean>(false)
 
    const fetchMyProduct = async() => {
       const cookieUser = getUser()
-         setCookUser(cookieUser)
-        
-       const resp = await getMyDetails()
-      const resp1 = await getMyProperty()
-      setUser(resp.data)
+      setCookUser(cookieUser)
+   try {
+     
+    const resp = await getMyDetails()
+   const resp1 = await getMyProperty()
+   console.log(resp)
+   setUser(resp.data)
+   setSectionLoading(false)
+   setHouses(resp1.data)
+   console.log(resp1)
+   if(resp.data == "Female"){
+      setInitial("Mrs") ;
+   }else {
+      setInitial("Mr")
+   }
+   
+   } catch (error:any) {
+      setLoginModal(true)
       setSectionLoading(false)
-      setHouses(resp1.data)
-      console.log(resp1)
-      if(resp.data == "Female"){
-         setInitial("Mrs") ;
-      }else {
-         setInitial("Mr")
-      }
-      console.log(resp)
+      setHouses(null)
+        setError( error?.response?.data?.message || "Try Again");
+        console.log(error)   
+   }
    }
    useEffect(() => {
       fetchMyProduct();
@@ -71,6 +82,8 @@ const LandLordDashboard = () => {
                  <MdOutlineNotifications size={33}  className="text-white  animate-wiggle"/>
               </div>
        </div> 
+               { (error && logInModal)  &&    <ErrorModal setLoginModal={setLoginModal} text={error}/>}
+
            <>
            {sectionLoading  ? <SectionLoading/>:
            <>
@@ -105,13 +118,13 @@ const LandLordDashboard = () => {
 
        <div className=" fixed bottom-0 flex py-4 w-full items-center justify-between bg-white  px-12 " >
            <div className="">
-            <SlHome onClick={() => setTab("home")}  size={30} className='text-grey-light'/>
+            <SlHome onClick={() => setTab("home")}  size={25} className='text-grey-light'/>
            </div>
-            <a  href="/lhouseupload" className="flex  mt-[-3rem] items-center justify-center bg-gradient-to-br from-[#234F68] to-[#8BC83F] h-20 w-20 rounded-full flex items-center cursor-pointer justify-center">
+            <a  href="/lhouseupload" className="flex  mt-[-3rem] items-center justify-center bg-gradient-to-br from-[#234F68] to-[#8BC83F] h-16 w-16 rounded-full flex items-center cursor-pointer justify-center">
               <p className="text-3xl text-white font-bold">+</p>
             </a>
            <div className="">
-           <FiUser onClick={() => setTab("profile")} size={30} className='text-grey-light' />
+           <FiUser onClick={() => setTab("profile")} size={25} className='text-grey-light' />
 
            </div>
        </div>

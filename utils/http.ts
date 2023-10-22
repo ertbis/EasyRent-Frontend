@@ -31,4 +31,3 @@ export default http;
 
 
 
-// sudo mount -t efs -o tls fs-0512f12c8eeb1ce15:/ efs

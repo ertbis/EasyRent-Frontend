@@ -12,7 +12,7 @@ import EmptyNotification from "./EmptyNotification";
 
 const NotificationPage = () => {
   const [notifications, setNotification] = useState<any>(null)
-  const [deleteModal, setDeleteModal] = useState<boolean>(true)
+  const [deleteModal, setDeleteModal] = useState<boolean>(false)
   
   const fetchMyNotification  = async() => {
     try {

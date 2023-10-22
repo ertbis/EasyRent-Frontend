@@ -116,7 +116,7 @@ const LandLordDashboard = () => {
             </>}
           
 
-       <div className=" fixed bottom-0 flex py-4 w-full items-center justify-between bg-white  px-12 " >
+       <div className=" z-100 fixed bottom-0 flex py-4 w-full items-center justify-between bg-white  px-12 " >
            <div className="">
             <SlHome onClick={() => setTab("home")}  size={25} className='text-grey-light'/>
            </div>

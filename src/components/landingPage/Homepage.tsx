@@ -18,6 +18,8 @@ import MobileFeaturedCard from "../common/MobileFeatureCard";
 import { getAllProperty } from "../../../utils/data/endpoints";
 import ErrorModal from "../ErrorModal";
 import SectionLoading from "../SectionLoading";
+import debounce from 'lodash/debounce';
+
 
 
 
@@ -68,28 +70,34 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
    const [error , setError]  = useState<string | null >(null)
    const [errorModal, setErrorModal] = useState<boolean>(false)
 
-   const handleSearch  = async(e:any)=>{
-      e.preventDefault()
-      setHouses(null)
-      setSectionLoading(true)
-      if (e.target.value !== '' ){
-         try {
-            const resp  = await getAllProperty(e.target.value)
-            setHouses(resp.data)
-            setShowSearch(true)
-            console.log(resp)
-            setSectionLoading(false)
-            
-         } catch (error:any) {
-            setErrorModal(true)
-               setSectionLoading(false)
-              setError( error?.response?.data?.message || "Fail to search");
-              console.log(error)     
-         }
-      }else {
-         setShowSearch(false)
-      }
-   }
+   // Create a debounced version of the handleSearch function
+   const debouncedSearch = debounce(async (searchValue : string) => {
+          try {
+              const resp = await getAllProperty(searchValue);
+              setHouses(resp.data);
+              console.log(resp);
+              setSectionLoading(false);
+          } catch (error:any) {
+              setErrorModal(true);
+              setSectionLoading(false);
+              setError(error?.response?.data?.message || "Failed to search");
+              console.log(error);
+          }
+   
+  }, 400); // Adjust the debounce delay as needed (500 milliseconds in this example)
+
+  const handleSearch = (e: any) => {
+      e.preventDefault();
+      setHouses(null);
+      setSectionLoading(true);
+      const searchValue = e.target.value;
+      if (searchValue !== '') {
+         setShowSearch(true);
+      debouncedSearch(searchValue); // Use the debounced function
+   } else {
+      setShowSearch(false);
+  }
+   };
 
 
    return (
@@ -111,7 +119,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
                className="text-grey-light"/>
      </div>
 
-     <div className=' text-grey-light flex  items-center border border-grey-light rounded-md w-[85vw]  p-2  h-16  '>
+     <div className='bg-white text-grey-light flex  items-center border border-grey-light rounded-md w-[85vw]  p-2  h-16  '>
         <BiSearch size={28} className='text-grey-light  '/>
            <input
            type="search"

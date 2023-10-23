@@ -18,7 +18,7 @@ const VerifyOtp = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [logInModal, setLoginModal] = useState<boolean>(false)
+  const [errorModal, setErrorModal] = useState<boolean>(false)
   const [cookUser, setCookUser] = useState<TokenUserType | null>(null)
   const userHook = useProtectedRoute(['landlord', 'student']);
 
@@ -49,7 +49,7 @@ const VerifyOtp = () => {
     } catch (error: any) {
       setError( error?.response?.data?.message || "Try Again");
       setLoading(false) 
-      setLoginModal(true)
+      setErrorModal(true)
        console.log(error)
     }
 
@@ -93,7 +93,7 @@ const VerifyOtp = () => {
           ) : (
             <>
 
-       { (error && logInModal)  &&    <ErrorModal setLoginModal={setLoginModal} text={error}/>}
+       { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
 
        <div className=' text-grey-light flex  items-center  justify-between mb-2  w-full h-16  '>
               <a href="/">

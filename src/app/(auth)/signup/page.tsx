@@ -28,7 +28,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [logInModal, setLoginModal] = useState<boolean>(false)
+  const [eerorModal, setErrorModal] = useState<boolean>(false)
 
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -58,7 +58,7 @@ const SignUp = () => {
       // dispatch(setLoggedInUser(userData));
       router.push('/verifyotp');
     } catch (e: any) {
-      setLoginModal(true)
+      setErrorModal(true)
       console.log(e);
       setLoading(false);
       setError( e?.response?.data?.message || "Try Again");
@@ -84,7 +84,7 @@ const SignUp = () => {
     <>
 
     <>
-    { (error && logInModal)  &&    <ErrorModal setLoginModal={setLoginModal} text={error}/>}
+    { (error && eerorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
 
     </>
        {inputData.role == "" ?  

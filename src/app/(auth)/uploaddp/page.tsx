@@ -20,7 +20,7 @@ const uploaddp = () => {
   const dispatch = useDispatch(); 
   const [loading , setLoading]  = useState(false)
   const [image, setImage] = useState<string | null >('/profiledp.png');
-  const [logInModal, setLoginModal] = useState<boolean>(false)
+  const [errorModal, setErrorModal] = useState<boolean>(false)
   const [error , setError]  = useState<string | null >(null)
   const [cookUser, setCookUser] = useState<TokenUserType | null>(null)
   const userHook = useProtectedRoute(['landlord', 'student']);
@@ -57,7 +57,7 @@ const submitDP = async (e: any)=>{
       //  dispatch(setProfilePicture(resp.data.user.profilePicture))
      } catch (error: any) {
       setError( error?.response?.data?.message || "Try Again");
-      setLoginModal(true)
+      setErrorModal(true)
         console.log(error) ;
        setLoading(false) 
      }
@@ -84,7 +84,7 @@ const submitDP = async (e: any)=>{
             <Loading />
           ) : (
       <>
-              { (error && logInModal)  &&    <ErrorModal setLoginModal={setLoginModal} text={error}/>}
+              { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
 
         <div className='flex  items-center  '>
 

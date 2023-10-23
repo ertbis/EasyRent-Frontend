@@ -27,7 +27,7 @@ const PersonalInfoForm: React.FC<any> = () => {
   const [lastName, setLastName] = useState('');
   const [gender, setGender] = useState('');
   const [loading, setLoading] = useState(false);
-  const [logInModal, setLoginModal] = useState<boolean>(false)
+  const [errorModal, setErrorModal] = useState<boolean>(false)
   const [error , setError]  = useState<string | null >(null)
   const userHook = useProtectedRoute(['landlord', 'student']);
 
@@ -50,7 +50,7 @@ const PersonalInfoForm: React.FC<any> = () => {
         router.push('/');
       }
     } catch (error:any) {
-      setLoginModal(true)
+      setErrorModal(true)
       setLoading(false);
       console.log(error);
       setError( error?.response?.data?.message || "Try Again");
@@ -65,7 +65,7 @@ const PersonalInfoForm: React.FC<any> = () => {
             <Loading />
           ) : (
             <>
-              { (error && logInModal)  &&    <ErrorModal setLoginModal={setLoginModal} text={error}/>}
+              { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
 
               <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-16  '>
                 <a href="/">

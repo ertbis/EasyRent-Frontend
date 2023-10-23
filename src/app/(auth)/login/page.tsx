@@ -30,7 +30,7 @@ const Login = () => {
   const [showPassword, setShowPassword]   = useState(false)
   const [loading , setLoading]  = useState(false)
   const [error , setError]  = useState<string | null >(null)
-  const [logInModal, setLoginModal] = useState<boolean>(false)
+  const [errorModal, setErrorModal] = useState<boolean>(false)
 
 
 
@@ -65,7 +65,7 @@ const Login = () => {
     }
       
     } catch (e : any) {
-      setLoginModal(true)
+      setErrorModal(true)
        console.log(e)
        setLoading(false)
        setError( e?.response?.data?.message || "Try Again");
@@ -93,7 +93,7 @@ const Login = () => {
             <Loading />
           ) : (
       <>
-              { (error && logInModal)  &&    <ErrorModal setLoginModal={setLoginModal} text={error}/>}
+              { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
 
 
         <h2 className="text-blue-800 w-[70%] text-2xl font-bold   ">Welcome, <br/>Let’s get started!</h2>
@@ -149,20 +149,20 @@ const Login = () => {
       </div>
       <div className="flex   flex-col md:flex-row justify-center mt-2">
         <button onClick={() => {
-          setLoginModal(true)
+          setErrorModal(true)
           setError('Google OAUTH not avalable - log in with email')}}  className="flex justify-center bg-transparent w-full md:w-[5rem] my-2 md:my-0 md:mx-2  p-3 md:p-2 border border-green-700 border-solid rounded-lg">
           <FcGoogle size={27}  />
           <p className='md:hidden text-grey-light ml-4' >Continue With Google</p>
         </button>
         <button onClick={() => {
-          setLoginModal(true)
+          setErrorModal(true)
           setError('Apple OAUTH not avalable - log in with email')}} className="flex justify-center bg-transparent w-full md:w-[5rem] my-2 md:my-0 md:mx-2  p-3 md:p-2 border border-green-700 border-solid rounded-lg">
           <FaApple size={27} className='text-black'/>
           <p className='md:hidden text-grey-light ml-4' >Continue With Apple</p>
 
         </button>
         <button onClick={() => {
-          setLoginModal(true)
+          setErrorModal(true)
           setError('Facebook OAUTH not avalable - log in with email')}}  className="flex  justify-center bg-transparent w-full md:w-[5rem] my-2 md:my-0 md:mx-2 p-3 md:p-2 border border-green-700 border-solid rounded-lg">
           <FaFacebook size={27} className='text-[#1877F2]' />
           <p className='md:hidden text-grey-light ml-4' >Continue With Facebook</p>

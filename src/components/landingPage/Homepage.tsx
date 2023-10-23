@@ -15,6 +15,9 @@ import { MdOutlineNotifications } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/GlobalRedux/store";
 import MobileFeaturedCard from "../common/MobileFeatureCard";
+import { getAllProperty } from "../../../utils/data/endpoints";
+import ErrorModal from "../ErrorModal";
+import SectionLoading from "../SectionLoading";
 
 
 
@@ -26,6 +29,7 @@ import MobileFeaturedCard from "../common/MobileFeatureCard";
     
  const HomePage :FC<LpHomeProps>  = ({setTab}) => {
    const [isMobileView, setIsMobileView] = React.useState(true);
+
 
    // Function to check if the screen size is mobile or desktop
    const handleResize = () => {
@@ -57,13 +61,31 @@ import MobileFeaturedCard from "../common/MobileFeatureCard";
 
 const MobileView :FC<LpHomeProps>  = ({setTab}) => {
    const [showFilterCard, setShowFilterCard ]  = useState(false)
-   const houses = useSelector((state: RootState) => state.houses.houses)
+   // const houses = useSelector((state: RootState) => state.houses.houses)
+   const  [houses , setHouses]= useState<any>(null)
    const [showSearch, setShowSearch] = useState(false)
+   const [sectionLoading, setSectionLoading] = useState(false)
+   const [error , setError]  = useState<string | null >(null)
+   const [errorModal, setErrorModal] = useState<boolean>(false)
 
-   const handleSearch  = (e:any)=>{
+   const handleSearch  = async(e:any)=>{
       e.preventDefault()
+      setHouses(null)
+      setSectionLoading(true)
       if (e.target.value !== '' ){
-          setShowSearch(true)
+         try {
+            const resp  = await getAllProperty(e.target.value)
+            setHouses(resp.data)
+            setShowSearch(true)
+            console.log(resp)
+            setSectionLoading(false)
+            
+         } catch (error:any) {
+            setErrorModal(true)
+               setSectionLoading(false)
+              setError( error?.response?.data?.message || "Fail to search");
+              console.log(error)     
+         }
       }else {
          setShowSearch(false)
       }
@@ -74,10 +96,10 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
       <div className='flex flex-col overflow-x-hidden  gap-4 px-4 items-center  ' >
       
       
-      {showFilterCard  &&    <FilterForm  setShowFilterCard={setShowFilterCard}/> }
+      {showFilterCard  &&    <FilterForm  setShowFilterCard={setShowFilterCard} /> }
+     
 
-
-
+  
       <div className='flex justify-between col-span-2 items-center w-[100%]  p-4 ' >
            <div className='flex-1 w-full '>
               <p className='font-normal  text-sm text-grey-light mb-3' > Hey James</p>
@@ -106,8 +128,11 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
 
       {showSearch   ? 
       <div className="h-[40rem]   overflow-y-scroll">
+       { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
+       {sectionLoading  ? <SectionLoading/>:
+
        <div   className='p-4' >
-        {houses.map((data, index) => {
+        {houses &&  houses.map((data:any, index :any) => {
             return (
                 <MobileFeaturedCard  key={index} house={data}/>
 
@@ -115,6 +140,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
         })}
 
         </div>
+}
          </div>
 :
    <>

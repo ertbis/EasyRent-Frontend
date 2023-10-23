@@ -33,7 +33,7 @@ const Paymentinfo: React.FC<any> = ({ onSubmit }) => {
   const [acctName, setacctName] = useState('');
   const [acctNumber, setAcctNumber] = useState('');
   const [loading, setLoading] = useState(false);
-  const [logInModal, setLoginModal] = useState<boolean>(false)
+  const [errorModal, setErrorModal] = useState<boolean>(false)
   const [error , setError]  = useState<string | null >(null)
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -52,7 +52,7 @@ const Paymentinfo: React.FC<any> = ({ onSubmit }) => {
          router.push('/ldashboard');
        }
     } catch (error:any) {
-      setLoginModal(true)
+      setErrorModal(true)
         console.log(error) ;
         setLoading(false)
         setError( error.response.data.message)
@@ -67,7 +67,7 @@ const Paymentinfo: React.FC<any> = ({ onSubmit }) => {
             <Loading />
           ) : (
             <>
-              { (error && logInModal)  &&    <ErrorModal setLoginModal={setLoginModal} text={error}/>}
+              { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
 
               <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-16  '>
                 <a href="/">

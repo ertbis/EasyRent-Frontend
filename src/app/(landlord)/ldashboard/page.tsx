@@ -32,7 +32,7 @@ const LandLordDashboard = () => {
    const [sectionLoading, setSectionLoading] = useState(true)
    const userHook = useProtectedRoute(['landlord']);
    const [error , setError]  = useState<string | null >(null)
-   const [logInModal, setLoginModal] = useState<boolean>(false)
+   const [errorModal, setErrorModal] = useState<boolean>(false)
 
    const fetchMyProduct = async() => {
       const cookieUser = getUser()
@@ -53,7 +53,7 @@ const LandLordDashboard = () => {
    }
    
    } catch (error:any) {
-      setLoginModal(true)
+      setErrorModal(true)
       setSectionLoading(false)
       setHouses(null)
         setError( error?.response?.data?.message || "Try Again");
@@ -82,7 +82,7 @@ const LandLordDashboard = () => {
                  <MdOutlineNotifications size={33}  className="text-white  animate-wiggle"/>
               </div>
        </div> 
-               { (error && logInModal)  &&    <ErrorModal setLoginModal={setLoginModal} text={error}/>}
+               { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
 
            <>
            {sectionLoading  ? <SectionLoading/>:

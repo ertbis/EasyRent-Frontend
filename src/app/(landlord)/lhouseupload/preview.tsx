@@ -31,7 +31,7 @@ interface PreviewProps {
     const router = useRouter();
     const [loading , setLoading]  = useState<Boolean>(false)
     const [error , setError]  = useState<string | null >(null)
-    const [logInModal, setLoginModal] = useState<boolean>(false)
+    const [errorModal, setErrorModal] = useState<boolean>(false)
 
 
     const postProperty = async() => {
@@ -44,7 +44,7 @@ interface PreviewProps {
            router.push('/ldashboard');
         
        } catch (error: any) {
-        setLoginModal(true)
+        setErrorModal(true)
         setLoading(false)
         setError( error?.response?.data?.message || "Try Again");
         console.log(error)   
@@ -90,7 +90,7 @@ interface PreviewProps {
                         </div>
                     </div>
         </div>
-        { (error && logInModal)  &&    <ErrorModal setLoginModal={setLoginModal} text={error}/>}
+        { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
 
         <div className='flex flex-col bg-[#F5F4F8] justify-center items-between p-4 rounded-lg m-4  mx-4  text-grey-light' >
             <div  className='flex'>

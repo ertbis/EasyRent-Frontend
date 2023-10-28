@@ -46,7 +46,7 @@ export default function Home() {
         <meta property="og:title" content="My page title" key="title" />
         <script src="https://kit.fontawesome.com/3b89073561.js" ></script>
       </Head>
-      <div className=" hidden fixed md:flex  w-screen h-screen bg-[#fff]  justify-center  items-center  text-xl">
+      <div className=" hidden z-[1000] fixed md:flex  w-screen h-screen bg-[#fff]  justify-center  items-center  text-xl">
          This web app  only work on mobile screen, kindly switch to a smaller screen size      </div>
       {logInModal &&
        <LoginModal setLoginModal={setLoginModal}/>
@@ -114,7 +114,7 @@ export default function Home() {
 
 const LoginModal = ({setLoginModal}:any) =>(
 <div className="fixed z-[1000] flex items-center w-full h-full bg-white bg-opacity-70">
-    <div data-aos="zoom-in" className="relative w-80 mx-4 bg-white rounded-lg shadow dark:bg-gray-700">
+    <div data-aos="zoom-in" className="relative w-90 mx-4 bg-white rounded-lg shadow dark:bg-gray-700">
         <FaTimes onClick={() => setLoginModal(false)} size={30} className="text-black  dark:text-white absolute top-3 right-2.5" />
 
         <div className="p-6 w-full h-full">

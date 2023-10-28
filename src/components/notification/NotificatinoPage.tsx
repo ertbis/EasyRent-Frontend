@@ -10,7 +10,7 @@ import { getMyNotification } from "../../../utils/data/endpoints";
 import EmptyNotification from "./EmptyNotification";
 
 
-const NotificationPage = () => {
+const NotificationPage = ({setTab}:any) => {
   const [notifications, setNotification] = useState<any>(null)
   const [deleteModal, setDeleteModal] = useState<boolean>(false)
   
@@ -37,7 +37,7 @@ const NotificationPage = () => {
         //  </>
         <div className="h-[80vh] w-screen">
             <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-12  '>
-            <a href="/">
+            <a onClick={()=> setTab('home')}>
             <AiOutlineLeft  size={30} className='text-green-700  '/>
             </a>
             <p className='flex-1 text-center text-[1.2rem] font-[800] text-blue-800'> Notifications</p>

@@ -11,11 +11,12 @@ import { FC, useEffect, useState } from "react";
 interface LpHeaderProps {
     setTab: React.Dispatch<React.SetStateAction<string>>;
     setLoginModal:React.Dispatch<React.SetStateAction<boolean>>;
+    user: any
   }
   
   
   
-  const MobileFooter :FC<LpHeaderProps>  = ({setTab, setLoginModal}) => {
+  const MobileFooter :FC<LpHeaderProps>  = ({setTab, setLoginModal, user}) => {
     const [isLogIn, setIsLogIn] = useState(false)
    
     useEffect(()=> {
@@ -51,9 +52,8 @@ interface LpHeaderProps {
                 
             
                 {isLogIn ?  <div className='text-grey-light cursor-pointer   flex flex-col justify-center items-center' >
-                    <div className=' w-[1.5rem] h-[1.5rem]'>
+                    <div className=' w-[1.5rem] h-[1.5rem] rounded-full bg-cover bg-center' style={{ backgroundImage: `url(${user && user.profilePicture ? user.profilePicture : "profiledp.png"})` }}>
 
-                    <img src="/profiledp.png" alt="Uploaded"  className=" rounded-full  object-cover w-full h-full " />
                     </div>
                     <p className='text-xs'>Profile</p>
                 </div> 

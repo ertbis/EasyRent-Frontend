@@ -2,7 +2,7 @@ import React from "react";
 
 const SectionLoading = () => {
   return (
-    <div className="flex   flex-col justify-center items-center  bg-[#ffffffb3]   h-full w-full ">
+    <div className="flex   flex-col justify-center items-center  bg-[#ffffffb3]   h-[60vh] w-[90vw] ">
      <p className="text-gray-800">Fecthing Properties.... </p>
       <style>
         {`

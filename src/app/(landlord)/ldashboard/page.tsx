@@ -44,7 +44,12 @@ const LandLordDashboard = () => {
    console.log(resp)
    setUser(resp.data)
    setSectionLoading(false)
-   setHouses(resp1.data)
+   if(resp1.data.length == 0){
+
+   }else{
+      setHouses(resp1.data)
+
+   }
    console.log(resp1)
    if(resp.data == "Female"){
       setInitial("Mrs") ;
@@ -69,7 +74,7 @@ const LandLordDashboard = () => {
     return ( 
         <div className='relative  flex flex-col h-[100vh]  overflow-x-hidden   ' >
             {tab === "profile"  && <Lprofile user = {user}/> } 
-            {tab ==="notification"  &&  <NotificationPage/>}
+            {tab ==="notification"  &&  <NotificationPage  setTab={setTab}/>}
             {tab === "home"  &&  
             <>
   

@@ -13,6 +13,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 import { getUser } from '../../../utils/auth';
+import HsImages from './Images';
 
 type cookieUserType ={
   email:string,
@@ -21,42 +22,64 @@ type cookieUserType ={
 const HousePage :FC = () => {
     const selectedHouse = useSelector((state: RootState) => state.selectedHouse.selectedHouse)
     const [user, setUser] =useState<cookieUserType >({email:"", role:""})
-   const fetchUser = async()=>{
+     const [tab, setTab]  = useState("house")
+     const [home, setHome]  = useState("/")
+
+    const fetchUser = async()=>{
        const cookieUser = await getUser()
-       setUser(cookieUser)
+       setUser(cookieUser);
+       if(cookieUser.role == 'landlord'){
+        setHome('/dashboard')
+       }else {
+        setHome('/')
+
+       }
+
 
    }
    
+   const showImages = async()=> {
+        setTab('images')
+   }
+
     useEffect(() => {
         fetchUser()
     }, [])
     
     return ( 
-        
+        <>
+
+        { tab == 'images' ? 
+        <HsImages setTab={setTab} selectedHouse={selectedHouse}/>
+        :
+      
         <div>
 
         <div className='bg-[#F5F4F8]    w-full ' >
         <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-12  '>
-            <a href="/ldashboard">
+            <a href={home}>
             <AiOutlineLeft  size={30} className='text-green-700  '/>
             </a>
             </div> 
            <div className="m-4">
               <div className= "relative  w-[100%] h-[15rem] rounded-xl ">
                
-                    <Image src={selectedHouse.images[0]} alt={selectedHouse.apartment}  fill className='w-full h-full  rounded-xl  bg-cover ' />
+                    <Image src={selectedHouse.images[0]} alt={selectedHouse.apartment}  fill   objectFit='cover'
+                     objectPosition='center center' className='w-full h-full  rounded-xl  bg-cover ' />
                 </div>
 
                 <div className='flex mt-4'>
 
                 <div className=" relative mr-2 w-full h-[10rem]">
-                    <Image src={selectedHouse.images[1]} alt={selectedHouse.apartment} fill  className='w-full h-full rounded-xl bg-cover ' />
+                    <Image src={selectedHouse.images[1]} alt={selectedHouse.apartment} fill   objectFit='cover'
+                     objectPosition='center center' className='w-full h-full rounded-xl bg-cover ' />
                 </div>
                 <div className="relative ml-2 w-full h-[10rem] ">
                 <div className='z-10 absolute top-4 left-10  bg-white  rounded-lg p-2 cursor-pointer'>
-                     <a href="/houseimages" className='text-gray-700 text-xs'>See all photos</a>
+                     <a onClick={showImages} className='text-gray-700 text-xs'>See all photos</a>
                 </div>
-                    <Image src={selectedHouse.images[2]} alt={selectedHouse.apartment}  fill className='w-full h-full rounded-xl bg-cover' />
+                    <Image src={selectedHouse.images[2]} alt={selectedHouse.apartment}  fill   objectFit='cover'
+                     objectPosition='center center' className='w-full h-full rounded-xl bg-cover' />
                 </div>
                 </div>
         </div>
@@ -148,6 +171,10 @@ const HousePage :FC = () => {
         </div>
          <DesktopFooter/>
         </div>
+        }
+        
+        </>
+        
      );
 }
  

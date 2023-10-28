@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useEffect, useState, FC} from "react"
+import React, {useEffect, useState, FC, useInsertionEffect} from "react"
 import LeftSection from '@/components/landingPage/LeftSection'
 import RightSection from '@/components/landingPage/RightSection'
 import {BsFilterRight} from "react-icons/bs"
@@ -69,6 +69,9 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
    const [sectionLoading, setSectionLoading] = useState(false)
    const [error , setError]  = useState<string | null >(null)
    const [errorModal, setErrorModal] = useState<boolean>(false)
+   const  [popularHouses , setPopularHouses]= useState<any>(null)
+   const  [nearHouses , setNearHouses]= useState<any>(null)
+
 
    // Create a debounced version of the handleSearch function
    const debouncedSearch = debounce(async (searchValue : string) => {
@@ -99,6 +102,17 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
   }
    };
 
+
+   const fetchbyLocationAndPopularity =async () => {
+      const resp = await getAllProperty('d');
+      const resp1 = await getAllProperty('ma');
+      setPopularHouses(resp.data)
+      setNearHouses(resp1.data)
+   }
+
+useEffect(()=> {
+   fetchbyLocationAndPopularity()
+},[])
 
    return (
       <div className='flex flex-col overflow-x-hidden  gap-4 px-4 items-center  ' >
@@ -157,7 +171,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
          <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
        </div>
        <div className="w-[90vw] mx-auto p-0 m-0 ">
-      <LeftSection/>
+      <LeftSection  houses={popularHouses}/>
   
       </div>
       <div className="flex p-0 m-0 px-4 w-full font-[400] text-[1rem] justify-between mx-auto">
@@ -173,15 +187,15 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
          </div>
          <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center">
             <BiHomeAlt size={18}  className=" text-grey-light"/>
-            <p className="text-[0.875]  text-grey-light">Damico</p>
+            <p className="text-[0.875]  text-grey-light">Eleyele</p>
          </div>
          <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center">
             <BiHomeAlt size={18}  className=" text-grey-light"/>
-            <p className="text-[0.875]  text-grey-light">Damico</p>
+            <p className="text-[0.875]  text-grey-light">Gate</p>
          </div>
          <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center">
             <BiHomeAlt size={18}  className=" text-grey-light"/>
-            <p className="text-[0.875]  text-grey-light">Damico</p>
+            <p className="text-[0.875]  text-grey-light">Shop</p>
          </div>
 
       </div>
@@ -193,7 +207,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
       </div>
 
       <div className="w-[90vw] mx-auto p-0 m-0  mb-12 ">
-      <LeftSection/>
+      <LeftSection houses ={nearHouses}/>
       </div>
    </>
    }
@@ -229,7 +243,7 @@ const DesktopView = ()=> {
            </div>
         </div>
        <RightSection />
-       <LeftSection   />
+       <LeftSection   houses ={'nearHouses'} />
       </div>
 
       <div className="relative w-full h-[16rem] bg-cover bg-center mt-8 px-24" style={{ backgroundImage: 'url("/bg2.png")' }}>

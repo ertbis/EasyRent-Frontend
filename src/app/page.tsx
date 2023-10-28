@@ -21,6 +21,7 @@ import "aos/dist/aos.css";
 import { getUser } from "../../utils/auth";
 import { TokenUserType } from "@/types/types";
 import LandLordDashboard from "./(landlord)/ldashboard/page";
+import { getMyDetails } from "../../utils/data/endpoints";
 
 export default function Home() {
   useEffect(() => {
@@ -30,9 +31,17 @@ export default function Home() {
   const [tab , setTab] = useState<string>('home') 
    const [logInModal, setLoginModal] = useState(false)
    const [cookUser, setCookUser] = useState<TokenUserType | null>(null)
+   const [user, setUser] = useState<any>(null)
+
+
+   const fetchDetails = async()=> {
+    const resp = await getMyDetails()
+    setUser(resp.data)
+   }
    useEffect(() => {
       const cookieUser = getUser();
        setCookUser(cookieUser)
+       fetchDetails()
    }, [])
    
   return (
@@ -46,7 +55,7 @@ export default function Home() {
         <meta property="og:title" content="My page title" key="title" />
         <script src="https://kit.fontawesome.com/3b89073561.js" ></script>
       </Head>
-      <div className=" hidden fixed md:flex  w-screen h-screen bg-[#fff]  justify-center  items-center  text-xl">
+      <div className=" hidden z-[1000] fixed md:flex  w-screen h-screen bg-[#fff]  justify-center  items-center  text-xl">
          This web app  only work on mobile screen, kindly switch to a smaller screen size      </div>
       {logInModal &&
        <LoginModal setLoginModal={setLoginModal}/>
@@ -61,9 +70,9 @@ export default function Home() {
        {tab ==='home' && <HomePage  setTab={setTab}/>}
        {tab ==='save' && <FavouriteHousePage/>}
        {tab ==='inbox' && <InboxPage/>}
-       {tab ==='notification' && <NotificationPage/>}
+       {tab ==='notification' && <NotificationPage setTab={setTab}/>}
        
-       <MobileFooter  setTab={setTab} setLoginModal={setLoginModal}   />
+       <MobileFooter  user={user} setTab={setTab} setLoginModal={setLoginModal}   />
 
        
        <DesktopFooter/>
@@ -97,7 +106,7 @@ export default function Home() {
        {tab ==='inbox' && <InboxPage/>}
        {tab ==='notification' && <NotificationPage/>}
        
-       <MobileFooter  setTab={setTab} setLoginModal={setLoginModal}   />
+       <MobileFooter user={user}  setTab={setTab} setLoginModal={setLoginModal}   />
 
        
        <DesktopFooter/>
@@ -114,7 +123,7 @@ export default function Home() {
 
 const LoginModal = ({setLoginModal}:any) =>(
 <div className="fixed z-[1000] flex items-center w-full h-full bg-white bg-opacity-70">
-    <div data-aos="zoom-in" className="relative w-80 mx-4 bg-white rounded-lg shadow dark:bg-gray-700">
+    <div data-aos="zoom-in" className="relative w-[90vw] mx-4 bg-white rounded-lg shadow dark:bg-gray-700">
         <FaTimes onClick={() => setLoginModal(false)} size={30} className="text-black  dark:text-white absolute top-3 right-2.5" />
 
         <div className="p-6 w-full h-full">

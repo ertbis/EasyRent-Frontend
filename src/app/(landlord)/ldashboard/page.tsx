@@ -51,7 +51,7 @@ const LandLordDashboard = () => {
 
    }
    console.log(resp1)
-   if(resp.data == "Female"){
+   if(resp.data.gender == "Female"){
       setInitial("Mrs") ;
    }else {
       setInitial("Mr")

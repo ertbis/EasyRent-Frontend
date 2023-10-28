@@ -29,7 +29,7 @@ const HousePage :FC = () => {
        const cookieUser = await getUser()
        setUser(cookieUser);
        if(cookieUser.role == 'landlord'){
-        setHome('/dashboard')
+        setHome('/ldashboard')
        }else {
         setHome('/')
 

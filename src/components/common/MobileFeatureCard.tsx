@@ -55,6 +55,8 @@ const addtoFavourite = async () => {
                     src={house.images[0]}
                     alt={house.apartment}
                     fill
+                    objectFit='cover'
+                     objectPosition='center center'
                     className='w-full h-full rounded-xl'
                   />
                 </div>

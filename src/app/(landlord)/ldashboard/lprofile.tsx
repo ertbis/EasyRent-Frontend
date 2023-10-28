@@ -63,9 +63,12 @@ const Lprofile = ({ user }: any) => {
           ) : (
       <>
       <div data-aos="fade-right" className="w-full mt-3 flex flex-col h-[13rem] justify-center items-center">
-        <div className="rounded-full h-[8rem] w-[8rem]">
+        {/* <div className="rounded-full h-[8rem] w-[8rem]">
           <img src={user.profilePicture ? user.profilePicture : "profiledp.png"} className="h-full w-full rounded-full" />
-        </div>
+        </div> */}
+        <div className="h-[8rem] w-[8rem] rounded-full bg-cover bg-center" style={{ backgroundImage: `url(${user.profilePicture ? user.profilePicture : "profiledp.png"})` }}>
+       </div>
+
         <p className="text-[1rem] text-grey-light ">{user ? user.lastName : "Emmy"}</p>
       </div>
       <div data-aos="fade-right"  className="mt-1 mx-4">

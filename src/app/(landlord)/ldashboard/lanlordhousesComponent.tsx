@@ -20,15 +20,15 @@ const LandlordHousesComponent = () => {
          </div>
          <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[6rem] p-[0.4rem] flex justify-around  items-center">
             <BiHomeAlt size={18}  className=" text-grey-light"/>
-            <p className="text-[0.4]  text-grey-light">Damico</p>
+            <p className="text-[0.4]  text-grey-light">Eleyele</p>
          </div>
          <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[6rem] p-[0.4rem] flex justify-around  items-center">
             <BiHomeAlt size={18}  className=" text-grey-light"/>
-            <p className="text-[0.4]  text-grey-light">Damico</p>
+            <p className="text-[0.4]  text-grey-light">Mayfair</p>
          </div>
          <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[6rem] p-[0.4rem] flex justify-around  items-center">
             <BiHomeAlt size={18}  className=" text-grey-light"/>
-            <p className="text-[0.4]  text-grey-light">Damico</p>
+            <p className="text-[0.4]  text-grey-light">Parakin</p>
          </div>
 
       </div>

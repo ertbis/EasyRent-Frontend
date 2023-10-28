@@ -17,7 +17,12 @@ const NotificationPage = ({setTab}:any) => {
   const fetchMyNotification  = async() => {
     try {
       const resp = await getMyNotification()
-      setNotification(resp.data)
+      if(resp.data.length == 0){
+
+      }else {
+
+        setNotification(resp.data)
+      }
       console.log(resp)
     } catch (error) {
       console.log(error)

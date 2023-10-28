@@ -23,9 +23,18 @@ const HousePage :FC = () => {
     const selectedHouse = useSelector((state: RootState) => state.selectedHouse.selectedHouse)
     const [user, setUser] =useState<cookieUserType >({email:"", role:""})
      const [tab, setTab]  = useState("house")
+     const [home, setHome]  = useState("/")
+
     const fetchUser = async()=>{
        const cookieUser = await getUser()
-       setUser(cookieUser)
+       setUser(cookieUser);
+       if(cookieUser.role == 'landlord'){
+        setHome('/dashboard')
+       }else {
+        setHome('/')
+
+       }
+
 
    }
    
@@ -48,7 +57,7 @@ const HousePage :FC = () => {
 
         <div className='bg-[#F5F4F8]    w-full ' >
         <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-12  '>
-            <a href="/ldashboard">
+            <a href={home}>
             <AiOutlineLeft  size={30} className='text-green-700  '/>
             </a>
             </div> 

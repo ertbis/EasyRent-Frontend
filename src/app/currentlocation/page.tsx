@@ -1,17 +1,27 @@
 "use client"
 import MobileFeaturedCard from '@/components/common/MobileFeatureCard';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { AiOutlineLeft } from "react-icons/ai";
 import { BsFilterRight } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { RootState } from '../GlobalRedux/store';
 import FilterForm from '@/components/landingPage/FilterForm';
+import { getAllProperty } from '../../../utils/data/endpoints';
+import SectionLoading from '@/components/SectionLoading';
 
 
 const CurrentLocation :FC = () => {
-    const houses = useSelector((state: RootState) => state.houses.houses)
     const [showFilterCard, setShowFilterCard] = useState(false)
+    const  [houses , setHouses]= useState<any>(null)
 
+    const fetchbyLocationAndPopularity =async () => {
+        const resp = await getAllProperty('dam');
+        setHouses(resp.data)
+     }
+  
+  useEffect(()=> {
+     fetchbyLocationAndPopularity()
+  },[])
 return (
     <div  className=''>
          {showFilterCard  &&  <FilterForm setShowFilterCard={setShowFilterCard}/>   }
@@ -24,12 +34,14 @@ return (
 
        </div>
        <div   className='p-4' >
-        {houses.map((data, index) => {
+        {houses ? houses.map((data:any, index:any) => {
             return (
                 <MobileFeaturedCard  key={index} house={data}/>
 
             )
-        })}
+        })  : 
+           <SectionLoading/>
+        }
 
         </div>
        

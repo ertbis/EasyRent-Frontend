@@ -18,7 +18,7 @@ const DeleteModal :FC<ErrorProps>  = ({setDeleteModal, text}) => {
     return (
 
         <div className="fixed top-0 left-0  z-[1000] flex items-center w-full h-full bg-white bg-opacity-70">
-    <div data-aos="zoom-in"  className="relative w-90 mx-4  rounded-lg shadow bg-gray-100">
+    <div data-aos="zoom-in"  className="relative w-[90vw] mx-4  rounded-lg shadow bg-gray-100">
         <div  className="z-[1500]  " >
         <FaTimes onClick={() => setDeleteModal(false)}  size={30} className=" text-black absolute top-3 right-2.5" />
         </div>

@@ -42,28 +42,61 @@ const FormTwo :FC<FormTwoProps>  = ({houseData,  setHouseData, setFormPage}) => 
         setFeatures(updatedFeatures);
       };
 
-    const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
-              const files = event.target.files;
-              const uploadedPhotoList: string[] = [];
-              if(files){
-          
-                  for (let i = 0; i < files.length; i++) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                      if (e.target?.result) {
-                        uploadedPhotoList.push(e.target.result.toString());
-                        console.log(uploadedPhotoList)
-                        if (uploadedPhotoList.length === files.length) {
-                          setUploadedPhotos((prevUploadedPhotos)=> [...prevUploadedPhotos,   ...uploadedPhotoList]);
-                        }
-                      }
-                    };
-                    reader.readAsDataURL(files[i]);
-                  }
+
+      const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
+        const files = event.target.files;
+        const uploadedPhotoList: string[] = [];
+      
+        if (files) {
+          const readers = Array.from(files).map((file) => {
+            const reader = new FileReader();
+      
+            reader.onload = (e) => {
+              if (e.target?.result) {
+                uploadedPhotoList.push(e.target.result.toString());
+                console.log(uploadedPhotoList);
+      
+                if (uploadedPhotoList.length === files.length) {
+                  setUploadedPhotos((prevUploadedPhotos) => [
+                    ...prevUploadedPhotos,
+                    ...uploadedPhotoList,
+                  ]);
+      
+                  // Now, update the houseData state with the uploaded photos
+                  setHouseData({ ...houseData, images: [...uploadedPhotos, ...uploadedPhotoList] });
+                }
               }
-              setHouseData({...houseData, images: uploadedPhotos})
-              console.log(uploadedPhotos)
             };
+      
+            reader.readAsDataURL(file);
+      
+            return reader;
+          });
+        }
+      };
+      
+    // const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
+    //           const files = event.target.files;
+    //           const uploadedPhotoList: string[] = [];
+    //           if(files){
+          
+    //               for (let i = 0; i < files.length; i++) {
+    //                 const reader = new FileReader();
+    //                 reader.onload = (e) => {
+    //                   if (e.target?.result) {
+    //                     uploadedPhotoList.push(e.target.result.toString());
+    //                     console.log(uploadedPhotoList)
+    //                     if (uploadedPhotoList.length === files.length) {
+    //                       setUploadedPhotos((prevUploadedPhotos)=> [...prevUploadedPhotos,   ...uploadedPhotoList]);
+    //                     }
+    //                   }
+    //                 };
+    //                 reader.readAsDataURL(files[i]);
+    //               }
+    //           }
+    //           setHouseData({...houseData, images: uploadedPhotos})
+    //           console.log(uploadedPhotos)
+    //         };
     return (
                     <div  className='flex flex-col h-screen  '>
                         <div className=' text-grey-light flex  items-center  justify-between px-4 rounded-md w-full h-16  '>

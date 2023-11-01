@@ -19,6 +19,7 @@ import { getAllProperty } from "../../../utils/data/endpoints";
 import ErrorModal from "../ErrorModal";
 import SectionLoading from "../SectionLoading";
 import debounce from 'lodash/debounce';
+import '../../app/globals.css'
 
 
 
@@ -53,8 +54,7 @@ import debounce from 'lodash/debounce';
   <>
     {isMobileView ? <MobileView  setTab={setTab}/> : <DesktopView/> }
   </>
-  
-          
+      
   )
 }
 
@@ -87,7 +87,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
               console.log(error);
           }
    
-  }, 400); // Adjust the debounce delay as needed (500 milliseconds in this example)
+  }, 400); 
 
   const handleSearch = (e: any) => {
       e.preventDefault();
@@ -96,7 +96,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
       const searchValue = e.target.value;
       if (searchValue !== '') {
          setShowSearch(true);
-      debouncedSearch(searchValue); // Use the debounced function
+      debouncedSearch(searchValue);
    } else {
       setShowSearch(false);
   }
@@ -180,7 +180,9 @@ useEffect(()=> {
 
          </div>
 
-      <div className="flex w-[85vw]  mx-auto overflow-x-scroll  custom-scrollbar-container">
+         
+
+      <div  id='custom-scrollbar-container' className="flex w-[85vw]  mx-auto overflow-x-hidden  ">
          <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center">
             <BiHomeAlt size={18}  className=" text-grey-light"/>
             <p className="text-[0.875]  text-grey-light">Damico</p>

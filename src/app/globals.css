@@ -37,3 +37,19 @@ body {
   color: rgb(var(--foreground-rgb));
   background: #f5f4f893;
 }
+
+
+#custom-scrollbar-container {
+  scrollbar-width: none !important; 
+  scrollbar-color: transparent transparent !important;
+}
+
+#custom-scrollbar-container ::-webkit-scrollbar {
+  width: 0 !important; 
+  height: 0;
+}
+
+#custom-scrollbar-container ::-webkit-scrollbar-thumb {
+  background: red; /* Hide scrollbar thumb background */
+  border: none; /* Hide scrollbar thumb border */
+}

@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/app/GlobalRedux/store';
 import SectionLoading from '../SectionLoading';
 import SkeletonLoader from './HomeSkeleton';
+import '../../app/globals.css'
 
 interface hType {
   houses: any
@@ -17,41 +18,20 @@ interface hType {
 
 const LeftSection :FC<hType>= ({houses}) => {
   // const houses = useSelector((state: RootState) => state.houses.houses)
-
     return ( 
-        <div className='  py-0  md:p-4 rounded-xl md:h-[62rem] overflow-x-hidden  overflow-y-scroll no-scrollbar ' >
-              {/* <style>
-         {`
-            .custom-scrollbar-container {
-               
-             
-               &::-webkit-scrollbar {
-                 width: 12px;
-               }
-             
-               &::-webkit-scrollbar-thumb {
-                 background: #4CAF50
-                 border-radius: 6px; 
-               }
-             
-               scrollbar-width: thin; 
-               scrollbar-color: #4CAF50 #333;
+        <div id='custom-scrollbar-container'  className='py-0  md:p-4 rounded-xl md:h-[62rem] overflow-x-hidden  overflow-y-scroll no-scrollbar ' >
 
-         `}
-
-       </style> */}
-        <div  className='  overflow-x-auto flex justify-center item-center md:grid  md:grid-cols-2  gap-4 w-full custom-scrollbar-container '>
+        <div  className='overflow-x-auto flex justify-center item-center md:grid  md:grid-cols-2  gap-4 w-full '>
 
       {houses ? houses.map((data:any, i:any)=>{
         return(
             <FeaturedCard key={i} house={data}/>
         )
       }): 
-      <div  className='  overflow-x-auto flex justify-center item-center md:grid  md:grid-cols-2  gap-4 w-full custom-scrollbar-container '>
-      <SkeletonLoader/> 
-      <SkeletonLoader/> 
-      <SkeletonLoader/> 
-
+      <div id='custom-scrollbar-container' className='  overflow-x-auto flex justify-center item-center md:grid  md:grid-cols-2  gap-4 w-full '>
+          <SkeletonLoader/> 
+          <SkeletonLoader/> 
+          <SkeletonLoader/> 
       </div>
       }    
           

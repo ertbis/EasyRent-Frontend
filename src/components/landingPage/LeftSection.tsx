@@ -9,6 +9,7 @@ import FeaturedCard from './FeaturedCard';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/GlobalRedux/store';
 import SectionLoading from '../SectionLoading';
+import SkeletonLoader from './HomeSkeleton';
 
 interface hType {
   houses: any
@@ -45,7 +46,14 @@ const LeftSection :FC<hType>= ({houses}) => {
         return(
             <FeaturedCard key={i} house={data}/>
         )
-      }): <SectionLoading/> }    
+      }): 
+      <div  className='  overflow-x-auto flex justify-center item-center md:grid  md:grid-cols-2  gap-4 w-full custom-scrollbar-container '>
+      <SkeletonLoader/> 
+      <SkeletonLoader/> 
+      <SkeletonLoader/> 
+
+      </div>
+      }    
           
            
         </div>

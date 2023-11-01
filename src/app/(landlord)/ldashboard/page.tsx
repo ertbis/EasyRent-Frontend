@@ -18,6 +18,7 @@ import SectionLoading from "@/components/SectionLoading";
 import { useRouter } from 'next/navigation';
 import { useProtectedRoute } from "@/app/useProtectedRoute";
 import ErrorModal from "@/components/ErrorModal";
+import MobileFeaturedCardSkeleton from "@/components/common/MobileFeatureCardSkeleton";
 
 
 const LandLordDashboard = () => {
@@ -90,7 +91,17 @@ const LandLordDashboard = () => {
                { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
 
            <>
-           {sectionLoading  ? <SectionLoading/>:
+           {sectionLoading  ? 
+             <div className="mt-4" >
+               <div   className='p-4 overflow-y-scroll ' >
+                  <MobileFeaturedCardSkeleton/>
+                  <MobileFeaturedCardSkeleton/>
+                  <MobileFeaturedCardSkeleton/>
+                  
+               </div>
+             </div>
+           
+           :
            <>
              { houses ?
         

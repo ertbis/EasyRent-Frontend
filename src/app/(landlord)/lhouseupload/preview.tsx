@@ -71,22 +71,34 @@ interface PreviewProps {
            <div className="m-4 mx-8  bg-[#F5F4F8]">
               <div className= "relative  w-[100%] h-[22rem] rounded-xl ">
                
-                    <Image src={houseData.images[0]} alt={houseData.apartment}  fill className='w-full h-full  rounded-xl  bg-cover ' />
+                    <Image src={houseData.images[0]} alt={houseData.apartment}  fill 
+                    objectFit='cover'
+                    objectPosition='center center'
+                    className='w-full h-full  rounded-xl   ' />
                 </div>
 
                 <div className='flex mt-4 mx-2'>
 
                     <div className=" relative mr-2 w-full h-[7rem]">
-                        <Image src={houseData.images[1]} alt={houseData.apartment} fill  className='w-full h-full rounded-xl bg-cover ' />
+                        <Image src={houseData.images[1]} alt={houseData.apartment} fill  
+                        objectFit='cover'
+                        objectPosition='center center'
+                        className='w-full h-full rounded-xl  ' />
                     </div>
                     <div className=" relative mr-2 w-full h-[7rem]">
-                        <Image src={houseData.images[1]} alt={houseData.apartment} fill  className='w-full h-full rounded-xl bg-cover ' />
+                        <Image src={houseData.images[1]} alt={houseData.apartment} fill  
+                            objectFit='cover'
+                            objectPosition='center center'
+                            className='w-full h-full rounded-xl  ' />
                     </div>
                     <div className="relative ml-2 w-full h-[7rem] ">
                         <div className='z-10 absolute top-4 left-10  bg-white  rounded-lg p-2 cursor-pointer'>
                             <a href="/houseimages" className='text-gray-700 text-xs'>3</a>
                         </div>
-                            <Image src={houseData.images[2]} alt={houseData.apartment}  fill className='w-full h-full rounded-xl bg-cover' />
+                            <Image src={houseData.images[2]} alt={houseData.apartment}  fill 
+                            objectFit='cover'
+                            objectPosition='center center'
+                            className='w-full h-full rounded-xl ' />
                         </div>
                     </div>
         </div>

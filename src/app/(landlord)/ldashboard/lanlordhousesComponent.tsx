@@ -5,12 +5,10 @@ import '../../globals.css'
 
 const LandlordHousesComponent = () => {
     return ( 
-
         <>
         <div className="flex mb-4 p-0 m-0 px-4 w-full font-[400] text-[1rem] justify-between mx-auto">
             <h3 className="text-blue-800 p-0 m-0">Your Apartment</h3>
             <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
-
          </div>
 
       <div   id='custom-scrollbar-container'  className="flex space-x-6  mx-auto overflow-x-hidden  custom-scrollbar-container "  >
@@ -30,7 +28,6 @@ const LandlordHousesComponent = () => {
             <BiHomeAlt size={18}  className=" text-grey-light"/>
             <p className="text-[0.4]  text-grey-light">Parakin</p>
          </div>
-
       </div>
         </>
      );

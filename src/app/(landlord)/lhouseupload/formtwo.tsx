@@ -180,9 +180,8 @@ const FormTwo :FC<FormTwoProps>  = ({houseData,  setHouseData, setFormPage}) => 
                             return(
                                 <div key={index} className='h-36  rounded-[0.625rem]'>
                                    <img
-                                    src={img}
-                                    
-                                    className='w-full h-full  rounded-[0.625rem]'
+                                    src={img}          
+                                    className='w-full h-full object-cover  rounded-[0.625rem]'
                                       />
                                </div>
 

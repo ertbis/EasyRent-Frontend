@@ -16,13 +16,13 @@ import Preview from './preview';
 
 const houseObj = { apartment:"A room",
 images:[
-  '/profiledp.png', '/profiledp.png', '/profiledp.png'
+//   '/profiledp.png', '/profiledp.png', '/profiledp.png'
 ],
 
-amount:"100000",
-location:"Damico",
+amount:"",
+location:"",
 about :"",
-features:["kitchen", "Gym House", "Packing lot", "AC", "Personal Metre", "DSTV"],
+features:[],
  mainFeatures: {
         light :true,
         school: true,

@@ -24,17 +24,15 @@ interface FormTwoProps {
 const FormTwo :FC<FormTwoProps>  = ({houseData,  setHouseData, setFormPage}) => {
     const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
     const [uploadedPhotos, setUploadedPhotos] = useState<string[]>([]);
-    const [features, setFeatures] = useState<string[]>([
-        "kitchen","DSTV"
-    ])
+    const [features, setFeatures] = useState<string[]>([   ])
     const [fInput, setFInput] = useState<string>("")
 
     const  addToFeatures = ( e: any) => {
         e.preventDefault()
       if(fInput !== ""){
         setFeatures([...features,   fInput.trim()]);
-        setHouseData({...houseData, features})
         setFInput("")
+        setHouseData({...houseData, features})
       }
     }
      const removeFeature = (featureToRemove: string) => {
@@ -150,7 +148,7 @@ const FormTwo :FC<FormTwoProps>  = ({houseData,  setHouseData, setFormPage}) => 
                                 name="price"
                                 placeholder="An apartment of your choice it is pleasing ro have 
                                 like this"
-                                className="border focus:border-green-700 border-grey-light outline-none rounded-md h-36 px-4 py-[1.2rem] md:py-2 w-full"
+                                className={`border  outline-none rounded-md h-36 px-4 py-[1.2rem] md:py-2 w-full ${houseData.about ? 'border-green-700' : ' border-grey-light'}`}
                                 value={houseData.about}
                                 onChange={e =>  setHouseData({...houseData, about : e.target.value})                              }
                                 required
@@ -159,7 +157,7 @@ const FormTwo :FC<FormTwoProps>  = ({houseData,  setHouseData, setFormPage}) => 
      
                        <div  className='grid grid-cols-2 space-x-4 space-y-4  w-full '>
 
-                            <div className='h-36 w-full my-4 rounded-[0.625rem] border border-green-700 flex justify-center items-center'>
+                            <div className={`h-36 w-full my-4 rounded-[0.625rem] border border-gray-500 flex justify-center items-center ${uploadedPhotos.length > 0  ? 'border-green-700 ' : 'border-gray-500 ' }`}>
                                     <label htmlFor="upload-photos" className='flex cursor-pointer justify-items items-center space-x-2'>
                                         <BiCamera size={30} className='text-green-700' />
                                         <p>Add Photos</p>

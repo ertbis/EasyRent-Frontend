@@ -19,6 +19,7 @@ interface FormOneProps {
       
 
 
+
 const FormOne :FC<FormOneProps>  = ({houseData,  setHouseData , setFormPage}) => {
     const [bedroom, setBedRoom] = useState(0)
     const [bathRoom, setBathRoom] = useState(0)
@@ -45,7 +46,7 @@ const FormOne :FC<FormOneProps>  = ({houseData,  setHouseData , setFormPage}) =>
                                 id="location"
                                 name="location"
                                 placeholder="location"
-                                className="border focus:border-green-700 border-grey-light outline-none rounded-md px-4 py-[1rem] md:py-2 w-full"
+                                className={`border   outline-none rounded-md px-4 py-[1rem] md:py-2 w-full ${houseData.location ? 'border-green-700 ': 'border-grey-light'  }`}
                                 value={houseData.location}
                                 onChange={(e) => setHouseData({ ...houseData, location: e.target.value })}
                                 required
@@ -69,6 +70,11 @@ const FormOne :FC<FormOneProps>  = ({houseData,  setHouseData , setFormPage}) =>
                                 className={`px-[1rem] py-[0.5rem] flex items-center text-[0.8rem] border border-green-700 rounded-lg  ${houseData.apartment == "Flat" && "bg-green-700  text-white"}`}>
                                         Flat
                                 </p>
+                                <p   
+                                onClick={() => setHouseData({ ...houseData, apartment: "Single Room"})}                                
+                                className={`px-[1rem] py-[0.5rem] flex items-center text-[0.8rem] border border-green-700 rounded-lg  ${houseData.apartment == "Single Room" && "bg-green-700  text-white"}`}>
+                                        Single Room
+                                </p>
                               
                             </div>
                         </div>
@@ -76,11 +82,11 @@ const FormOne :FC<FormOneProps>  = ({houseData,  setHouseData , setFormPage}) =>
                         <div className='' > 
                                 <p className='flex items-center'> <RiPriceTag3Line size={15} className='text-blue-800'/> Rent Price</p>
                                 <input
-                                type="price"
+                                type="number"
                                 id="price"
                                 name="price"
                                 placeholder="Enter price"
-                                className="border focus:border-green-700 border-grey-light outline-none rounded-md px-4 py-[1rem] md:py-2 w-full"
+                                className={`border   outline-none rounded-md px-4 py-[1rem] md:py-2 w-full ${houseData.amount ? 'border-green-700 ': 'border-grey-light'  }`}
                                 value={houseData.amount}
                                 onChange={(e) => setHouseData({ ...houseData, amount: e.target.value })}
                                 required
@@ -89,7 +95,7 @@ const FormOne :FC<FormOneProps>  = ({houseData,  setHouseData , setFormPage}) =>
 
                         <div className='' > 
                                 <p className='flex items-center'> Bedroom</p>
-                                        <div className="flex  mt-2  space-x-2  rounded-lg border border-gray-500 border-[1px]">
+                                        <div className={`flex  mt-2  space-x-2  rounded-lg border  border-[1px] ${bedroom != 0 ? 'border-green-700' : 'border-gray-500'}`}>
                                                 
                                                 <button
                                                 type="button"
@@ -111,7 +117,7 @@ const FormOne :FC<FormOneProps>  = ({houseData,  setHouseData , setFormPage}) =>
 
                         <div className='' > 
                                 <p className='flex items-center'> Bathrooms</p>
-                                        <div className="flex  mt-2  space-x-2  rounded-lg border border-gray-500 border-[1px]">
+                                      <div className={`flex  mt-2  space-x-2  rounded-lg border  border-[1px] ${bathRoom != 0 ? 'border-green-700' : 'border-gray-500'}`}>
                                                 
                                                 <button
                                                 onClick={() =>setBathRoom(bathRoom - 1)}   
@@ -139,8 +145,12 @@ const FormOne :FC<FormOneProps>  = ({houseData,  setHouseData , setFormPage}) =>
                         <button
                                     onClick={(e) => {
                                        e.preventDefault()
-                                     setFormPage( "two")}}
-                                    className="h-[3.75rem] bg-green-700 text-white w-full rounded-lg" >
+                                       if(houseData.location && houseData.amount){
+
+                                               setFormPage( "two")
+                                        }
+                                       }  }
+                                    className={`h-[3.75rem] w-full rounded-lg ${houseData.location && houseData.amount ? ' bg-green-700 text-white ' : 'bg-[transparent]  text-gray-200 border border-gray-300' }`} >
                                     Next
                         </button>
                     </div>

@@ -22,14 +22,13 @@ import ErrorModal from '@/components/ErrorModal';
 interface PreviewProps {
     houseData: HouseType;
     setFormPage:React.Dispatch<React.SetStateAction<string>>;
-  
   }
   
   
   const Preview :FC<PreviewProps>  = ({houseData, setFormPage}) => {   
     //  const houseData = useSelector((state: RootState) => state.selectedHouse.selectedHouse)
     const router = useRouter();
-    const [loading , setLoading]  = useState<Boolean>(false)
+    const [loading , setLoading]  = useState<boolean>(false)
     const [error , setError]  = useState<string | null >(null)
     const [errorModal, setErrorModal] = useState<boolean>(false)
 

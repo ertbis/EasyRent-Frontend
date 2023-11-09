@@ -54,8 +54,6 @@ export const getMyDetails = async ()  => {
 
 
 
-
-
 //landlord enpoint
 export const uploadProperty = async (param : any)  => {
     
@@ -70,12 +68,15 @@ export const getMyProperty = async ()  => {
 } 
 
 export const getAllProperty = async (param : string)  => {
-    
     const resp = await http.get(`/apis/properties/showAll?search=${param}`)
-
     return resp
 } 
 
+
+export const getSingleProperty = async (param : any)  => {
+    const resp = await http.get(`/apis/properties/${param}`)
+    return resp
+} 
 
 
 //notification

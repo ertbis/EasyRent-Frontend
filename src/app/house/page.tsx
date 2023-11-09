@@ -14,12 +14,16 @@ import { useState, useEffect } from 'react';
 
 import { getUser } from '../../../utils/auth';
 import HsImages from './Images';
+import { getSingleProperty } from '../../../utils/data/endpoints';
+import { useRouter } from 'next/router';
 
-type cookieUserType ={
+type cookieUserType = {
   email:string,
   role : string
 }
 const HousePage :FC = () => {
+    const router = useRouter();
+    const { id } = router.query;
     const selectedHouse = useSelector((state: RootState) => state.selectedHouse.selectedHouse)
     const [user, setUser] =useState<cookieUserType >({email:"", role:""})
      const [tab, setTab]  = useState("house")
@@ -28,11 +32,11 @@ const HousePage :FC = () => {
     const fetchUser = async()=>{
        const cookieUser = await getUser()
        setUser(cookieUser);
+       const resp = await getSingleProperty(id)
        if(cookieUser.role == 'landlord'){
         setHome('/ldashboard')
        }else {
         setHome('/')
-
        }
 
 

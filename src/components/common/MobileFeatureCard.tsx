@@ -26,9 +26,9 @@ const MobileFeaturedCard: FC<{ house: HouseType }> = ({ house }) => {
   }, [])
   
 
-const handleCardClick = async () => {
-   const resp = await dispatch(setSelectedHouse(house)); 
-   router.push("/house")
+const handleCardClick = async (id: string) => {
+   const resp = await dispatch(setSelectedHouse(house )); 
+   router.push(`/house/${id}`)
 };
 const addtoFavourite = async () => {
   await dispatch(setfavHouses(house));
@@ -40,7 +40,7 @@ const addtoFavourite = async () => {
   }
 };
   return ( 
-        <div  onClick={() =>handleCardClick()} className="h-full bg-[#F5F4F8] hover:bg-[#cac8d1] rounded-xl px-2  py-4  mb-8" >
+        <div  onClick={() =>handleCardClick(house._id)} className="h-full bg-[#F5F4F8] hover:bg-[#cac8d1] rounded-xl px-2  py-4  mb-8" >
             <div className="relative w-[full]   ">
                  <div onClick={() => addtoFavourite()} className='z-10 absolute top-4 right-4 bg-white rounded-full p-1 cursor-pointer'>
                 {isFav  ?  

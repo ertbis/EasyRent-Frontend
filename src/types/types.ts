@@ -1,4 +1,5 @@
 export interface HouseType {
+    _id : string;
     apartment: string;
     images: string[];
     amount: string;

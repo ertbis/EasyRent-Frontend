@@ -10,7 +10,6 @@ const SkeletonLoader: FC = () => {
 
       <div className='z-10 absolute top-4 right-4 bg-gray-400 rounded-full p-3 cursor-pointer'>
                              
-
                  </div>
       </div>
       

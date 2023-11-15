@@ -12,27 +12,31 @@ import DesktopFooter from '@/components/DesktopFooter';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
-import { getUser } from '../../../utils/auth';
-import HsImages from './Images';
-import { getSingleProperty } from '../../../utils/data/endpoints';
-import { useRouter } from 'next/router';
+import { getUser } from '../../../../utils/auth';
+import HsImages from '../Images';
+import { getSingleProperty } from '../../../../utils/data/endpoints';
+import Loading from '@/components/Loading';
 
 type cookieUserType = {
   email:string,
   role : string
 }
-const HousePage :FC = () => {
-    const router = useRouter();
-    const { id } = router.query;
-    const selectedHouse = useSelector((state: RootState) => state.selectedHouse.selectedHouse)
+
+
+
+
+const HousePage :FC<any> = ({params}) => {
+    // const selectedHouse = useSelector((state: RootState) => state.selectedHouse.selectedHouse)
     const [user, setUser] =useState<cookieUserType >({email:"", role:""})
      const [tab, setTab]  = useState("house")
      const [home, setHome]  = useState("/")
+     const [selectedHouse,  setSelectedHouse] = useState<any>(null)
 
     const fetchUser = async()=>{
        const cookieUser = await getUser()
        setUser(cookieUser);
-       const resp = await getSingleProperty(id)
+       const resp = await getSingleProperty(params.houseId)
+       setSelectedHouse(resp.data)
        if(cookieUser.role == 'landlord'){
         setHome('/ldashboard')
        }else {
@@ -41,14 +45,14 @@ const HousePage :FC = () => {
 
 
    }
-   
+   useEffect(() => {
+       fetchUser()
+   }, [])
+    
    const showImages = async()=> {
         setTab('images')
    }
 
-    useEffect(() => {
-        fetchUser()
-    }, [])
     
     return ( 
         <>
@@ -56,7 +60,11 @@ const HousePage :FC = () => {
         { tab == 'images' ? 
         <HsImages setTab={setTab} selectedHouse={selectedHouse}/>
         :
-      
+        <>
+        {selectedHouse ? 
+
+
+
         <div>
 
         <div className='bg-[#F5F4F8]    w-full ' >
@@ -75,15 +83,19 @@ const HousePage :FC = () => {
                 <div className='flex mt-4'>
 
                 <div className=" relative mr-2 w-full h-[10rem]">
+                    {selectedHouse.images[1] && 
                     <Image src={selectedHouse.images[1]} alt={selectedHouse.apartment} fill   objectFit='cover'
                      objectPosition='center center' className='w-full h-full rounded-xl bg-cover ' />
+                    }
                 </div>
                 <div className="relative ml-2 w-full h-[10rem] ">
                 <div className='z-10 absolute top-4 left-10  bg-white  rounded-lg p-2 cursor-pointer'>
                      <a onClick={showImages} className='text-gray-700 text-xs'>See all photos</a>
                 </div>
-                    <Image src={selectedHouse.images[2]} alt={selectedHouse.apartment}  fill   objectFit='cover'
+                {selectedHouse.images[2]   && 
+                    <Image src={selectedHouse?.images[2]} alt={selectedHouse.apartment}  fill   objectFit='cover'
                      objectPosition='center center' className='w-full h-full rounded-xl bg-cover' />
+                }
                 </div>
                 </div>
         </div>
@@ -122,7 +134,7 @@ const HousePage :FC = () => {
         <div className='m-4 w-[90vw] '>
              <h2 className="text-blue-800 w-[70%] text-sm font-medium mt-4 ">Features and Amenities</h2>
              <p className='flex flex-wrap text-grey-light'>
-                {selectedHouse.features.map((data, i)=> {
+                {selectedHouse.features.map((data: any,  i:any)=> {
                     return(
                         <span className='flex items-center mr-2' key={i}> <AiOutlineCheck size={15} className='mr-2' />{data}</span> 
 
@@ -133,8 +145,8 @@ const HousePage :FC = () => {
              </p>
         </div>
 
-        { user.role == "student"
-        && 
+        { user.role == "landlord" 
+        ? '' : 
         <>
         
 
@@ -175,6 +187,15 @@ const HousePage :FC = () => {
         </div>
          <DesktopFooter/>
         </div>
+
+          : <Loading/>
+
+        }
+        
+        </>
+
+
+
         }
         
         </>

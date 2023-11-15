@@ -68,7 +68,7 @@ export const getMyProperty = async ()  => {
 } 
 
 export const getAllProperty = async (param : string)  => {
-    const resp = await http.get(`/apis/properties/showAll?search=${param}`)
+    const resp = await http.get(`/apis/properties?search=${param}`)
     return resp
 } 
 

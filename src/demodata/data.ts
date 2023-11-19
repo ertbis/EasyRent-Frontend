@@ -15,8 +15,8 @@ export const housesData:HouseType[] =[
               light :true,
               school: true,
               carPack : true
-       }
-      
+       },
+      _id: 'd'
     },
 
     { apartment:"Self Contain",
@@ -34,6 +34,8 @@ export const housesData:HouseType[] =[
             school: false,
             carPack : true
      }
+     ,
+      _id: 'd'
     
   },
   { apartment:"Self Contain",
@@ -51,6 +53,8 @@ export const housesData:HouseType[] =[
           school: true,
           carPack : true
    }
+   ,
+      _id: 'd'
   
 },
 { apartment:"Self Contain",
@@ -68,6 +72,8 @@ features:["kitchen", "Shared Gym", "Swimming pool", "Personal Meter","AC", "Spor
         school: true,
         carPack : true
  }
+ ,
+      _id: 'd'
 
 },
 { apartment:"Self Contain",
@@ -84,7 +90,8 @@ features:["kitchen", "Shared Gym", "Swimming pool", "Personal Meter","AC", "Spor
         light :true,
         school: true,
         carPack : true
- }
+ },
+ _id: 'd'
 
 },
 { apartment:"Self Contain",
@@ -101,7 +108,8 @@ features:["kitchen", "Shared Gym", "Swimming pool", "Personal Meter","AC", "Spor
         light :true,
         school: true,
         carPack : true
- }
+ },
+ _id: 'd'
 
 },
 
@@ -119,7 +127,8 @@ features:["kitchen", "Shared Gym", "Swimming pool", "Personal Meter","AC", "Spor
         light :true,
         school: true,
         carPack : true
- }
+ },
+ _id: 'd'
 
 },
 { apartment:"Self Contain",
@@ -135,8 +144,8 @@ features:["kitchen", "Shared Gym", "Swimming pool", "Personal Meter","AC" ],
         light :true,
         school: true,
         carPack : true
- }
-
+ },
+ _id: 'd'
 },
 { apartment:"A room",
 images:[
@@ -152,7 +161,8 @@ features:["kitchen", "Shared Gym", "Swimming pool", "Personal Meter","AC", "Spor
         light :true,
         school: true,
         carPack : false
- }
+ },
+ _id: 'd'
 
 },
 { apartment:"A room",
@@ -169,7 +179,8 @@ features:["kitchen", "Shared Gym", "Swimming pool", "Personal Meter","AC", "Spor
         light :true,
         school: true,
         carPack : false
- }
+ },
+ _id: 'd'
 
 },
 { apartment:"A room",
@@ -186,7 +197,8 @@ features:["kitchen", "Shared Gym", "Swimming pool", "Personal Meter","AC", "Spor
         light :true,
         school: true,
         carPack : false
- }
+ },
+ _id: 'd'
 
 },
 { apartment:"A room",
@@ -203,7 +215,8 @@ features:["kitchen", "Shared Gym", "Swimming pool", "Personal Meter","AC", "Spor
         light :true,
         school: true,
         carPack : false
- }
+ },
+ _id: 'd'
 
 },
 { apartment:"A room",
@@ -220,7 +233,8 @@ features:["kitchen", "Shared Gym", "Swimming pool", "Personal Meter","AC", "Spor
         light :true,
         school: true,
         carPack : false
- }
+ },
+ _id: 'd'
 
 },
 { apartment:"A room",
@@ -237,7 +251,8 @@ features:["kitchen", "Shared Gym", "Swimming pool", "Personal Meter","AC", "Spor
         light :true,
         school: true,
         carPack : false
- }
+ },
+ _id: 'd'
 
 },
 ]

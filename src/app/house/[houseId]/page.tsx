@@ -17,7 +17,7 @@ import HsImages from '../Images';
 import { getSingleProperty, scheduleTourEP } from '../../../../utils/data/endpoints';
 import Loading from '@/components/Loading';
 import ErrorModal from '@/components/ErrorModal';
-import ScheduleTour from './ScheduleTour';
+import ScheduleTour from '../ScheduleTour';
 
 type cookieUserType = {
   email:string,

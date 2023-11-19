@@ -33,6 +33,7 @@ type tourType ={
 
 const HousePage :FC<any> = ({params}) => {
     // const selectedHouse = useSelector((state: RootState) => state.selectedHouse.selectedHouse)
+    const router = useRouter();
     const [user, setUser] =useState<cookieUserType >({email:"", role:""})
      const [tab, setTab]  = useState("house")
      const [home, setHome]  = useState("/")
@@ -41,7 +42,6 @@ const HousePage :FC<any> = ({params}) => {
      const [loading, setLoading] = useState(false)
      const [error , setError]  = useState<string | null >(null)
      const [errorModal, setErrorModal] = useState<boolean>(false)
-     const router = useRouter();
 
   
 

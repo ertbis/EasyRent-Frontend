@@ -28,11 +28,12 @@ features:[],
         school: true,
         carPack : false
  }
+ 
 }
 
 const CurrentLocation :FC = () => {
   
-   const  [houseData, setHouseData] = useState<HouseType>(houseObj)
+   const  [houseData, setHouseData] = useState<any>(houseObj)
    const [formpage, setFormPage] = useState("one")
 
 return (

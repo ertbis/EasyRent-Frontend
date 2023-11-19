@@ -80,6 +80,11 @@ export const getSingleProperty = async (param : any)  => {
 
 //notification
 
+export const deleteNotification = async (param : any)  => {
+    const resp = await http.delete(`/apis/properties/${param}`)
+    return resp
+} 
+
 export const getMyNotification = async ()  => {
     const resp = await http.get("/apis/notifications/me")
     return resp

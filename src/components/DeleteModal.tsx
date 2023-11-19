@@ -2,6 +2,7 @@ import { FC, useEffect } from "react";
 import { FaTimes } from "react-icons/fa"
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { deleteNotification } from "../../utils/data/endpoints";
 
 interface ErrorProps {
     text: string;
@@ -15,7 +16,16 @@ const DeleteModal :FC<ErrorProps>  = ({setDeleteModal, text}) => {
         AOS.refresh();
       }, []);
 
-    return (
+
+    // const deleteNot = async() => {
+    //   try {
+    //     const resp = await deleteNotification(param)
+    //     console.log(resp)
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+    // }
+        return (
 
         <div className="fixed top-0 left-0  z-[1000] flex items-center w-full h-full bg-white bg-opacity-70">
     <div data-aos="zoom-in"  className="relative w-[90vw] mx-4  rounded-lg shadow bg-gray-100">

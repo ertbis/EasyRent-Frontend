@@ -40,7 +40,7 @@ const LandLordDashboard = () => {
       setCookUser(cookieUser)
    try {
      
-    const resp = await getMyDetails()
+   const resp = await getMyDetails()
    const resp1 = await getMyProperty()
    console.log(resp)
    setUser(resp.data)
@@ -118,7 +118,7 @@ const LandLordDashboard = () => {
                </div>
                </div>  :
 
-                           <EmptyLandlord/> 
+                     <EmptyLandlord/> 
 
                }
           </>
@@ -132,16 +132,17 @@ const LandLordDashboard = () => {
             </>}
           
 
-       <div className=" z-100 fixed bottom-0 flex py-4 w-full items-center justify-between bg-white  px-12 " >
-           <div className="">
-            <SlHome onClick={() => setTab("home")}  size={25} className='text-grey-light'/>
+       <div className=" text-[#6A6A6A] z-100 fixed bottom-0 flex py-4 w-full items-center justify-between bg-white  px-12 " >
+           <div className="flex flex-col justify-center items-center">
+            <SlHome onClick={() => setTab("home")}  size={22}  className={tab =="home" ?  "text-green-700" : "text-grey"}/>
+            <p className={`text-xs ${tab =="home" ?  "text-green-700" : "text-grey"}`}>Home</p>
            </div>
             <a  href="/lhouseupload" className="flex  mt-[-3rem] items-center justify-center bg-gradient-to-br from-[#234F68] to-[#8BC83F] h-16 w-16 rounded-full flex items-center cursor-pointer justify-center">
               <p className="text-3xl text-white font-bold">+</p>
             </a>
-           <div className="">
-           <FiUser onClick={() => setTab("profile")} size={25} className='text-grey-light' />
-
+           <div className="flex flex-col justify-center items-center">
+           <FiUser onClick={() => setTab("profile")} size={22}  className={tab =="profile" ?  "text-green-700" : "text-grey"} />
+           <p className={`text-xs ${tab =="profile" ?  "text-green-700" : "text-grey"}`}>Profile</p>
            </div>
        </div>
   

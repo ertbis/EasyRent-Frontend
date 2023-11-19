@@ -61,8 +61,7 @@ export const uploadProperty = async (param : any)  => {
     return resp
 }
 
-export const getMyProperty = async ()  => {
-    
+export const getMyProperty = async ()  => {    
     const resp = await http.get("/apis/properties/me")
     return resp
 } 
@@ -85,3 +84,27 @@ export const getMyNotification = async ()  => {
     const resp = await http.get("/apis/notifications/me")
     return resp
 } 
+
+
+
+
+
+///Verify Edit Otp Code
+
+export const getEditOTPVerification = async () => {
+    const resp = await http.get("/apis/otps/")
+    return resp
+}
+
+
+export const verifyEditOTPVerification = async (param : any)  => { 
+    const resp = await http.post("/apis/otps/verify",  param  )
+    return resp
+}
+
+
+/// tour 
+export const scheduleTourEP = async (param : any) => {
+    const resp = await http.post("/apis/tours/",  param  )
+    return resp 
+}

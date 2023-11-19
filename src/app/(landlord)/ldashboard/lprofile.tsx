@@ -63,7 +63,7 @@ const Lprofile = ({ user }: any) => {
             <Loading />
           ) : (
       <>
-      <div data-aos="fade-right" className="w-full mt-3 flex flex-col h-[13rem] justify-center items-center">
+      <div data-aos="fade-right" className="w-full mt-3 flex flex-col h-[13rem] justify-center  items-center">
         {/* <div className="rounded-full h-[8rem] w-[8rem]">
           <img src={user.profilePicture ? user.profilePicture : "profiledp.png"} className="h-full w-full rounded-full" />
         </div> */}
@@ -72,7 +72,7 @@ const Lprofile = ({ user }: any) => {
 
         <p className="text-[1rem] text-grey-light ">{user ? user.lastName : "Emmy"}</p>
       </div>
-      <div data-aos="fade-right"  className="mt-1 mx-4">
+      <div data-aos="fade-right"  className="mt-1 mx-4 w-[90%]">
         <h1 className="text-blue-800 mb-3 text-[1.3rem] font-bold ">Account Settings</h1>
      
         <a href='/infoform' className="mx-2 flex py-3 border-b border-gray-300 items-center text-gray-600" >
@@ -80,12 +80,14 @@ const Lprofile = ({ user }: any) => {
         <p className="flex-1 text-[1rem] ml-4">Personal Information</p>
         <MdKeyboardArrowRight size={27} className="" />
        </a>
-
-        <a href='/paymentacct' className="mx-2 flex py-3 border-b border-gray-300 items-center text-gray-600" >
+     {user.role == "landlord"
+     &&
+        <a href='/paymentdetails' className="mx-2 flex py-3 border-b border-gray-300 items-center text-gray-600" >
           <MdOutlinePayments size={27} className="" />
           <p className="flex-1 text-[1rem] ml-4">Payment Account</p>
           <MdKeyboardArrowRight size={27} className="" />
        </a>
+     }
 
         <a href='/legal' className="mx-2 flex py-3 border-b border-gray-300 items-center text-gray-600" >
           <AiOutlineLock size={27} className="" />
@@ -94,7 +96,7 @@ const Lprofile = ({ user }: any) => {
      </a>
         
       </div>
-      <div data-aos="fade-right"  className="mt-6 mx-4">
+      <div data-aos="fade-right"  className="mt-6 mx-4 w-[90%]">
         <h1 className="text-blue-800 my-3 text-[1.3rem] font-bold ">Support</h1>
         <a href ="/gethelp"  className="mx-2 flex py-3 border-b border-gray-300 items-center text-gray-600" >
           <HiOutlineUser size={27} className="" />
@@ -110,7 +112,7 @@ const Lprofile = ({ user }: any) => {
         </a>
 
       </div>
-      <div className="mt-2  flex justify-center mb-32 w-full ">
+      <div className="mt-2  flex justify-center mb-32 w-[90%] ">
         <a  onClick={logOut} className="mb-4  font-medium  text-center py-2 text-green-700"> Log Out</a>
       </div>
       </>

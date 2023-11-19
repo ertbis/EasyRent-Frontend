@@ -22,6 +22,7 @@ import { getUser } from "../../utils/auth";
 import { TokenUserType } from "@/types/types";
 import LandLordDashboard from "./(landlord)/ldashboard/page";
 import { getMyDetails } from "../../utils/data/endpoints";
+import Lprofile from "./(landlord)/ldashboard/lprofile";
 
 export default function Home() {
   useEffect(() => {
@@ -55,7 +56,7 @@ export default function Home() {
         <meta property="og:title" content="My page title" key="title" />
         <script src="https://kit.fontawesome.com/3b89073561.js" ></script>
       </Head>
-      <div className=" hidden z-[1000] fixed md:flex  w-screen h-screen bg-[#fff]  justify-center  items-center  text-xl">
+      <div className=" hidden z-[1000] fixed md:f zplex  w-screen h-screen bg-[#fff]  justify-center  items-center  text-xl">
          This web app  only work on mobile screen, kindly switch to a smaller screen size      </div>
       {logInModal &&
        <LoginModal setLoginModal={setLoginModal}/>
@@ -71,7 +72,8 @@ export default function Home() {
        {tab ==='save' && <FavouriteHousePage/>}
        {tab ==='inbox' && <InboxPage/>}
        {tab ==='notification' && <NotificationPage setTab={setTab}/>}
-       
+       {tab ==='profile' && <Lprofile user={user} />}
+
        <MobileFooter  user={user} setTab={setTab} setLoginModal={setLoginModal}   />
 
        
@@ -105,7 +107,8 @@ export default function Home() {
        {tab ==='save' && <FavouriteHousePage/>}
        {tab ==='inbox' && <InboxPage/>}
        {tab ==='notification' && <NotificationPage/>}
-       
+       {tab ==='profile' && <Lprofile user={user} />}
+
        <MobileFooter user={user}  setTab={setTab} setLoginModal={setLoginModal}   />
 
        

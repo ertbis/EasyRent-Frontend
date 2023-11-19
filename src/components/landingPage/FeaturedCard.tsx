@@ -11,21 +11,25 @@ import { CiLocationOn } from "react-icons/ci";
 import { FaWalking } from "react-icons/fa";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
+
 
 const FeaturedCard: FC<{ house: HouseType }> = ({ house }) => {
   const [isFav, setIsFav]= useState(false)
   const favHouses = useSelector((state: RootState) => state.favHouses.favHouses)
   const dispatch = useDispatch()
+  const router = useRouter();
 
 
   useEffect(() => {
- 
-    
+  
   }, [favHouses])
   
 
-const handleCardClick = async () => {
-   const resp = await dispatch(setSelectedHouse(house)); 
+const handleCardClick = async (id: string) => {
+   const resp = await dispatch(setSelectedHouse(house));
+    router.push(`/house/${id}`)
+ 
 };
 const addtoFavourite = async () => {
   await dispatch(setfavHouses(house));
@@ -37,7 +41,7 @@ const addtoFavourite = async () => {
   }
 };
   return ( 
-        <div  onClick={() =>handleCardClick()} className="h-full bg-[#F5F4F8] hover:bg-[#cac8d1] rounded-xl px-2  pb-0 md:pb-4 mb-4" >
+        <div  onClick={() =>handleCardClick(house._id)} className="h-full bg-[#F5F4F8] hover:bg-[#cac8d1] rounded-xl px-2  pb-0 md:pb-4 mb-4" >
             <div className="relative w-[full]  h-[10rem] ">
                  <div onClick={() => addtoFavourite()} className='z-10 absolute top-4 right-4 bg-white rounded-full p-1 cursor-pointer'>
                 {isFav  ?  

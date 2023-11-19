@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FaCalendarAlt } from 'react-icons/fa';
 
-const CarouselDatePicker: React.FC = () => {
+const CarouselDatePicker: React.FC<any> = ({setTourDetails, tourDetails }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedHour, setSelectedHour] = useState<number>(1);
   const [selectedPeriod, setSelectedPeriod] = useState<string>('AM');
@@ -13,28 +13,28 @@ const CarouselDatePicker: React.FC = () => {
 
   const handleDateChange = (date: Date) => {
     setSelectedDate(date);
-    console.log(date);
   };
 
   const handleInputDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const date = new Date(event.target.value);
     setSelectedDate(date);
-    console.log(date);
+    setTourDetails( {...tourDetails,  day :`${date.getDate()} ${getMonthName(date)}`}  )
   };
 
   const handleBoxClick = (date: Date) => {
     setSelectedDate(date);
-    console.log(date);
+    setTourDetails( {...tourDetails,  day :`${date.getDate()} ${getMonthName(date)}`}  )
   };
 
   const handleHourChange = (hour: number) => {
     setSelectedHour(hour);
-    console.log(hour);
+    setTourDetails( {...tourDetails,  time:hour}  )
   };
 
   const handlePeriodChange = (period: string) => {
     setSelectedPeriod(period);
-    console.log(period);
+    setTourDetails( {...tourDetails,  period}  )
+
   };
 
   const handleIconClick = () => {
@@ -91,8 +91,8 @@ const CarouselDatePicker: React.FC = () => {
           {dateList.map((date) => (
             <div className="" key={date.getTime()}>
               <div
-                className={`h-24 w-22 m-1 border border-[2px] text-gray-400 border-gray-300 ${
-                  selectedDate?.getTime() === date.getTime() ? 'bg-green-700 text-black border-green-700' : 'bg-transparent'
+                className={`h-24 w-22 m-1 border border-[2px]  ${
+                  selectedDate?.getDate() === date.getDate() ? ' text-black border-black' : 'text-gray-300 bg-transparent'
                 }`}
                 onClick={() => handleBoxClick(date)}
               >
@@ -113,7 +113,7 @@ const CarouselDatePicker: React.FC = () => {
           <select
             value={selectedHour}
             onChange={(e) => handleHourChange(parseInt(e.target.value, 10))}
-            className="bg-green-light  border border-green-700 rounded-lg h-6 cursor-pointer mr-2"
+            className="bg-green-light w-16 px-2 border border-blue-800 rounded-2xl h-7 cursor-pointer mr-2"
           >
             {Array.from({ length: 12 }, (_, i) => i + 1).map((hour) => (
               <option key={hour} value={hour}>
@@ -126,8 +126,9 @@ const CarouselDatePicker: React.FC = () => {
           <select
             value={selectedPeriod}
             onChange={(e) => handlePeriodChange(e.target.value)}
-            className="bg-green-light border border-green-700  rounded-lg h-6 cursor-pointer"
+            className="  border w-16 px-2 border-blue-800   rounded-2xl h-7 cursor-pointer"
           >
+            <option >-</option>
             <option value="AM">AM</option>
             <option value="PM">PM</option>
           </select>

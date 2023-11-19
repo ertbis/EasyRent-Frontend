@@ -51,7 +51,7 @@ interface LpHeaderProps {
                 </div>
                 
             
-                {isLogIn ?  <div className='text-grey-light cursor-pointer   flex flex-col justify-center items-center' >
+                {isLogIn ?  <div onClick={()=> handletabClick("profile")} className='text-grey-light cursor-pointer   flex flex-col justify-center  items-center' >
                     <div className=' w-[1.5rem] h-[1.5rem] rounded-full bg-cover bg-center' style={{ backgroundImage: `url(${user && user.profilePicture ? user.profilePicture : "profiledp.png"})` }}>
 
                     </div>

@@ -70,19 +70,19 @@ const addtoFavourite = async () => {
             </div>
               <p className='text-sm text-grey-light mx-2 font-bold'>{house.apartment}</p>
               <div className='  grid grid-cols-3 gap-1 mt-4  justify-start items-center' >
-                  {house.mainFeatures.light &&  
+                  {house?.mainFeatures?.light &&  
                     <div className="flex h-6 bg-white w-full  mr-2  justify-center items-center rounded-xl p-[0.3rem] " >
                         <HiOutlineLightBulb  className='w-3 h-3 text-grey-light mr-2 ' />
                         <p className="text-grey-light text-[0.6rem]">24 hrs light</p>
                     </div>
                   }  
-                  {house.mainFeatures.school &&
+                  {house?.mainFeatures?.school &&
                     <div className="flex h-6 bg-white mr-1 w-full  justify-center items-center rounded-xl p-[0.3rem] " >
                         <FaWalking  className='w-3 h-3 text-grey-light mr-1 ' />
                         <p className="text-grey-light text-[0.6rem]" >School in 30mins</p>
                     </div>
                   }
-                  {house.mainFeatures.carPack &&
+                  {house?.mainFeatures?.carPack &&
                     <div className="flex h-6 bg-white  mr-1 w-full    justify-center items-center rounded-xl p-[0.3rem] " >
                         <AiFillCar   className='w-3 h-3 text-grey-light mr-1'  />
                         <p className="text-grey-light text-[0.6rem]">Car Park</p>

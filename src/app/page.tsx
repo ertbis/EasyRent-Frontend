@@ -74,7 +74,7 @@ export default function Home() {
        {tab ==='notification' && <NotificationPage setTab={setTab}/>}
        {tab ==='profile' && <Lprofile user={user} />}
 
-       <MobileFooter  user={user} setTab={setTab} setLoginModal={setLoginModal}   />
+       <MobileFooter tab={tab} user={user} setTab={setTab} setLoginModal={setLoginModal}   />
 
        
        <DesktopFooter/>
@@ -109,7 +109,7 @@ export default function Home() {
        {tab ==='notification' && <NotificationPage/>}
        {tab ==='profile' && <Lprofile user={user} />}
 
-       <MobileFooter user={user}  setTab={setTab} setLoginModal={setLoginModal}   />
+       <MobileFooter user={user} tab={tab} setTab={setTab} setLoginModal={setLoginModal}   />
 
        
        <DesktopFooter/>

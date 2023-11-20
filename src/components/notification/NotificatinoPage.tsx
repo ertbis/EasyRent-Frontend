@@ -8,6 +8,7 @@ import { RxCross2 } from "react-icons/rx";
 import DeleteModal from "../DeleteModal";
 import { getMyNotification } from "../../../utils/data/endpoints";
 import EmptyNotification from "./EmptyNotification";
+import { UserIcon } from "@/assets/icons";
 
 
 const NotificationPage = ({setTab}:any) => {
@@ -63,7 +64,7 @@ const NotificationPage = ({setTab}:any) => {
 
                 <div  key={index} className="flex text-gray-800 my-4 ">
                     <div className="flex-[0.3] flex justify-center items-center">
-                      <HiOutlineUser size={30}  className="text-gray-800 "/>
+                    <UserIcon  color="#343A40" width="24" height="24"/>
                     </div>
                     <div className="flex-1">
                       <p className="text-gray-800 font-bold ">{data.content.slice(0, 51)}...</p>

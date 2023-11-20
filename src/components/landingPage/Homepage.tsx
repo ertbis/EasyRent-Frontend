@@ -20,6 +20,7 @@ import ErrorModal from "../ErrorModal";
 import SectionLoading from "../SectionLoading";
 import debounce from 'lodash/debounce';
 import '../../app/globals.css'
+import { FilterIcon, HomeIcon, NotificationIcon, SearchIcon } from "@/assets/icons";
 
 
 
@@ -127,14 +128,15 @@ useEffect(()=> {
               <p className='font-normal  text-sm text-grey-light mb-3' > Hey James</p>
             <h2 className="text-blue-800 w-full text-2xl font-bold mt-4 ">Lets start Exploring</h2>
             </div> 
-          
-               <MdOutlineNotifications size={30}
+              <div
                  onClick={() => setTab("notification")}
-               className="text-grey-light"/>
+               className="text-grey-light">
+               <NotificationIcon color="#138DA0" width='18' height='23'/>
+               </div>
      </div>
 
-     <div className='bg-white text-grey-light flex  items-center border border-grey-light rounded-md w-[85vw]  p-2  h-16  '>
-        <BiSearch size={28} className='text-grey-light  '/>
+     <div className='bg-white text-grey-light flex  items-center border border-grey-light rounded-md w-[85vw]  p-2  h-14  '>
+     <SearchIcon  color="#343A40" width="20" height="20"/>
            <input
            type="search"
            id="search"
@@ -144,7 +146,9 @@ useEffect(()=> {
            onChange={handleSearch}
            
            />
-   <BsFilterRight  onClick={() => setShowFilterCard(true)} size={30} className="mr-2 cursor-pointer  border-l pl-2 border-grey-light ml-2 "/>
+   <div  onClick={() => setShowFilterCard(true)}  className="mr-2 cursor-pointer  border-l pl-2 border-grey-light ml-2 ">
+      <FilterIcon color="" width="" height=""/>
+   </div>
 
        </div>
 
@@ -181,26 +185,36 @@ useEffect(()=> {
          </div>
 
          
-
+     {popularHouses ?
       <div  id='custom-scrollbar-container' className="flex w-[85vw]  mx-auto overflow-x-hidden  ">
-         <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center">
-            <BiHomeAlt size={18}  className=" text-grey-light"/>
-            <p className="text-[0.875]  text-grey-light">Damico</p>
+         <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
+            <HomeIcon  color="#343A40" width="17" height="18"/>
+            <p className="text-[0.875rem]  text-grey-light">Damico</p>
          </div>
-         <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center">
-            <BiHomeAlt size={18}  className=" text-grey-light"/>
-            <p className="text-[0.875]  text-grey-light">Eleyele</p>
+         <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
+         <HomeIcon  color="#343A40" width="17" height="18"/>
+            <p className="text-[0.875rem]  text-grey-light">Eleyele</p>
          </div>
-         <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center">
-            <BiHomeAlt size={18}  className=" text-grey-light"/>
-            <p className="text-[0.875]  text-grey-light">Gate</p>
+         <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
+         <HomeIcon  color="#343A40" width="17" height="18"/>
+            <p className="text-[0.875rem]  text-grey-light">Gate</p>
          </div>
-         <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center">
-            <BiHomeAlt size={18}  className=" text-grey-light"/>
-            <p className="text-[0.875]  text-grey-light">Shop</p>
+         <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
+         <HomeIcon  color="#343A40" width="17" height="18"/>
+            <p className="text-[0.875rem]  text-grey-light">Shop</p>
          </div>
 
-      </div>
+      </div>:
+         <div id='custom-scrollbar-container' className="flex w-[85vw] mx-auto overflow-x-hidden">
+         {[1, 2, 3, 4].map((item) => (
+           <div key={item} className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around items-center gap-x-2 animate-pulse">
+             <div className="bg-gray-300 rounded-full w-5 h-5"></div>
+             <div className="bg-gray-300 w-[4rem] h-[0.875rem] rounded"></div>
+           </div>
+         ))}
+       </div>
+     
+   }
 
 
       <div className="flex p-0 m-0  mt-[1rem] px-4 w-full font-[400] text-[1rem] justify-between mx-auto">

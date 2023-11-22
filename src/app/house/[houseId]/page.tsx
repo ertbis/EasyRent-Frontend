@@ -67,7 +67,7 @@ const HousePage :FC<any> = ({params}) => {
               propertyId : selectedHouse._id
              })
              console.log(resp)
-             router.push('/payment');
+             router.push(`/payment/${resp.data.data._id}`);
 
          } catch (error: any) {
              setErrorModal(true)

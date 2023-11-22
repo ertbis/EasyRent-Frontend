@@ -113,3 +113,10 @@ export const scheduleTourEP = async (param : any) => {
     const resp = await http.post("/apis/tours/",  param  )
     return resp 
 }
+
+/// Payment routes
+
+export const makePayment = async( param: any ) => {
+  const resp = await http.post("/apis/payments/", param);
+  return resp
+}

@@ -44,7 +44,7 @@ const addtoFavourite = async () => {
             <div className="relative w-[full]   ">
                  <div onClick={() => addtoFavourite()} className='z-10 absolute top-4 right-4 bg-white rounded-full p-1 cursor-pointer'>
                 {isFav  ?  
-                    <AiTwotoneHeart size={15} className='text-red-400'/>
+                    <AiTwotoneHeart size={15} className='text-green-700'/>
                 :
                     <AiOutlineHeart size={15} className='text-grey-light'/>
                 }

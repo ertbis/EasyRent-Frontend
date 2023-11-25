@@ -21,6 +21,8 @@ import SectionLoading from "../SectionLoading";
 import debounce from 'lodash/debounce';
 import '../../app/globals.css'
 import { FilterIcon, HomeIcon, NotificationIcon, SearchIcon } from "@/assets/icons";
+import { TokenUserType } from "@/types/types";
+import { getUser } from "../../../utils/auth";
 
 
 
@@ -72,8 +74,13 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
    const [errorModal, setErrorModal] = useState<boolean>(false)
    const  [popularHouses , setPopularHouses]= useState<any>(null)
    const  [nearHouses , setNearHouses]= useState<any>(null)
+   const [cookUser, setCookUser] = useState<TokenUserType | null>(null);
 
-
+   useEffect(() => {
+      const cookieUser = getUser();
+      setCookUser(cookieUser);
+      console.log(cookieUser)
+    }, []);
    // Create a debounced version of the handleSearch function
    const debouncedSearch = debounce(async (searchValue : string) => {
           try {

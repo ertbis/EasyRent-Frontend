@@ -31,6 +31,8 @@ const handleCardClick = async (id: string) => {
     router.push(`/house/${id}`)
  
 };
+
+
 const addtoFavourite = async () => {
   await dispatch(setfavHouses(house));
   if(favHouses){
@@ -41,18 +43,18 @@ const addtoFavourite = async () => {
   }
 };
   return ( 
-        <div  onClick={() =>handleCardClick(house._id)} className="h-full bg-[#F5F4F8] hover:bg-[#cac8d1] rounded-xl px-2  pb-0 md:pb-4 mb-4" >
+        <div  className="h-full bg-[#F5F4F8] hover:bg-[#cac8d1] rounded-xl px-2  pb-0 md:pb-4 mb-4" >
             <div className="relative w-[full]  h-[10rem] ">
                  <div onClick={() => addtoFavourite()} className='z-10 absolute top-4 right-4 bg-white rounded-full p-1 cursor-pointer'>
                 {isFav  ?  
-                    <AiTwotoneHeart size={15} className='text-red-400'/>
+                    <AiTwotoneHeart size={15} className='text-green-700'/>
                 :
                     <AiOutlineHeart size={15} className='text-grey-light'/>
                 }
 
                  </div>
                  <div className='w-[9rem] h-[10rem]  md:w-full md:h-full rounded-xl'>
-                  <Image
+                  <Image    onClick={() =>handleCardClick(house._id)}
                     src={house.images[0]}
                     alt={house.apartment}
                     fill

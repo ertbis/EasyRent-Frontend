@@ -190,6 +190,7 @@ import { AiOutlineLeft } from 'react-icons/ai';
 import { BsCreditCard } from 'react-icons/bs';
 import { makePayment } from '../../../../utils/data/endpoints';
 import ErrorModal from '@/components/ErrorModal';
+import { useProtectedRoute } from '@/app/useProtectedRoute';
 // import { BiLogoMastercard} from 'react-icons/bi'
 // interface UserPaymentPropsType {
 //   onSubmit: (bank: string, acctName: string, acctNumber: string) => void;
@@ -207,6 +208,8 @@ const UserPayment: React.FC<any> = ({ params }) => {
   const [loading, setLoading] = useState(false);
   const [error , setError]  = useState<string | null >(null)
   const [errorModal, setErrorModal] = useState<boolean>(false)
+  const userHook = useProtectedRoute(['landlord', 'student']);
+
 
   const handleSubmit = async(event: React.FormEvent) => {
     event.preventDefault();

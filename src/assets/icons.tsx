@@ -39,6 +39,7 @@ fill={prop.color}/>
 
 
 
+
 export function SearchIcon(prop:PropType){
    return(
         <svg xmlns="http://www.w3.org/2000/svg" 
@@ -146,5 +147,25 @@ export function FilterIcon(prop:PropType){
 </svg>
     )
  }
+
+
+ export function NotPlusIcon(prop:PropType){
+   return(
+      <svg xmlns="http://www.w3.org/2000/svg"
+       width="71" height="70" 
+       viewBox="0 0 71 70" fill="none">
+  <circle cx="35.5" cy="35" r="35" 
+  fill="url(#paint0_radial_2090_7329)"/>
+  <defs>
+    <radialGradient id="paint0_radial_2090_7329" 
+    cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" 
+    gradientTransform="translate(0.500006 -11.3953) rotate(54.4352) scale(100.061)">
+      <stop offset="0.046875" stop-color="#234F68"/>
+      <stop offset="0.983052" stop-color="#8BC83F"/>
+    </radialGradient>
+  </defs>
+</svg>
+   )
+}
 
 

@@ -30,6 +30,7 @@ const PersonalInfoForm: React.FC = () => {
       try {
         const resp = await getMyDetails();
         setMyDetails(resp.data);
+        console.log(myDetails)
       } catch (error: any) {
         console.error(error);
         setError(error.response?.data?.message || 'An error occurred');
@@ -86,8 +87,8 @@ const PersonalInfoForm: React.FC = () => {
                 <input
                   type="text"
                   placeholder="Last Name"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  value={myDetails?.lastName}
+                  onChange={(e) => setMyDetails({...myDetails, lastName: e.target.value})}
                   className="text-black p-0 outline-none rounded-md w-full"
                 />
               </div>

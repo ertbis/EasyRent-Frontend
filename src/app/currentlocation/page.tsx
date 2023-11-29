@@ -10,6 +10,7 @@ import { getAllProperty } from '../../../utils/data/endpoints';
 import SectionLoading from '@/components/SectionLoading';
 import { FilterIcon } from '@/assets/icons';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { PrevIcon } from '@/assets/icons1';
 
 
 const CurrentLocation :FC = () => {
@@ -53,7 +54,7 @@ return (
          {showFilterCard  &&  <FilterForm setShowFilterCard={setShowFilterCard}/>   }
           <div className=' text-grey-light flex  items-center  justify-between border-b border-grey-light px-4 rounded-md w-full h-16  '>
           <a href="/">
-        <AiOutlineLeft size={30} className='text-grey-light  '/>
+          <PrevIcon color="" width="" height=""/>
             </a>
            <p className='text-[1.2rem] font-[700] text-blue-800'> Current Location</p>
            <div className="mr-2 cursor-pointer  border-l pl-2 border-grey-light ml-2 ">

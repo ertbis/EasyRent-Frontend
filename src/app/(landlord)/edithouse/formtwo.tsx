@@ -12,6 +12,7 @@ import { BiCamera } from 'react-icons/bi';
 import Image from 'next/image';
 import { HouseType } from '@/types/types';
 import { FaPlus } from 'react-icons/fa';
+import { PrevIcon } from '@/assets/icons1';
 
 interface FormTwoProps {
   houseData: HouseType;
@@ -79,7 +80,7 @@ const FormTwo :FC<FormTwoProps>  = ({houseData,  setHouseData, setFormPage}) => 
                     <div  className='flex flex-col h-screen  '>
                         <div className=' text-grey-light flex  items-center  justify-between px-4 rounded-md w-full h-16  '>
                         <a onClick={()=> setFormPage("one")}>
-                    <AiOutlineLeft size={30} className='text-green-700 '/>
+                        <PrevIcon color="" width="" height=""/>
                         </a>
                         <p className='flex-1 text-center  cursor-pointer text-[1.rem] font-[700] text-blue-800'> List Your Property</p>
                     

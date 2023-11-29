@@ -103,7 +103,7 @@ const Lprofile = ({ user }: any) => {
         </a>
 
       </div>
-      <div className="mt-2  flex justify-center mb-32 w-[90%] ">
+      <div className="mt-2  flex justify-center mb-[5rem] w-[90%] ">
         <a onClick={() => setOpenEdit(true)}  className="mb-4  font-medium  text-center py-2 text-green-700"> Log Out</a>
       </div>
       {openEdit && <LogOutModal setOpenEdit={setOpenEdit}/>}

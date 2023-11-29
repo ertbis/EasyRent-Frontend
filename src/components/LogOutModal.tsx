@@ -51,7 +51,7 @@ window.location.replace("/");
                         <p className="p-4 text-[1.25rem] w-[80%] rounded-[0.9375rem] font-semiBold text-[#343A40]">Are you sure you want to logout?</p>
                        <div className="flex gap-[1rem]">
                           <button onClick={()=> HandleClick()} className="bg-[#1BB81B] py-[1.1rem] px-[3.5rem] text-white rounded-[0.7rem]">Yes</button>
-                          <button onClick={() => setOpenEdit(false)} className="py-[1.1rem] px-[3.5rem] border border-[#1BB81B] rounded-[0.7rem]">No</button>
+                          <button onClick={() => setOpenEdit(false)} className="py-[1.1rem] text-[#343A40] px-[3.5rem] border border-[#1BB81B] rounded-[0.7rem]">No</button>
                        </div>
                     </div>
         </div> 

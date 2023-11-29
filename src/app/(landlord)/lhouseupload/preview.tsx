@@ -16,6 +16,7 @@ import { uploadProperty } from '../../../../utils/data/endpoints';
 import { useRouter } from 'next/navigation';
 import Loading from '@/components/Loading';
 import ErrorModal from '@/components/ErrorModal';
+import { PrevIcon } from '@/assets/icons1';
 
 
 
@@ -55,7 +56,7 @@ interface PreviewProps {
         <div>
                 <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-grey-light px-4 rounded-md w-full h-16  '>
                 <a onClick={()=> setFormPage("two")}>
-                <AiOutlineLeft size={30} className='text-green-700  '/>
+                <PrevIcon color="" width="" height=""/>
                 </a>
                  <p className='flex-1 text-center text-[1.4rem] font-[700] text-blue-800'> Preview</p>
 

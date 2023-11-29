@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { setName } from '@/app/GlobalRedux/Features/user/userSlice';
 import ErrorModal from '@/components/ErrorModal';
 import { useProtectedRoute } from '@/app/useProtectedRoute';
+import { PrevIcon } from '@/assets/icons1';
 
 const PersonalInfoForm: React.FC = () => {
   const dispatch = useDispatch();
@@ -66,7 +67,7 @@ const PersonalInfoForm: React.FC = () => {
 
           <div className="text-grey-light flex items-center justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-16">
             <a href="/">
-              <AiOutlineLeft size={30} className="text-green-700" />
+            <PrevIcon color="" width="" height=""/>
             </a>
             <p className="flex-1 text-center text-[1.4rem] font-[700] text-blue-800">Personal Information</p>
           </div>

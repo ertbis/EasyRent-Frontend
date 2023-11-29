@@ -132,7 +132,7 @@ useEffect(()=> {
   
       <div className='flex justify-between col-span-2 items-center w-[100%]  p-4 ' >
            <div className='flex-1 w-full '>
-              <p className='font-normal  text-sm text-grey-light mb-3' > Hey James</p>
+              <p className='font-normal  text-sm text-grey-light mb-3' > Hey {cookUser?.name ? cookUser?.name : "You"}</p>
             <h2 className="text-blue-800 w-full text-2xl font-bold mt-4 ">Lets start Exploring</h2>
             </div> 
               <div

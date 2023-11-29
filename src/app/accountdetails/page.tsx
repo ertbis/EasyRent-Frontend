@@ -1,4 +1,5 @@
 "use client"
+import { PrevIcon } from "@/assets/icons1";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
 
@@ -17,7 +18,7 @@ const AccountDetails = () => {
         <div className="flex flex-col md:pt-0 w-full m-0 h-screen md:h-[78vh]  md:w-[33%] px-4 py-4 bg-white md:rounded-xl shadow-lg  md:mr-16 md:h-full  text-grey-light">
           <div className=' text-grey-light flex  items-center  justify-between mb-2  w-full h-16  '>
                   <a href="/">
-                  <AiOutlineLeft size={25} className='text-green-700  '/>
+                  <PrevIcon color="" width="" height=""/>
                 </a>
                <a  href='/'>
                <button className='bg-green-700 text-white font-semibold flex justify-center items-center h-4 rounded-3xl  w-20  py-4' >skip</button>

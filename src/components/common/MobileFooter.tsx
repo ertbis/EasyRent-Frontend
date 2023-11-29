@@ -37,7 +37,7 @@ interface LpHeaderProps {
     return ( 
         <div className='fixed z-[505]  py-[0.5rem] bg-white bottom-[0] text-grey-light flex-1 justify-around items-center flex w-screen mx-2' >
             <div   onClick={() => handletabClick("home")}
-            className={` ${activeButton == "home" ? "text-green-700 border-b border-green-700" : "text-grey-light"} cursor-pointer   flex flex-col justify-center items-center`} >
+            className={` ${activeButton == "home" ? "text-green-700 " : "text-grey-light"} cursor-pointer   flex flex-col justify-center items-center`} >
                    {activeButton == 'home'  ? 
                    <SearchIconFill color="#1BB81B" width="24" height="24" />
                    :<SearchIcon  color="#343A40" width="24" height="24"/>
@@ -46,7 +46,7 @@ interface LpHeaderProps {
                   
                 </div>
                 <div  onClick={()=> handletabClick("save")}
-                    className={` ${activeButton == "save" ? "text-green-700 border-b border-green-700" : "text-grey-light"} cursor-pointer  flex flex-col justify-center items-center`} >
+                    className={` ${activeButton == "save" ? "text-green-700 " : "text-grey-light"} cursor-pointer  flex flex-col justify-center items-center`} >
                    {activeButton == 'save'  ? 
                    <FavouriteIcon color="#1BB81B" width="24" height="24" />
                    :<FavouriteIcon  color="#343A40" width="24" height="24"/>
@@ -54,7 +54,7 @@ interface LpHeaderProps {
                     <p className='text-[0.5rem] '>Save</p>
                 </div>
                 <div  onClick={()=> handletabClick("inbox")}
-                    className={` ${activeButton == "inbox" ? "text-green-700  border-b border-green-700" : "text-grey"} cursor-pointer   flex flex-col  justify-center  z-100 items-center`} >
+                    className={` ${activeButton == "inbox" ? "text-green-700  " : "text-grey"} cursor-pointer   flex flex-col  justify-center  z-100 items-center`} >
                     {activeButton == 'inbox'  ? 
                    <MessageIconFill color="#1BB81B" width="24" height="24" />
                    :<MessageIcon  color="#343A40" width="24" height="24"/>

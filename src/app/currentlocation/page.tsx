@@ -8,6 +8,8 @@ import { RootState } from '../GlobalRedux/store';
 import FilterForm from '@/components/landingPage/FilterForm';
 import { getAllProperty } from '../../../utils/data/endpoints';
 import SectionLoading from '@/components/SectionLoading';
+import { FilterIcon } from '@/assets/icons';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 
 const CurrentLocation :FC = () => {
@@ -15,13 +17,37 @@ const CurrentLocation :FC = () => {
     const  [houses , setHouses]= useState<any>(null)
 
     const fetchbyLocationAndPopularity =async () => {
-        const resp = await getAllProperty('dam');
+        const resp = await getAllProperty('d');
         setHouses(resp.data)
      }
   
   useEffect(()=> {
      fetchbyLocationAndPopularity()
   },[])
+
+// const fetchHouse = async(page: number) =>  {
+//     await new Promise((resolve) => setTimeout(resolve, 1000))
+//     return houses.slice((page - 1) * 2, page * 2)
+// }
+
+
+// const {data, fetchNextPage, isFetchingNextPage}  = useInfiniteQuery(
+//     ['query'],
+//     async({pageParam = 1 }) => {
+//         const response = await fetchHouse(pageParam)
+//         return response
+//     },
+//     {
+//         getNextPageParam : (_, pages) => {
+//             return pages.length + 1
+//         },
+//         initialData :{
+//             pages: [houses.slice(0, 2)],
+//             pageParams : [1]
+//         },
+//     }
+// )
+
 return (
     <div  className=''>
          {showFilterCard  &&  <FilterForm setShowFilterCard={setShowFilterCard}/>   }
@@ -30,7 +56,10 @@ return (
         <AiOutlineLeft size={30} className='text-grey-light  '/>
             </a>
            <p className='text-[1.2rem] font-[700] text-blue-800'> Current Location</p>
-           <BsFilterRight  onClick={()=> setShowFilterCard(true)} size={35} className="mr-2 cursor-pointer  border-l pl-2 border-grey-light ml-2 "/>
+           <div className="mr-2 cursor-pointer  border-l pl-2 border-grey-light ml-2 ">
+
+           <FilterIcon color="" width="" height=""/>
+           </div>
 
        </div>
        <div   className='p-4' >
@@ -45,6 +74,14 @@ return (
 
         </div>
        
+       {/* <button  onClick={() => fetchNextPage()}  disabled={isFetchingNextPage}>
+        {isFetchingNextPage  ?
+           'LOading More ....' :
+           (data?.pages.length ?? 0) < 3
+           ? 'Load More'
+           : 'Nothing more to load'
+         }
+       </button> */}
 
     </div>
 )

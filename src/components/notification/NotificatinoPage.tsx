@@ -13,7 +13,6 @@ import { UserIcon } from "@/assets/icons";
 
 const NotificationPage = ({setTab}:any) => {
   const [notifications, setNotification] = useState<any>(null)
-  const [deleteModal, setDeleteModal] = useState<boolean>(false)
   
   const fetchMyNotification  = async() => {
     try {
@@ -51,29 +50,17 @@ const NotificationPage = ({setTab}:any) => {
             </div> 
           
 
-          {deleteModal &&
-          
-          <DeleteModal  setDeleteModal={setDeleteModal} text="Notification"/>
-          }
-
         <>
           {notifications  ? 
           <>
              {notifications.map((data :any, index: any)=> {
-              return(
 
+
+               return(
                 <div  key={index} className="flex text-gray-800 my-4 ">
-                    <div className="flex-[0.3] flex justify-center items-center">
-                    <UserIcon  color="#343A40" width="24" height="24"/>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-gray-800 font-bold ">{data.content.slice(0, 51)}...</p>
-                      <p className="text-gray-800 ">{data.Date}</p>
-                    </div>
-                    <div className="flex-[0.3] flex justify-center items-center">
-                      <RxCross2  onClick={() => setDeleteModal(true)}  size={30}  className="text-gray-800"/>
-                    </div>
-             </div>
+                  <NotificationBar data={data}/>
+               </div>
+         
               )
              })}
           </>
@@ -94,3 +81,28 @@ const NotificationPage = ({setTab}:any) => {
 }
  
 export default NotificationPage;
+
+
+
+
+const NotificationBar = ({data}: any)=> {
+const [deleteModal, setDeleteModal] = useState<boolean>(false)
+
+  return(
+         <>         
+    {deleteModal &&
+      <DeleteModal notId={data._id}  setDeleteModal={setDeleteModal} text="Notification"/>
+      }
+  <div className="flex-[0.3] flex justify-center items-center">
+    <UserIcon  color="#343A40" width="24" height="24"/>
+    </div>
+    <div className="flex-1">
+    <p className="text-gray-800 font-bold ">{data.content.slice(0, 51)}...</p>
+    <p className="text-gray-800 ">{data.Date}</p>
+    </div>
+    <div className="flex-[0.3] flex justify-center items-center">
+    <RxCross2  onClick={() => setDeleteModal(true)}  size={30}  className="text-gray-800"/>
+  </div>
+</>
+  )
+}

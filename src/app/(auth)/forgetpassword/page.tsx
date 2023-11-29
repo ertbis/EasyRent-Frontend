@@ -12,6 +12,8 @@ const forgetPassword = () => {
   const [email , setEmail] = useState("") ;
   const [loading , setLoading]  = useState(false)
   const [error , setError]  = useState<string | null >(null)
+ 
+
 
 
   const handleSubmit =async (e: React.FormEvent) => {
@@ -45,9 +47,9 @@ const forgetPassword = () => {
       <div className="flex flex-col justify-between  md:pt-0 w-full m-0 h-screen  md:h-[75vh]   md:w-[30%] px-8 py-4 bg-white md:rounded-xl shadow-lg  md:mr-16  text-grey-light">
        
       <div className=' text-grey-light flex  items-center  justify-start mb-2  w-full h-16  '>
-              <a href="/">
+           <a href="/">
               <AiOutlineLeft size={25} className='text-green-700  '/>
-            </a>
+           </a>
 
        </div>
         <h2 className="text-blue-800 w-[70%] text-2xl font-bold mt-0 ">Forgot Password</h2>

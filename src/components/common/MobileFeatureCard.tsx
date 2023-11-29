@@ -2,7 +2,7 @@
 import { setfavHouses } from '@/app/GlobalRedux/Features/favHouse/favHouseSlice';
 import { setSelectedHouse } from '@/app/GlobalRedux/Features/selectedHouse/selectedHouseSlice';
 import { RootState } from '@/app/GlobalRedux/store';
-import { HouseType } from '@/types/types';
+import { HouseType, TokenUserType } from '@/types/types';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { FC, useState ,useEffect } from 'react';
@@ -12,24 +12,29 @@ import { CiLocationOn } from "react-icons/ci";
 import { FaWalking } from "react-icons/fa";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from '../../../utils/auth';
+import { EditIcon } from '@/assets/icons1';
+import EditModal from '../EditModal';
 
-const MobileFeaturedCard: FC<{ house: HouseType }> = ({ house }) => {
+interface CardProps {
+  house: HouseType
+}
+
+const MobileFeaturedCard: FC<CardProps> = ({ house }) => {
   const [isFav, setIsFav]= useState(false)
   const favHouses = useSelector((state: RootState) => state.favHouses.favHouses)
   const dispatch = useDispatch()
   const router = useRouter();
+  const [cookUser, setCookUser] = useState<TokenUserType | null>(null)
+  const [openEdit, setOpenEdit] = useState(false)
 
-
-
-  useEffect(() => {
-    
-  }, [])
   
 
 const handleCardClick = async (id: string) => {
    const resp = await dispatch(setSelectedHouse(house )); 
    router.push(`/house/${id}`)
 };
+
 const addtoFavourite = async () => {
   await dispatch(setfavHouses(house));
   if(favHouses){
@@ -39,18 +44,50 @@ const addtoFavourite = async () => {
     }
   }
 };
-  return ( 
-        <div  onClick={() =>handleCardClick(house._id)} className="h-full bg-[#F5F4F8] hover:bg-[#cac8d1] rounded-xl px-2  py-4  mb-8" >
-            <div className="relative w-[full]   ">
-                 <div onClick={() => addtoFavourite()} className='z-10 absolute top-4 right-4 bg-white rounded-full p-1 cursor-pointer'>
-                {isFav  ?  
-                    <AiTwotoneHeart size={15} className='text-green-700'/>
-                :
-                    <AiOutlineHeart size={15} className='text-grey-light'/>
-                }
 
-                 </div>
-                 <div className='w-[9rem] h-[14rem]  md:w-full md:h-full rounded-xl'>
+useEffect(() => {
+  const cookieUser = getUser();
+   setCookUser(cookieUser)
+}, [])
+
+
+  return ( 
+        <div   className=" h-full bg-[#F5F4F8] hover:bg-[#cac8d1] rounded-xl px-2  py-4  mb-8" >
+           {openEdit && <EditModal houseId={house._id} setOpenEdit={setOpenEdit}/>}
+            
+            <div className="relative w-[full]   ">
+             {cookUser ?
+             <>
+             {cookUser.role =="landlord" ?
+          
+            <div onClick={() => setOpenEdit(true)} className='z-10 absolute top-4 right-4 bg-white rounded-full p-2 cursor-pointer'>
+              <EditIcon width='20' height='21' color='#1BB81B'/>
+             </div> :
+
+            <div onClick={() => addtoFavourite()} className='z-10 absolute top-4 right-4 bg-white rounded-full p-1 cursor-pointer'>
+            {isFav  ?  
+                <AiTwotoneHeart size={15} className='text-green-700'/>
+            :
+                <AiOutlineHeart size={15} className='text-grey-light'/>
+            }
+
+            </div>
+
+            } 
+            
+             </>:
+              <div onClick={() => addtoFavourite()} className='z-10 absolute top-4 right-4 bg-white rounded-full p-1 cursor-pointer'>
+              {isFav  ?  
+                  <AiTwotoneHeart size={15} className='text-green-700'/>
+              :
+                  <AiOutlineHeart size={15} className='text-grey-light'/>
+              }
+
+               </div>
+            }
+
+               
+                 <div onClick={() =>handleCardClick(house._id)} className='w-[9rem] h-[14rem]  md:w-full md:h-full rounded-xl'>
                   <Image
                     src={house.images[0]}
                     alt={house.apartment}

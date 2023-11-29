@@ -20,6 +20,7 @@ const VerifyEditOTP = () => {
   const [cookUser, setCookUser] = useState<TokenUserType | null>(null);
   const userHook = useProtectedRoute(['landlord', 'student']);
 
+  
   useEffect(() => {
     const cookieUser = getUser();
     setCookUser(cookieUser);

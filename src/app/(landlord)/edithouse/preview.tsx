@@ -12,20 +12,22 @@ import DesktopFooter from '@/components/DesktopFooter';
 import Image from 'next/image';
 import { HouseType } from '@/types/types';
 import { housesData } from '@/demodata/data';
-import { uploadProperty } from '../../../../utils/data/endpoints';
+import { updateProperty, uploadProperty } from '../../../../utils/data/endpoints';
 import { useRouter } from 'next/navigation';
 import Loading from '@/components/Loading';
 import ErrorModal from '@/components/ErrorModal';
+import { update } from 'lodash';
 
 
 
 interface PreviewProps {
     houseData: HouseType;
     setFormPage:React.Dispatch<React.SetStateAction<string>>;
-  }
+    _id:string 
+}
   
   
-  const Preview :FC<PreviewProps>  = ({houseData, setFormPage}) => {   
+  const Preview :FC<PreviewProps>  = ({_id, houseData, setFormPage}) => {   
     //  const houseData = useSelector((state: RootState) => state.selectedHouse.selectedHouse)
     const router = useRouter();
     const [loading , setLoading]  = useState<boolean>(false)
@@ -35,10 +37,9 @@ interface PreviewProps {
 
     const postProperty = async() => {
         setLoading(true)
-
        try {
            console.log(houseData)
-           const resp = await uploadProperty(houseData);
+           const resp = await updateProperty({houseData, _id});
            console.log(resp)
            router.push('/ldashboard');
         
@@ -175,7 +176,7 @@ interface PreviewProps {
 
         
         <div className='m-4  mb-8 flex justify-between w-[90vw]'>
-        <button onClick ={postProperty} className='bg-green-700 text-white font-bold rounded-lg w-[100%]  h-16' >Post Property</button>          
+        <button onClick ={postProperty} className='bg-green-700 text-white font-bold rounded-lg w-[100%]  h-16' >Update Property</button>          
               
         </div>
         </div>

@@ -20,6 +20,7 @@ import { useProtectedRoute } from "@/app/useProtectedRoute";
 import ErrorModal from "@/components/ErrorModal";
 import MobileFeaturedCardSkeleton from "@/components/common/MobileFeatureCardSkeleton";
 import { HomeIcon, NotificationIcon, UserIcon } from "@/assets/icons";
+import EditModal from "@/components/EditModal";
 
 
 const LandLordDashboard = () => {
@@ -79,8 +80,7 @@ const LandLordDashboard = () => {
             {tab ==="notification"  &&  <NotificationPage  setTab={setTab}/>}
             {tab === "home"  &&  
             <>
-  
-  <div className='flex justify-between h-[11rem] col-span-2 items-end w-[100%] bg-[#17A2B8]  px-[1.4rem] py-[2rem]  rounded-b-[0.6rem] ' >
+  <div  className='flex justify-between h-[11rem] col-span-2 items-end w-[100%] bg-[#17A2B8]  px-[1.4rem] py-[2rem]  rounded-b-[0.6rem] ' >
              <div className='flex-1 w-full '>
                 <h1 className='  text-[1.25rem] text-[#F5FEFF] mb-3' > Good Morning</h1>
               <h2 className="text-white w-full text-[1.5rem] font-bold mt-4 ">{user ? initial + " " + user.lastName : cookUser.name}</h2>
@@ -107,12 +107,12 @@ const LandLordDashboard = () => {
            <>
              { houses ?
         
-               <div className="mt-4" >
+               <div className="mt-4"  >
                   <LandlordHousesComponent houses={houses}/>
                   <div   className='p-4 overflow-y-scroll ' >
                         {houses.map((data :any, index:any) => {
                               return (
-                                 <MobileFeaturedCard  key={index} house={data}/>
+                                 <MobileFeaturedCard  key={index} house={data} />
 
                               )
                         })}

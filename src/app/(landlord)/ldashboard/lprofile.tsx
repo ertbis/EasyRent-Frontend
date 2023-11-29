@@ -8,28 +8,30 @@ import Loading from "@/components/Loading";
 import { removeToken, removeUser } from "../../../../utils/auth";
 import { useRouter } from "next/navigation";
 import EditPaymentinfo from "@/components/common/EditPaymentInfo";
+import LogOutModal from "@/components/LogOutModal";
 
-const DropdownProfileItem = ({user}: any) => (
-  <div data-aos="flip-down" className="mx-2 flex-col py-3 border-b border-gray-300 items-center text-gray-600">
-    <p className="flex-1 text-lg ml-4"> <span className="font-bold">Name</span>  :  {user.lastName  && user.lastName}</p>
-    <p className="flex-1 text-lg ml-4"> <span className="font-bold">Gender</span>  :  {user.gender && user.gender}</p>
-    <p className="flex-1 text-green-700 text-lg ml-4"> <span className="text-black font-bold">Email</span>  :  {user.email && user.email}</p>
-    <a  href="/infoform" type="submit" className="flex justify-center items-center bg-blue-800 mb-4 hover:opacity-50 text-white py-2   rounded-md w-full" ><AiOutlineEdit  size={27}/> Edit</a>
-  </div>
-);
-const DropdownBankItem = ({bankDetails}: any) => (
-  <div data-aos="flip-down" className="mx-2 flex-col py-3 border-b border-gray-300 items-center text-gray-600">
-    <p className="flex-1 text-lg ml-4"> <span className="font-bold">Bank </span>  :  {bankDetails.bankName && bankDetails.bankName}</p>
-    <p className="flex-1 text-lg ml-4"> <span className="font-bold">Account Name</span>  :  {bankDetails.acctName && bankDetails.acctName}</p>
-    <p className="flex-1 text-green-700 text-lg ml-4"> <span className="text-black font-bold">Account Number</span>  :  {bankDetails.acctNumber  && bankDetails.acctNumber}</p>
-    <a  href="/paymentacct" type="submit" className="flex justify-center items-center bg-blue-800 mb-4 hover:opacity-50 text-white py-2   rounded-md w-full" ><AiOutlineEdit  size={27}/> Edit</a>
+// const DropdownProfileItem = ({user}: any) => (
+//   <div data-aos="flip-down" className="mx-2 flex-col py-3 border-b border-gray-300 items-center text-gray-600">
+//     <p className="flex-1 text-lg ml-4"> <span className="font-bold">Name</span>  :  {user.lastName  && user.lastName}</p>
+//     <p className="flex-1 text-lg ml-4"> <span className="font-bold">Gender</span>  :  {user.gender && user.gender}</p>
+//     <p className="flex-1 text-green-700 text-lg ml-4"> <span className="text-black font-bold">Email</span>  :  {user.email && user.email}</p>
+//     <a  href="/infoform" type="submit" className="flex justify-center items-center bg-blue-800 mb-4 hover:opacity-50 text-white py-2   rounded-md w-full" ><AiOutlineEdit  size={27}/> Edit</a>
+//   </div>
+// );
+// const DropdownBankItem = ({bankDetails}: any) => (
+//   <div data-aos="flip-down" className="mx-2 flex-col py-3 border-b border-gray-300 items-center text-gray-600">
+//     <p className="flex-1 text-lg ml-4"> <span className="font-bold">Bank </span>  :  {bankDetails.bankName && bankDetails.bankName}</p>
+//     <p className="flex-1 text-lg ml-4"> <span className="font-bold">Account Name</span>  :  {bankDetails.acctName && bankDetails.acctName}</p>
+//     <p className="flex-1 text-green-700 text-lg ml-4"> <span className="text-black font-bold">Account Number</span>  :  {bankDetails.acctNumber  && bankDetails.acctNumber}</p>
+//     <a  href="/paymentacct" type="submit" className="flex justify-center items-center bg-blue-800 mb-4 hover:opacity-50 text-white py-2   rounded-md w-full" ><AiOutlineEdit  size={27}/> Edit</a>
 
-  </div>
-);
+//   </div>
+// );
 
 const Lprofile = ({ user }: any) => {
   const router = useRouter();
   const [loading , setLoading]  = useState(false)
+  const [openEdit, setOpenEdit] = useState(false)
 
 
   useEffect(() => {
@@ -41,18 +43,7 @@ const Lprofile = ({ user }: any) => {
   const [paymentAccountOpen, setPaymentAccountOpen] = useState(false);
   
 
-  const logOut = ()=> {
-    setLoading(true)
-    try {
-      removeToken()
-      removeUser()
-      router.push('/');
-
-    } catch (error) {
-      setLoading(false)
-      console.log(error)
-    }
-  }
+ 
 
   return (
     <>
@@ -113,8 +104,10 @@ const Lprofile = ({ user }: any) => {
 
       </div>
       <div className="mt-2  flex justify-center mb-32 w-[90%] ">
-        <a  onClick={logOut} className="mb-4  font-medium  text-center py-2 text-green-700"> Log Out</a>
+        <a onClick={() => setOpenEdit(true)}  className="mb-4  font-medium  text-center py-2 text-green-700"> Log Out</a>
       </div>
+      {openEdit && <LogOutModal setOpenEdit={setOpenEdit}/>}
+ 
       </>
     )}
     </>  :

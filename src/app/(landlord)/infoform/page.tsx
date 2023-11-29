@@ -76,9 +76,9 @@ const PersonalInfoForm: React.FC = () => {
                 <label className="block text-gray-500 text-xs font-medium">First Name:</label>
                 <input
                   type="text"
-                  value={firstName}
+                  value={myDetails.firstName}
                   placeholder="First Name"
-                  onChange={(e) => setFirstName(e.target.value)}
+                  onChange={(e) => setMyDetails({...myDetails, firstName: e.target.value})}
                   className="text-black p-0 outline-none rounded-md w-full"
                 />
               </div>

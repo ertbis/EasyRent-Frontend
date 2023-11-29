@@ -54,7 +54,7 @@ export const getMyDetails = async ()  => {
 
 
 
-//landlord enpoint
+//landlord endpoint
 export const uploadProperty = async (param : any)  => {
     
     const resp = await http.post("/apis/properties",  param  )
@@ -71,6 +71,14 @@ export const getAllProperty = async (param : string)  => {
     return resp
 } 
 
+export const deleteProperty = async (param: string)  => {    
+    const resp = await http.delete(`/apis/properties/${param}`)
+    return resp
+} 
+export const updateProperty = async (param: any)  => {    
+    const resp = await http.put(`/apis/properties/${param._id}`, param.houseData)
+    return resp
+} 
 
 export const getSingleProperty = async (param : any)  => {
     const resp = await http.get(`/apis/properties/${param}`)
@@ -81,7 +89,7 @@ export const getSingleProperty = async (param : any)  => {
 //notification
 
 export const deleteNotification = async (param : any)  => {
-    const resp = await http.delete(`/apis/properties/${param}`)
+    const resp = await http.delete(`/apis/notifications/${param}`)
     return resp
 } 
 

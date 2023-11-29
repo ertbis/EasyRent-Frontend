@@ -59,9 +59,9 @@ const Login = () => {
      console.log(res)
 
     if(resp.data.role == "landlord"){
-      router.push('/ldashboard');
+      window.location.replace("/ldashboard");
     }else{
-      router.push('/');
+      window.location.replace("/");
     }
       
     } catch (e : any) {

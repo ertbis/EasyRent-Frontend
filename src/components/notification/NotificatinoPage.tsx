@@ -9,11 +9,13 @@ import DeleteModal from "../DeleteModal";
 import { getMyNotification } from "../../../utils/data/endpoints";
 import EmptyNotification from "./EmptyNotification";
 import { UserIcon } from "@/assets/icons";
+import { PrevIcon } from "@/assets/icons1";
 
 
 const NotificationPage = ({setTab}:any) => {
   const [notifications, setNotification] = useState<any>(null)
   
+
   const fetchMyNotification  = async() => {
     try {
       const resp = await getMyNotification()
@@ -37,13 +39,11 @@ const NotificationPage = ({setTab}:any) => {
   }, []);
 
     return ( 
-        //  <>
-        //     <Receipt/>
-        //  </>
+       
         <div className="h-[80vh] w-screen">
             <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-12  '>
             <a onClick={()=> setTab('home')}>
-            <AiOutlineLeft  size={30} className='text-green-700  '/>
+          <PrevIcon color="" width="" height=""/>
             </a>
             <p className='flex-1 text-center text-[1.2rem] font-[800] text-blue-800'> Notifications</p>
 

@@ -28,6 +28,7 @@ const forgetPassword = () => {
         console.log(data)
         const resp = await ForgetPassword(data);
         console.log(resp)
+        window.location.replace("/");
       } catch (e : any) {
          console.log(e)
          setLoading(false)

@@ -1,3 +1,6 @@
+"use client"
+
+import { useState } from "react"
 import SideBar from "./Sidebar"
 
 
@@ -5,10 +8,10 @@ import SideBar from "./Sidebar"
 
 
 const Admin = () => {
-
+ const [tab , setTab] = useState("dashboard")
     return (
         <div className="flex">
-           <SideBar tab="dashboard"/>
+           <SideBar  setTab={setTab} tab={tab}/>
 
             <div className="">
 

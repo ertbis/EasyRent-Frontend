@@ -26,9 +26,16 @@ export const VerifyOTPCode = async (param : any)  => {
 }
   
 export const ForgetPassword = async (param : any)  => {
-    const resp = await http.post("/apis/user/forgot_password",  param )
+    const resp = await http.post("/apis/forgetpassword",  param )
     return resp
 }
+
+export const ChangePassword = async (param : any)  => {
+    console.log(param)
+    const resp = await http.post(`/apis/forgetpassword/update/${param.userId}`,  {password : param.password} )
+    return resp
+}
+
 
 export const UploadDP = async (param : any)  => {
     const profilePicture = param

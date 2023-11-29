@@ -106,7 +106,7 @@ const AdminLogin = () => {
             id="email"
             name="email"
             placeholder='Email Address'
-            className="border border-grey-light focus:border-green-700 outline-none rounded-lg px-4 py-3 md:py-2 w-full"
+            className="border border-grey-light focus:border-green-700 outline-none rounded-lg px-4 py-3  w-full"
             value = {inputData.email}
             onChange={handleChange}
         />
@@ -119,7 +119,7 @@ const AdminLogin = () => {
             id="password"
             name="password"
             placeholder='Password'
-            className="border outline-none border-grey-light focus:border-green-700 rounded-lg px-4 py-3 md:py-2 w-full"
+            className="border outline-none border-grey-light focus:border-green-700 rounded-lg px-4 py-3 w-full"
             value = {inputData.password}
             onChange={handleChange}
         />
@@ -135,7 +135,7 @@ const AdminLogin = () => {
 
         <button
           type="submit"
-          className="bg-green-700  hover:opacity-[0.5] text-white py-2 py-3 md:py-2 md:mt-14 rounded-md w-full">
+          className="bg-green-700  hover:opacity-[0.5] text-white  py-3 md:mt-14 rounded-md w-full">
          Login
         </button>
         

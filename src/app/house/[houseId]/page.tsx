@@ -192,7 +192,14 @@ const HousePage :FC<any> = ({params}) => {
         </div>
 
         { user.role == "landlord" 
-        ? '' : 
+        ? 
+        <div className='m-4 mb-12 w-[90vw] bg-[#F5F4F8]  p-2 rounded-lg '>
+        <h2 className="text-blue-800 w-[70%] text-sm font-medium mt-4 ">About This Home</h2>
+        <p className='flex flex-wrap text-grey-light'>
+        {selectedHouse.about}
+        </p>
+        </div>
+        : 
         <>
         
 

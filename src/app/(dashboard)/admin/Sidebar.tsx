@@ -1,5 +1,5 @@
 import { UserIcon } from "@/assets/icons"
-import { MenuIcon, MenuIconFill, MessageActiveIcon, PlusIcon, PlusIconFill, SHIcon, SHIconFill, SettingIcon } from "@/assets/icons1"
+import { LogOutIcon, MenuIcon, MenuIconFill, MessageActiveIcon, PlusIcon, PlusIconFill, SHIcon, SHIconFill, SettingIcon } from "@/assets/icons1"
 import { FC } from "react"
 
 
@@ -8,7 +8,7 @@ const SideBar:FC<any> = ({tab, setTab}) => {
 
     return (
 
-        <div className="w-[20%] px-[2rem] p-6 h-screen border border-red">
+        <div className="flex flex-col w-[20%] px-[2rem] p-6 h-screen border border-red">
 
             <div className='text-xl flex justify-start items-start h-[12%] w-full md:text-5xl font-sans font-bold text-green-700'>
                 <p>E<span  className=' text-blue-800'>R</span>T</p>
@@ -68,6 +68,12 @@ const SideBar:FC<any> = ({tab, setTab}) => {
                 </div>
                 
             </div>
+
+            <div className='flex-1 text-xl  flex justify-center items-center  w-full md:text-5xl font-sans font-bold text-green-700'>
+                <p  className="flex cursor-pointer text-[1.2rem] text-[#F13E38]"> 
+                <LogOutIcon width="" height="" color=""/>
+                  <span  className="ml-2">Logout</span></p>
+           </div>
         </div>
     )
 }

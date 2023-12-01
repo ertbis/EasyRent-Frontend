@@ -36,8 +36,12 @@ export default function Home() {
 
 
    const fetchDetails = async()=> {
-    const resp = await getMyDetails()
-    setUser(resp.data)
+    try {
+      const resp = await getMyDetails()
+      setUser(resp.data)      
+    } catch (error) {
+      console.log("unable to fetch useer")
+    }
    }
    useEffect(() => {
       const cookieUser = getUser();

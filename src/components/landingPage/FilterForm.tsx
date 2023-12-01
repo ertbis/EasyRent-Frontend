@@ -2,14 +2,26 @@ import { FC, useEffect, useState } from "react";
 import { AiOutlineLeft } from "react-icons/ai";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { getFilterProperty } from "../../../utils/data/endpoints";
+import FilterResult from "./FilterResult";
+import Loading from "../Loading";
+import ErrorModal from "../ErrorModal";
 
 interface FilterFormProp {
     setShowFilterCard: (show: boolean) => void;
 }
 
+
 const FilterForm: FC<FilterFormProp> = ({ setShowFilterCard }) => {
     const [filterQuery, setFilterQuery] = useState<any>({});
-
+    const [bedroom, setBedroom] = useState(0)
+    const [searchResult, setSearchResult] = useState<any>(null)
+    const [showSearch, setShowSearch] = useState(true)
+    const [loading , setLoading]  = useState(false)
+    const [error , setError]  = useState<string | null >(null)
+    const [errorModal, setErrorModal] = useState<boolean>(false)
+  
+  
     useEffect(() => {
         AOS.init();
         AOS.refresh();
@@ -35,18 +47,33 @@ const FilterForm: FC<FilterFormProp> = ({ setShowFilterCard }) => {
     };
 
     // Handle form submission
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        // Here you can use the filterQuery state to perform some action
-        console.log("Filter Criteria:", filterQuery);
+        setLoading(true)
+        try {
+            const resp = await getFilterProperty(filterQuery)
+            setLoading(false)
+            setShowSearch(true)
+            setSearchResult(resp.data.properties)
+        } catch (e:any) {
+            setErrorModal(true)
+            console.log(e)
+            setLoading(false)
+            setError( e?.response?.data?.message || "Try Again");
+        }
     };
 
     return (
+        <>        {(searchResult && showSearch)  ? <FilterResult houses={searchResult} setShowSearch={setShowSearch}/> :
+        
+        
         <div className="fixed z-[500]  top-0 bg-[#a7a4a4b5] w-screen h-[100vh] flex justify-center items-center">
             <div data-aos="zoom-in" className="relative bg-white rounded-lg z-[10000] p-4 w-screen h-screen md:w-[20rem] md:h-[24rem]">
                 <AiOutlineLeft size={18} onClick={() => setShowFilterCard(false)} className="absolute text-gray-700 left-4 top-4 cursor-pointer" />
                 <h3 className="text-blue-800 text-center font-bold text-lg">Filter</h3>
                 <hr />
+                { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
+                {loading  && <Loading/>}
                 <form className="text-gray-500 h-full" onSubmit={handleSubmit}>
                     <div className="flex flex-col justify-between">
                         <div className="my-4 mb-8">
@@ -76,13 +103,15 @@ const FilterForm: FC<FilterFormProp> = ({ setShowFilterCard }) => {
                                 
                             <button
                             type="button"
+                            onClick={()=>setBedroom(bedroom - 1)}
                             className="flex-1 p-2 rounded-lg  border  border-gray-300"
                             >
                             -
                             </button>
-                            <span className="flex-1  rounded-lg text-center p-2">0</span>
+                            <span className="flex-1  rounded-lg text-center p-2">{bedroom}</span>
                             <button
                             type="button"
+                                   onClick={() =>setBedroom(bedroom + 1)}
                             className="flex-1  p-2  rounded-lg border border-gray-300"
                             >
                             +
@@ -93,12 +122,18 @@ const FilterForm: FC<FilterFormProp> = ({ setShowFilterCard }) => {
 
                         <div className="my-4 mb-8">
                             <p className="font-bold text-grey-light text-sm">House Type</p>
-                            <div className="flex mt-2 space-x-2 text-xs text-grey-light items-center">
-                                <span
-                                    className={`p-4 border border-gray-300 rounded-lg ${filterQuery.houseType === 'Self contain' ? 'bg-green-200' : ''}`}
-                                    onClick={() => handleHouseTypeChange('Self contain')}
+                            <div className="flex  mt-2 w-full space-x-2  text-xs text-grey-light items-center">
+                            <span
+                                    className={`p-4 border border-gray-300 rounded-lg ${filterQuery.houseType === 'Duplex' ? 'bg-green-200' : ''}`}
+                                    onClick={() => handleHouseTypeChange('Duplex')}
                                 >
-                                    Self contain
+                                   Duplex
+                                </span>
+                                <span
+                                    className={`p-4 border border-gray-300 rounded-lg ${filterQuery.houseType === 'Self Contain' ? 'bg-green-200' : ''}`}
+                                    onClick={() => handleHouseTypeChange('Self Contain')}
+                                >
+                                    Self Contain
                                 </span>
                                 <span
                                     className={`p-4 border border-gray-300 rounded-lg ${filterQuery.houseType === 'Flat' ? 'bg-green-200' : ''}`}
@@ -107,23 +142,25 @@ const FilterForm: FC<FilterFormProp> = ({ setShowFilterCard }) => {
                                     Flat
                                 </span>
                                 <span
-                                    className={`p-4 border border-gray-300 rounded-lg ${filterQuery.houseType === 'One Room' ? 'bg-green-200' : ''}`}
-                                    onClick={() => handleHouseTypeChange('One Room')}
+                                    className={`p-4 border border-gray-300 rounded-lg ${filterQuery.houseType === 'Single Room' ? 'bg-green-200' : ''}`}
+                                    onClick={() => handleHouseTypeChange('Single Room')}
                                 >
-                                    One Room
+                                    Single Room
                                 </span>
                             </div>
                         </div>
                     </div>
 
                     <div className="flex h-[15rem] items-end space-x-8 text-xs">
-                        <button type="submit" className="p-2 py-4 bg-green-700 text-white w-full rounded-lg">
+                        <button type="submit" className="p-2 py-4 mb-12 bg-green-700 text-white w-full rounded-lg">
                             Show
                         </button>
                     </div>
                 </form>
             </div>
         </div>
+        }
+        </>
     );
 }
 

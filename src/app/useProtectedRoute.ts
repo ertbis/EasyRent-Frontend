@@ -10,12 +10,12 @@ export const useProtectedRoute = (allowedRoles: string[]) => {
 
   useEffect(() => {
     if (!token) {
-      router.push('/login');
+      window.location.replace("/login");
       return;
     }
 
     if (!allowedRoles.includes(user.role)) {
-      router.push('/unauthorized'); // You can customize this route or behavior
+      window.location.replace("/unauthorized");
     }
   }, [user, allowedRoles, router]);
 

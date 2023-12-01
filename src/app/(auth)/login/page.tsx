@@ -57,19 +57,21 @@ const Login = () => {
     }
      const res = await dispatch(setLoggedInUser(userData)); 
      console.log(res)
-
-    if(resp.data.role == "landlord"){
-      window.location.replace("/ldashboard");
-    }else{
-      window.location.replace("/");
-    }
+   if(!(resp.data.user.emailVerified)){
+    window.location.replace("/verifyotp");
+   }else {
+     if(resp.data.role == "landlord"){
+       window.location.replace("/ldashboard");
+     }else{
+       window.location.replace("/");
+     }
+   }
       
     } catch (e : any) {
       setErrorModal(true)
        console.log(e)
        setLoading(false)
        setError( e?.response?.data?.message || "Try Again");
-       console.log(error)   
     }
   };
 
@@ -150,22 +152,22 @@ const Login = () => {
       <div className="flex   flex-col md:flex-row justify-center mt-2">
         <button onClick={() => {
           setErrorModal(true)
-          setError('Google OAUTH not avalable - log in with email')}}  className="flex justify-center bg-transparent w-full md:w-[5rem] my-2 md:my-0 md:mx-2  p-3 md:p-2 border border-green-700 border-solid rounded-lg">
+          setError('Google OAUTH not avalable - log in with email')}}  className="flex justify-center bg-transparent w-full md:w-[5rem] my-2 md:my-0 md:mx-2  p-3 px-8 md:p-2 border border-green-700 border-solid rounded-lg">
           <FcGoogle size={27}  />
-          <p className='md:hidden text-grey-light ml-4' >Continue With Google</p>
+          <p className='md:hidden  text-left text-grey-light ml-4 flex-1' >Continue With Google</p>
         </button>
         <button onClick={() => {
           setErrorModal(true)
-          setError('Apple OAUTH not avalable - log in with email')}} className="flex justify-center bg-transparent w-full md:w-[5rem] my-2 md:my-0 md:mx-2  p-3 md:p-2 border border-green-700 border-solid rounded-lg">
+          setError('Apple OAUTH not avalable - log in with email')}} className="flex justify-center bg-transparent w-full md:w-[5rem] my-2 md:my-0 md:mx-2  p-3 px-8  md:p-2 border border-green-700 border-solid rounded-lg">
           <FaApple size={27} className='text-black'/>
-          <p className='md:hidden text-grey-light ml-4' >Continue With Apple</p>
+          <p className='md:hidden text-left text-grey-light ml-4 flex-1' >Continue With Apple</p>
 
         </button>
         <button onClick={() => {
           setErrorModal(true)
-          setError('Facebook OAUTH not avalable - log in with email')}}  className="flex  justify-center bg-transparent w-full md:w-[5rem] my-2 md:my-0 md:mx-2 p-3 md:p-2 border border-green-700 border-solid rounded-lg">
+          setError('Facebook OAUTH not avalable - log in with email')}}  className="flex  justify-center bg-transparent w-full md:w-[5rem] my-2 md:my-0 md:mx-2 p-3 px-8  md:p-2 border border-green-700 border-solid rounded-lg">
           <FaFacebook size={27} className='text-[#1877F2]' />
-          <p className='md:hidden text-grey-light ml-4' >Continue With Facebook</p>
+          <p className='md:hidden text-left text-grey-light ml-4 flex-1' >Continue With Facebook</p>
 
         </button>
       </div>

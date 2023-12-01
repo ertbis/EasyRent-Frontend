@@ -42,7 +42,7 @@ interface PreviewProps {
            console.log(houseData)
            const resp = await updateProperty({houseData, _id});
            console.log(resp)
-           router.push('/ldashboard');
+           window.location.replace("/ldashboard");
         
        } catch (error: any) {
         setErrorModal(true)

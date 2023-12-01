@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import SideBar from "./Sidebar"
+import HeaderDashBoard from "./Header"
 
 
 
@@ -13,8 +14,8 @@ const Admin = () => {
         <div className="flex">
            <SideBar  setTab={setTab} tab={tab}/>
 
-            <div className="">
-
+            <div className="flex-1 ">
+              <HeaderDashBoard />
             </div>
         </div>
     )

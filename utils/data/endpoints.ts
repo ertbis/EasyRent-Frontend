@@ -92,6 +92,14 @@ export const getSingleProperty = async (param : any)  => {
     return resp
 } 
 
+export const getFilterProperty = async (param : any)  => {
+    const resp = await http.post(`/apis/properties/filter`, param)
+    return resp
+} 
+
+
+
+
 
 //notification
 

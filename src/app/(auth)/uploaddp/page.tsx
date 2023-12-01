@@ -50,9 +50,17 @@ const submitDP = async (e: any)=>{
        const resp = await UploadDP(image) ;
        console.log(resp) 
        if(cookUser?.name == "No name" ){
-        router.push('/paymentacct');
+        if(cookUser?.role == "landlord"){
+          router.push('/paymentacct');
+        }else {
+          router.push('/infoform');
+        }
        }else {
-         router.push('/ldashboard');
+          if(cookUser?.role == "landlord"){
+            router.push('/ldashboard');
+          }else {
+            router.push('/');
+          }
        }
       //  dispatch(setProfilePicture(resp.data.user.profilePicture))
      } catch (error: any) {

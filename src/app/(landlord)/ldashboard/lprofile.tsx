@@ -66,7 +66,7 @@ const Lprofile = ({ user }: any) => {
       <div data-aos="fade-right"  className="mt-1 mx-4 w-[90%]">
         <h1 className="text-blue-800 mb-3 text-[1.3rem] font-bold ">Account Settings</h1>
      
-        <a href='/infoform' className="mx-2 flex py-3 border-b border-gray-300 items-center text-gray-600" >
+        <a href='/editinfo' className="mx-2 flex py-3 border-b border-gray-300 items-center text-gray-600" >
         <HiOutlineUser size={27} className="" />
         <p className="flex-1 text-[1rem] ml-4">Personal Information</p>
         <MdKeyboardArrowRight size={27} className="" />

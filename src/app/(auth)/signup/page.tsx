@@ -122,7 +122,7 @@ const SignUp = () => {
     <div className="relative bg-cbover" style={{ backgroundImage: 'url("/formbg.png")' }}>
       <DesktopHeader />
       <div className="flex items-center justify-end min-h-screen w-full ">
-      <div className="pt-16 md:pt-4 w-full m-0 h-screen md:h-full  md:w-[45%]  lg:py-12  lg:w-[38%] px-8 md:py-4 bg-white md:rounded-xl shadow-lg md:py-2 md:pb-6 md:mr-16 md:mt-12  text-grey-light">
+      <div className="pt-16 md:pt-4 w-full m-0 min-h-screen md:h-full  md:w-[45%]  lg:py-12  lg:w-[38%] pb-6 px-8 md:py-4 bg-white md:rounded-xl shadow-lg md:py-2 md:pb-6 md:mr-16 md:mt-12  text-grey-light">
           {loading ? (
             <Loading />
           ) : (
@@ -216,19 +216,27 @@ const SignUp = () => {
                 <hr className="w-full border-grey-light" />
               </div>
               <div className="flex   flex-col md:flex-row justify-center mt-2">
-                <button className="flex justify-center bg-transparent w-full md:w-[5rem] my-2 md:my-0 md:mx-2  p-3 md:p-2 border border-green-700 border-solid rounded-lg">
-                  <FcGoogle size={27} />
-                  <p className="md:hidden text-grey-light ml-4">Continue With Google</p>
-                </button>
-                <button className="flex justify-center bg-transparent w-full md:w-[5rem] my-2 md:my-0 md:mx-2  p-3 md:p-2 border border-green-700 border-solid rounded-lg">
-                  <FaApple size={27} className="text-black" />
-                  <p className="md:hidden text-grey-light ml-4">Continue With Apple</p>
-                </button>
-                <button className="flex justify-center bg-transparent w-full md:w-[5rem] my-2 md:my-0 md:mx-2 p-3 md:p-2 border border-green-700 border-solid rounded-lg">
-                  <FaFacebook size={27} className="text-[#1877F2]" />
-                  <p className="md:hidden text-grey-light ml-4">Continue With Facebook</p>
-                </button>
-              </div>
+              <button onClick={() => {
+                setErrorModal(true)
+                setError('Google OAUTH not avalable - log in with email')}}  className="flex justify-center bg-transparent w-full md:w-[5rem] my-2 md:my-0 md:mx-2  p-3 px-6 md:p-2 border border-green-700 border-solid rounded-lg">
+                <FcGoogle size={27}  />
+                <p className='md:hidden  text-left text-grey-light ml-4 flex-1' >Continue With Google</p>
+              </button>
+              <button onClick={() => {
+                setErrorModal(true)
+                setError('Apple OAUTH not avalable - log in with email')}} className="flex justify-center bg-transparent w-full md:w-[5rem] my-2 md:my-0 md:mx-2  p-3 px-6  md:p-2 border border-green-700 border-solid rounded-lg">
+                <FaApple size={27} className='text-black'/>
+                <p className='md:hidden text-left text-grey-light ml-4 flex-1' >Continue With Apple</p>
+
+              </button>
+              <button onClick={() => {
+                setErrorModal(true)
+                setError('Facebook OAUTH not avalable - log in with email')}}  className="flex  justify-center bg-transparent w-full md:w-[5rem] my-2 md:my-0 md:mx-2 p-3 px-6  md:p-2 border border-green-700 border-solid rounded-lg">
+                <FaFacebook size={27} className='text-[#1877F2]' />
+                <p className='md:hidden text-left text-grey-light ml-4 flex-1' >Continue With Facebook</p>
+
+              </button>
+      </div>
               <div className="mt-3  w-full">
                 <p className="text-center  text-grey-light text-sm">
                   Already have an account?

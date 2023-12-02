@@ -82,8 +82,8 @@ const LandLordDashboard = () => {
             <>
   <div  className='flex justify-between h-[11rem] col-span-2 items-end w-[100%] bg-[#17A2B8]  px-[1.4rem] py-[2rem]  rounded-b-[0.6rem] ' >
              <div className='flex-1 w-full '>
-                <h1 className='  text-[1.25rem] text-[#F5FEFF] mb-3' > Good Morning</h1>
-              <h2 className="text-white w-full text-[1.5rem] font-bold mt-4 ">{user ? initial + " " + user.lastName : cookUser.name}</h2>
+                <h1 className='  text-[1rem] text-[#F5FEFF] mb-2' > Good Morning</h1>
+              <h2 className="text-white w-full text-[1.5rem] font-bold mt-1">{user ? initial + " " + user.lastName : cookUser.name}</h2>
               </div> 
               <div  onClick={() => setTab("notification")}  className=" h-full flex items-center animate-wiggle">
               <NotificationIcon color="#F5FEFF" width='18' height='23'/>
@@ -109,7 +109,7 @@ const LandLordDashboard = () => {
         
                <div className="mt-4"  >
                   <LandlordHousesComponent houses={houses}/>
-                  <div   className='p-4 overflow-y-scroll ' >
+                  <div   className='p-4 overflow-y-scroll mb-12' >
                         {houses.map((data :any, index:any) => {
                               return (
                                  <MobileFeaturedCard  key={index} house={data} />

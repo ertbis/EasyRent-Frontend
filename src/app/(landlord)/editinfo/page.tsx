@@ -102,7 +102,7 @@ const EditPersonalInfoForm: React.FC = () => {
                 <select
                   value={myDetails?.gender || ''}
                   disabled // Make the select field read-only
-                  className="mt-1 p-2 text-gray-500 bg-white rounded-md w-full"
+                  className="mt-1  text-gray-500 bg-white rounded-md w-full"
                 >
                   <option value="">Gender</option>
                   {['Male', 'Female', 'Other'].map((option) => (

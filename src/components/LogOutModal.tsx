@@ -48,7 +48,7 @@ window.location.replace("/");
                 <div className="w-[90%] z-[1200] mx-auto rounded-t-[1.25rem] bg-[#E4E4E4] mt-[-0.8rem] h-[0.8rem]"></div>
                 <div className="w-[20%] font-bold h-[0.25rem] my-3 rounded-lg mx-auto bg-[#D9D9D9] "></div>
                     <div className="flex flex-col justify-center items-center">
-                        <p className="p-4 text-[1.25rem] w-[80%] rounded-[0.9375rem] font-semiBold text-[#343A40]">Are you sure you want to logout?</p>
+                        <p className="p-4 text-[1.1rem] w-[80%] rounded-[0.9375rem] font-semiBold text-[#343A40]">Are you sure you want to logout?</p>
                        <div className="flex gap-[1rem]">
                           <button onClick={()=> HandleClick()} className="bg-[#1BB81B] py-[1.1rem] px-[3.5rem] text-white rounded-[0.7rem]">Yes</button>
                           <button onClick={() => setOpenEdit(false)} className="py-[1.1rem] text-[#343A40] px-[3.5rem] border border-[#1BB81B] rounded-[0.7rem]">No</button>

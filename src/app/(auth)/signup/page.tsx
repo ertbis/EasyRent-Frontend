@@ -45,6 +45,7 @@ const SignUp = () => {
     try {
       const resp = await createUser(inputData);
       setToken(resp.data.accessToken)
+      localStorage.setItem('ertotptime', resp.data.otptime);
       setUser({email :inputData.email, role : resp.data.role ,
         name:resp.data.user.lastName || "No name", 
         emailVerified:resp.data.user.emailVerified, })

@@ -44,34 +44,34 @@ const Analytics = () => {
                     <p className="">Filter</p>
                 </div>
             </div>
-            <div className="flex gap-x-[1.2rem] gap-y-[1.2rem]  flex-wrap w-full">
-            <div className="bg-[#fff] border border-[rgba(0, 0, 0, 0.20);] p-[1rem] w-[17rem]">
-                    <p className="text-[1rem] ">Profit</p>
-                    <p className="text-[1.7rem] text-bold text-[#63ABFF]">N500M</p>
-                </div>
+            <div className="flex flex-wrap  gap-x-[2rem] gap-y-[1.2rem]   w-full">
                 <div className="bg-[#fff] border border-[rgba(0, 0, 0, 0.20);] p-[1rem] w-[17rem]">
                     <p className="text-[1rem] ">Profit</p>
-                    <p className="text-[1.7rem] text-bold text-[#63ABFF]">N500M</p>
+                    <p className="text-[1.7rem]  font-bold text-[#63ABFF]">N500M</p>
                 </div>
                 <div className="bg-[#fff] border border-[rgba(0, 0, 0, 0.20);] p-[1rem] w-[17rem]">
-                    <p className="text-[1rem] ">Profit</p>
-                    <p className="text-[1.7rem] text-bold text-[#63ABFF]">N500M</p>
+                    <p className="text-[1rem] ">Total Houses</p>
+                    <p className="text-[1.7rem] font-bold text-[#FFDB5E]">N50,000</p>
                 </div>
                 <div className="bg-[#fff] border border-[rgba(0, 0, 0, 0.20);] p-[1rem] w-[17rem]">
-                    <p className="text-[1rem] ">Profit</p>
-                    <p className="text-[1.7rem] text-bold text-[#63ABFF]">N500M</p>
+                    <p className="text-[1rem] ">Total LandLords</p>
+                    <p className="text-[1.7rem] font-bold text-[#72B0BA]">50,0000</p>
+                </div>
+                <div className="bg-[#fff] border border-[rgba(0, 0, 0, 0.20);] p-[1rem] w-[17rem]">
+                    <p className="text-[1rem] ">Total Users</p>
+                    <p className="text-[1.7rem] font-bold text-[#CA96FF]">50,0000</p>
+                </div>
+                <div className="bg-[#fff] border border-[rgba(0, 0, 0, 0.20)] p-[1rem] w-[17rem]">
+                    <p className="text-[1rem] ">Total Rent</p>
+                    <p className="text-[1.7rem] font-bold text-[#FF9C96]">20,0000</p>
+                </div>
+                <div className="bg-[#fff] border border-[rgba(0, 0, 0, 0.20)] p-[1rem] w-[17rem]">
+                    <p className="text-[1rem] ">Total Tour Request</p>
+                    <p className="text-[1.7rem] font-bold text-[#FF96E2]">20,000</p>
                 </div>
                 <div className="bg-[#fff] border border-[rgba(0, 0, 0, 0.20)] p-[1rem] w-[17rem]">
                     <p className="text-[1rem] ">Profit</p>
-                    <p className="text-[1.7rem] text-bold text-[#63ABFF]">N500M</p>
-                </div>
-                <div className="bg-[#fff] border border-[rgba(0, 0, 0, 0.20)] p-[1rem] w-[17rem]">
-                    <p className="text-[1rem] ">Profit</p>
-                    <p className="text-[1.7rem] text-bold text-[#63ABFF]">N500M</p>
-                </div>
-                <div className="bg-[#fff] border border-[rgba(0, 0, 0, 0.20)] p-[1rem] w-[17rem]">
-                    <p className="text-[1rem] ">Profit</p>
-                    <p className="text-[1.7rem] text-bold text-[#63ABFF]">N500M</p>
+                    <p className="text-[1.7rem] font-bold text-[#63ABFF]">N500M</p>
                 </div>
             </div>
 

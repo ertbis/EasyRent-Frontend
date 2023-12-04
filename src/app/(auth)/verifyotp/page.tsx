@@ -3,7 +3,7 @@
 import { useState, useRef, ChangeEvent, KeyboardEvent, RefObject, useEffect } from 'react';
 import DesktopHeader from '../../../components/DesktopHeader';
 import {BiTime} from "react-icons/bi"
-import { VerifyOTPCode } from '../../../../utils/data/endpoints';
+import { ResendOTPCode, VerifyOTPCode } from '../../../../utils/data/endpoints';
 import { getUser } from '../../../../utils/auth';
 import { useRouter } from 'next/navigation';
 import Loading from '@/components/Loading';
@@ -21,10 +21,68 @@ const VerifyOtp = () => {
   const [errorModal, setErrorModal] = useState<boolean>(false)
   const [cookUser, setCookUser] = useState<TokenUserType | null>(null)
   const userHook = useProtectedRoute(['landlord', 'student']);
+  const [home, setHome] = useState("")
+ const getOTPcreatedAt = ()=>{
+  // Get the value from localStorage
+    const storedValue = localStorage.getItem('ertotptime');
+
+    // Check if the value is not null or undefined
+    if (storedValue) {
+      // Convert the string to a Date object
+      const dateObject = new Date(storedValue);
+
+      return dateObject
+      // Check if the conversion was successful
+      if (!isNaN(dateObject.getTime())) {
+        console.log('Converted Date:', dateObject);
+      } else {
+        console.error('Invalid date format in localStorage');
+      }
+    } else {
+      return  null
+    }
+ }
+ const now: any = getOTPcreatedAt()
+  const calculateTimeLeft = () => {
+    let targetDate :any;
+    if(now){
+     targetDate =  new Date(now.getTime() + 60 * 60 * 1000)
+    }else{
+     targetDate = new Date()
+    }
+    const currentDate: any = new Date();
+    const difference: any = targetDate - currentDate;
+    if (difference > 0) {
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      return { days, hours, minutes, seconds };
+    }
+
+    // If the target date has passed
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    // Cleanup the interval on component unmount
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
       const cookieUser = getUser(); 
         setCookUser(cookieUser)
+        if(cookUser?.role == "landlord"){
+           setHome("/ldashboard")
+        }else{
+          setHome("/")
+        }
    }, [])
 
 
@@ -44,6 +102,7 @@ const VerifyOtp = () => {
       console.log(reqBody);
       const resp = await VerifyOTPCode(reqBody)
       console.log(resp)
+      localStorage.removeItem('ertotptime');
       router.push('/uploaddp');
 
     } catch (error: any) {
@@ -55,6 +114,20 @@ const VerifyOtp = () => {
 
 
   };
+
+
+  const resendOTP = async() => {
+    setLoading(true)
+    try {
+      const resp = await ResendOTPCode()
+      localStorage.setItem('ertotptime', resp.data.otptime);
+      setLoading(false)
+    } catch (error: any) {
+      setError( error?.response?.data?.message || "Try Again");
+      setLoading(false) 
+      setErrorModal(true)
+       console.log(error)    }
+  }
 
   const handleChange = (index: number, value: string) => {
     setOtp((prevOtp) => {
@@ -96,7 +169,7 @@ const VerifyOtp = () => {
        { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
 
        <div className=' text-grey-light flex  items-center  justify-between mb-2  w-full h-16  '>
-              <a href="/">
+            <a href={home}>
               <AiOutlineLeft size={25} className='text-green-700  '/>
             </a>
 
@@ -111,7 +184,7 @@ const VerifyOtp = () => {
                   <input
                     key={index}
                     ref={(el) => (otpInputs.current[index] = el)}
-                    type="text"
+                    type="number"
                     className="bg-gray-200 text-black outline-none rounded-md p-4 text-4xl w-full text-center"
                     maxLength={1}
                     value={otp[index] || ''}
@@ -127,9 +200,9 @@ const VerifyOtp = () => {
               <div>
 
                   <div className="bg-grey-light text-sm text-white flex items-center justify-center rounded-full mx-auto px-4 py-2 md:py-2 w-[35%] md:w-[25%]" >
-                    <BiTime size={20} /> <p>00:21</p>
+                    <BiTime size={20} /> <p>{timeLeft.minutes} : {timeLeft.seconds}</p>
                   </div>
-                  <p className='font-normal text-center text-sm  text-grey-light mb-3' >Didn't receive the OTP? <span className='text-green-700'> Resend</span></p>
+                  <p className='font-normal text-center text-sm  text-grey-light mb-3' >Didn't receive the OTP? <span onClick={()=> resendOTP()} className='text-green-700'> Resend</span></p>
 
                 <button
                   type="submit"

@@ -20,6 +20,10 @@ export const logOutUser = async ()  => {
     const resp = await http.get("/apis/users/logout" )
     return resp
 }
+export const ResendOTPCode = async ()  => {
+    const resp = await http.get("/apis/users/resendotp" )
+    return resp
+}
 export const VerifyOTPCode = async (param : any)  => {
     const resp = await http.post("/apis/users/verifyotp",  param )
     return resp

@@ -6,7 +6,7 @@ import { AiOutlineLeft } from 'react-icons/ai';
 import DesktopHeader from '../../../components/DesktopHeader';
 import Loading from '@/components/Loading';
 import ErrorModal from '@/components/ErrorModal';
-import { VerifyOTPCode, verifyEditOTPVerification } from '../../../../utils/data/endpoints';
+import { ResendOTPCode, VerifyOTPCode, verifyEditOTPVerification } from '../../../../utils/data/endpoints';
 import { getUser } from '../../../../utils/auth';
 import { useRouter } from 'next/navigation';
 import { TokenUserType } from '@/types/types';
@@ -27,9 +27,35 @@ const VerifyEditOTP = () => {
   }, []);
 
   // Countdown
+
+  const getOTPcreatedAt = ()=>{
+    // Get the value from localStorage
+      const storedValue = localStorage.getItem('erteditotptime');
+  
+      // Check if the value is not null or undefined
+      if (storedValue) {
+        // Convert the string to a Date object
+        const dateObject = new Date(storedValue);
+  
+        return dateObject
+        // Check if the conversion was successful
+        if (!isNaN(dateObject.getTime())) {
+          console.log('Converted Date:', dateObject);
+        } else {
+          console.error('Invalid date format in localStorage');
+        }
+      } else {
+        return  null
+     }
+   }
+   const now: any = getOTPcreatedAt()
   const calculateTimeLeft = () => {
-    const now = new Date();
-    const targetDate: any = new Date(now.getTime() + 60 * 60 * 1000);
+    let targetDate :any;
+    if(now){
+     targetDate =  new Date(now.getTime() + 60 * 60 * 1000)
+    }else{
+     targetDate = new Date()
+    }
     const currentDate: any = new Date();
     const difference: any = targetDate - currentDate;
     if (difference > 0) {
@@ -99,10 +125,24 @@ const VerifyEditOTP = () => {
     }
   };
 
+  
   const clearOtpInputs = () => {
     otpInputs.current.forEach((input) => (input!.value = ''));
   };
-
+  
+  const resendOTP = async() => {
+    setLoading(true)
+    try {
+      const resp = await ResendOTPCode()
+      localStorage.setItem('erteditotptime', resp.data.otptime);
+      setLoading(false)
+      location.reload()
+    } catch (error: any) {
+      setError( error?.response?.data?.message || "Try Again");
+      setLoading(false) 
+      setErrorModal(true)
+       console.log(error)    }
+  }
   return (
     <div className="relative bg-cover" style={{ backgroundImage: 'url("/formbg.png")' }}>
       <div className="flex items-center justify-end min-h-screen w-full">
@@ -114,7 +154,7 @@ const VerifyEditOTP = () => {
               {error && errorModal && <ErrorModal setErrorModal={setErrorModal} text={error} />}
 
               <div className="text-grey-light flex items-center justify-between mb-2 w-full h-16">
-                <a href="/">
+                <a href="/ldashboard">
                   <AiOutlineLeft size={25} className="text-green-700" />
                 </a>
                 <h2 className="text-blue-800 w-[70%] text-xl font-bold">Enter the code</h2>

@@ -21,6 +21,7 @@ import ErrorModal from "@/components/ErrorModal";
 import MobileFeaturedCardSkeleton from "@/components/common/MobileFeatureCardSkeleton";
 import { HomeIcon, NotificationIcon, UserIcon } from "@/assets/icons";
 import EditModal from "@/components/EditModal";
+import { useOTPConfirm } from "@/app/useOTPConfirm";
 
 
 const LandLordDashboard = () => {
@@ -34,6 +35,8 @@ const LandLordDashboard = () => {
    const [cookUser, setCookUser] = useState<any>({name:""})
    const [sectionLoading, setSectionLoading] = useState(true)
    const userHook = useProtectedRoute(['landlord']);
+   const otpConfirm = useOTPConfirm();
+
    const [error , setError]  = useState<string | null >(null)
    const [errorModal, setErrorModal] = useState<boolean>(false)
 

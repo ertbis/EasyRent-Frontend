@@ -61,6 +61,7 @@ const PaymentDetails: React.FC<any> = () => {
     try {
       const resp = await getEditOTPVerification();
       console.log(resp)
+      localStorage.setItem('erteditotptime', resp.data.otptime);
       if(resp){
         router.push("/verifyeditotp")
       }

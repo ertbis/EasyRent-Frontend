@@ -23,6 +23,7 @@ import { TokenUserType } from "@/types/types";
 import LandLordDashboard from "./(landlord)/ldashboard/page";
 import { getMyDetails } from "../../utils/data/endpoints";
 import Lprofile from "./(landlord)/ldashboard/lprofile";
+import { useOTPConfirm } from "./useOTPConfirm";
 
 export default function Home() {
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function Home() {
    const [logInModal, setLoginModal] = useState(false)
    const [cookUser, setCookUser] = useState<TokenUserType | null>(null)
    const [user, setUser] = useState<any>(null)
-
+   const otpconfirm  = useOTPConfirm()
 
    const fetchDetails = async()=> {
     try {

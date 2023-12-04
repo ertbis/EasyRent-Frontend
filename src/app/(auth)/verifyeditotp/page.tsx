@@ -1,5 +1,4 @@
 "use client"
-
 import React, { useState, useRef, ChangeEvent, KeyboardEvent, useEffect } from 'react';
 import { BiTime } from 'react-icons/bi';
 import { AiOutlineLeft } from 'react-icons/ai';
@@ -29,24 +28,32 @@ const VerifyEditOTP = () => {
   // Countdown
 
   const getOTPcreatedAt = ()=>{
-    // Get the value from localStorage
-      const storedValue = localStorage.getItem('erteditotptime');
-  
-      // Check if the value is not null or undefined
-      if (storedValue) {
-        // Convert the string to a Date object
-        const dateObject = new Date(storedValue);
-  
-        return dateObject
-        // Check if the conversion was successful
-        if (!isNaN(dateObject.getTime())) {
-          console.log('Converted Date:', dateObject);
-        } else {
-          console.error('Invalid date format in localStorage');
+    if (typeof localStorage !== 'undefined') {
+   
+          // Get the value from localStorage
+          const storedValue = localStorage.getItem('erteditotptime');
+        
+          // Check if the value is not null or undefined
+          if (storedValue) {
+            // Convert the string to a Date object
+            const dateObject = new Date(storedValue);
+
+            return dateObject
+            // Check if the conversion was successful
+            if (!isNaN(dateObject.getTime())) {
+              console.log('Converted Date:', dateObject);
+            } else {
+              console.error('Invalid date format in localStorage');
+            }
+          } else {
+            return  null
         }
-      } else {
-        return  null
-     }
+  
+    } else {
+      console.warn('localStorage is not available in this environment.');
+    
+    }
+ 
    }
    const now: any = getOTPcreatedAt()
   const calculateTimeLeft = () => {
@@ -92,17 +99,23 @@ const VerifyEditOTP = () => {
 
     const otpString = otp.join('');
     const reqBody = { otp: otpString };
+    if (typeof localStorage !== 'undefined') {
+   
+      try {
+        const resp = await verifyEditOTPVerification(reqBody);
+        console.log(resp);
+        router.push('/paymentacct');
+      } catch (error: any) {
+        setError(error?.response?.data?.message || 'Try Again');
+        setLoading(false);
+        setErrorModal(true);
+        console.log(error);
+            }
+      } else {
+        console.warn('localStorage is not available in this environment.');
 
-    try {
-      const resp = await verifyEditOTPVerification(reqBody);
-      console.log(resp);
-      router.push('/paymentacct');
-    } catch (error: any) {
-      setError(error?.response?.data?.message || 'Try Again');
-      setLoading(false);
-      setErrorModal(true);
-      console.log(error);
-    }
+      }
+   
   };
 
   const handleChange = (index: number, value: string) => {
@@ -132,16 +145,23 @@ const VerifyEditOTP = () => {
   
   const resendOTP = async() => {
     setLoading(true)
-    try {
-      const resp = await ResendOTPCode()
-      localStorage.setItem('erteditotptime', resp.data.otptime);
-      setLoading(false)
-      location.reload()
-    } catch (error: any) {
-      setError( error?.response?.data?.message || "Try Again");
-      setLoading(false) 
-      setErrorModal(true)
-       console.log(error)    }
+    if (typeof localStorage !== 'undefined') {
+   
+      try {
+        const resp = await ResendOTPCode()
+        localStorage.setItem('erteditotptime', resp.data.otptime);
+        setLoading(false)
+        location.reload()
+      } catch (error: any) {
+        setError( error?.response?.data?.message || "Try Again");
+        setLoading(false) 
+        setErrorModal(true)
+         console.log(error)    }
+      } else {
+        console.warn('localStorage is not available in this environment.');
+
+      }
+   
   }
   return (
     <div className="relative bg-cover" style={{ backgroundImage: 'url("/formbg.png")' }}>
@@ -170,7 +190,7 @@ const VerifyEditOTP = () => {
                     <input
                       key={index}
                       ref={(el) => (otpInputs.current[index] = el)}
-                      type="text"
+                      type="number"
                       className="bg-gray-200 text-black outline-none rounded-md p-4 text-4xl w-full text-center"
                       maxLength={1}
                       value={otp[index] || ''}
@@ -184,7 +204,7 @@ const VerifyEditOTP = () => {
                     <BiTime size={20} /> <p>{timeLeft.minutes} : {timeLeft.seconds}</p>
                   </div>
                   <p className="font-normal text-center text-sm text-grey-light mb-3">
-                    Didn't receive the OTP? <span className="text-green-700"> Resend</span>
+                    Didn't receive the OTP? <span onClick={()=> resendOTP()}  className="text-green-700"> Resend</span>
                   </p>
                   <button
                     type="submit"

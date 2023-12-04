@@ -23,7 +23,8 @@ const VerifyOtp = () => {
   const userHook = useProtectedRoute(['landlord', 'student']);
   const [home, setHome] = useState("")
  const getOTPcreatedAt = ()=>{
-  // Get the value from localStorage
+  if (typeof localStorage !== 'undefined') {
+    // Get the value from localStorage
     const storedValue = localStorage.getItem('ertotptime');
 
     // Check if the value is not null or undefined
@@ -41,6 +42,12 @@ const VerifyOtp = () => {
     } else {
       return  null
     }
+
+  } else {
+    console.warn('localStorage is not available in this environment.');
+  
+  }
+
  }
  const now: any = getOTPcreatedAt()
   const calculateTimeLeft = () => {
@@ -98,19 +105,25 @@ const VerifyOtp = () => {
     const reqBody = {
       otp : otpString
     }
-    try {
-      console.log(reqBody);
-      const resp = await VerifyOTPCode(reqBody)
-      console.log(resp)
-      localStorage.removeItem('ertotptime');
-      router.push('/uploaddp');
-
-    } catch (error: any) {
-      setError( error?.response?.data?.message || "Try Again");
-      setLoading(false) 
-      setErrorModal(true)
-       console.log(error)
+    if (typeof localStorage !== 'undefined') {
+      try {
+        console.log(reqBody);
+        const resp = await VerifyOTPCode(reqBody)
+        console.log(resp)
+        localStorage.removeItem('ertotptime');
+        router.push('/uploaddp');
+  
+      } catch (error: any) {
+        setError( error?.response?.data?.message || "Try Again");
+        setLoading(false) 
+        setErrorModal(true)
+         console.log(error)
+      }
+    } else {
+      console.warn('localStorage is not available in this environment.');
+    
     }
+   
 
 
   };
@@ -118,16 +131,24 @@ const VerifyOtp = () => {
 
   const resendOTP = async() => {
     setLoading(true)
-    try {
-      const resp = await ResendOTPCode()
-      localStorage.setItem('ertotptime', resp.data.otptime);
-      setLoading(false)
-    } catch (error: any) {
-      setError( error?.response?.data?.message || "Try Again");
-      setLoading(false) 
-      setErrorModal(true)
-       console.log(error)    }
+    if (typeof localStorage !== 'undefined') {
+      try {
+        const resp = await ResendOTPCode()
+        localStorage.setItem('ertotptime', resp.data.otptime);
+        setLoading(false)
+        location.reload()
+      } catch (error: any) {
+        setError( error?.response?.data?.message || "Try Again");
+        setLoading(false) 
+        setErrorModal(true)
+         console.log(error)    }
+    
+    } else {
+      console.warn('localStorage is not available in this environment.');
+    
+    }
   }
+   
 
   const handleChange = (index: number, value: string) => {
     setOtp((prevOtp) => {

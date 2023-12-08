@@ -4,7 +4,7 @@ import { useState, useRef, ChangeEvent, KeyboardEvent, RefObject, useEffect } fr
 import DesktopHeader from '../../../components/DesktopHeader';
 import {BiTime} from "react-icons/bi"
 import { ResendOTPCode, VerifyOTPCode } from '../../../../utils/data/endpoints';
-import { getUser } from '../../../../utils/auth';
+import { getUser, setUser } from '../../../../utils/auth';
 import { useRouter } from 'next/navigation';
 import Loading from '@/components/Loading';
 import { TokenUserType } from '@/types/types';
@@ -106,14 +106,20 @@ const VerifyOtp = () => {
       otp : otpString
     }
     if (typeof localStorage !== 'undefined') {
+
       try {
+
+      
+
         console.log(reqBody);
         const resp = await VerifyOTPCode(reqBody)
         console.log(resp)
         localStorage.removeItem('ertotptime');
+        const updatedCook = {...cookUser , emailVerified: true}
+        setUser(updatedCook)
         router.push('/uploaddp');
-  
-      } catch (error: any) {
+        
+      } catch (error: any) {  
         setError( error?.response?.data?.message || "Try Again");
         setLoading(false) 
         setErrorModal(true)

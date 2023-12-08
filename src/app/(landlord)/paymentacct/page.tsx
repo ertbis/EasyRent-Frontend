@@ -93,16 +93,16 @@ const Paymentinfo: React.FC<any> = () => {
               <div className="mb-4 bg-white p-4 border border-gray-400 rounded-lg">
                 <input
                   type="text"
-                  value={myDetails.bankDetails.bankName}
+                  value={myDetails?.bankDetails?.bankName}
                   placeholder="Bank Name"
-                  readOnly // Assuming this field should not be editable
+                  onChange={(e) => setMyDetails({ ...myDetails, bankDetails: { ...myDetails.bankDetails, bankName: e.target.value } })}
                   className="p-0 outline-none rounded-md w-full"
                 />
               </div>
               <div className="mb-4 bg-white p-4 border border-gray-400 rounded-lg">
                 <input
                   type="text"
-                  value={myDetails.bankDetails.acctNumber}
+                  value={myDetails?.bankDetails?.acctNumber}
                   placeholder="Account Number"
                   onChange={(e) => setMyDetails({ ...myDetails, bankDetails: { ...myDetails.bankDetails, acctNumber: e.target.value } })}
                   className="p-0 outline-none rounded-md w-full"
@@ -111,7 +111,7 @@ const Paymentinfo: React.FC<any> = () => {
               <div className="mb-4 bg-white p-4 border border-gray-400 rounded-lg">
                 <input
                   type="text"
-                  value={myDetails.bankDetails.acctName}
+                  value={myDetails?.bankDetails?.acctName}
                   placeholder="Account Name"
                   onChange={(e) => setMyDetails({ ...myDetails, bankDetails: { ...myDetails.bankDetails, acctName: e.target.value } })}
                   className="p-0 outline-none rounded-md w-full"
@@ -120,7 +120,7 @@ const Paymentinfo: React.FC<any> = () => {
             </div>
             <button
               type="submit"
-              className="bg-green-700 text-white mb-8 rounded-md px-4 py-4 md:py-2 w-full"
+              className="bg-green-700 text-white mb-16 rounded-md px-4 py-4 md:py-2 w-full"
             >
               Save
             </button>

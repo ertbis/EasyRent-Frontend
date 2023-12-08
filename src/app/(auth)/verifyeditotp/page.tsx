@@ -166,7 +166,7 @@ const VerifyEditOTP = () => {
   return (
     <div className="relative bg-cover" style={{ backgroundImage: 'url("/formbg.png")' }}>
       <div className="flex items-center justify-end min-h-screen w-full">
-        <div className="md:pt-0 w-full m-0 h-screen md:h-[78vh] md:w-[33%] px-4 py-4 bg-[#F5F4F8] md:rounded-xl shadow-lg md:mr-16 md:h-full text-grey-light">
+        <div className="md:pt-0 w-full m-0 h-screen md:h-[78vh] md:w-[33%] px-4 py-4 bg-[#F5F4F8] md:rounded-xl md:shadow-lg md:mr-16 md:h-full text-grey-light">
           {loading ? (
             <Loading />
           ) : (
@@ -208,7 +208,7 @@ const VerifyEditOTP = () => {
                   </p>
                   <button
                     type="submit"
-                    className="bg-green-700 text-white mb-8 rounded-md px-4 py-4 md:py-2 w-full"
+                    className="bg-green-700 text-white mb-12 rounded-md px-4 py-4 md:py-2 w-full"
                   >
                     Verify
                   </button>

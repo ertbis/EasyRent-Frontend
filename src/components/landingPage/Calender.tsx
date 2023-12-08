@@ -77,14 +77,14 @@ const CarouselDatePicker: React.FC<any> = ({setTourDetails, tourDetails }) => {
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <div className="mb-2 flex justify-end w-full">
-        <label className="relative">
+        <div className="relative text-[red] border w-6 border-[#808080] rounded-lg">
           <input
             type="date"
-            className="bg-green-light w-6 h-6 cursor-pointer"
+            className="  w-full h-full cursor-pointer  rounded-lg  text-[#fff] "
             ref={inputDateRef}
             onChange={handleInputDateChange}
           />
-        </label>
+        </div>
       </div>
       <div className="w-full">
         <Slider {...settings}>
@@ -92,7 +92,7 @@ const CarouselDatePicker: React.FC<any> = ({setTourDetails, tourDetails }) => {
             <div className="" key={date.getTime()}>
               <div
                 className={`h-24 w-22 m-1 border border-[2px]  ${
-                  selectedDate?.getDate() === date.getDate() ? ' text-black border-black' : 'text-gray-300 bg-transparent'
+                  selectedDate?.getDate() === date.getDate() ? ' text-gray-600 border-gray-700' : 'text-gray-400 bg-transparent'
                 }`}
                 onClick={() => handleBoxClick(date)}
               >

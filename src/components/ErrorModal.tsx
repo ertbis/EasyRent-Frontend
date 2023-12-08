@@ -17,8 +17,8 @@ const ErrorModal :FC<ErrorProps>  = ({setErrorModal, text}) => {
 
     return (
 
-        <div className="fixed top-0 left-0  z-[1000] flex items-center w-full h-full bg-white bg-opacity-70">
-    <div data-aos="zoom-in"  className="relative w-[90vw] mx-4 h-[10rem]  rounded-lg shadow bg-gray-100">
+        <div className=" fixed top-0 left-0  z-[1000] flex items-center w-full h-full bg-white bg-opacity-70">
+    <div data-aos="zoom-in"  className="relative w-[90vw] mx-4 h-[10rem] md:w-[35rem] md:h-[15rem] md:mx-auto rounded-lg shadow bg-gray-100">
         <div  className="z-[1500]  " onClick={() => setErrorModal(false)}>
         <FaTimes onClick={() => setErrorModal(false)}  size={30} className=" text-black absolute top-3 right-2.5" />
         </div>

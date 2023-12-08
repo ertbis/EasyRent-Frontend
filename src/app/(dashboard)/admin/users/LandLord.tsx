@@ -1,0 +1,92 @@
+import { FilterIcon } from "@/assets/icons"
+import { DeleteIcon, EditTableIcon } from "@/assets/icons1"
+import { FetchedUserType } from "@/types/types"
+import { FC } from "react"
+
+interface componentPropType {
+  landlords: FetchedUserType[] | null 
+}
+
+const AdminLandlordView:FC<componentPropType> = ({landlords}) => {
+
+    return(
+        <div className="bg-[#F8F9FB] text-[#343A40] p-[3rem]">
+        <div className="flex w-full justify-between mb-[3rem]">
+            <p className="text-[1.25rem] font-bold ">User-Landlord</p>
+            <div className="flex gap-x-[1rem] cursor-pointer p-[0.6rem] px-[1rem]  bg-[#fff] rounded-[1.25rem] border border-[rgba(0, 0, 0, 0.20)]">
+                <FilterIcon width="" height="" color=""/>
+                <p className="">Filter</p>
+            </div>
+        </div>
+        <div className="container mx-auto mt-8">
+  <table className="min-w-full border border-gray-300 text-[#343A40]">
+  
+    <thead>
+      <tr className="text-[#343A40]">
+        <th className="py-2 px-4 border border-gray-300 "><input type="checkbox" /></th>
+        <th className="py-2 font-medium px-4 border border-gray-300">S/N</th>
+        <th className="py-2 font-medium px-4 border border-gray-300">Name</th>
+        <th className="py-2  font-medium px-4 border border-gray-300">Phone Number</th>
+        <th className="py-2 font-medium px-4 border border-gray-300">Email</th>
+        <th className="py-2 font-medium px-4 border border-gray-300">Account Number</th>
+        <th className="py-2 font-medium px-4 border border-gray-300">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {/* Add your table rows here */}
+      {landlords  ?   
+        landlords.map((data, index) => {
+          return(
+            <tr  key={index}>
+                <td className="py-2 px-4 border border-gray-300">
+                  <input type="checkbox" />
+                </td>
+                <td className="py-2 px-4 border border-gray-300">{index + 1}</td>
+                <td className="py-2 px-4 border border-gray-300">{data?.firstName}  {data?.lastName}</td>
+                <td className="py-2 px-4 border border-gray-300">not available</td>
+                <td className="py-2 px-4 border border-gray-300">{data?.email}</td>
+                <td className="py-2 px-4 border border-gray-300">{data?.bankDetails?.acctNumber}</td>
+                <td className="py-2 px-4 border border-gray-300">
+                <div className="flex gap-x-[1rem]">
+                        <div className="">
+                            <EditTableIcon width="" height="" color="" />
+                        </div>
+                        <div className="">
+                            <DeleteIcon width="" height="" color="" />
+                        </div>
+                </div>
+                </td>
+              </tr>
+          )
+        })  :
+    
+          <tr>
+            <td className="py-2 px-4 border border-gray-300">
+              <input type="checkbox" />
+            </td>
+            <td className="py-2 px-4 border border-gray-300">1</td>
+            <td className="py-2 px-4 border border-gray-300">Damico</td>
+            <td className="py-2 px-4 border border-gray-300">08140711202</td>
+            <td className="py-2 px-4 border border-gray-300">3 avenue , Damico</td>
+            <td className="py-2 px-4 border border-gray-300">Free</td>
+            <td className="py-2 px-4 border border-gray-300">
+            <div className="flex gap-x-[1rem]">
+                    <div className="">
+                        <EditTableIcon width="" height="" color="" />
+                    </div>
+                    <div className="">
+                        <DeleteIcon width="" height="" color="" />
+                    </div>
+            </div>
+            </td>
+          </tr>
+    }
+    </tbody>
+  </table>
+</div>
+        
+    </div>
+    )
+}
+
+export default AdminLandlordView

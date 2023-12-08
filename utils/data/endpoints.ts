@@ -58,6 +58,10 @@ export const getMyDetails = async ()  => {
     const resp = await http.get("/apis/users/mydetails")
     return resp
 } 
+export const getAllUsers = async ()  => {
+    const resp = await http.get("/apis/users")
+    return resp
+} 
 
 
 

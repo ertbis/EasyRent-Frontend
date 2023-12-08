@@ -24,6 +24,8 @@ export interface UserType {
     };
 
 
+
+
 // export interface HouseType {
 //   apartment: string;
 //   images: string[];
@@ -57,4 +59,25 @@ export type TokenUserType = {
   role:string,
   emailVerified:boolean,
   name: string
+}
+
+export type FetchedUserType = {
+  admin: {
+    level: string | null
+  };
+  bankDetails: {
+     acctName: string,
+     acctNumber:number,
+     bankName : string
+  };
+  name: string;
+  role: string ;
+  email:string ;
+  firstName: string;
+  lastName: string;
+  emailVerified:boolean;
+  gender: string;
+  profilePicture: string | null
+  _id: any;
+
 }

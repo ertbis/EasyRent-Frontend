@@ -15,6 +15,8 @@ import ErrorModal from '@/components/ErrorModal';
 import { logInUser } from '../../../../../utils/data/endpoints';
 import { setToken, setUser } from '../../../../../utils/auth';
 import DesktopHeader from '@/components/DesktopHeader';
+import SectionLoading from '@/components/SectionLoading';
+import ALoading from '@/components/ALoading';
 
 
 
@@ -43,25 +45,19 @@ const AdminLogin = () => {
     try {
       const resp = await logInUser(inputData)
       console.log(resp)
+      
+      if(resp.data.role == "admin"){
       setToken(resp.data.accessToken)
       setUser({email :inputData.email, role : resp.data.role ,
          name:resp.data.user.lastName || "No name", 
          emailVerified:resp.data.user.emailVerified, })
-   
-    const userData = {
-      name : "",
-      email : inputData.email,
-      role : resp.data.role,
-      emailVerified:resp.data.user.emailVerified,
-      profilePicture : resp.data.user.profilePicture || null
-    }
-     const res = await dispatch(setLoggedInUser(userData)); 
-     console.log(res)
-
-    if(resp.data.role == "landlord"){
-      router.push('/ldashboard');
-    }else{
-      router.push('/');
+         window.location.replace("/admin");
+    }else {
+      setLoading(false)
+      console.log("Only Admin can Login through this Form")
+      setError("Only Admin can Login through this Form" )
+      setErrorModal(true)
+      return
     }
       
     } catch (e : any) {
@@ -88,9 +84,9 @@ const AdminLogin = () => {
 
       <DesktopHeader/>
     <div className="flex   items-center justify-center min-h-screen w-full ">
-    <div className="pt-16 md:p-14 w-full m-0 h-screen md:h-full  md:w-[45%]    lg:w-[38%] px-8 md:py-14 bg-white md:rounded-xl shadow-lg   md:mr-16 md:mt-12  text-grey-light">
+    <div className="relative border border-[red] pt-16 md:p-14 w-full m-0 h-screen md:h-full  md:w-[45%] md:min-h-[25rem]    lg:w-[38%] px-8 md:py-14 bg-white md:rounded-xl shadow-lg   md:mr-16 md:mt-12  text-grey-light">
     {loading ? (
-            <Loading />
+            <ALoading />
           ) : (
       <>
               { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}

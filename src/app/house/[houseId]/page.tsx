@@ -156,7 +156,7 @@ const HousePage :FC<any> = ({params}) => {
             </div>
               <p className=' text-sm my-2 font-bond'>{selectedHouse.apartment}</p>
          
-          <div className=' flex justify-between items-center bg-[#F5F4F8]  p-2 rounded-lg' >
+          <div className=' flex justify-start items-center bg-[#F5F4F8]  p-2 rounded-lg' >
             {selectedHouse.mainFeatures.light   &&
                     <div className="flex h-6 bg-white  mr-2  justify-center items-center rounded-xl p-[0.4rem] " >
                         <HiOutlineLightBulb  className='w-4 h-4 mr-[0.5rem]' />

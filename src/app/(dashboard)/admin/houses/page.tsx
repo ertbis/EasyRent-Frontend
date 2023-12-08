@@ -5,16 +5,18 @@ import SideBar from "../Sidebar"
 import HeaderDashBoard from "../Header"
 import Analytics from "../boards/Analytics"
 import AdminHousesView from "./AdminHousesView"
+import { useAdminProtect } from "@/app/useAdminProtect"
 
 
 
 
 
 const Admin = () => {
- const [tab , setTab] = useState("dashboard")
+    useAdminProtect()
+
     return (
         <div className="flex">
-           <SideBar  setTab={setTab} tab={tab}/>
+           <SideBar  tab="houses" />
 
             <div className="flex-1  bg-[#F8F9FB]">
              <HeaderDashBoard />

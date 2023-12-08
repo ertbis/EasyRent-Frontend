@@ -221,3 +221,18 @@ export function DeleteIcon(prop:PropType){
    )
 }
 
+
+export function DropLineIcon(prop:PropType){
+   return(
+      <svg xmlns="http://www.w3.org/2000/svg" 
+      width="30" 
+      height="12" 
+      viewBox="0 0 30 12" 
+      fill="none">
+      <path 
+      d="M0.499973 0.500235C0.499936 13.0004 26.0001 11.0003 29.4999 11.0004" 
+      stroke="#D6D8D9"/>
+    </svg>
+   )
+}
+

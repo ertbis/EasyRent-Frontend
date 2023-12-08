@@ -95,7 +95,7 @@ const PersonalInfoForm: React.FC = () => {
                 </select>
               </div>
             </div>
-            <button type="submit" className="bg-green-700 text-white rounded-md px-4 py-4 md:py-2 w-full">
+            <button type="submit" className="bg-green-700 text-white  mb-8 rounded-md px-4 py-4 md:py-2 w-full">
               Save
             </button>
           </form>

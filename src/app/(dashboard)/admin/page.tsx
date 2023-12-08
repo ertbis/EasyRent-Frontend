@@ -4,21 +4,22 @@ import { useState } from "react"
 import SideBar from "./Sidebar"
 import HeaderDashBoard from "./Header"
 import Analytics from "./boards/Analytics"
+import { useAdminProtect } from "@/app/useAdminProtect"
 
 
 
 
 
 const Admin = () => {
- const [tab , setTab] = useState("dashboard")
+  useAdminProtect()
     return (
         <div className="flex">
-           <SideBar  setTab={setTab} tab={tab}/>
+           <SideBar tab='dashboard'/>
 
             <div className="flex-1  bg-[#F8F9FB]">
               <HeaderDashBoard />
               <Analytics />
-            </div>
+            </div>, 
         </div>
     )
 }

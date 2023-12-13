@@ -81,7 +81,7 @@ const ChatScreen :FC<ScreenProps> = ({isTyping, writeMessage, message, chatMessa
         </div>
        
 
-        <div className= " h-[75vh] overflow-y-scroll flex-1" ref={chatContainerRef}>
+        <div className= " h-[75%] overflow-y-scroll flex-1" ref={chatContainerRef}>
                     {chatMessages && chatMessages.map((data: any, index: any) => {
                        
                        return(
@@ -98,7 +98,7 @@ const ChatScreen :FC<ScreenProps> = ({isTyping, writeMessage, message, chatMessa
 
                            {isTyping &&             
                               <div className="w-full flex   px-6 justify-end">
-                                  <p className="text-medium w-[5rem] h-8 text-gray-light">typing{text}</p>
+                                  <p className="text-medium w-[5rem] h-8 text-[#343A40] ">typing{text}</p>
                               </div>
                           }
                             

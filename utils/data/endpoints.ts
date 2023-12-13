@@ -4,9 +4,17 @@ import { signUpDetailsType } from "../../utils/types"
 
 
 
+// create user requst function
 
 export const createUser = async (param : signUpDetailsType)  => {
     const resp = await http.post("/apis/users", param )
+    return resp
+}
+
+
+// create admin request function
+export const createAdmin = async (param : any)  => {
+    const resp = await http.post("/apis/users/admin", param )
     return resp
 }
 
@@ -62,6 +70,7 @@ export const getAllUsers = async ()  => {
     const resp = await http.get("/apis/users")
     return resp
 } 
+
 
 
 
@@ -150,4 +159,31 @@ export const scheduleTourEP = async (param : any) => {
 export const makePayment = async( param: any ) => {
   const resp = await http.post("/apis/payments/", param);
   return resp
+}
+
+
+
+//chat routes
+export const createChats = async(  ) => {
+    const resp = await http.post("/apis/chats/"  );
+    return resp
+}
+
+export const getMyChats = async() => {
+    const resp = await http.get(`/apis/chats/`);
+    return resp
+}
+export const getChat = async( param: any ) => {
+    const resp = await http.get(`/apis/chats/find/${param}`);
+    return resp
+}
+
+export const createMessage = async( param: any ) => {
+    const resp = await http.post("/apis/messages/", param);
+    return resp
+}
+
+export const getChatMessages = async( param: string ) => {
+    const resp = await http.get(`/apis/messages/${param}`);
+    return resp
 }

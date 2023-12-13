@@ -113,7 +113,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
 
    const fetchbyLocationAndPopularity =async () => {
       const resp = await getAllProperty('d');
-      const resp1 = await getAllProperty('ma');
+      const resp1 = await getAllProperty('el');
       setPopularHouses(resp.data)
       setNearHouses(resp1.data)
    }

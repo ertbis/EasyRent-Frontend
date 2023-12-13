@@ -49,6 +49,16 @@ export interface  FavHouseListProps {
 }
 
 
+
+
+export interface SocketOnlineUser {
+  socketId : string,
+  userId : string
+}
+
+export type onlineUserType = SocketOnlineUser[];
+
+
 export type logInDetailsType = {
   email: string
   password: string,

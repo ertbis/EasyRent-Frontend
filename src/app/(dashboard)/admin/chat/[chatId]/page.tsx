@@ -1,30 +1,31 @@
 "use client"
 
 import { useState } from "react"
-import SideBar from "../Sidebar"
-import HeaderDashBoard from "../Header"
-import Analytics from "../boards/Analytics"
-import AdminHousesView from "./AdminHousesView"
+import SideBar from "../../Sidebar"
+import HeaderDashBoard from "../../Header"
 import { useAdminProtect } from "@/app/useAdminProtect"
+import ChatView from "../ChatView"
 
 
 
 
 
-const HousesAdmin = () => {
+const ChatsAdmin =({params} :any) => {
     useAdminProtect()
-
+     
     return (
         <div className="flex">
-           <SideBar  tab="houses" />
+           <SideBar  tab="message" />
 
             <div className="flex-1  bg-[#F8F9FB]">
              <HeaderDashBoard />
-             <AdminHousesView/>
+              <ChatView params={params}/>
+
+
              </div>
         </div>
     )
 }
 
 
-export default HousesAdmin
+export default ChatsAdmin

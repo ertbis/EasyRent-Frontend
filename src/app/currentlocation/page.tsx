@@ -11,6 +11,7 @@ import SectionLoading from '@/components/SectionLoading';
 import { FilterIcon } from '@/assets/icons';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { PrevIcon } from '@/assets/icons1';
+import MobileFeaturedCardSkeleton from '@/components/common/MobileFeatureCardSkeleton';
 
 
 const CurrentLocation :FC = () => {
@@ -56,7 +57,7 @@ return (
           <a href="/">
           <PrevIcon color="" width="" height=""/>
             </a>
-           <p className='text-[1.2rem] font-[700] text-blue-800'> Current Location</p>
+           <p className='text-[1.2rem] font-[700] text-blue-800'> Popular Location</p>
            <div className="mr-2 cursor-pointer  border-l pl-2 border-grey-light ml-2 ">
 
            <FilterIcon color="" width="" height=""/>
@@ -70,7 +71,14 @@ return (
 
             )
         })  : 
-           <SectionLoading/>
+        <div className="mt-2" >
+            <div   className='py-4 overflow-y-scroll ' >
+            <MobileFeaturedCardSkeleton/>
+            <MobileFeaturedCardSkeleton/>
+            <MobileFeaturedCardSkeleton/>
+            
+            </div>
+        </div>
         }
 
         </div>

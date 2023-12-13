@@ -12,7 +12,7 @@ const SideBar:FC<any> = ({tab, user, setUser}) => {
 
     return (
 
-        <div className="flex flex-col w-[20%] px-[2rem] p-6 h-screen border border-red">
+        <div className="hidden md:flex flex-col w-[20%] px-[2rem] p-6 h-screen border border-red">
 
             <div className='text-xl flex justify-start items-start h-[12%] w-full md:text-5xl font-sans font-bold text-green-700'>
                 <p>E<span  className=' text-blue-800'>R</span>T</p>
@@ -68,7 +68,7 @@ const SideBar:FC<any> = ({tab, user, setUser}) => {
                   }                 
  
 
-                <a  href="/admin" className={`flex cursor-pointer py-[1rem] px-4  mb-[0.5rem] rounded-lg ${tab === "message" ? "bg-[#1BB81B]" : "bg-[transparent]"}`}>
+                <a  href="/admin/chat/id" className={`flex cursor-pointer py-[1rem] px-4  mb-[0.5rem] rounded-lg ${tab === "message" ? "bg-[#1BB81B]" : "bg-[transparent]"}`}>
                  {tab === "message" ?               
                  <MessageActiveIcon  width="28" height="24" color='white'/>
                  : 

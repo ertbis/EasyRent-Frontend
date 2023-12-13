@@ -18,7 +18,7 @@ interface userDataType{
 }
 
 
-const Admin = () => {
+const UsersAdmin = () => {
     const [user , setUser] = useState("landlords")
     const [userData, setUserData]  = useState<userDataType >({students: null, landlords: null})
 
@@ -61,4 +61,4 @@ const Admin = () => {
 }
 
 
-export default Admin
+export default UsersAdmin

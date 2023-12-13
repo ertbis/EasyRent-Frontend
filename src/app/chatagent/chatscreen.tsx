@@ -54,7 +54,7 @@ const ChatScreen :FC<ScreenProps> = ({isTyping, writeMessage, message, chatMessa
 
 
     return ( 
-        <div className="relative  w-screen">
+        <div className="relative h-screen w-screen">
         <div className="bg-grey-light h-[6rem]  flex items-center  p-2 ">
              <a onClick={() => setScreen("first")}  className="flex-[0.2]">
                  <AiOutlineLeft size={25} className='text-white '/>
@@ -113,7 +113,7 @@ const ChatScreen :FC<ScreenProps> = ({isTyping, writeMessage, message, chatMessa
                type="text"
                placeholder="message"
                value={message}
-               className="outline-none flex-1 h-8 bg-transparent ml-2 "
+               className="outline-none text-[#343A40] flex-1 h-8 bg-transparent ml-2 "
                onChange={e  => writeMessage(e)}
 
            />

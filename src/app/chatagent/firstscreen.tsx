@@ -24,7 +24,7 @@ const FirstScreen :FC<ScreenProps> = ({sendMessage , currentChat}) => {
                  <textarea  
                  placeholder="Write a message"
                    onChange={e  => setMessage(e.target.value)}
-                  className="w-[90%] outline-none bg-[transparent] h-[60%]" ></textarea>
+                  className="w-[90%] text-[#343A40]  outline-none bg-[transparent] h-[60%]" ></textarea>
                 <div className="flex space-x-2 mx-2 ">
                     <p className="border border-green-700 p-1 text-[0.7rem] text-center text-green-700 rounded-lg">
                         I like to get more details

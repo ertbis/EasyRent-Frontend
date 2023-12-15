@@ -59,7 +59,7 @@ const ChatScreen :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message
     return ( 
         <div className="relative h-screen w-screen">
         <div className="bg-grey-light h-[6rem]  flex items-center  p-2 ">
-             <a onClick={() => setScreen("first")}  className="flex-[0.2]">
+             <a href="/" className="flex-[0.2]">
                  <AiOutlineLeft size={25} className='text-white '/>
              </a>
              <div className="flex flex-1 items-center" >

@@ -43,6 +43,15 @@ const ChatAgent = ({params} :any) => {
     },[sender])
      
 
+
+
+useEffect(()=> {
+  const isOnline =  onlineUsers?.some((user) => user?.userId == currentChat?.members[0]._id) 
+  if(!isOnline){
+     setIsTyping(false)
+  }
+}, [onlineUsers, currentChat ] )
+
     useEffect(()=> {
         if(socket === null) return
         socket.emit("addNewUser", sender?._id )

@@ -36,6 +36,13 @@ const ChatView = ({params} : any) => {
 
 
 
+useEffect(()=> {
+    const isOnline =  onlineUsers?.some((user) => user?.userId == currentChat?.members[0]._id) 
+    if(!isOnline){
+       setIsTyping(false)
+    }
+}, [onlineUsers, currentChat ] )
+
 
   useEffect(()=> {
     const newSocket = io("https://easyrent-44an.onrender.com/")  

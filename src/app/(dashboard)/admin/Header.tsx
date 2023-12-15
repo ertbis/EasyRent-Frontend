@@ -2,11 +2,29 @@ import { NotificationIcon, SearchIcon } from "@/assets/icons"
 import { DropDownIcon, MessageActiveIcon } from "@/assets/icons1"
 import { AnyAaaaRecord } from "dns"
 import AddAdminForm from "./AddAdminForm"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { getMyDetails } from "../../../../utils/data/endpoints"
 
 const HeaderDashBoard = () => {
    const [showCreateAdmin, setShowCreateAdmin] = useState(false)
-    return (
+   const [admin, setAdmin] = useState<any>(null)
+   const fetchAdminDetails = async () => {
+    try {
+       
+        const mydetails  = await getMyDetails() 
+        setAdmin(mydetails.data)
+        
+    } catch (e : any) {
+        console.log(e)
+       
+    }
+}
+
+useEffect(()=> {
+  fetchAdminDetails()
+}, [])
+
+   return (
        <div className="relative flex px-[1rem] md:px-[2rem] border border-[ rgba(52, 58, 64, 0.05)] justify-between items-center h-[6rem]">
           <div className='hidden bg-[white] flex-[1] w-full text-[#BDB8B8] md:flex justify-center items-center border border-[rgba(0, 0, 0, 0.20)] rounded-[1.25rem] px-[2.3rem] h-[4.3rem]  '>
           <SearchIcon  color="#BDB8B8" width="20" height="20"/>
@@ -31,8 +49,8 @@ const HeaderDashBoard = () => {
               <MessageActiveIcon  width="28" height="24" color='#343A40'/>
             </div>
             <div  className=" flex items-center justify-end">
-               <div className='mr-2 w-[2.9rem] h-[2.9rem] rounded-full bg-cover bg-center' style={{ backgroundImage: `url("/profiledp.png")` }}></div>
-               <p className=" hidden md:block mr-2 text-[1.25rem] ">Afolabi David</p>
+               <div className='mr-2 w-[2.9rem] h-[2.9rem] rounded-full bg-cover bg-center' style={{ backgroundImage: `url("/adminavatar.png")` }}></div>
+               <p className=" hidden md:block mr-2 text-[1.25rem] ">{admin?.firstName}</p>
                <DropDownIcon width="" height="" color=""/>
             </div>
         </div>

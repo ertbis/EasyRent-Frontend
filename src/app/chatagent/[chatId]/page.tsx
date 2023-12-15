@@ -27,6 +27,7 @@ const ChatAgent = ({params} :any) => {
     const [chatMessages, setChatMessages] = useState<any | null>(null)
     const [isTyping, setIsTyping] = useState<any>(false)
     const [message, setMessage] = useState<string>('')
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
 
    
@@ -162,7 +163,8 @@ const writeMessage =(e :any) => {
 
 
     const sendMessage = async (param: string) => {
-        try {
+        setIsLoading(true); 
+      try {
             const data ={
               text: param,
               chatId: params.chatId
@@ -173,15 +175,18 @@ const writeMessage =(e :any) => {
             setNewMessage(resp.data.data)
             setMessage("")
             setChatMessages((prev : any) => [...prev, resp.data.data])
+            setIsLoading(false); 
             setScreen("chat")
+
         } catch (error) {
-            console.log(error)
+            console.log(error)             
+            setIsLoading(false); 
         }
     }
     return (  
         <>
-       {screen ==="first"  && <FirstScreen currentChat={currentChat} sendMessage={sendMessage} />}
-       {screen ==="chat"  && <ChatScreen
+       {screen ==="first"  && <FirstScreen isLoading={isLoading} currentChat={currentChat} sendMessage={sendMessage} />}
+       {screen ==="chat"  && <ChatScreen  isLoading={isLoading}
        chatMessages={chatMessages}
        message={message}  writeMessage={writeMessage}
          onlineUsers={onlineUsers}  isTyping={isTyping}

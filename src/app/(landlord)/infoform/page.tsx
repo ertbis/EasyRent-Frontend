@@ -13,7 +13,7 @@ import { useProtectedRoute } from '@/app/useProtectedRoute';
 const PersonalInfoForm: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const userHook = useProtectedRoute(['landlord', 'student']);
+  // const userHook = useProtectedRoute(['landlord', 'student']);
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');

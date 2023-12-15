@@ -1,4 +1,4 @@
-import { SearchIcon } from "@/assets/icons"
+import { SearchIcon, SpinIcon } from "@/assets/icons"
 import { LinkIcon, OnlineTickIcon, PhoneIcon, SendMessageIcon } from "@/assets/icons1"
 import { useEffect, useRef, useState } from "react"
 import { createMessage, getChat, getChatMessages, getMyChats, getMyDetails } from "../../../../../utils/data/endpoints"
@@ -24,6 +24,7 @@ const ChatView = ({params} : any) => {
   const [newMessage, setNewMessage] = useState<any>("")
   const chatContainerRef = useRef<HTMLDivElement | null>(null); 
   const [isTyping, setIsTyping] = useState<any>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
 
   useEffect(() => {
@@ -159,6 +160,7 @@ const writeMessage =(e :any) => {
 
 
 const sendMessage = async (param: string) => {
+  setIsLoading(true)
     try {
         const data ={
           text: param,
@@ -169,8 +171,11 @@ const sendMessage = async (param: string) => {
      
         setNewMessage(resp.data.data)
         setChatMessages((prev : any) => [...prev, resp.data.data])
-    } catch (error) {
+        setIsLoading(false)
+
+      } catch (error) {
         console.log(error)
+        setIsLoading(false)
     }
 
     
@@ -227,7 +232,7 @@ useEffect(() => {
                         <a href={`/admin/chat/${data._id}`} className="flex cursor-pointer rounded-xl bg-[#fff] mb-4 gap-[2rem] px-6 justify-between items-center h-[4.5625rem]">
                                 <div className="relative h-[3.25rem] w-[3.25rem] rounded-full bg-cover bg-center" style={{ backgroundImage: `url(${data.members[0]?.profilePicture ? data.members[0]?.profilePicture : "/profiledp.png"})` }}>
                                 <div className="absolute right-[20%] top-[0]">
-                                   { onlineUsers?.some((user) => user?.userId == currentChat?.members[0]._id) ? 
+                                   { onlineUsers?.some((user) => user?.userId == data?.members[0]._id) ? 
                                     <OnlineTickIcon width="" height="" color="#1BB81B" />
                                     :
                                     <OnlineTickIcon width="" height="" color="" />
@@ -238,7 +243,7 @@ useEffect(() => {
                                 <div className="flex-1 text-[#343A40]">
                                     <p className="font-semiBold text-[1.0625rem]">{data.members[0].firstName}  {data.members[0].lastName}</p>
                                     <p className="text-[0.625rem]" >
-                                    { onlineUsers?.some((user) => user?.userId == currentChat?.members[0]._id) ? "Online" : "Offline"   }
+                                    { onlineUsers?.some((user) => user?.userId == data?.members[0]._id) ? "Online" : "Offline"   }
                                     </p>
                                 </div>
                                 <div className="text-[0.75rem]">
@@ -311,6 +316,17 @@ useEffect(() => {
                                     onChange={e  => writeMessage(e)}
 
                                     />
+
+                        {isLoading ?
+                                      <div 
+                                      className=" flex items-center text-[#fff] justify-center p-1 h-[3rem] w-[3rem] rounded-full bg-green-700">
+                                            <span className="">
+                                                <SpinIcon width="" height="" color=""/>
+                                              </span>
+                                      </div>
+                            
+
+                                      :
                                     <div       onClick={() => {
                                                     sendMessage(message)
                                                     setMessage("")
@@ -319,7 +335,7 @@ useEffect(() => {
                                     <SendMessageIcon width="" height="" 
                                     color="" />
                                     </div>
-
+                          }
                                 </div>
 
                           </div>

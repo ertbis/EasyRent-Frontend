@@ -5,6 +5,7 @@ import { FiPhone } from "react-icons/fi";
 import { MdOutlineSend } from "react-icons/md";
 import { getChat, getChatMessages, getMyDetails } from "../../../utils/data/endpoints";
 import { onlineUserType } from "@/types/types";
+import { SpinIcon } from "@/assets/icons";
 
 interface ScreenProps {
     sendMessage: any,
@@ -17,9 +18,11 @@ interface ScreenProps {
     message: any,
     writeMessage: any,
     isTyping: any,
+    isLoading: boolean,
+
 } 
 
-const ChatScreen :FC<ScreenProps> = ({isTyping, writeMessage, message, chatMessages, onlineUsers, sender, chatId, sendMessage, setScreen, currentChat}) => {   
+const ChatScreen :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message, chatMessages, onlineUsers, sender, chatId, sendMessage, setScreen, currentChat}) => {   
     const chatContainerRef = useRef<HTMLDivElement | null>(null); 
 
   useEffect(() => {
@@ -64,10 +67,10 @@ const ChatScreen :FC<ScreenProps> = ({isTyping, writeMessage, message, chatMessa
                      <div className={`h-2 w-2  rounded-full absolute right-[16%] top-[0%]  
                       ${                   onlineUsers?.some((user) => user?.userId == currentChat?.members[0]._id) ? "bg-green-700" : "bg-black"   }
                      `}></div>
-                     <img src="/profiledp.png" className="w-full h-full rounded-full"/>
+                     <img src="/adminavatar.png" className="w-full h-full rounded-full"/>
                  </div>
                  <div className="text-white ml-2"  >
-                     <h1 className="text-[1.1rem] font-semiBold">{currentChat?.members[0].email}</h1>
+                     <h1 className="text-[1.1rem] font-semiBold">{currentChat?.members[0].firstName}</h1>
                      <p className="text-xs">{
                      onlineUsers?.some((user) => user?.userId == currentChat?.members[0]._id) ? "Online" : "Offline"   }</p>
                  </div>
@@ -86,7 +89,7 @@ const ChatScreen :FC<ScreenProps> = ({isTyping, writeMessage, message, chatMessa
                        
                        return(
                         <div  key={index}  className={`w-full flex   px-6 ${data?.senderId == sender?._id ? "justify-end" : "justify-start"}`}>
-                            <div className={` md:w-[20%] my-3 min-h-[4rem] rounded-lg p-4  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] " : "bg-[#F5FEFF] text-gray-light"}`}>
+                            <div className={` md:w-[20%] my-3 min-h-[4rem] rounded-lg p-4  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] " : "bg-[#F5FEFF] text-[#343A40] "}`}>
                                 <p className="">{data.text}</p>
                             </div>
                        </div> 
@@ -117,12 +120,23 @@ const ChatScreen :FC<ScreenProps> = ({isTyping, writeMessage, message, chatMessa
                onChange={e  => writeMessage(e)}
 
            />
-            <div 
-             onClick={() =>  sendMessage(message) }
-            className="p-2 rounded-full bg-green-700">
-                
-             <MdOutlineSend size={30} className=""/>
-            </div>
+           {isLoading ?
+               <div 
+               className=" flex items-center text-[#fff] justify-center p-1 h-[2rem] w-[2rem] rounded-full bg-green-700">
+                    <span className="">
+                         <SpinIcon width="" height="" color=""/>
+                       </span>
+               </div>
+    
+
+              :
+                <div 
+                onClick={() =>  sendMessage(message) }
+                className="p-2 rounded-full bg-green-700">
+                    
+                <MdOutlineSend size={30} className=""/>
+                </div>
+          }
         </div>
        </div>
 

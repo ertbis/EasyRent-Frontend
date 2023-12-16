@@ -25,6 +25,37 @@ const ChatView = ({params} : any) => {
   const chatContainerRef = useRef<HTMLDivElement | null>(null); 
   const [isTyping, setIsTyping] = useState<any>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false);
+ const [notifications, setNotifications] = useState<any>([])
+
+
+
+
+
+
+
+
+
+ const setNotification = () => {
+  const unreadNotifications = notifications.filter((n: any) => n.isRead === false);
+
+  const updatedChats = chats?.map((chat: any) => {
+    // Check if the chat's members[0]._id matches the senderId in any unreadNotification
+    const hasUnreadMessages = unreadNotifications.some((notification: any) => {
+      return chat.members[0]._id === notification.senderId && !notification.isRead;
+    });
+
+    // If there are unread messages for this chat, increment unreadMessageCount
+    return {
+      ...chat,
+      unreadMessageCount: hasUnreadMessages ? (chat.unreadMessageCount  + 1) : (chat.unreadMessageCount || 0),
+    };
+  });
+  if(updatedChats && updatedChats.length > 0){
+
+    setChats([...updatedChats]);
+  }
+};
+
 
 
   useEffect(() => {
@@ -46,6 +77,9 @@ useEffect(()=> {
 
   useEffect(()=> {
     const newSocket = io("https://easyrent-44an.onrender.com/")  
+    //const newSocket = io("http://localhost:5000/")  
+
+     
     setSocket(newSocket)
 
 
@@ -72,6 +106,7 @@ useEffect(()=> {
       const recipientId = currentChat?.members[0]._id 
       socket.emit("sendMessage", {...newMessage, recipientId } )
 
+      
     },[newMessage])
 
  //receive Message
@@ -84,11 +119,24 @@ useEffect(()=> {
 
       setChatMessages((prev : any) => [...prev , res])
  
- 
+   
     } )
 
+    socket.on("getNotification", (res : any ) => {
+      console.log("getting here")
+     const   isChatOpen = currentChat?.members.some((id :any) => id._id === res.senderId)
+     console.log(res)
+     if(isChatOpen) {
+      setNotifications((prev:any) => [{...res, isRead : true}, ...prev])
+     }else {
+      setNotifications((prev:any) => [res, ...prev])
+     }
+     console.log(isChatOpen)
+     console.log(notifications)
+    })
+    setNotification()
 
-  return () => {
+    return () => {
       socket.off("getMessage")
     }
 },[socket , currentChat])
@@ -115,11 +163,13 @@ useEffect(()=> {
 
 
 
-  const fetchChats = async () => {
-    try {
-       const res = await getMyChats()
-       setChats(res.data)
-       if(params.chatId != 'list'){
+const fetchChats = async () => {
+  try {
+    const res = await getMyChats()
+    const updatedChats = res.data.map((chat :any) => ({ ...chat, unreadMessageCount: 0 }));
+    setChats([...updatedChats]);
+    // console.log(chats)
+       if(params.chatId != 'id'){
         const cChat = await getChat(params.chatId)
         setCurrentChat(cChat.data)
        }
@@ -161,6 +211,8 @@ const writeMessage =(e :any) => {
 
 
 }
+
+
 
 
 
@@ -236,7 +288,7 @@ useEffect(() => {
                      {chats  &&
                        chats.map((data: any, index: any) => {
                         return (
-                        <a href={`/admin/chat/${data._id}`} className="flex cursor-pointer rounded-xl bg-[#fff] mb-4 gap-[2rem] px-6 justify-between items-center h-[4.5625rem]">
+                        <a key={index} href={`/admin/chat/${data._id}`} className="flex cursor-pointer rounded-xl bg-[#fff] mb-4 gap-[2rem] px-6 justify-between items-center h-[4.5625rem]">
                                 <div className="relative h-[3.25rem] w-[3.25rem] rounded-full bg-cover bg-center" style={{ backgroundImage: `url(${data.members[0]?.profilePicture ? data.members[0]?.profilePicture : "/profiledp.png"})` }}>
                                 <div className="absolute right-[20%] top-[0]">
                                    { onlineUsers?.some((user) => user?.userId == data?.members[0]._id) ? 
@@ -254,6 +306,9 @@ useEffect(() => {
                                     </p>
                                 </div>
                                 <div className="text-[0.75rem]">
+                                  {data.unreadMessageCount > 0 &&
+                                     <p className="bg-green-700 text-white rounded-full flex justify-center font-semiBold">{data.unreadMessageCount}</p>
+                                  }
                                     <p>3hrs</p>
                                 </div>
                        </a>

@@ -34,6 +34,8 @@ const ChatAgent = ({params} :any) => {
 
     useEffect(()=> {
       const newSocket = io("https://easyrent-44an.onrender.com/")  
+      //const newSocket = io("http://localhost:5000/")  
+
       setSocket(newSocket)
 
 

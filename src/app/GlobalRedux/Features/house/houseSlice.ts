@@ -1,9 +1,9 @@
 import { housesData } from "@/demodata/data";
-import { HouseListProps, HouseType } from "@/types/types";
+import { HouseListProp, HouseType } from "@/types/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
-const initialState:HouseListProps ={
+const initialState:HouseListProp ={
   houses: [...housesData],
 }
 

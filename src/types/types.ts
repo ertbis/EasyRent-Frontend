@@ -47,9 +47,9 @@ export interface UserType {
 
 // }
 
-// export interface HouseListProps {
-// houses: HouseType[];
-// }
+export interface HouseListProp {
+houses: HouseType[];
+}
 
 export type HouseListProps =  HouseType[];
   
@@ -90,6 +90,7 @@ export type FetchedUserType = {
      bankName : string
   };
   name: string;
+
   role: string ;
   email:string ;
   phoneNumber:number;

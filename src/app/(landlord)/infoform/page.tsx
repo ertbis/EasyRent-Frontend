@@ -17,6 +17,8 @@ const PersonalInfoForm: React.FC = () => {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+
   const [gender, setGender] = useState('');
 
   const [loading, setLoading] = useState(false);
@@ -77,6 +79,17 @@ const PersonalInfoForm: React.FC = () => {
                   placeholder="Last Name"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
+                  className="text-black p-0 outline-none rounded-md w-full"
+                />
+              </div>
+
+              <div className="mb-4 bg-white p-2 border border-gray-400 rounded-lg">
+                <label className="block text-gray-500 text-xs font-medium">phone Number</label>
+                <input
+                  type="number"
+                  placeholder="Phone Number"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
                   className="text-black p-0 outline-none rounded-md w-full"
                 />
               </div>

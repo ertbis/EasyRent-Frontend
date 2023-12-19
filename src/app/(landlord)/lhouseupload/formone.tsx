@@ -99,14 +99,17 @@ const FormOne :FC<FormOneProps>  = ({houseData,  setHouseData , setFormPage}) =>
                                                 
                                                 <button
                                                 type="button"
-                                                onClick={() =>setBedRoom(bedroom - 1)}
-                                                className="flex-[0.6] p-2 py-3 rounded-lg  border  border-gray-300"
+                                                onClick={() =>{if(houseData.bedroom > 0){
+                                                        setHouseData({...houseData,   bedroom: houseData.bedroom - 1})}
+                                                }
+                                                }    
+                                                                className="flex-[0.6] p-2 py-3 rounded-lg  border  border-gray-300"
                                                 >
                                                 -
                                                 </button>
-                                                <span className="flex-1  py-3  rounded-lg text-center p-2">{bedroom}</span>
+                                                <span className="flex-1  py-3  rounded-lg text-center p-2">{houseData.bedroom}</span>
                                                 <button
-                                                onClick={() =>setBedRoom(bedroom + 1)}   
+                                                onClick={() =>setHouseData({...houseData,   bedroom: houseData.bedroom + 1})}
                                                 type="button"
                                                 className="flex-[0.6] p-2  py-3  rounded-lg border border-gray-300"
                                                 >
@@ -116,25 +119,17 @@ const FormOne :FC<FormOneProps>  = ({houseData,  setHouseData , setFormPage}) =>
                         </div>
 
                         <div className='' > 
-                                <p className='flex items-center'> Bathrooms</p>
-                                      <div className={`flex  mt-2  space-x-2  rounded-lg border  border-[1px] ${bathRoom != 0 ? 'border-green-700' : 'border-gray-500'}`}>
-                                                
-                                                <button
-                                                onClick={() =>setBathRoom(bathRoom - 1)}   
-                                                type="button"
-                                                className="flex-[0.6] p-2   py-3  rounded-lg  border  border-gray-300"
-                                                >
-                                                -
-                                                </button>
-                                                <span className="flex-1   py-3  rounded-lg text-center p-2">{bathRoom}</span>
-                                                <button
-                                                onClick={() =>setBathRoom(bathRoom + 1)}   
-                                                type="button"
-                                                className="flex-[0.6]  p-2   py-3  rounded-lg border border-gray-300"
-                                                >
-                                                +
-                                                </button>
-                                        </div>
+                                <p className='flex items-center'> Hostel Name</p>
+                                <input
+                                type="hostelName"
+                                id="hostelName"
+                                name="hostelName"
+                                placeholder="hostel name"
+                                className={`border   outline-none rounded-md px-4 py-[1rem] md:py-2 w-full ${houseData.amount ? 'border-green-700 ': 'border-grey-light'  }`}
+                                value={houseData.hostelName}
+                                onChange={(e) => setHouseData({ ...houseData, hostelName: e.target.value })}
+                                required
+                                />
                         </div>
                     </div>
 

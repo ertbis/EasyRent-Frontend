@@ -136,7 +136,7 @@ const FormTwo :FC<FormTwoProps>  = ({houseData,  setHouseData, setFormPage}) => 
                                 ></textarea>
                         </div>
      
-                       <div  className='grid grid-cols-2 space-x-4 space-y-4  w-full '>
+                       {/* <div  className='grid grid-cols-2 space-x-4 space-y-4  w-full '>
 
                             <div className={`h-36 w-full my-4 rounded-[0.625rem] border border-gray-500 flex justify-center items-center ${uploadedPhotos.length > 0  ? 'border-green-700 ' : 'border-gray-500 ' }`}>
                                     <label htmlFor="upload-photos" className='flex cursor-pointer justify-items items-center space-x-2'>
@@ -170,7 +170,7 @@ const FormTwo :FC<FormTwoProps>  = ({houseData,  setHouseData, setFormPage}) => 
                            
 
 
-                       </div>
+                       </div> */}
 
 
                     </div>
@@ -178,8 +178,8 @@ const FormTwo :FC<FormTwoProps>  = ({houseData,  setHouseData, setFormPage}) => 
                 
 
                     <div className='mb-16 flex space-x-4'>
-                    <button
-                                    className="h-[4rem] bg-green-700 text-white w-full rounded-lg" >
+                    <button       onClick ={e => e.preventDefault()}
+                                    className="h-[4rem] opacity-[0.3] bg-green-700 text-white w-full rounded-lg" >
                                     Post Property
                         </button>
 

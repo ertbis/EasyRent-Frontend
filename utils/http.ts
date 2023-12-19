@@ -4,7 +4,7 @@ import { getAuthCredentials } from "./auth";
 const http = axios.create({
   timeout: 30000,
   //baseURL: "http://localhost:5000/",
-   baseURL: "https://easyrent-44an.onrender.com/",
+  baseURL: "https://easyrent-44an.onrender.com/",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

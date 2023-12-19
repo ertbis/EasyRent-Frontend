@@ -14,6 +14,8 @@ images:[
 amount:"",
 location:"",
 about :"",
+bedroom: 0,
+hostelName:'',
 features:[],
  mainFeatures: {
         light :true,

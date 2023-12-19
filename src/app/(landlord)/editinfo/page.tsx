@@ -21,6 +21,7 @@ const EditPersonalInfoForm: React.FC = () => {
   const [myDetails, setMyDetails] = useState<any>({
     lastName: '',
     firstName: '',
+    phoneNumber: '',
     gender: '',
   });
 
@@ -46,7 +47,7 @@ const EditPersonalInfoForm: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setLoading(true);
-    const data = { firstName : myDetails?.firstName, lastName: myDetails?.lastName, gender: myDetails?.gender || '' };
+    const data = { firstName : myDetails?.firstName, lastName: myDetails?.lastName, gender: myDetails?.gender || '' , phoneNumber: myDetails?.phoneNumber };
     try {
       const resp = await UpdateUser(data);
       const res = await dispatch(setName(myDetails.lastName));
@@ -95,6 +96,16 @@ const EditPersonalInfoForm: React.FC = () => {
                   placeholder="Last Name"
                   value={myDetails?.lastName}
                   onChange={(e) => setMyDetails({...myDetails, lastName: e.target.value})}
+                  className="text-black p-0 outline-none rounded-md w-full"
+                />
+              </div>
+              <div className="mb-4 bg-white p-2 border border-gray-400 rounded-lg">
+                <label className="block text-gray-500 text-xs font-medium">Phone Number:</label>
+                <input
+                  type="number"
+                  placeholder="phone Number"
+                  value={myDetails?.phoneNumber}
+                  onChange={(e) => setMyDetails({...myDetails, phoneNumber: e.target.value})}
                   className="text-black p-0 outline-none rounded-md w-full"
                 />
               </div>

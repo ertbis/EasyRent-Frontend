@@ -52,6 +52,7 @@ interface PreviewProps {
        }
          
     }
+    console.log(houseData)
     return ( 
         
         <div>

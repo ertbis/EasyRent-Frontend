@@ -199,7 +199,7 @@ const FormTwo :FC<FormTwoProps>  = ({houseData,  setHouseData, setFormPage}) => 
 
                     <div className='mb-16 flex space-x-4'>
                     <button
-                                    className="h-[4rem] bg-green-700 text-white w-full rounded-lg" >
+                                    className="h-[4rem] opacity-[0.1] bg-green-700 text-white w-full rounded-lg" >
                                     Post Property
                         </button>
 

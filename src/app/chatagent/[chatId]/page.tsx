@@ -175,6 +175,10 @@ const writeMessage =(e :any) => {
 
     const sendMessage = async (param: string) => {
         setIsLoading(true); 
+        if(param == ''){
+          setIsLoading(false)
+          return
+        }
       try {
             const data ={
               text: param,
@@ -182,7 +186,7 @@ const writeMessage =(e :any) => {
             }
             console.log(data)
             const resp = await  createMessage(data)   
-            console.log(resp.data.data)
+            // console.log(resp.data.data)
             setNewMessage(resp.data.data)
             setMessage("")
             setChatMessages((prev : any) => [...prev, resp.data.data])

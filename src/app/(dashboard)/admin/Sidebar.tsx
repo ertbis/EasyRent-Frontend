@@ -1,6 +1,8 @@
 import { UserIcon } from "@/assets/icons"
 import { DropLineIcon, LogOutIcon, MenuIcon, MenuIconFill, MessageActiveIcon, PlusIcon, PlusIconFill, SHIcon, SHIconFill, SettingIcon } from "@/assets/icons1"
-import { FC } from "react"
+import { FC, useEffect, useState } from "react"
+import { getMyDetails } from "../../../../utils/data/endpoints"
+import { useAdminProtect } from "@/app/useAdminProtect"
 
 interface sidebarprop {
   tab: string
@@ -9,6 +11,22 @@ interface sidebarprop {
 }
 
 const SideBar:FC<any> = ({tab, user, setUser}) => {
+  useAdminProtect()
+  const [myDetails, setMyDetails]  = useState<any>(null)
+  const  fetchMyDetails = async () => {
+    try {
+        const resp    = await  getMyDetails()
+        console.log(resp.data)
+         setMyDetails(resp.data)
+        
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    useEffect(() => {
+      fetchMyDetails()
+    },[] )
 
     return (
 
@@ -20,7 +38,9 @@ const SideBar:FC<any> = ({tab, user, setUser}) => {
 
 
             <div  className="">
-                <a href="/admin" className={`flex cursor-pointer py-[1rem] px-4 mb-[0.5rem] rounded-lg ${tab === "dashboard" ? "bg-[#1BB81B]" : "bg-[transparent]"}`}>
+              {(myDetails?.admin?.level == 1)   &&
+              
+                <a href="/admin/boards" className={`flex cursor-pointer py-[1rem] px-4 mb-[0.5rem] rounded-lg ${tab === "dashboard" ? "bg-[#1BB81B]" : "bg-[transparent]"}`}>
                   {tab === "dashboard" ?               
                   <MenuIconFill  width="24" height="24" color='white'/>
                   : 
@@ -28,6 +48,7 @@ const SideBar:FC<any> = ({tab, user, setUser}) => {
                 }
                   <p className={`text-[1.0625rem] pl-[0.8rem] ${tab === "dashboard" ? 'text-white':"text-gray-light" }`}>DashBoard</p>
                 </a>
+              }
                 <a   href="/admin/addproperty" className={`flex cursor-pointer py-[1rem] px-4  mb-[0.5rem] rounded-lg ${tab === "addproperty" ? "bg-[#1BB81B]" : "bg-[transparent]"}`}>
                  {tab === "addproperty" ?               
                  <PlusIconFill  width="24" height="25" color='white'/>
@@ -37,7 +58,7 @@ const SideBar:FC<any> = ({tab, user, setUser}) => {
                   <p className={`text-[1.0625rem] pl-[0.8rem] ${tab === "addproperty" ? 'text-white':"text-gray-light" }`}>Add Property</p>
                 </a>
 
-                <a  href="/admin/houses" className={`flex cursor-pointer py-[1rem] px-4  mb-[0.5rem] rounded-lg ${tab === "houses" ? "bg-[#1BB81B]" : "bg-[transparent]"}`}>
+                <a  href="/admin" className={`flex cursor-pointer py-[1rem] px-4  mb-[0.5rem] rounded-lg ${tab === "houses" ? "bg-[#1BB81B]" : "bg-[transparent]"}`}>
                  {tab === "houses" ?               
                  <SHIconFill  width="22" height="22" color='white'/>
                  : 
@@ -45,6 +66,11 @@ const SideBar:FC<any> = ({tab, user, setUser}) => {
                 }
                   <p className={`text-[1.0625rem] pl-[0.8rem] ${tab === "houses" ? 'text-white':"text-gray-light" }`}>Houses</p>
                 </a>
+
+                {(myDetails?.admin?.level == 1  || myDetails?.admin?.level == 2)   &&
+
+
+                 <>
 
                 <a  href="/admin/users" className={`flex cursor-pointer py-[1rem] px-4  mb-[0.5rem] rounded-lg ${tab === "users" ? "bg-[#1BB81B]" : "bg-[transparent]"}`}>
                  {tab === "users" ?               
@@ -67,6 +93,8 @@ const SideBar:FC<any> = ({tab, user, setUser}) => {
                     </div>  
                   }                 
  
+                </>
+                }
 
                 <a  href="/admin/chat/id" className={`flex cursor-pointer py-[1rem] px-4  mb-[0.5rem] rounded-lg ${tab === "message" ? "bg-[#1BB81B]" : "bg-[transparent]"}`}>
                  {tab === "message" ?               

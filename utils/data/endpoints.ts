@@ -197,3 +197,8 @@ export const getChatMessages = async( param: string ) => {
     const resp = await http.get(`/apis/messages/${param}`);
     return resp
 }
+
+export const getAnalytics = async(  ) => {
+    const resp = await http.get(`/apis/analytics`);
+    return resp
+}

@@ -4,6 +4,7 @@ import { useState } from "react"
 import SideBar from "../Sidebar"
 import HeaderDashBoard from "../Header"
 import AddProperty from "./AddAdminProperty"
+import { useAdminProtect } from "@/app/useAdminProtect"
 
 
 const houseObj = { apartment:"A room",
@@ -26,6 +27,8 @@ features:[],
 }
 
 const AddPropertyPage = () => {
+    
+
     const  [houseData, setHouseData] = useState<any>(houseObj)
 
 

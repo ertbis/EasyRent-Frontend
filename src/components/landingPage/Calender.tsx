@@ -8,7 +8,7 @@ import { FaCalendarAlt } from 'react-icons/fa';
 const CarouselDatePicker: React.FC<any> = ({setTourDetails, tourDetails }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedHour, setSelectedHour] = useState<number>(1);
-  const [selectedPeriod, setSelectedPeriod] = useState<string>('AM');
+  const [selectedPeriod, setSelectedPeriod] = useState<string >('-');
   const inputDateRef = useRef<HTMLInputElement | null>(null);
 
   const handleDateChange = (date: Date) => {

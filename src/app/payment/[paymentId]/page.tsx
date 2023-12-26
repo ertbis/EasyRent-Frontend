@@ -282,40 +282,40 @@ const UserPayment: React.FC<any> = ({ params }) => {
          
                 <div className='flex mx-6 items-center  my-4'>
                     <BsCreditCard size={30} className='text-gray-500  mr-3'/>
-                    <p className='font-semiBold text-grey-light'>Credit Card</p>
+                    <p className='font-semiBold text-grey-light'>Click proceed button</p>
                 </div>
            <form onSubmit={handleSubmit} className="flex flex-col justify-between mt-4 mx-6 h-[60%] text-grey-light">
         <div className=''>
 
             <div className="mb-4 bg-white p-3 border border-gray-400  rounded-lg">
-            <input
+            {/* <input
                 type="text"
                 value={bank}
                 placeholder='Bank Name'
                 onChange={(e) => setbank(e.target.value)}
                 className=" p-0 outline-none   rounded-md w-full"
                 required
-           />
+           /> */}
             </div>
            <div className='flex space-x-2'>
            <div className="mb-4 bg-white p-3 border border-gray-400  rounded-lg">
-            <input
+            {/* <input
                 type="text"
                 value={acctName}
                 placeholder='MM/YY'
                 onChange={(e) => setacctName(e.target.value)}
                 className=" p-0 outline-none   rounded-md w-full"
-            />
+            /> */}
                                                                                                                                                        
             </div>
             <div className="mb-4 bg-white p-3 border border-gray-400  rounded-lg">
-            <input
+            {/* <input
                 type="text"
                 value={acctName}
                 placeholder='CVV'
                 onChange={(e) => setacctName(e.target.value)}
                 className=" p-0 outline-none   rounded-md w-full"
-            />
+            /> */}
                                                                                                                                                        
             </div>
            </div>

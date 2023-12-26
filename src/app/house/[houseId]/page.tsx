@@ -14,7 +14,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getUser } from '../../../../utils/auth';
 import HsImages from '../Images';
-import { getSingleProperty, scheduleTourEP } from '../../../../utils/data/endpoints';
+import { getSingleProperty, makePayment, scheduleTourEP } from '../../../../utils/data/endpoints';
 import Loading from '@/components/Loading';
 import ErrorModal from '@/components/ErrorModal';
 import ScheduleTour from '../ScheduleTour';
@@ -66,8 +66,17 @@ const HousePage :FC<any> = ({params}) => {
              const resp = await scheduleTourEP({...tourDetails ,
               propertyId : selectedHouse._id
              })
-             console.log(resp)
-             router.push(`/payment/${resp.data.data._id}`);
+
+             const param = {
+                amount: 1000,
+                Id : resp.data.data._id,
+            };
+        
+            const resp1 = await makePayment(param);
+            if (resp1.data.url) {
+                window.location.href = resp1.data.url
+              }
+            
 
          } catch (error: any) {
              setErrorModal(true)

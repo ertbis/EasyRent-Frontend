@@ -29,11 +29,14 @@ import { getUser } from "../../../utils/auth";
 
    interface LpHomeProps {
       setTab: React.Dispatch<React.SetStateAction<string>>;
+      popularHouses: any ;
+      nearHouses: any ;
+
     }
     
     
     
- const HomePage :FC<LpHomeProps>  = ({setTab}) => {
+ const HomePage :FC<LpHomeProps>  = ({setTab, popularHouses,  nearHouses}) => {
    const [isMobileView, setIsMobileView] = React.useState(true);
 
 
@@ -55,7 +58,7 @@ import { getUser } from "../../../utils/auth";
   
   return (
   <>
-    {isMobileView ? <MobileView  setTab={setTab}/> : <DesktopView/> }
+    {isMobileView ? <MobileView   popularHouses={popularHouses}  nearHouses={nearHouses} setTab={setTab}/> : <DesktopView/> }
   </>
       
   )
@@ -64,7 +67,7 @@ import { getUser } from "../../../utils/auth";
 
 
 
-const MobileView :FC<LpHomeProps>  = ({setTab}) => {
+const MobileView :FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses}) => {
    const [showFilterCard, setShowFilterCard ]  = useState(false)
    // const houses = useSelector((state: RootState) => state.houses.houses)
    const  [houses , setHouses]= useState<any>(null)
@@ -72,8 +75,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
    const [sectionLoading, setSectionLoading] = useState(false)
    const [error , setError]  = useState<string | null >(null)
    const [errorModal, setErrorModal] = useState<boolean>(false)
-   const  [popularHouses , setPopularHouses]= useState<any>(null)
-   const  [nearHouses , setNearHouses]= useState<any>(null)
+   
    const [cookUser, setCookUser] = useState<TokenUserType | null>(null);
 
    useEffect(() => {
@@ -111,16 +113,16 @@ const MobileView :FC<LpHomeProps>  = ({setTab}) => {
    };
 
 
-   const fetchbyLocationAndPopularity =async () => {
-      const resp = await getAllProperty('d');
-      const resp1 = await getAllProperty('el');
-      setPopularHouses(resp.data)
-      setNearHouses(resp1.data)
-   }
+//    const fetchbyLocationAndPopularity =async () => {
+//       const resp = await getAllProperty('d');
+//       const resp1 = await getAllProperty('el');
+//       setPopularHouses(resp.data)
+//       setNearHouses(resp1.data)
+//    }
 
-useEffect(()=> {
-   fetchbyLocationAndPopularity()
-},[])
+// useEffect(()=> {
+//    fetchbyLocationAndPopularity()
+// },[])
 
    return (
       <div className='flex flex-col overflow-x-hidden  gap-4 px-4 items-center  ' >

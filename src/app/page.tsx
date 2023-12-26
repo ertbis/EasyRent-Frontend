@@ -21,7 +21,7 @@ import "aos/dist/aos.css";
 import { getUser } from "../../utils/auth";
 import { TokenUserType } from "@/types/types";
 import LandLordDashboard from "./(landlord)/ldashboard/page";
-import { getMyDetails } from "../../utils/data/endpoints";
+import { getAllProperty, getMyDetails } from "../../utils/data/endpoints";
 import Lprofile from "./(landlord)/ldashboard/lprofile";
 import { useOTPConfirm } from "./useOTPConfirm";
 
@@ -34,6 +34,8 @@ export default function Home() {
    const [logInModal, setLoginModal] = useState(false)
    const [cookUser, setCookUser] = useState<TokenUserType | null>(null)
    const [user, setUser] = useState<any>(null)
+   const  [popularHouses , setPopularHouses]= useState<any>(null)
+   const  [nearHouses , setNearHouses]= useState<any>(null)
    const otpconfirm  = useOTPConfirm()
 
    const fetchDetails = async()=> {
@@ -50,6 +52,19 @@ export default function Home() {
        fetchDetails()
    }, [])
    
+
+   const fetchbyLocationAndPopularity =async () => {
+    const resp = await getAllProperty('d');
+    const resp1 = await getAllProperty('el');
+    setPopularHouses(resp.data)
+    setNearHouses(resp1.data)
+ }
+
+useEffect(()=> {
+ fetchbyLocationAndPopularity()
+},[])
+
+
   return (
 
     <>{ cookUser  ? 
@@ -73,7 +88,7 @@ export default function Home() {
 
 
        <LpHeader  setTab={setTab}/>
-       {tab ==='home' && <HomePage  setTab={setTab}/>}
+       {tab ==='home' && <HomePage  popularHouses={popularHouses}  nearHouses={nearHouses}  setTab={setTab}/>}
        {tab ==='save' && <FavouriteHousePage/>}
        {tab ==='inbox' && <InboxPage/>}
        {tab ==='notification' && <NotificationPage setTab={setTab}/>}
@@ -108,7 +123,7 @@ export default function Home() {
 
 
        <LpHeader  setTab={setTab}/>
-       {tab ==='home' && <HomePage  setTab={setTab}/>}
+       {tab ==='home' && <HomePage  popularHouses={popularHouses}  nearHouses={nearHouses} setTab={setTab}/>}
        {tab ==='save' && <FavouriteHousePage/>}
        {tab ==='inbox' && <InboxPage/>}
        {tab ==='notification' && <NotificationPage/>}

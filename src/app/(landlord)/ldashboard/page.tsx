@@ -83,7 +83,7 @@ const LandLordDashboard = () => {
             {tab ==="notification"  &&  <NotificationPage  setTab={setTab}/>}
             {tab === "home"  &&  
             <>
-  <div  className='flex justify-between h-[11rem] col-span-2 items-end w-[100%] bg-[#17A2B8]  px-[1.4rem] py-[2rem]  rounded-b-[0.6rem] ' >
+  <div  className='flex justify-between h-[9rem] col-span-2 items-end w-[100%] bg-[#17A2B8]  px-[1.4rem] py-[2rem]  rounded-b-[0.6rem] ' >
              <div className='flex-1 w-full '>
                 <h1 className='  text-[1rem] text-[#F5FEFF] ' > Good Morning</h1>
               <h2 className="text-white w-full text-[1.5rem] font-bold ">{user ? initial + " " + user.lastName : cookUser.name}</h2>

@@ -24,6 +24,7 @@ import LandLordDashboard from "./(landlord)/ldashboard/page";
 import { getAllProperty, getMyDetails } from "../../utils/data/endpoints";
 import Lprofile from "./(landlord)/ldashboard/lprofile";
 import { useOTPConfirm } from "./useOTPConfirm";
+import ErrorModal from "@/components/ErrorModal";
 
 export default function Home() {
   useEffect(() => {
@@ -37,7 +38,9 @@ export default function Home() {
    const  [popularHouses , setPopularHouses]= useState<any>(null)
    const  [nearHouses , setNearHouses]= useState<any>(null)
    const otpconfirm  = useOTPConfirm()
-
+   const [error , setError]  = useState<string | null >(null)
+   const [errorModal, setErrorModal] = useState<boolean>(false)
+ 
    const fetchDetails = async()=> {
     try {
       const resp = await getMyDetails()
@@ -54,15 +57,23 @@ export default function Home() {
    
 
    const fetchbyLocationAndPopularity =async () => {
-    const resp = await getAllProperty('d');
-    const resp1 = await getAllProperty('el');
-    setPopularHouses(resp.data)
-    setNearHouses(resp1.data)
+    try {
+      const resp = await getAllProperty('d');
+      const resp1 = await getAllProperty('el');
+      setPopularHouses(resp.data)
+      setNearHouses(resp1.data) 
+    } catch (e: any) {
+      setErrorModal(true)
+      console.log(e)
+      setError( e?.response?.data?.message || "No Internet try Again");
+    }
  }
 
 useEffect(()=> {
+
  fetchbyLocationAndPopularity()
-},[])
+
+},[nearHouses, popularHouses])
 
 
   return (
@@ -93,6 +104,8 @@ useEffect(()=> {
        {tab ==='inbox' && <InboxPage/>}
        {tab ==='notification' && <NotificationPage setTab={setTab}/>}
        {tab ==='profile' && <Lprofile user={user} />}
+      
+       { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
 
        <MobileFooter tab={tab} user={user} setTab={setTab} setLoginModal={setLoginModal}   />
 
@@ -128,7 +141,8 @@ useEffect(()=> {
        {tab ==='inbox' && <InboxPage/>}
        {tab ==='notification' && <NotificationPage/>}
        {tab ==='profile' && <Lprofile user={user} />}
-
+       
+       { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
        <MobileFooter user={user} tab={tab} setTab={setTab} setLoginModal={setLoginModal}   />
 
        

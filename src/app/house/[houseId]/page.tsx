@@ -14,7 +14,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getUser } from '../../../../utils/auth';
 import HsImages from '../Images';
-import { getSingleProperty, makePayment, scheduleTourEP } from '../../../../utils/data/endpoints';
+import { createChats, getSingleProperty, makePayment, scheduleTourEP } from '../../../../utils/data/endpoints';
 import Loading from '@/components/Loading';
 import ErrorModal from '@/components/ErrorModal';
 import ScheduleTour from '../ScheduleTour';
@@ -104,6 +104,21 @@ const HousePage :FC<any> = ({params}) => {
         setTab('images')
    }
 
+
+   const createNewChat = async() => {
+    setLoading(true)
+     try {
+         const resp = await  createChats()
+         console.log(resp)
+        window.location.replace(`/chatagent/${resp.data._id}`);
+
+     } catch (e : any) {
+         setErrorModal(true)
+         console.log(e)
+         setLoading(false)
+         setError( e?.response?.data?.message || "Try Again");
+     }
+ }
     
     return ( 
         <>
@@ -239,8 +254,10 @@ const HousePage :FC<any> = ({params}) => {
 
        
         <div className='m-4  mb-8 flex justify-between w-[90vw]'>
-        
-        <button className='bg-transparent text-green-700 font-bold rounded-lg border border-1 border-solid border-green-700 w-[40%]  h-10' >Help</button>          
+        {user.role == "student" &&
+        <button onClick={() => createNewChat()}
+        className='bg-transparent text-green-700 font-bold rounded-lg border border-1 border-solid border-green-700 w-[40%]  h-10' >Help</button>          
+        }
         {(tourDetails?.day && tourDetails.time && tourDetails.period)  ?
         <button onClick={() => setTab('scheduleTour')} className='font-bold rounded-lg w-[40%]  h-10  bg-green-700 text-white '
         >Proceed</button>   

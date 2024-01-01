@@ -6,7 +6,6 @@ import { getToken, getUser } from '../../utils/auth';
 export const useOTPConfirm = () => {
   const user = getUser();
 
-   console.log(user)
   useEffect(() => {
     if (user.emailVerified == true) {
       return

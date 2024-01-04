@@ -68,7 +68,7 @@ const ChatView = ({params} : any) => {
 
 
 useEffect(()=> {
-    const isOnline =  onlineUsers?.some((user) => user?.userId == currentChat?.members[0]._id) 
+    const isOnline =  onlineUsers?.some((user) => user?.userId == currentChat?.members[0]?._id) 
     if(!isOnline){
        setIsTyping(false)
     }
@@ -103,7 +103,7 @@ useEffect(()=> {
 
     useEffect(()=> {
       if(socket === null) return
-      const recipientId = currentChat?.members[0]._id 
+      const recipientId = currentChat?.members[0]?._id 
       socket.emit("sendMessage", {...newMessage, recipientId } )
 
       
@@ -196,7 +196,7 @@ useEffect(()=>{
 
 useEffect(()=> {
   if(socket === null) return
-  const recipientId = currentChat?.members[0]._id 
+  const recipientId = currentChat?.members[0]?._id 
 
   if(message == ''){
     socket.emit("stop-typing",  {recipientId} )
@@ -207,7 +207,7 @@ useEffect(()=> {
 
 const writeMessage =(e :any) => {
   setMessage(e.target.value);
-  const recipientId = currentChat?.members[0]._id 
+  const recipientId = currentChat?.members[0]?._id 
 
 
 }
@@ -229,7 +229,11 @@ const sendMessage = async (param: string) => {
         const resp = await  createMessage(data)   
      
         setNewMessage(resp.data.data)
-        setChatMessages((prev : any) => [...prev, resp.data.data])
+        if(chatMessages){
+          setChatMessages((prev : any) => [...prev, resp.data.data])
+        }else{
+          setChatMessages(resp.data.data)
+        }
         setIsLoading(false)
 
       } catch (error) {
@@ -285,13 +289,13 @@ useEffect(() => {
 
 
                 <div className="">
-                     {chats  &&
+                     {(chats && chats?.length > 0 ) ?
                        chats.map((data: any, index: any) => {
                         return (
                         <a key={index} href={`/admin/chat/${data._id}`} className="flex cursor-pointer rounded-xl bg-[#fff] mb-4 gap-[2rem] px-6 justify-between items-center h-[4.5625rem]">
                                 <div className="relative h-[3.25rem] w-[3.25rem] rounded-full bg-cover bg-center" style={{ backgroundImage: `url(${data.members[0]?.profilePicture ? data.members[0]?.profilePicture : "/profiledp.png"})` }}>
                                 <div className="absolute right-[20%] top-[0]">
-                                   { onlineUsers?.some((user) => user?.userId == data?.members[0]._id) ? 
+                                   { onlineUsers?.some((user) => user?.userId == data?.members[0]?._id) ? 
                                     <OnlineTickIcon width="" height="" color="#1BB81B" />
                                     :
                                     <OnlineTickIcon width="" height="" color="" />
@@ -300,21 +304,21 @@ useEffect(() => {
                                 </div>
                                 </div>
                                 <div className="flex-1 text-[#343A40]">
-                                    <p className="font-semiBold text-[1.0625rem]">{data.members[0].firstName}  {data.members[0].lastName}</p>
+                                    <p className="font-semiBold text-[1.0625rem]">{data?.members[0]?.firstName}  {data?.members[0]?.lastName}</p>
                                     <p className="text-[0.625rem]" >
-                                    { onlineUsers?.some((user) => user?.userId == data?.members[0]._id) ? "Online" : "Offline"   }
+                                    { onlineUsers?.some((user) => user?.userId == data?.members[0]?._id) ? "Online" : "Offline"   }
                                     </p>
                                 </div>
                                 <div className="text-[0.75rem]">
-                                  {data.unreadMessageCount > 0 &&
+                                  {data?.unreadMessageCount > 0 &&
                                      <p className="bg-green-700 text-white rounded-full flex justify-center font-semiBold">{data.unreadMessageCount}</p>
                                   }
                                     <p>3hrs</p>
                                 </div>
                        </a>
                         )
-                       })
-                     
+                       })  :
+                        <p className="text-center font-bold text-xl mt-10 text-black">No Chat Found!!!</p>
                      }
                   
 
@@ -326,7 +330,7 @@ useEffect(() => {
                      <div className="flex rounded-tr-xl bg-[#343A40] mb-4 gap-[2rem] px-6 justify-between items-center h-[4.5625rem]">
                             <div className="relative h-[3.25rem] w-[3.25rem] rounded-full bg-cover bg-center" style={{ backgroundImage: `url(${currentChat?.members[0]?.profilePicture ? currentChat?.members[0]?.profilePicture : "/profiledp.png"})` }}>
                                 <div className="absolute right-[20%] top-[0]">
-                                { onlineUsers?.some((user) => user?.userId == currentChat?.members[0]._id) ? 
+                                { onlineUsers?.some((user) => user?.userId == currentChat?.members[0]?._id) ? 
                                     <OnlineTickIcon width="" height="" color="#1BB81B" />
                                     :
                                     <OnlineTickIcon width="" height="" color="" />
@@ -335,9 +339,9 @@ useEffect(() => {
                                 </div>
                             </div>
                             <div className="flex-1 text-[#fff]">
-                                <p className="font-semiBold text-[1.0625rem]">{currentChat?.members[0].firstName}  {currentChat?.members[0].lastName}</p>
+                                <p className="font-semiBold text-[1.0625rem]">{currentChat?.members[0]?.firstName}  {currentChat?.members[0]?.lastName}</p>
                                 <p className="text-[0.625rem]" >
-                               { onlineUsers?.some((user) => user?.userId == currentChat?.members[0]._id) ? "Online" : "Offline"   }
+                               { onlineUsers?.some((user) => user?.userId == currentChat?.members[0]?._id) ? "Online" : "Offline"   }
                                 </p>
                             </div>
                             <div className="cursor-pointer">
@@ -349,7 +353,7 @@ useEffect(() => {
                             
                             return(
                                 <div key={index} className={`w-full flex   px-6 ${data?.senderId == sender?._id ? "justify-end" : "justify-start"}`}>
-                                    <div className={` md:w-[30%] my-3 min-h-[4rem] rounded-lg p-4  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] " : "bg-[#F5FEFF] text-gray-light"}`}>
+                                    <div className={` md:w-[30%] my-3 min-h-[4rem] rounded-lg p-4  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] " : "bg-[#F5FEFF] text-[black]"}`}>
                                         <p className="">{data.text}</p>
                                     </div>
                             </div>
@@ -374,7 +378,7 @@ useEffect(() => {
                                     name="search"
                                     placeholder='Search '
                                     value={message}
-                                    className=" outline-none p-4 h-[70%] w-full"
+                                    className="text-[black] outline-none p-4 h-[70%] w-full"
                                     onChange={e  => writeMessage(e)}
 
                                     />

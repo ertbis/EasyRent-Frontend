@@ -189,7 +189,11 @@ const writeMessage =(e :any) => {
             // console.log(resp.data.data)
             setNewMessage(resp.data.data)
             setMessage("")
-            setChatMessages((prev : any) => [...prev, resp.data.data])
+            if(chatMessages){
+              setChatMessages((prev : any) => [...prev, resp.data.data])
+            }else{
+              setChatMessages(resp.data.data)
+            }
             setIsLoading(false); 
             setScreen("chat")
 

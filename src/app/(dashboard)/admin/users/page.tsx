@@ -8,6 +8,7 @@ import AdminLandlordView from "./LandLord"
 import AdminStudentView from "./Student"
 import { getAllUsers } from "../../../../../utils/data/endpoints"
 import { FetchedUserType, UserType } from "@/types/types"
+import AdminAdminsView from "./admins"
 
 
 
@@ -15,12 +16,13 @@ import { FetchedUserType, UserType } from "@/types/types"
 interface userDataType{
     students: FetchedUserType[] | null
     landlords: FetchedUserType[] | null
+    admins: FetchedUserType[] | null
 }
 
 
 const UsersAdmin = () => {
     const [user , setUser] = useState("landlords")
-    const [userData, setUserData]  = useState<userDataType >({students: null, landlords: null})
+    const [userData, setUserData]  = useState<userDataType >({students: null, landlords: null , admins : null})
 
     const filterArrayByRole = (array: any[], targetRole: string )=> {
         const newArray = array.filter((obj) => obj.role === targetRole)
@@ -31,7 +33,9 @@ const UsersAdmin = () => {
             const resp = await getAllUsers()
             const landlords = filterArrayByRole(resp.data, "landlord")
             const students = filterArrayByRole(resp.data, "student")
-            setUserData({...userData, landlords , students})
+            const admins = filterArrayByRole(resp.data, "admin")
+
+            setUserData({...userData, landlords , students, admins})
         } catch (error) {
             console.log(error)
         }
@@ -54,6 +58,9 @@ const UsersAdmin = () => {
              }
               {user == "students"  &&
              <AdminStudentView  students={userData.students}/>
+             }
+             {user == "admins"  &&
+             <AdminAdminsView  admins={userData.admins}/>
              }
              </div>
         </div>

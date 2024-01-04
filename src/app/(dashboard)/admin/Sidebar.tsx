@@ -3,6 +3,7 @@ import { DropLineIcon, LogOutIcon, MenuIcon, MenuIconFill, MessageActiveIcon, Pl
 import { FC, useEffect, useState } from "react"
 import { getMyDetails } from "../../../../utils/data/endpoints"
 import { useAdminProtect } from "@/app/useAdminProtect"
+import LogOutModal from "@/components/LogOutModal"
 
 interface sidebarprop {
   tab: string
@@ -12,6 +13,7 @@ interface sidebarprop {
 
 const SideBar:FC<any> = ({tab, user, setUser}) => {
   useAdminProtect()
+  const [openEdit, setOpenEdit] = useState(false)
   const [myDetails, setMyDetails]  = useState<any>(null)
   const  fetchMyDetails = async () => {
     try {
@@ -46,7 +48,7 @@ const SideBar:FC<any> = ({tab, user, setUser}) => {
                   : 
                   <MenuIcon  width="24" height="24" color='white'/>
                 }
-                  <p className={`text-[1.0625rem] pl-[0.8rem] ${tab === "dashboard" ? 'text-white':"text-gray-light" }`}>DashBoard</p>
+                  <p className={`text-[1.0625rem] pl-[0.8rem] ${tab === "dashboard" ? 'text-white':"text-[black]" }`}>DashBoard</p>
                 </a>
               }
                 <a   href="/admin/addproperty" className={`flex cursor-pointer py-[1rem] px-4  mb-[0.5rem] rounded-lg ${tab === "addproperty" ? "bg-[#1BB81B]" : "bg-[transparent]"}`}>
@@ -55,7 +57,7 @@ const SideBar:FC<any> = ({tab, user, setUser}) => {
                  : 
                  <PlusIcon  width="22" height="23" color='white'/>
                 }
-                  <p className={`text-[1.0625rem] pl-[0.8rem] ${tab === "addproperty" ? 'text-white':"text-gray-light" }`}>Add Property</p>
+                  <p className={`text-[1.0625rem] pl-[0.8rem] ${tab === "addproperty" ? 'text-white':"text-[black]" }`}>Add Property</p>
                 </a>
 
                 <a  href="/admin" className={`flex cursor-pointer py-[1rem] px-4  mb-[0.5rem] rounded-lg ${tab === "houses" ? "bg-[#1BB81B]" : "bg-[transparent]"}`}>
@@ -64,7 +66,7 @@ const SideBar:FC<any> = ({tab, user, setUser}) => {
                  : 
                  <SHIcon  width="22" height="23" color='white'/>
                 }
-                  <p className={`text-[1.0625rem] pl-[0.8rem] ${tab === "houses" ? 'text-white':"text-gray-light" }`}>Houses</p>
+                  <p className={`text-[1.0625rem] pl-[0.8rem] ${tab === "houses" ? 'text-white':"text-[black]" }`}>Houses</p>
                 </a>
 
                 {(myDetails?.admin?.level == 1  || myDetails?.admin?.level == 2)   &&
@@ -78,7 +80,7 @@ const SideBar:FC<any> = ({tab, user, setUser}) => {
                  : 
                  <UserIcon  width="16" height="22" color='#343A40'/>
                 }
-                  <p className={`text-[1.0625rem] pl-[0.8rem] ${tab === "users" ? 'text-white':"text-gray-light" }`}>Users</p>
+                  <p className={`text-[1.0625rem] pl-[0.8rem] ${tab === "users" ? 'text-white':"text-[black]" }`}>Users</p>
                 </a>
                 {tab === "users" &&
                    <div className="mb-3">
@@ -90,6 +92,12 @@ const SideBar:FC<any> = ({tab, user, setUser}) => {
                            <DropLineIcon width="" height="" color="" />
                            <a className={`ml-2 text-[0.9rem]  ${user == "students" ? "text-[#1BB81B]" : "text-[#343A40]"}`}>students</a>
                         </div>
+                        {(myDetails?.admin?.level == 1)   &&
+                        <div onClick={() => setUser("admins")}  className="cursor-pointer  flex ml-8 mt-3"> 
+                           <DropLineIcon width="" height="" color="" />
+                           <a className={`ml-2 text-[0.9rem]  ${user == "admins" ? "text-[#1BB81B]" : "text-[#343A40]"}`}>admins</a>
+                        </div>
+                        }
                     </div>  
                   }                 
  
@@ -102,7 +110,7 @@ const SideBar:FC<any> = ({tab, user, setUser}) => {
                  : 
                  <MessageActiveIcon  width="28" height="24" color='#343A40'/>
                 }
-                  <p className={`text-[1.0625rem] pl-[0.8rem] ${tab === "message" ? 'text-white':"text-gray-light" }`}>Message</p>
+                  <p className={`text-[1.0625rem] pl-[0.8rem] ${tab === "message" ? 'text-white':"text-[black]" }`}>Message</p>
                 </a>
                 <a  href="/admin" className={`flex cursor-pointer py-[1rem] px-4  mb-[0.5rem] rounded-lg ${tab === "setting" ? "bg-[#1BB81B]" : "bg-[transparent]"}`}>
                  {tab === "setting" ?               
@@ -110,16 +118,18 @@ const SideBar:FC<any> = ({tab, user, setUser}) => {
                  : 
                  <SettingIcon  width="28" height="24" color='#343A40'/>
                 }
-                  <p className={`text-[1.0625rem] pl-[0.8rem] ${tab === "setting" ? 'text-white':"text-gray-light" }`}>Settings</p>
+                  <p className={`text-[1.0625rem] pl-[0.8rem] ${tab === "setting" ? 'text-white':"text-[black]" }`}>Settings</p>
                 </a>
                 
             </div>
 
-            <div className='flex-1 text-xl  flex justify-center items-center  w-full md:text-5xl font-sans font-bold text-green-700'>
+            <div onClick={() => setOpenEdit(true)} className='flex-1 text-xl  flex justify-center items-center  w-full md:text-5xl font-sans font-bold text-green-700'>
                 <p  className="flex cursor-pointer text-[1.2rem] text-[#F13E38]"> 
                 <LogOutIcon width="" height="" color=""/>
-                  <span  className="ml-2">Logout</span></p>
+                  <span   className="ml-2">Logout</span></p>
+
            </div>
+                  {openEdit && <LogOutModal setOpenEdit={setOpenEdit}/>}
         </div>
     )
 }

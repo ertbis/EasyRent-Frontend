@@ -59,7 +59,7 @@ const AddAdminForm:FC<componentPropType> = ({setShowCreateAdmin}) => {
   };
 
   return (
-    <div className='absolute z-[1200] bg-[#ffffffb3] flex justify-center items-center top-0 left-0 w-full h-screen bg-gray-light'>
+    <div className='text-[black] absolute z-[1200] bg-[#ffffffb3] flex justify-center items-center top-0 left-0 w-full h-screen bg-gray-light'>
      {success  ?
      
         <div className='border border-gray-500 rounded-lg p-5 bg-[#fff]'>

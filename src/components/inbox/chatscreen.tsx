@@ -7,10 +7,9 @@ import { getChat, getChatMessages, getMyDetails } from "../../../utils/data/endp
 import { onlineUserType } from "@/types/types";
 import { SpinIcon } from "@/assets/icons";
 
+
 interface ScreenProps {
     sendMessage: any,
-    setScreen:React.Dispatch<React.SetStateAction<string>>,
-    chatId : string,
     currentChat: any,
     sender: any,
     onlineUsers: onlineUserType  | null,
@@ -22,8 +21,9 @@ interface ScreenProps {
 
 } 
 
-const ChatScreen :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message, chatMessages, onlineUsers, sender, chatId, sendMessage, setScreen, currentChat}) => {   
+const ChatScreenInbox :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message, chatMessages, onlineUsers, sender, sendMessage, currentChat}) => {   
     const chatContainerRef = useRef<HTMLDivElement | null>(null); 
+
 
   useEffect(() => {
     // Scroll to the bottom when chatMessages update
@@ -34,7 +34,7 @@ const ChatScreen :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message
 
   const [text, setText] = useState('');
   const originalText = '....';
-
+  
   useEffect(() => {
     let index = 0;
   
@@ -65,35 +65,33 @@ const ChatScreen :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message
              <div className="flex flex-1 items-center" >
                  <div className="relative rounded-full h-[3.5rem] w-[3.5rem] ">
                      <div className={`h-2 w-2  rounded-full absolute right-[16%] top-[0%]  
-                      ${                   onlineUsers?.some((user) => user?.userId == currentChat?.members[0]._id) ? "bg-green-700" : "bg-black"   }
+                      ${                   onlineUsers?.some((user) => user?.userId == currentChat?.members[0]?._id) ? "bg-green-700" : "bg-black"   }
                      `}></div>
                      <img src="/adminavatar.png" className="w-full h-full rounded-full"/>
                  </div>
                  <div className="text-white ml-2"  >
-                     <h1 className="text-[1.1rem] font-semiBold">{currentChat?.members[0].firstName}</h1>
+                     <h1 className="text-[1.1rem] font-semiBold">{currentChat?.members[0]?.firstName}</h1>
                      <p className="text-xs">{
-                     onlineUsers?.some((user) => user?.userId == currentChat?.members[0]._id) ? "Online" : "Offline"   }</p>
+                     onlineUsers?.some((user) => user?.userId == currentChat?.members[0]?._id) ? "Online" : "Offline"   }</p>
                  </div>
              </div>
              <div className="flex-[0.22]">
                 
                  <FiPhone size={29}
-                 onClick={() => setScreen("call")}
+                
                  className='text-green-700 cursor-pointer '/>
              </div>
         </div>
        
 
-        <div className= " h-[75%] overflow-y-scroll flex-1" ref={chatContainerRef}>
-                    {chatMessages && chatMessages.map((data: any, index: any) => {
+        <div className= " h-[75%] pb-20 overflow-y-scroll flex-1" ref={chatContainerRef}>
+                    {chatMessages && chatMessages?.map((data: any, index: any) => {
                        
                        return(
                         <div  key={data._id}  className={`w-full flex   px-6 ${data?.senderId == sender?._id ? "justify-end" : "justify-start"}`}>
                             <div className={` md:w-[20%] my-3 min-h-[4rem] rounded-lg p-4  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] " : "bg-[#F5FEFF] text-[#343A40] "}`}>
                                 <p className="">{data.text}</p>
-                            <TimeAgo timestamp={data.updatedAt} />
                             </div>
-
                        </div> 
                         
                        )
@@ -112,7 +110,7 @@ const ChatScreen :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message
 
        <div className="fixed bottom-[1%] w-[100%]">
 
-        <div className=" bg-white p-2 px-4 rounded-[1.5rem] flex w-[90vw] mx-auto items-center ">
+        <div className=" bg-white mb-20 p-2 px-4 rounded-[1.5rem] flex w-[90vw] mx-auto items-center ">
             <BsCamera size={25}  className="text-blue-800"/>
             <input  
                type="text"
@@ -147,38 +145,4 @@ const ChatScreen :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message
      );
 }
  
-export default ChatScreen;
-
-
-const TimeAgo = ({ timestamp }: any) => {
-  const [timeAgo, setTimeAgo] = useState('');
-
-  useEffect(() => {
-    const updateAgo = () => {
-      const currentDate : any = new Date();
-      const messageDate : any = new Date(timestamp);
-
-      const timeDifference = currentDate - messageDate;
-      const seconds = Math.floor(timeDifference / 1000);
-      const minutes = Math.floor(seconds / 60);
-      const hours = Math.floor(minutes / 60);
-
-      if (seconds < 60) {
-        setTimeAgo(`${seconds} second${seconds === 1 ? '' : 's'} ago`);
-      } else if (minutes < 60) {
-        setTimeAgo(`${minutes} minute${minutes === 1 ? '' : 's'} ago`);
-      } else if (hours < 24) {
-        setTimeAgo(`${hours} hour${hours === 1 ? '' : 's'} ago`);
-      } else {
-        setTimeAgo('more than a day ago');
-      }
-    };
-
-    updateAgo();
-    const intervalId = setInterval(updateAgo, 60000);
-
-    return () => clearInterval(intervalId);
-  }, [timestamp]);
-
-  return <span className="text-gray-400 text-xs">{timeAgo}</span>;
-};
+export default ChatScreenInbox;

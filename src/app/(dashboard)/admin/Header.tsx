@@ -39,8 +39,11 @@ useEffect(()=> {
         <div className= "flex gap-[2.5rem] items-center flex-1  justify-end">
          {(admin?.admin?.level == 1)  &&    
          
-         <button onClick={() => setShowCreateAdmin(true)}
-         className="p-4 border border-[red] text-[black] rounded-[50%]">+</button>
+         <button
+         onClick={() => setShowCreateAdmin(true)}
+         className="p-2 border font-bold border-[#BDB8B8] hover:bg-[#BDB8B8] bg-[#1BB81B] px-4 text-xl text-white rounded-full focus:outline-none focus:border-gray-300"
+       > +
+       </button>
          }
         <div   className=" text-grey-light cursor-pointer  flex flex-col justify-center items-center" >
               <NotificationIcon  width="22" height="26" color='#343A40'/>

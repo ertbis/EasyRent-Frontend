@@ -187,6 +187,10 @@ export const getChat = async( param: any ) => {
     const resp = await http.get(`/apis/chats/find/${param}`);
     return resp
 }
+export const deleteChatEndPoint = async( param: any ) => {
+    const resp = await http.delete(`/apis/chats/${param}`);
+    return resp
+}
 
 export const createMessage = async( param: any ) => {
     const resp = await http.post("/apis/messages/", param);

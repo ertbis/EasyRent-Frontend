@@ -1,9 +1,12 @@
 import { SearchIcon, SpinIcon } from "@/assets/icons"
+import { SlOptionsVertical } from "react-icons/sl";
 import { LinkIcon, OnlineTickIcon, PhoneIcon, SendMessageIcon } from "@/assets/icons1"
 import { useEffect, useRef, useState } from "react"
-import { createMessage, getChat, getChatMessages, getMyChats, getMyDetails } from "../../../../../utils/data/endpoints"
+import { createMessage, deleteChatEndPoint, getChat, getChatMessages, getMyChats, getMyDetails } from "../../../../../utils/data/endpoints"
 import {io} from "socket.io-client"
 import { onlineUserType } from "@/types/types";
+import Loading from "@/components/Loading";
+import ErrorModal from "@/components/ErrorModal";
 
 
 
@@ -25,8 +28,29 @@ const ChatView = ({params} : any) => {
   const chatContainerRef = useRef<HTMLDivElement | null>(null); 
   const [isTyping, setIsTyping] = useState<any>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false);
- const [notifications, setNotifications] = useState<any>([])
+  const [notifications, setNotifications] = useState<any>([])
+  const  [openOption, setOpenOption] = useState<boolean>(false)
 
+
+
+
+
+  const deleteChat = async() => {
+     setLoading(true)
+
+     try {
+      const resp = await deleteChatEndPoint(params.chatId)
+      console.log(resp)
+      if(resp){
+        window.location.replace("/admin/chat/id");
+      }
+     } catch (e: any) {
+      setErrorModal(true)
+      console.log(e)
+      setLoading(false)
+      setError( e?.response?.data?.message || "Try Again");
+     }
+  }
 
 
 
@@ -324,10 +348,10 @@ useEffect(() => {
 
                 </div>
              </div>
-
+                         { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
 
              <div className="flex-1 relative flex flex-col h-[82vh] ">
-                     <div className="flex rounded-tr-xl bg-[#343A40] mb-4 gap-[2rem] px-6 justify-between items-center h-[4.5625rem]">
+                     <div className="flex relative  rounded-tr-xl bg-[#343A40] mb-4 gap-[2rem] px-6 justify-between items-center h-[4.5625rem]">
                             <div className="relative h-[3.25rem] w-[3.25rem] rounded-full bg-cover bg-center" style={{ backgroundImage: `url(${currentChat?.members[0]?.profilePicture ? currentChat?.members[0]?.profilePicture : "/profiledp.png"})` }}>
                                 <div className="absolute right-[20%] top-[0]">
                                 { onlineUsers?.some((user) => user?.userId == currentChat?.members[0]?._id) ? 
@@ -345,8 +369,17 @@ useEffect(() => {
                                 </p>
                             </div>
                             <div className="cursor-pointer">
-                                <PhoneIcon width="" height="" color="" />
+                                <SlOptionsVertical onClick={() =>setOpenOption(!openOption) }  />
                             </div>
+                                {openOption  &&
+                                  <div className="absolute right-[2rem] top-[3rem] bg-[gray] w-[5rem] h-[5rem] p-4 rounded-lg" >
+                                     <p 
+                                     onClick={() => deleteChat()}
+                                     className="cursor-pointer  font-bold"> Delete</p>
+                                  </div>
+                                }
+                                { loading && <Loading/> }
+
                      </div>
                      <div className= " pb-[5rem] overflow-y-scroll border border-gray-light flex-1" ref={chatContainerRef}>
                             {chatMessages && chatMessages.map((data: any, index: any) => {

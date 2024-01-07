@@ -179,7 +179,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses}) => {
          </div>
 :
    <>
-       <div className="flex p-0 m-0 my-2 px-4 w-full font-[400] text-[1rem] justify-between mx-auto">
+       <div className="flex p-0 m-0  px-4 w-full font-[400] text-[1rem] justify-between mx-auto">
          <h3 className="text-blue-800 p-0 m-0">Current Location</h3>
          <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
        </div>
@@ -187,7 +187,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses}) => {
       <LeftSection  houses={popularHouses}/>
   
       </div>
-      <div className="flex p-0 m-0 px-4 my-2 w-full font-[400] text-[1rem] justify-between mx-auto">
+      <div className="flex p-0 m-0 px-4  w-full font-[400] text-[1rem] justify-between mx-auto">
             <h3 className="text-blue-800 p-0 m-0">Top Location</h3>
             <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
 
@@ -226,7 +226,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses}) => {
    }
 
 
-      <div className="flex p-0 m-0  mt-[1rem] my-2 px-4 w-full font-[400] text-[1rem] justify-between mx-auto">
+      <div className="flex p-0 m-0  mt-[1rem]  px-4 w-full font-[400] text-[1rem] justify-between mx-auto">
          <h3 className="text-blue-800 p-0 m-0">Popular</h3>
          <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
       </div>

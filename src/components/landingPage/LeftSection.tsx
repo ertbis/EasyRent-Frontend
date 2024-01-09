@@ -19,9 +19,9 @@ interface hType {
 const LeftSection :FC<hType>= ({houses}) => {
   // const houses = useSelector((state: RootState) => state.houses.houses)
     return ( 
-        <div id='custom-scrollbar-container'  className='py-0  md:p-4 rounded-xl md:h-[62rem] overflow-x-hidden  overflow-y-scroll no-scrollbar ' >
+        <div id='custom-scrollbar-container'  className='py-0  md:p-4 rounded-xl //md:h-[62rem] overflow-x-hidden  overflow-y-scroll no-scrollbar ' >
 
-        <div  className='overflow-x-auto flex justify-start item-center md:grid  md:grid-cols-2  gap-4 w-full '>
+        <div  className='overflow-x-auto flex justify-start item-center //md:grid  //md:grid-cols-2  gap-4 w-full '>
 
       {houses ? houses.map((data:any, i:any)=>{
         return(

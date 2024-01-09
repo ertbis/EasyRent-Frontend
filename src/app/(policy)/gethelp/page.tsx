@@ -23,7 +23,7 @@ const GetHelp = () => {
          try {
              const resp = await  createChats()
              console.log(resp)
-            window.location.replace(`/chatagent/${resp.data._id}`);
+            window.location.replace(`/chatagent/${resp.data[0]._id}`);
  
          } catch (e : any) {
              setErrorModal(true)

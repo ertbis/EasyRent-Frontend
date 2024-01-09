@@ -191,11 +191,14 @@ const writeMessage =(e :any) => {
             setMessage("")
             if(chatMessages){
               setChatMessages((prev : any) => [...prev, resp.data.data])
+              setIsLoading(false); 
+              setScreen("chat")
             }else{
               setChatMessages(resp.data.data)
+              setIsLoading(false); 
+              setScreen("chat")
             }
-            setIsLoading(false); 
-            setScreen("chat")
+           
 
         } catch (error) {
             console.log(error)             

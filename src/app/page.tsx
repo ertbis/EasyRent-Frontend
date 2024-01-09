@@ -316,7 +316,7 @@ useEffect(()=> {
    {/* <ErrorModal setLoginModal={setLoginModal} text="A FAtal ErroR occur"/> */}
 
 
-       <LpHeader  setTab={setTab}/>
+       {/* <LpHeader  setTab={setTab}/> */}
        {tab ==='home' && <HomePage  popularHouses={popularHouses}  nearHouses={nearHouses}  setTab={setTab}/>}
        {tab ==='save' && <FavouriteHousePage/>}
        {tab ==='inbox' && <InboxPage 
@@ -358,7 +358,7 @@ useEffect(()=> {
    {/* <ErrorModal setLoginModal={setLoginModal} text="A FAtal ErroR occur"/> */}
 
 
-       <LpHeader  setTab={setTab}/>
+       {/* <LpHeader  setTab={setTab}/> */}
        {tab ==='home' && <HomePage  popularHouses={popularHouses}  nearHouses={nearHouses} setTab={setTab}/>}
        {tab ==='save' && <FavouriteHousePage/>}
        {tab ==='inbox' && <InboxPage 

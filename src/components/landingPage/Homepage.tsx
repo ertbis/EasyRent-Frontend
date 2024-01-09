@@ -58,7 +58,8 @@ import { getUser } from "../../../utils/auth";
   
   return (
   <>
-    {isMobileView ? <MobileView   popularHouses={popularHouses}  nearHouses={nearHouses} setTab={setTab}/> : <DesktopView/> }
+    {isMobileView ? <MobileView   popularHouses={popularHouses}  nearHouses={nearHouses} setTab={setTab}/> : 
+    <DesktopView     popularHouses={popularHouses}  nearHouses={nearHouses} setTab={setTab}/> }
   </>
       
   )
@@ -246,7 +247,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses}) => {
 }
  
 
-const DesktopView = ()=> {
+const DesktopView:FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses})=> {
    const [showFilterCard, setShowFilterCard] = useState(false)
 
    return(
@@ -268,7 +269,7 @@ const DesktopView = ()=> {
            </div>
         </div>
        <RightSection />
-       <LeftSection   houses ={'nearHouses'} />
+       <LeftSection   houses={popularHouses}/>
       </div>
 
       <div className="relative w-full h-[16rem] bg-cover bg-center mt-8 px-24" style={{ backgroundImage: 'url("/bg2.png")' }}>

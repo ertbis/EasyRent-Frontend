@@ -24,8 +24,8 @@ interface ScreenProps {
 
 const ChatScreen :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message, chatMessages, onlineUsers, sender, chatId, sendMessage, setScreen, currentChat}) => {   
     const chatContainerRef = useRef<HTMLDivElement | null>(null); 
-
-  useEffect(() => {
+    console.log(chatMessages)
+    useEffect(() => {
     // Scroll to the bottom when chatMessages update
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;

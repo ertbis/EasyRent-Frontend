@@ -95,7 +95,7 @@ const  TableRow:FC<any> = ({data, index}) => {
               </td>
               <td className="py-2 px-4 border border-gray-300">{index + 1}</td>
               <td className="py-2 px-4 border border-gray-300">{data?.firstName}  {data?.lastName}</td>
-              <td className="py-2 px-4 border border-gray-300">08140711202</td>
+              <td className="py-2 px-4 border border-gray-300">{data?.phoneNumber}</td>
               <td className="py-2 px-4 border border-gray-300">{data?.email}</td>
               <td className="py-2 px-4 border border-gray-300">{data?.bankDetails?.acctNumber}</td>
               <td className="py-2 px-4 border border-gray-300">

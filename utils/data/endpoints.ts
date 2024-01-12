@@ -187,6 +187,10 @@ export const getChat = async( param: any ) => {
     const resp = await http.get(`/apis/chats/find/${param}`);
     return resp
 }
+export const updateChatCount = async( param: any ) => {
+    const resp = await http.put(`/apis/chats/updateUnreadMessage/${param.id}`, {unreadMessageCount : param.unreadMsgCount} );
+    return resp
+}
 export const deleteChatEndPoint = async( param: any ) => {
     const resp = await http.delete(`/apis/chats/${param}`);
     return resp

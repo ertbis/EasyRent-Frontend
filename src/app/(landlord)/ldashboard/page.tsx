@@ -98,11 +98,11 @@ const LandLordDashboard = () => {
            <>
            {sectionLoading  ? 
              <div className="mt-4" >
-               <div   className='p-4 overflow-y-scroll ' >
+               <div   className='p-4 overflow-y-scroll  md:grid  md:grid-cols-2  md:gap-4' >
                   <MobileFeaturedCardSkeleton/>
                   <MobileFeaturedCardSkeleton/>
                   <MobileFeaturedCardSkeleton/>
-                  
+                  <MobileFeaturedCardSkeleton/>
                </div>
              </div>
            
@@ -112,7 +112,7 @@ const LandLordDashboard = () => {
         
                <div className="mt-4"  >
                   <LandlordHousesComponent houses={houses}/>
-                  <div   className='p-4 overflow-y-scroll mb-12' >
+                  <div   className='p-4 overflow-y-scroll mb-12 md:grid  md:grid-cols-2  md:gap-4' >
                         {houses.map((data :any, index:any) => {
                               return (
                                  <MobileFeaturedCard  key={index} house={data} />

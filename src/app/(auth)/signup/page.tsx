@@ -96,23 +96,23 @@ const SignUp = () => {
                </a>           
           </div>
 
-          <div className='flex justify-between space-x-4'>
-           <div className='w-[50%]'>
-             <img src='Rectangle 2.png' alt='' className='w-full h-full'/>
-           </div>
-           <div className='w-[50%]'>
-             <img src='Rectangle 3.png' alt='' className='w-full h-full'/>
-           </div>
+          <div className='flex-1 flex justify-between md:h-[76%] space-x-4 md:space-x-6'>
+            <div className='w-[50%]'>
+              <img src='Rectangle 2.png' alt='' className='w-full h-full'/>
+            </div>
+            <div className='w-[50%] '>
+              <img src='Rectangle 3.png' alt='' className='w-full h-full'/>
+            </div>
           </div>
-          <div className='flex-1 flex flex-col justify-between space-y-4 my-12'>
+          <div className=' flex flex-col justify-between space-y-4 my-12'>
             <h1 className='text-[1.5rem] font-[600]  text-blue-800'>Ready to Explore</h1>
             <button onClick={(e)=> setRole("student")}
-                 className="bg-green-700 text-white  py-4 md:py-2 rounded-md w-full"
+                 className="bg-green-700 text-white  py-4 rounded-md w-full"
                >
                   Student
            </button>
            <button  onClick={(e)=> setRole("landlord")}
-                 className="bg-transparent  border border-green-700  text-green-700 py-4 md:py-2 rounded-md w-full"
+                 className="bg-transparent  border border-green-700  text-green-700 py-4  rounded-md w-full"
                >
                   Landlord
            </button>
@@ -123,7 +123,7 @@ const SignUp = () => {
     <div className="relative bg-cbover" style={{ backgroundImage: 'url("/formbg.png")' }}>
       <DesktopHeader />
       <div className="flex items-center justify-end min-h-screen w-full ">
-      <div className="pt-16 md:pt-4 w-full m-0 min-h-screen md:h-full  md:w-[45%]  lg:py-12  lg:w-[38%] pb-6 px-8 md:py-4 bg-white md:rounded-xl shadow-lg md:py-2 md:pb-6 md:mr-16 md:mt-12  text-grey-light">
+      <div className="pt-16 md:pt-4 w-full m-0 min-h-screen md:h-full  md:min-h-full md:w-[45%]  lg:py-12  lg:w-[38%] pb-6 px-8 md:py-4 bg-white md:rounded-xl shadow-lg md:py-2 md:pb-6 md:mr-16 md:mt-12  text-grey-light">
           {loading ? (
             <Loading />
           ) : (

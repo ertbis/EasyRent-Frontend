@@ -87,7 +87,7 @@ useEffect(() => {
             }
 
                
-                 <div onClick={() =>handleCardClick(house._id)} className='w-[9rem] h-[14rem]  md:w-full md:h-full rounded-xl'>
+                 <div onClick={() =>handleCardClick(house._id)} className='w-[9rem] h-[14rem]   rounded-xl'>
                   <Image
                     src={house.images[0]}
                     alt={house.apartment}

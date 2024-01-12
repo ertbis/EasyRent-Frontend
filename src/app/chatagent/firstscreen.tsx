@@ -34,7 +34,9 @@ const FirstScreen :FC<ScreenProps> = ({isLoading, sendMessage , currentChat}) =>
                {!isLoading   && 
                
                 <div className="flex space-x-2 mx-2 ">
-                    <p onClick={() => sendMessage("I like to get more details")}
+                    {currentChat  ?
+                     <>  
+                     <p onClick={() => sendMessage("I like to get more details")}
                     className="border border-green-700 p-1 text-[0.7rem] text-center text-green-700 rounded-lg">
                         I like to get more details
                     </p>
@@ -47,7 +49,12 @@ const FirstScreen :FC<ScreenProps> = ({isLoading, sendMessage , currentChat}) =>
                     <p  onClick={() => sendMessage("I like to get more details")}
                      className="border border-green-700 p-1 text-[0.7rem] text-center text-green-700 rounded-lg">
                         I like to get more details
-                    </p>
+                    </p>                  
+                       </>  :
+
+                       <p>Fetching Messages......</p>
+                 
+                }
                 </div>
                }
            </div>    {isLoading ?

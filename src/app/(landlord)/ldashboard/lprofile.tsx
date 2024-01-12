@@ -9,6 +9,7 @@ import { removeToken, removeUser } from "../../../../utils/auth";
 import { useRouter } from "next/navigation";
 import EditPaymentinfo from "@/components/common/EditPaymentInfo";
 import LogOutModal from "@/components/LogOutModal";
+import SectionLoading from "@/components/SectionLoading";
 
 // const DropdownProfileItem = ({user}: any) => (
 //   <div data-aos="flip-down" className="mx-2 flex-col py-3 border-b border-gray-300 items-center text-gray-600">
@@ -51,7 +52,14 @@ const Lprofile = ({ user }: any) => {
   
     <>
         {loading ? (
-            <Loading />
+          <div className="relative">
+            <SectionLoading />
+            <div className="mt-2 z-[3000] flex justify-center mb-[5rem] w-[90%] ">
+            <a onClick={() => setOpenEdit(true)}  className="mb-4  font-medium  text-center py-2 text-green-700"> Log Out</a>
+          </div>
+          {openEdit && <LogOutModal setOpenEdit={setOpenEdit}/>}
+           </div>
+     
           ) : (
       <>
       <div data-aos="fade-right" className="w-full mt-3 flex flex-col h-[13rem] justify-center  items-center">
@@ -111,9 +119,11 @@ const Lprofile = ({ user }: any) => {
       </>
     )}
     </>  :
-    <Loading/>
+    
+            <Loading />
+ 
    }
-   
+    
 
     </>
   );

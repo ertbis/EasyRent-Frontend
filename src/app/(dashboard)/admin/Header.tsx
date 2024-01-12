@@ -4,10 +4,12 @@ import { AnyAaaaRecord } from "dns"
 import AddAdminForm from "./AddAdminForm"
 import { useEffect, useState } from "react"
 import { getMyDetails } from "../../../../utils/data/endpoints"
+import NotificationPage from "@/components/notification/NotificatinoPage"
 
 const HeaderDashBoard = () => {
    const [showCreateAdmin, setShowCreateAdmin] = useState(false)
    const [admin, setAdmin] = useState<any>(null)
+  const  [tab, setTab]  = useState<any>("")
    const fetchAdminDetails = async () => {
     try {
        
@@ -45,7 +47,8 @@ useEffect(()=> {
        > +
        </button>
          }
-        <div   className=" text-grey-light cursor-pointer  flex flex-col justify-center items-center" >
+        <div  onClick={() => setTab("notification")} 
+          className=" text-grey-light cursor-pointer  flex flex-col justify-center items-center" >
               <NotificationIcon  width="22" height="26" color='#343A40'/>
  
             </div>
@@ -60,6 +63,12 @@ useEffect(()=> {
         </div>
 
          {showCreateAdmin &&  <AddAdminForm   setShowCreateAdmin={setShowCreateAdmin}/>}
+            {tab ==='notification' && 
+               <div className =" absolute left-[3rem] top-[1rem] bg-[white] z-[1200] w-[70%] h-[70vh]">
+                  <NotificationPage setTab={setTab}/>
+               </div>
+                  
+            }
        </div>
 
     )

@@ -62,7 +62,7 @@ useEffect(()=> {
   if(sender){
 
     var newSocket = io("https://easyrent-44an.onrender.com/")  
-    //const newSocket = io("http://localhost:5000/")  
+    //var newSocket = io("http://localhost:5000/")  
   
     setSocket(newSocket)
   }
@@ -149,28 +149,25 @@ useEffect(()=>{
 )
 
 
-   const setNotification = () => {
-  //   // const unreadNotifications = Object.values(notifications).filter((n: any) => n.isRead === false);
+    const setNotification = () => {
+    const unreadNotifications = notifications.filter((n: any) => n.isRead === false);
   
-  //   // const updatedChats: { [key: string]: any } = {};
-  
-  //   // Object.keys(chats).forEach((chatId: string) => {
-  //   //   const chat = chats[chatId];
-  
-  //   //   // Check if the chat's members[0]._id matches the senderId in any unreadNotification
-  //   //   const hasUnreadMessages = unreadNotifications.some((notification: any) => {
-  //   //     return chat.members[0]._id === notification.senderId && !notification.isRead;
-  //   //   });
-  
-  //   //   // If there are unread messages for this chat, increment unreadMessageCount
-  //   //   updatedChats[chatId] = {
-  //   //     ...chat,
-  //   //     unreadMessageCount: hasUnreadMessages ? (chat.unreadMessageCount + 1) : (chat.unreadMessageCount || 0),
-  //   //   };
-  //   // });
-  
-  //   // setChats({ ...updatedChats });
-   };
+      // Check if the chat's members[0]._id matches the senderId in any unreadNotification
+      console.log(chats)
+      console.log(unreadNotifications)
+      const hasUnreadMessages = unreadNotifications.some((notification: any) => {
+        return chats.members[0]?._id === notification.senderId;
+      });
+      // If there are unread messages for this chat, increment unreadMessageCount
+    
+      console.log(chats)
+    if(chats && chats.length > 0){
+      const unreadMessageCount = hasUnreadMessages ? (chats.unreadMessageCount  + 1) : (chats.unreadMessageCount || 0)
+      setChats({ ...chats,
+        unreadMessageCount });
+      }
+    console.log(chats)
+  };
   
 
    //send Message
@@ -197,6 +194,7 @@ useEffect(()=>{
     } )
 
     socket.on("getNotification", (res : any ) => {
+      console.log(res)
      const   isChatOpen = chats?.members.some((id :any) => id._id === res.senderId)
      if(isChatOpen) {
       setNotifications((prev:any) => [{...res, isRead : true}, ...prev])
@@ -204,13 +202,47 @@ useEffect(()=>{
       setNotifications((prev:any) => [res, ...prev])
      }
     
+     setNotification()
     })
-    setNotification()
 
     return () => {
       socket.off("getMessage")
     }
 },[socket , chats])
+
+
+
+
+//typing 
+useEffect(()=> {
+  if(socket === null) return
+
+  socket.on("userTyping", (res: any)=>{
+        setIsTyping(true)
+    } )
+    socket.on("userStopTyping", (res: any)=>{
+        setIsTyping(false)
+    } )
+
+    return () => {
+      socket.off("userTyping")
+      socket.off("userStopTyping")
+      setIsTyping(false)
+    }
+
+},[socket])
+
+
+useEffect(()=> {
+  if(socket === null) return
+  const recipientId = chats?.members[0]?._id 
+
+  if(message == ''){
+    socket.emit("stop-typing",  {recipientId} )
+  }else{
+    socket.emit("typing",  {recipientId} )
+  }
+}, [message])
 
 
 
@@ -252,6 +284,8 @@ const sendMessage = async (param: string) => {
 
     
 }
+
+
 
 
 
@@ -330,7 +364,7 @@ useEffect(()=> {
       
        { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
 
-       <MobileFooter tab={tab} user={user} setTab={setTab} setLoginModal={setLoginModal}   />
+       <MobileFooter tab={tab} user={user} setTab={setTab} setLoginModal={setLoginModal}  chats={chats}  />
 
        
        <DesktopFooter/>
@@ -370,7 +404,7 @@ useEffect(()=> {
        {tab ==='profile' && <Lprofile user={user} />}
        
        { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
-       <MobileFooter user={user} tab={tab} setTab={setTab} setLoginModal={setLoginModal}   />
+       <MobileFooter user={user} tab={tab} setTab={setTab} setLoginModal={setLoginModal} chats={chats}  />
 
        
        <DesktopFooter/>
@@ -387,16 +421,16 @@ useEffect(()=> {
 
 const LoginModal = ({setLoginModal}:any) =>(
 <div className="fixed z-[1000] flex items-center w-full h-full bg-white bg-opacity-70">
-    <div data-aos="zoom-in" className="relative w-[90vw] mx-4 bg-white rounded-lg shadow dark:bg-gray-700">
+    <div data-aos="zoom-in" className="relative w-[90vw] mx-auto md:p-[5rem] bg-white rounded-lg shadow dark:bg-gray-700">
         <FaTimes onClick={() => setLoginModal(false)} size={30} className="text-black  dark:text-white absolute top-3 right-2.5" />
 
         <div className="p-6 w-full h-full">
             <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">Ready to book a tour?</h3>
-            <a type='submit'  href="/login" className="text-center bg-blue-800 mb-4 hover:opacity-50 text-white py-2 py-3 md:py-2 rounded-md w-full">Login</a>
+            <a type='submit'  href="/login" className="text-center bg-blue-800 mb-4 hover:opacity-50 text-white py-2 py-3 md:py-4 rounded-md w-full">Login</a>
             <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
                 Not registered?
             </div>
-            <a type="submit" href="/signup" className="bg-green-700 flex justify-center hover:opacity-50 text-white py-2 py-3 md:py-2 rounded-md w-full">
+            <a type="submit" href="/signup" className="bg-green-700 flex justify-center hover:opacity-50 text-white py-2 py-3 md:py-4 rounded-md w-full">
                 Sign Up
             </a>
         </div>

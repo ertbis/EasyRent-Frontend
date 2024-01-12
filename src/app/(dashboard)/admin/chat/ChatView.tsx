@@ -59,26 +59,28 @@ const ChatView = ({params} : any) => {
 
 
 
- const setNotification = () => {
-  const unreadNotifications = notifications.filter((n: any) => n.isRead === false);
-
-  const updatedChats = chats?.map((chat: any) => {
-    // Check if the chat's members[0]._id matches the senderId in any unreadNotification
-    const hasUnreadMessages = unreadNotifications.some((notification: any) => {
-      return chat.members[0]._id === notification.senderId && !notification.isRead;
+  const setNotification = () => {
+    const unreadNotifications = notifications.filter((n: any) => n.isRead === false);
+  
+    const updatedChats = chats?.map((chat: any) => {
+      // Check if the chat's members[0]._id matches the senderId in any unreadNotification
+      console.log(chat)
+      console.log(unreadNotifications)
+      const hasUnreadMessages = unreadNotifications.some((notification: any) => {
+        return chat.members[0]?._id === notification.senderId;
+      });
+      // If there are unread messages for this chat, increment unreadMessageCount
+      return {
+        ...chat,
+        unreadMessageCount: hasUnreadMessages ? (chat.unreadMessageCount  + 1) : (chat.unreadMessageCount || 0),
+      };
     });
-
-    // If there are unread messages for this chat, increment unreadMessageCount
-    return {
-      ...chat,
-      unreadMessageCount: hasUnreadMessages ? (chat.unreadMessageCount  + 1) : (chat.unreadMessageCount || 0),
-    };
-  });
-  if(updatedChats && updatedChats.length > 0){
-
-    setChats([...updatedChats]);
-  }
-};
+    if(updatedChats && updatedChats.length > 0){
+  
+      setChats([...updatedChats]);
+      
+    }
+  };
 
 
 
@@ -155,10 +157,12 @@ useEffect(()=> {
      }else {
       setNotifications((prev:any) => [res, ...prev])
      }
-     console.log(isChatOpen)
-     console.log(notifications)
+    //  console.log(isChatOpen)
+    if(notifications){
+       console.log("sgd" + notifications)
+       setNotification()
+     }
     })
-    setNotification()
 
     return () => {
       socket.off("getMessage")
@@ -388,6 +392,8 @@ useEffect(() => {
                                 <div key={index} className={`w-full flex   px-6 ${data?.senderId == sender?._id ? "justify-end" : "justify-start"}`}>
                                     <div className={` md:w-[30%] my-3 min-h-[4rem] rounded-lg p-4  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] " : "bg-[#F5FEFF] text-[black]"}`}>
                                         <p className="">{data.text}</p>
+                                        <TimeAgo timestamp={data.updatedAt} />
+
                                     </div>
                             </div>
 
@@ -399,7 +405,7 @@ useEffect(() => {
 
                            {isTyping &&             
                               <div className="w-full flex   px-6 justify-end">
-                                  <p className="text-medium w-[5rem] h-8 text-gray-light">typing{text}</p>
+                                  <p className="text-medium w-[5rem] h-8 text-[black]">typing{text}</p>
                               </div>
                           }
 
@@ -446,3 +452,36 @@ useEffect(() => {
 
 
 export default ChatView
+
+const TimeAgo = ({ timestamp }: any) => {
+  const [timeAgo, setTimeAgo] = useState('');
+
+  useEffect(() => {
+    const updateAgo = () => {
+      const currentDate : any = new Date();
+      const messageDate : any = new Date(timestamp);
+
+      const timeDifference = currentDate - messageDate;
+      const seconds = Math.floor(timeDifference / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+
+      if (seconds < 60) {
+        setTimeAgo(`${seconds} second${seconds === 1 ? '' : 's'} ago`);
+      } else if (minutes < 60) {
+        setTimeAgo(`${minutes} minute${minutes === 1 ? '' : 's'} ago`);
+      } else if (hours < 24) {
+        setTimeAgo(`${hours} hour${hours === 1 ? '' : 's'} ago`);
+      } else {
+        setTimeAgo('more than a day ago');
+      }
+    };
+
+    updateAgo();
+    const intervalId = setInterval(updateAgo, 60000);
+
+    return () => clearInterval(intervalId);
+  }, [timestamp]);
+
+  return <span className="text-gray-400 text-xs">{timeAgo}</span>;
+};

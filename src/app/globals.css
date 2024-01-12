@@ -37,6 +37,8 @@ body {
   color: rgb(var(--foreground-rgb));
   background: #f5f4f893;
   font-family: 'Open Sans', sans-serif;
+  /* width: 70vw;
+  margin: auto; */
 }
 
 p, h1,h2,h3,h4,h5{

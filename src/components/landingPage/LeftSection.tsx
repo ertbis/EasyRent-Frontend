@@ -28,7 +28,7 @@ const LeftSection :FC<hType>= ({houses}) => {
             <FeaturedCard key={i} house={data}/>
         )
       }): 
-      <div id='custom-scrollbar-container' className='  overflow-x-auto flex justify-center item-center md:grid  md:grid-cols-2  gap-4 w-full '>
+      <div id='custom-scrollbar-container' className='  overflow-x-auto flex  justify-start item-center  //md:grid  //md:grid-cols-2  gap-4 w-full '>
           <SkeletonLoader/> 
           <SkeletonLoader/> 
           <SkeletonLoader/> 

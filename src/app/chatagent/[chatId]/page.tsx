@@ -195,8 +195,9 @@ const writeMessage =(e :any) => {
               setScreen("chat")
             }else{
               setChatMessages(resp.data.data)
-              setIsLoading(false); 
-              setScreen("chat")
+              location.reload() 
+              // setScreen("chat")
+              // setIsLoading(false); 
             }
            
 

@@ -13,12 +13,13 @@ interface LpHeaderProps {
     setTab: React.Dispatch<React.SetStateAction<string>>;
     setLoginModal:React.Dispatch<React.SetStateAction<boolean>>;
     user: any,
-    tab: any
+    tab: any,
+    chats: any
   }
   
   
   
-  const MobileFooter :FC<LpHeaderProps>  = ({setTab, setLoginModal, tab , user}) => {
+  const MobileFooter :FC<LpHeaderProps>  = ({setTab, setLoginModal, tab , user, chats}) => {
     const [isLogIn, setIsLogIn] = useState(false)
    
     useEffect(()=> {
@@ -54,10 +55,19 @@ interface LpHeaderProps {
                     <p className='text-[0.5rem] '>Save</p>
                 </div>
                 <div  onClick={()=> handletabClick("inbox")}
-                    className={` ${activeButton == "inbox" ? "text-green-700  " : "text-grey"} cursor-pointer   flex flex-col  justify-center  z-100 items-center`} >
+                    className={` ${activeButton == "inbox" ? "text-green-700  " : "text-grey"} cursor-pointer  relative  flex flex-col  justify-center  z-100 items-center`} >
                     {activeButton == 'inbox'  ? 
+              
                    <MessageIconFill color="#1BB81B" width="24" height="24" />
-                   :<MessageIcon  color="#343A40" width="24" height="24"/>
+                      
+                   :
+                   <>
+                    {chats?.unreadMessageCount > 0 &&
+                         <span className="bg-green-700 text-white rounded-full w-2 h-2  absolute top-[-0.5rem] right-[0] flex justify-center align-center font-semiBold">{chats.unreadMessageCount}</span>
+                    }
+
+                   <MessageIcon  color="#343A40" width="24" height="24"/>
+                   </>
                    }
                    < p className='text-[0.5rem] '>inbox</p>
                 </div>

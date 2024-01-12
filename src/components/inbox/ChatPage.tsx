@@ -5,6 +5,8 @@ import ChatCard from "./ChatCard";
 
 
 const ChatPage = () => {
+    
+
 
     const messages = [
         { sender: 'user', text: 'Hello!' },

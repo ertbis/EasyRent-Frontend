@@ -13,7 +13,7 @@ interface FilterFormProp {
 
 
 const FilterForm: FC<FilterFormProp> = ({ setShowFilterCard }) => {
-    const [filterQuery, setFilterQuery] = useState<any>({});
+    const [filterQuery, setFilterQuery] = useState<any>({bedroom: 0});
     const [bedroom, setBedroom] = useState(0)
     const [searchResult, setSearchResult] = useState<any>(null)
     const [showSearch, setShowSearch] = useState(true)
@@ -46,10 +46,19 @@ const FilterForm: FC<FilterFormProp> = ({ setShowFilterCard }) => {
         });
     };
 
+    //handle bedroom number
+    const  HandleSetBedroom = (param: number) => {
+        setFilterQuery({
+            ...filterQuery,
+            bedroom : filterQuery?.bedroom + param 
+        });
+    }
+
     // Handle form submission
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         setLoading(true)
+    
         try {
             const resp = await getFilterProperty(filterQuery)
             setLoading(false)
@@ -103,15 +112,15 @@ const FilterForm: FC<FilterFormProp> = ({ setShowFilterCard }) => {
                                 
                             <button
                             type="button"
-                            onClick={()=>setBedroom(bedroom - 1)}
+                            onClick={()=>HandleSetBedroom(-1)}
                             className="flex-1 p-2 rounded-lg  border  border-gray-300"
                             >
                             -
                             </button>
-                            <span className="flex-1  rounded-lg text-center p-2">{bedroom}</span>
+                            <span className="flex-1  rounded-lg text-center p-2">{filterQuery?.bedroom}</span>
                             <button
                             type="button"
-                                   onClick={() =>setBedroom(bedroom + 1)}
+                                   onClick={() =>HandleSetBedroom(1)}
                             className="flex-1  p-2  rounded-lg border border-gray-300"
                             >
                             +

@@ -1,7 +1,7 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineLeft } from 'react-icons/ai';
-import { UpdateUser } from '../../../../utils/data/endpoints';
+import { UpdateUser, getMyDetails } from '../../../../utils/data/endpoints';
 import Loading from '@/components/Loading';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
@@ -9,6 +9,7 @@ import { setName } from '@/app/GlobalRedux/Features/user/userSlice';
 import ErrorModal from '@/components/ErrorModal';
 import { PrevIcon } from '@/assets/icons1';
 import { useProtectedRoute } from '@/app/useProtectedRoute';
+import { setUser } from '../../../../utils/auth';
 
 const PersonalInfoForm: React.FC = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,28 @@ const PersonalInfoForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [myDetails, setMyDetails] = useState<any>({
+    lastName: '',
+    firstName: '',
+    phoneNumber: '',
+    gender: '',
+  });
+
+
+  useEffect(() => {
+    async function fetchDetails() {
+      try {
+        const resp = await getMyDetails();
+        setMyDetails(resp.data);
+        console.log(myDetails)
+      } catch (error: any) {
+        console.error(error);
+        setError(error.response?.data?.message || 'An error occurred');
+      }
+    }
+
+    fetchDetails();
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -32,7 +55,10 @@ const PersonalInfoForm: React.FC = () => {
     console.log(data)
     try {
       const resp = await UpdateUser(data);
-      await dispatch(setName(resp.data.user.lastName));
+      const res = await dispatch(setName(myDetails.lastName));
+      setUser({email :myDetails.email, role : myDetails.role ,
+        name:myDetails.lastName || "No name", 
+        emailVerified:myDetails.emailVerified, })
       router.push(resp.data.user.role === 'landlord' ? '/ldashboard' : '/');
     } catch (error: any) {
       setErrorModal(true);

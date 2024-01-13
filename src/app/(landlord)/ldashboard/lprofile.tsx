@@ -52,13 +52,7 @@ const Lprofile = ({ user }: any) => {
   
     <>
         {loading ? (
-          <div className="relative">
-            <SectionLoading />
-            <div className="mt-2 z-[3000] flex justify-center mb-[5rem] w-[90%] ">
-            <a onClick={() => setOpenEdit(true)}  className="mb-4  font-medium  text-center py-2 text-green-700"> Log Out</a>
-          </div>
-          {openEdit && <LogOutModal setOpenEdit={setOpenEdit}/>}
-           </div>
+          <Loading />
      
           ) : (
       <>
@@ -120,8 +114,14 @@ const Lprofile = ({ user }: any) => {
     )}
     </>  :
     
+           
+            <div className="">
             <Loading />
- 
+            <div className="mt-10 z-[2000] flex justify-center mb-[5rem] w-[100%] ">
+            <a onClick={() => setOpenEdit(true)}  className="mb-4 cursor-pointer border border-green-700 p-2 rounded-xl z-[2000]  font-bold w-full text-center py-2 text-green-700"> Log Out</a>
+          </div>
+          {openEdit && <LogOutModal setOpenEdit={setOpenEdit}/>}
+           </div>
    }
     
 

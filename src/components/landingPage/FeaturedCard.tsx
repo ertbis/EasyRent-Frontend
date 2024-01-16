@@ -42,14 +42,15 @@ const addtoFavourite = async () => {
     }
   }
 };
+
   return ( 
-        <div  className="h-full bg-[#F5F4F8] hover:bg-[#cac8d1] rounded-xl px-2  pb-0 md:pb-4 mb-4" >
+        <div  className="h-full bg-[#F5F4F8] hover:bg-[#cac8d1] rounded-xlpx-2  pb-0 md:pb-4 mb-4" >
             <div className="relative w-[full]   h-[10rem]  md:h-[15rem]">
                  <div onClick={() => addtoFavourite()} className='z-10 absolute top-4 right-4 bg-white rounded-full p-1 cursor-pointer'>
                 {isFav  ?  
-                    <AiTwotoneHeart size={15} className='text-green-700'/>
+                    <AiTwotoneHeart size={10} className='text-green-700'/>
                 :
-                    <AiOutlineHeart size={15} className='text-grey-light'/>
+                    <AiOutlineHeart size={10} className='text-green-700'/>
                 }
 
                  </div>
@@ -64,14 +65,19 @@ const addtoFavourite = async () => {
                   />
                 </div>
              </div>
-             <div className="flex  mx-2">
+             <div className='mx-2 pb-1'>
                 <p className='flex-1 text-blue-800 w-[70%]  text-[0.75rem] lg:text-lg font-bold ' >{` #${house.amount}`}<span className=' text-[0.5rem] lg:text-sm'>/Year</span></p>
-               <div className='flex flex-[0.5] justify-start items-center text-grey-light text-sm w-full'>
-                    <CiLocationOn size={15}  className='ml-4 text-blue-800'/>
-                    <p className=' flex text-[0.5rem] lg:text-sm'> Damico</p>
-               </div>
-            </div>
-              <p className='text-[0.5rem] md:text-sm text-grey-light mx-2 md:font-bold'>{house.apartment}</p>
+                <div className="flex items-center justify-between  ">
+                    <p className='text-[0.5rem] md:text-sm text-grey-light  md:font-bold'>{house.apartment}</p>
+                    <div className='flex flex-[0.5] justify-start items-center text-grey-light text-sm w-full'>
+                          <CiLocationOn size={15}  className='ml-4 text-blue-800'/>
+                          <p className=' flex text-[0.5rem] lg:text-sm'> {house?.location}</p>
+                    </div>
+                </div>
+
+             </div>
+
+
               <div className='hidden  md:grid grid-cols-3 gap-1  justify-start items-center' >
                   {house?.mainFeatures?.light &&  
                     <div  title='24 hrs light' className="flex h-6 bg-white w-full  mr-2  justify-center items-center rounded-xl p-[0.3rem] " >

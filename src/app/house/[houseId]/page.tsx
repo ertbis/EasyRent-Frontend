@@ -2,7 +2,7 @@
 import { FC } from 'react';
 import {CiLocationOn } from  'react-icons/ci'
 import {FaWalking} from 'react-icons/fa'
-import {AiFillCar, AiOutlineCheck, AiOutlineHeart, AiOutlineLeft}  from 'react-icons/ai'
+import {AiFillCar, AiOutlineCheck, AiOutlineHeart, AiOutlineLeft, AiTwotoneHeart}  from 'react-icons/ai'
 import {HiOutlineLightBulb} from 'react-icons/hi'
 import {RxDotFilled} from "react-icons/rx"
 import { useSelector } from 'react-redux';
@@ -18,6 +18,8 @@ import { createChats, getSingleProperty, makePayment, scheduleTourEP } from '../
 import Loading from '@/components/Loading';
 import ErrorModal from '@/components/ErrorModal';
 import ScheduleTour from '../ScheduleTour';
+import { setfavHouses } from '@/app/GlobalRedux/Features/favHouse/favHouseSlice';
+import { HelpDeskIcon } from '@/assets/icons1';
 
 type cookieUserType = {
   email:string,
@@ -42,7 +44,8 @@ const HousePage :FC<any> = ({params}) => {
      const [loading, setLoading] = useState(false)
      const [error , setError]  = useState<string | null >(null)
      const [errorModal, setErrorModal] = useState<boolean>(false)
-
+     const [isFav, setIsFav]= useState(false)
+    const [showFullDesc, setShowFullDesc] = useState(false)
   
 
 
@@ -57,6 +60,17 @@ const HousePage :FC<any> = ({params}) => {
         setHome('/')
        }
    }
+
+
+const addtoFavourite = async () => {
+    // await dispatch(setfavHouses(house));
+    // if(favHouses){
+    //   const fav =favHouses.filter((item :HouseType) => item === house)
+    //   if(fav){
+    //      setIsFav(true)
+    //   }
+    // }
+  };
 
    const scheduleTour = async(e:any)=> {
     e.preventDefault()
@@ -107,6 +121,9 @@ const HousePage :FC<any> = ({params}) => {
 
    const createNewChat = async() => {
     setLoading(true)
+    if(!user.role){
+        window.location.replace("/login")
+    }
      try {
          const resp = await  createChats()
          console.log(resp)
@@ -137,70 +154,86 @@ const HousePage :FC<any> = ({params}) => {
             {error && errorModal && <ErrorModal setErrorModal={setErrorModal} text={error} />}
         <div className='bg-white    w-full ' >
 
-
-        <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-12  '>
-            <a href={home}>
-            <AiOutlineLeft  size={30} className='text-green-700  '/>
-            </a>
-            </div> 
            <div className="m-4 bg-[#F5F4F8] ">
-              <div className= "relative  w-[100%] h-[15rem] rounded-xl ">
-               
+              <div className= "relative  w-[100%] h-[25.4rem] rounded-xl ">
+                   
+                 <div onClick={() => addtoFavourite()} className='z-10 absolute flex justify-center items-center top-4 h-[3.1rem] w-[3.1rem] left-4 bg-white rounded-full cursor-pointer'>
+                        <a href={home}>
+                        <AiOutlineLeft  size={19} className='text-green-700  '/>
+                        </a>
+                     </div>
+                    <div onClick={() => addtoFavourite()} className='z-10 absolute flex justify-center items-center top-4 h-[3.1rem] w-[3.1rem] right-4 bg-white rounded-full cursor-pointer'>
+                        {isFav  ?  
+                            <AiTwotoneHeart size={20} className='text-green-700'/>
+                        :
+                            <AiOutlineHeart size={20} className='text-green-700'/>
+                        }
+                     </div>
                     <Image src={selectedHouse.images[0]} alt={selectedHouse.apartment}  fill   objectFit='cover'
                      objectPosition='center center' className='w-full h-full  rounded-xl  bg-cover ' />
                 </div>
 
-                <div className='flex mt-4'>
+                <div className='flex justify-around mt-4'>
 
-                <div className=" relative mr-2 w-full h-[10rem]">
+                <div className=" relative mr-2 w-[5.3rem] h-[5.6rem]">
                     {selectedHouse.images[1] && 
                     <Image src={selectedHouse.images[1]} alt={selectedHouse.apartment} fill   objectFit='cover'
                      objectPosition='center center' className='w-full h-full rounded-xl bg-cover ' />
                     }
                 </div>
-                <div className="relative ml-2 w-full h-[10rem] ">
+                {selectedHouse.images[2] &&
+                        <div className=" relative mr-2 w-[5.3rem] h-[5.6rem]">
+                        {selectedHouse.images[2] && 
+                        <Image src={selectedHouse.images[2]} alt={selectedHouse.apartment} fill   objectFit='cover'
+                         objectPosition='center center' className='w-full h-full rounded-xl bg-cover ' />
+                        }
+                    </div>
+                }
+                <div className="relative ml-2 w-[5.6rem] h-[5.6rem] ">
                 <div className='z-10 absolute top-4 left-10  bg-white  rounded-lg p-2 cursor-pointer'>
-                     <a onClick={showImages} className='text-gray-700 text-xs'>See all photos</a>
+                     <a onClick={showImages} className='text-gray-700 text-xs'>+{selectedHouse.images.length}</a>
                 </div>
-                {selectedHouse.images[2]   && 
-                    <Image src={selectedHouse?.images[2]} alt={selectedHouse.apartment}  fill   objectFit='cover'
+                {selectedHouse.images[3]   && 
+                    <Image src={selectedHouse?.images[3]} alt={selectedHouse.apartment}  fill   objectFit='cover'
                      objectPosition='center center' className='w-full h-full rounded-xl bg-cover' />
                 }
                 </div>
                 </div>
+
+
+                <div className='flex flex-col justify-center items-between rounded-xl  my-2  text-grey-light bg-[#F5F4F8]  p-2 rounded-lg' >
+                    <div  className='flex'>
+                        <p className='flex-[0.5] text-blue-800 w-[90%] text-xl font-bold ' > {`#${selectedHouse.amount}/Years`}</p>
+                    <div className='flex justify-end text-sm w-full'>
+                            <CiLocationOn size={15}  className='ml-4 text-blue-800'/>
+                            <p className=' flex  text-sm'> {selectedHouse.location}</p>
+                    </div>
+                    </div>
+                    <p className=' text-sm my-2 font-bond'>{selectedHouse.apartment}</p>
+                
+                <div className=' flex justify-start items-center bg-[#F5F4F8]  pb-2 rounded-lg' >
+                    {selectedHouse.mainFeatures.light   &&
+                            <div className="flex h-6 bg-white  mr-2  justify-center items-center rounded-xl p-[0.4rem] " >
+                                <HiOutlineLightBulb  className='w-4 h-4 mr-[0.5rem]' />
+                                <p className="text-grey-light text-[0.5rem] ">24 hrs light</p>
+                            </div>
+                    }
+                    {selectedHouse.mainFeatures.school   &&
+                            <div className="flex h-6 bg-white mr-2  justify-center items-center rounded-xl p-[0.4rem] " >
+                                <FaWalking  className='w-4 h-4 mr-[0.5rem]' />
+                                <p className="text-grey-light text-[0.5rem]" >School in 30mins</p>
+                            </div>
+                    }
+                    {selectedHouse.mainFeatures.carPack   &&
+                            <div className="flex h-6 bg-white mr-2   justify-center items-center rounded-xl p-[0.4rem] " >
+                                <AiFillCar   className='w-4 h-4 mr-[0.5rem]'  />
+                                <p className="text-grey-light text-[0.5rem]">Car Park</p>
+                            </div>
+                    }
+                    </div>
+                </div>
         </div>
 
-        <div className='flex flex-col justify-center items-between  m-4  text-grey-light bg-[#F5F4F8]  p-2 rounded-lg' >
-            <div  className='flex'>
-                <p className='flex-[0.5] text-blue-800 w-[90%] text-xl font-bold ' > {`#${selectedHouse.amount}/Years`}</p>
-               <div className='flex justify-end text-sm w-full'>
-                    <CiLocationOn size={15}  className='ml-4 text-blue-800'/>
-                    <p className=' flex  text-sm'> {selectedHouse.location}</p>
-               </div>
-            </div>
-              <p className=' text-sm my-2 font-bond'>{selectedHouse.apartment}</p>
-         
-          <div className=' flex justify-start items-center bg-[#F5F4F8]  p-2 rounded-lg' >
-            {selectedHouse.mainFeatures.light   &&
-                    <div className="flex h-6 bg-white  mr-2  justify-center items-center rounded-xl p-[0.4rem] " >
-                        <HiOutlineLightBulb  className='w-4 h-4 mr-[0.5rem]' />
-                        <p className="text-grey-light text-[0.5rem] ">24 hrs light</p>
-                    </div>
-            }
-            {selectedHouse.mainFeatures.school   &&
-                    <div className="flex h-6 bg-white mr-2  justify-center items-center rounded-xl p-[0.4rem] " >
-                        <FaWalking  className='w-4 h-4 mr-[0.5rem]' />
-                        <p className="text-grey-light text-[0.5rem]" >School in 30mins</p>
-                    </div>
-            }
-            {selectedHouse.mainFeatures.carPack   &&
-                    <div className="flex h-6 bg-white mr-2   justify-center items-center rounded-xl p-[0.4rem] " >
-                        <AiFillCar   className='w-4 h-4 mr-[0.5rem]'  />
-                        <p className="text-grey-light text-[0.5rem]">Car Park</p>
-                    </div>
-            }
-            </div>
-        </div>
         <div className='m-4 w-[90vw] bg-[#F5F4F8]  p-2 rounded-lg'>
              <h2 className="text-blue-800 w-[70%] text-sm font-medium mt-4 ">Features and Amenities</h2>
              <p className='flex flex-wrap text-grey-light'>
@@ -241,9 +274,19 @@ const HousePage :FC<any> = ({params}) => {
 
         <div className='m-4 w-[90vw] bg-[#F5F4F8]  p-2 rounded-lg '>
              <h2 className="text-blue-800 w-[70%] text-sm font-medium mt-4 ">About This Home</h2>
+            {showFullDesc ?
              <p className='flex flex-wrap text-grey-light'>
-             {selectedHouse.about}
+             {selectedHouse.about} 
+             <span onClick={() => setShowFullDesc(false)} className='text-green-700 cursor-pointer text-xs' >show less</span>
              </p>
+             :
+             <p className='flex flex-wrap text-grey-light'>
+             {selectedHouse.about.slice(0, 100)} ..... 
+             <span onClick={() => setShowFullDesc(true)} className='text-green-700  cursor-pointer text-xs' >see more...</span>
+             </p>
+        
+        
+        }
         </div>
 
         <div className='m-4 w-[90vw]  bg-[#F5F4F8]  p-2 rounded-lg'>
@@ -253,16 +296,18 @@ const HousePage :FC<any> = ({params}) => {
         </div>
 
        
-        <div className='m-4  mb-8 flex justify-between w-[90vw]'>
-        {user.role == "student" &&
-        <button onClick={() => createNewChat()}
-        className='bg-transparent text-green-700 font-bold rounded-lg border border-1 border-solid border-green-700 w-[40%]  h-10' >Help</button>          
+        <div className='m-4 mt-6  mb-8 flex justify-between w-[90vw]'>
+        {(!user.role || user.role == "student") &&
+           <div className=''
+           onClick={() => createNewChat()}>
+                <HelpDeskIcon width="" height="" color="" />
+            </div>
         }
         {(tourDetails?.day && tourDetails.time && tourDetails.period)  ?
-        <button onClick={() => setTab('scheduleTour')} className='font-bold rounded-lg w-[40%]  h-10  bg-green-700 text-white '
+        <button onClick={() => setTab('scheduleTour')} className='font-bold flex-1 mx-2 rounded-lg w-[40%]  h-10  bg-green-700 text-white '
         >Proceed</button>   
         :
-         <button className=' font-bold rounded-lg w-[40%]  h-10    bg-[transparent] text-gray-200 border border-gray-300' 
+         <button className=' font-bold rounded-lg flex-1  h-10    bg-[transparent]  mx-2 text-gray-200 border border-gray-300' 
          >Proceed</button>        
         }
               

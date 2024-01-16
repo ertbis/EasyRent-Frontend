@@ -53,12 +53,13 @@ const FilterForm: FC<FilterFormProp> = ({ setShowFilterCard }) => {
             bedroom : filterQuery?.bedroom + param 
         });
     }
+    
 
     // Handle form submission
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         setLoading(true)
-    
+        
         try {
             const resp = await getFilterProperty(filterQuery)
             setLoading(false)

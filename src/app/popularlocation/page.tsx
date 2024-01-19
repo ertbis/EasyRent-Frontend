@@ -14,12 +14,12 @@ import { PrevIcon } from '@/assets/icons1';
 import MobileFeaturedCardSkeleton from '@/components/common/MobileFeatureCardSkeleton';
 
 
-const CurrentLocation :FC = () => {
+const PopularLocation :FC = () => {
     const [showFilterCard, setShowFilterCard] = useState(false)
     const  [houses , setHouses]= useState<any>(null)
 
     const fetchbyLocationAndPopularity =async () => {
-        const resp = await getAllProperty('d');
+        const resp = await getAllProperty('el');
         setHouses(resp.data)
      }
   
@@ -98,8 +98,7 @@ return (
 }
 
 
-export default CurrentLocation
+export default PopularLocation
 
 
 
-//https://987372179093.signin.aws.amazon.com/console

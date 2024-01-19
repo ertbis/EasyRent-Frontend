@@ -30,10 +30,12 @@ const HsImages :FC<propType> = ({selectedHouse, setTab}) => {
        </div>
         <div className='bg-[#F5F4F8]    w-full ' >
 
+
            <div className="m-4">
-              <div className= "relative  w-[100%] h-[17rem] rounded-xl ">
+              <div className= "relative  w-[100%] h-[25.4rem] rounded-xl ">
                
-                    <Image src={selectedImage ? selectedImage :  selectedHouse.images[0]} alt={selectedHouse.apartment}  fill className='w-full h-full  rounded-xl  bg-cover ' />
+                    <Image src={selectedImage ? selectedImage :  selectedHouse.images[0]} alt={selectedHouse.apartment}   fill   objectFit='cover'
+                     objectPosition='center center' className='w-full h-full  rounded-xl  bg-cover ' />
                 </div>
 
                 <div className='grid grid-cols-2 mt-4'>

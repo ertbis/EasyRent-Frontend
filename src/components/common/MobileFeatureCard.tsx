@@ -64,11 +64,11 @@ useEffect(() => {
               <EditIcon width='20' height='21' color='#1BB81B'/>
              </div> :
 
-            <div onClick={() => addtoFavourite()} className='z-10 absolute top-4 right-4 bg-white rounded-full p-1 cursor-pointer'>
+            <div onClick={() => addtoFavourite()} className='z-10 flex  justify-center items-center h-[3rem] w-[3rem] absolute top-4 right-4 bg-white rounded-full p-1 cursor-pointer'>
             {isFav  ?  
-                <AiTwotoneHeart size={15} className='text-green-700'/>
+                <AiTwotoneHeart size={25} className='text-green-700'/>
             :
-                <AiOutlineHeart size={15} className='text-grey-light'/>
+                <AiOutlineHeart size={25} className='text-green-700'/>
             }
 
             </div>
@@ -76,11 +76,11 @@ useEffect(() => {
             } 
             
              </>:
-              <div onClick={() => addtoFavourite()} className='z-10 absolute top-4 right-4 bg-white rounded-full p-1 cursor-pointer'>
+              <div onClick={() => addtoFavourite()} className='z-10 absolute top-4 right-4 h-[3rem] w-[3rem] bg-white rounded-full p-1 cursor-pointer'>
               {isFav  ?  
-                  <AiTwotoneHeart size={15} className='text-green-700'/>
+                  <AiTwotoneHeart size={25} className='text-green-700'/>
               :
-                  <AiOutlineHeart size={15} className='text-grey-light'/>
+                  <AiOutlineHeart size={25} className='text-green-700'/>
               }
 
                </div>

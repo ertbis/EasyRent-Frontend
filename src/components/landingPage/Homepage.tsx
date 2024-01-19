@@ -229,7 +229,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses}) => {
 
       <div className="flex p-0 m-0  mt-[1rem]  px-4 w-full font-[400] text-[1rem] justify-between mx-auto">
          <h3 className="text-blue-800 p-0 m-0">Popular</h3>
-         <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
+         <a href="/popularlocation" className="text-green-700 p-0 m-0">See all</a>
       </div>
 
       <div className="w-[90vw] mx-auto p-0 m-0  mb-12 ">

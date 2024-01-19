@@ -52,10 +52,10 @@ const GetHelp = () => {
                        <p  className="flex-1  text-lg ml-4">Call</p>
                         <MdKeyboardArrowRight  size={24} className=""/>
                     </div>
-                    <div onClick={() => createNewChat()} 
+                    <div
                      className=" flex py-3 border-b border-gray-300 items-center  hover:bg-gray-200 text-gray-600">
                        <p  className="flex-1  text-[1rem] ml-4">Chat with Us</p>
-                        <MdKeyboardArrowRight   size={24} className=""/>
+                        <p className="text-[red] text-xs">Not Yet Available</p>
                     </div>
                     <div   onClick={() => setPage("feedback")}
                      className=" flex py-3 border-b border-gray-300  items-center  text-gray-600">

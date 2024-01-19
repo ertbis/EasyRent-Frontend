@@ -300,7 +300,7 @@ const addtoFavourite = async () => {
         {(!user.role || user.role == "student") &&
            <div className=''
            onClick={() => createNewChat()}>
-                <HelpDeskIcon width="" height="" color="" />
+                <HelpDeskIcon width="50" height="51" color="#138DA0" />
             </div>
         }
         {(tourDetails?.day && tourDetails.time && tourDetails.period)  ?

@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FaCalendarAlt } from 'react-icons/fa';
+import { CalenderIcon } from '@/assets/icons1';
 
 const CarouselDatePicker: React.FC<any> = ({setTourDetails, tourDetails }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -46,10 +47,11 @@ const CarouselDatePicker: React.FC<any> = ({setTourDetails, tourDetails }) => {
   const settings = {
     infinite: false,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 3,
     slidesToScroll: 1,
     centerMode: false,
     centerPadding: '60px',
+    variableWidth:true,
   };
 
   const dateList = [
@@ -77,22 +79,23 @@ const CarouselDatePicker: React.FC<any> = ({setTourDetails, tourDetails }) => {
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <div className="mb-2 flex justify-end w-full">
-        <div className="relative text-[red] border w-6 border-[#808080] rounded-lg">
+        <div onClick={()=>handleIconClick()} className="relative flex mr-2 rounded-lg">
           <input
             type="date"
-            className="  w-full h-full cursor-pointer  rounded-lg  text-[#fff] "
+            className="opacity-0   cursor-pointer  rounded-lg  text-[#fff] "
             ref={inputDateRef}
             onChange={handleInputDateChange}
           />
+          <CalenderIcon />
         </div>
       </div>
-      <div className="w-full">
+      <div className="w-full ">
         <Slider {...settings}>
           {dateList.map((date) => (
-            <div className="" key={date.getTime()}>
+            <div style={{ width: 100 }} className="" key={date.getTime()}>
               <div
-                className={`h-24 w-22 m-1 border border-[2px]  ${
-                  selectedDate?.getDate() === date.getDate() ? ' text-gray-600 border-gray-700' : 'text-gray-400 bg-transparent'
+                className={` m-1 border border-[2px]  text-[#343A40] border-[#343A40]  ${
+                  selectedDate?.getDate() === date.getDate() ? ' opacity-1' : 'opacity-[0.5]'
                 }`}
                 onClick={() => handleBoxClick(date)}
               >

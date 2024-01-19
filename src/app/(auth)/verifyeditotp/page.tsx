@@ -163,6 +163,28 @@ const VerifyEditOTP = () => {
       }
    
   }
+
+
+  const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
+    const pastedData = event.clipboardData.getData('text');
+    
+    // Handle pasted value character by character
+    for (let i = 0; i < pastedData.length; i++) {
+      if (otpInputs.current[i]) {
+        setOtp((prevOtp) => {
+          const updatedOtp = [...prevOtp];
+          updatedOtp[i] = pastedData[i];
+          return updatedOtp;
+        });
+      }
+    }
+  
+    // Move focus to the next input
+    if (pastedData.length > 0 && otpInputs.current[pastedData.length - 1]) {
+      otpInputs.current[pastedData.length - 1]!.focus();
+    }
+  };
+
   return (
     <div className="relative bg-cover" style={{ backgroundImage: 'url("/formbg.png")' }}>
       <div className="flex items-center justify-end min-h-screen w-full">
@@ -190,13 +212,15 @@ const VerifyEditOTP = () => {
                     <input
                       key={index}
                       ref={(el) => (otpInputs.current[index] = el)}
-                      type="number"
+                      type="text"
                       className="bg-gray-200 text-black outline-none rounded-md p-4 text-4xl w-full text-center"
                       maxLength={1}
                       value={otp[index] || ''}
                       onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(index, e.target.value)}
                       onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => handleKeyDown(index, e)}
-                    />
+                      onPaste={handlePaste}
+
+                      />
                   ))}
                 </div>
                 <div>

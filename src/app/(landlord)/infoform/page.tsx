@@ -51,8 +51,7 @@ const PersonalInfoForm: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setLoading(true);
-    const data = { firstName, lastName, gender };
-    console.log(data)
+    const data = { firstName, lastName, gender , phoneNumber };
     try {
       const resp = await UpdateUser(data);
       const res = await dispatch(setName(myDetails.lastName));

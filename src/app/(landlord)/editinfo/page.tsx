@@ -33,6 +33,7 @@ const EditPersonalInfoForm: React.FC = () => {
     async function fetchDetails() {
       try {
         const resp = await getMyDetails();
+        console.log(resp)
         setMyDetails(resp.data);
         console.log(myDetails)
       } catch (error: any) {

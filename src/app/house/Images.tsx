@@ -17,15 +17,13 @@ type propType ={
 const HsImages :FC<propType> = ({selectedHouse, setTab}) => {
     // const selectedHouse = useSelector((state: RootState) => state.selectedHouse.selectedHouse)
     const [selectedImage, setSelectedImage] = useState<string | null>(null)
-    console.log(selectedHouse)
     return ( 
         
         <div>
-           <div className=' text-grey-light flex  items-center  justify-between border-b border-grey-light px-4 rounded-md w-full h-16  '>
-          <a onClick={()=> setTab('house')}>
-        <AiOutlineLeft size={30} className='text-grey-light  '/>
+           <div className=' text-grey-light flex  items-center  justify-between border-b border-gray-200 px-4 rounded-md w-full h-12  '>
+            <a onClick={()=> setTab('house')}>
+                        <AiOutlineLeft  size={19} className='text-green-700  '/>
             </a>
-           <p className='text-[1.2rem] font-[700] text-blue-800'> Images</p>
 
        </div>
         <div className='bg-[#F5F4F8]    w-full ' >

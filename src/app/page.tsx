@@ -56,6 +56,16 @@ export default function Home() {
 
 
 
+
+
+
+
+
+
+
+
+
+
 //connect socket 
 useEffect(()=> {
   console.log(sender)
@@ -111,8 +121,8 @@ const fetchChat = async () => {
 
   } catch (e : any) {
     if(sender){
-      setErrorModal(true)
       console.log(e)
+      setErrorModal(true)
       setError( e?.response?.data?.message || "Try Again");
   
     }
@@ -325,7 +335,7 @@ useEffect(()=> {
 
  fetchbyLocationAndPopularity()
 
-},[nearHouses, popularHouses])
+},[])
 
 
   return (
@@ -351,7 +361,7 @@ useEffect(()=> {
 
 
        {/* <LpHeader  setTab={setTab}/> */}
-       {tab ==='home' && <HomePage  popularHouses={popularHouses}  nearHouses={nearHouses}  setTab={setTab}/>}
+       {tab ==='home' && <HomePage  popularHouses={popularHouses} cookUser={cookUser} nearHouses={nearHouses}  setTab={setTab}/>}
        {tab ==='save' && <FavouriteHousePage/>}
        {tab ==='inbox' && <InboxPage 
        chatMessages={chatMessages}   socket={socket} chats={chats}
@@ -374,7 +384,6 @@ useEffect(()=> {
        }
        </>
         :
-
     <main className="relative flex bg-[#f5f4f8 ]  min-h-screen flex-col items-center justify-between ">
        <Head>
         <title>ERT website</title>
@@ -385,7 +394,6 @@ useEffect(()=> {
          This web app  only work on mobile screen, kindly switch to a smaller screen size      </div>
       {logInModal &&
        <LoginModal setLoginModal={setLoginModal}/>
-     
       }
 
 
@@ -393,7 +401,7 @@ useEffect(()=> {
 
 
        {/* <LpHeader  setTab={setTab}/> */}
-       {tab ==='home' && <HomePage  popularHouses={popularHouses}  nearHouses={nearHouses} setTab={setTab}/>}
+       {tab ==='home' && <HomePage  popularHouses={popularHouses} cookUser={cookUser} nearHouses={nearHouses} setTab={setTab}/>}
        {tab ==='save' && <FavouriteHousePage/>}
        {tab ==='inbox' && <InboxPage 
        chatMessages={chatMessages}   socket={socket} chats={chats}

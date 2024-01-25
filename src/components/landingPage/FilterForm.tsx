@@ -6,6 +6,7 @@ import { getFilterProperty } from "../../../utils/data/endpoints";
 import FilterResult from "./FilterResult";
 import Loading from "../Loading";
 import ErrorModal from "../ErrorModal";
+import { PrevIcon } from "@/assets/icons1";
 
 interface FilterFormProp {
     setShowFilterCard: (show: boolean) => void;
@@ -79,7 +80,10 @@ const FilterForm: FC<FilterFormProp> = ({ setShowFilterCard }) => {
         
         <div className="fixed z-[500]  top-0 bg-[#a7a4a4b5] w-screen h-[100vh] flex justify-center items-center">
             <div data-aos="zoom-in" className="relative bg-white rounded-lg z-[10000] p-4 w-screen h-screen md:w-[20rem] md:h-[24rem]">
-                <AiOutlineLeft size={18} onClick={() => setShowFilterCard(false)} className="absolute text-gray-700 left-4 top-4 cursor-pointer" />
+                <div onClick={() => setShowFilterCard(false)}   className="absolute text-gray-700 left-4 top-4 cursor-pointer">
+                    <PrevIcon color="" width="" height=""/>
+                </div>
+  
                 <h3 className="text-blue-800 text-center font-bold text-lg">Filter</h3>
                 <hr />
                 { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}

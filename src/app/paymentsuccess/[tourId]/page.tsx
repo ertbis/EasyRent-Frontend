@@ -1,10 +1,10 @@
 "use client"
-import React, { useState } from 'react';
-import { createChats } from '../../../utils/data/endpoints';
+import React, { FC, useState } from 'react';
+import { createChats, createMessage } from '../../../../utils/data/endpoints';
 import Loading from '@/components/Loading';
 import ErrorModal from '@/components/ErrorModal';
 
-const SuccessPage = () => {
+const SuccessPage:FC<any> = ({params}) => {
     const [loading , setLoading]  = useState(false)
     const [error , setError]  = useState<string | null >(null)
     const [errorModal, setErrorModal] = useState<boolean>(false)
@@ -16,6 +16,13 @@ const SuccessPage = () => {
         try {
             const resp = await  createChats()
             console.log(resp)
+            const data ={
+              text: "New Tour Created",
+              chatId: resp.data[0]._id,
+              attachment : params.tourId
+            }
+            console.log(data)
+            const resp1 = await  createMessage(data)
            window.location.replace(`/chatagent/${resp.data[0]._id}`);
 
         } catch (e : any) {

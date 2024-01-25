@@ -7,6 +7,9 @@ import {io} from "socket.io-client"
 import { onlineUserType } from "@/types/types";
 import Loading from "@/components/Loading";
 import ErrorModal from "@/components/ErrorModal";
+import Image from "next/image";
+import { CiLocationOn } from "react-icons/ci";
+import TimeAgo from "@/app/chatagent/TimeAgo";
 
 
 
@@ -390,11 +393,40 @@ useEffect(() => {
                             
                             return(
                                 <div key={index} className={`w-full flex   px-6 ${data?.senderId == sender?._id ? "justify-end" : "justify-start"}`}>
-                                    <div className={` md:w-[30%] my-3 min-h-[4rem] rounded-lg p-4  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] " : "bg-[#F5FEFF] text-[black]"}`}>
-                                        <p className="">{data.text}</p>
-                                        <TimeAgo timestamp={data.updatedAt} />
+                                 {data?.attachment  ?
 
-                                    </div>
+                            <div  className={`flex  w-[17.3rem] h-[7.5rem] my-3 min-h-[6rem] p-2  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] rounded-l-[1rem] rounded-br-[1rem] " : "bg-[#1BB81B] text-[#343A40] rounded-r-[1rem]  rounded-bl-[1rem]  "}`}>
+                                  <div className="h-[6.5rem] w-[8rem] mr-4 relative">
+                                        <Image    
+                                        src={data?.attachment.propertyId.images[0]}
+                                          // alt={house.apartment}
+                                        
+                                          alt=""
+                                          fill
+                                          objectFit='cover'
+                                          objectPosition='center center'
+                                          className='w-full h-full rounded-xl'
+                                        />
+                                        <p  className="bg-white bottom-[10%] left-[10%] text-[#343A40] rounded-[0.5rem] text-[0.5rem] p-[0.5rem]  absolute">{data?.attachment?.propertyId?.location }</p>
+                                  </div>
+                                  <div className="flex flex-col justify-center items-center">
+                                            <a href={`/house/${data?.attachment?.propertyId?._id}`}  className="text-[1rem] text-[#fff] font-semibold ">{data?.attachment?.propertyId?.apartment }  apartment </a>
+                                            <div className='flex flex-[0.5] justify-start items-center text-grey-light text-sm w-full'>
+                                              <CiLocationOn size={13}  className='ml-4 text-[#F5FEFF]'/>
+                                              <p className=' flex text-[0.625rem] text-[#F5FEFF] lg:text-sm'> {data?.attachment?.propertyId?.location }</p>
+                                            </div>
+
+                                  </div>
+                            </div>
+
+                            :
+                            <>
+                            <div className={` md:w-[20%] my-3 min-h-[4rem] rounded-lg p-4  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] " : "bg-[#F5FEFF] text-[#343A40] "}`}>
+                                <p className="">{data.text}</p>
+                            <TimeAgo timestamp={data.updatedAt} />
+                            </div>
+                            </>
+                            }
                             </div>
 
                             )
@@ -453,35 +485,3 @@ useEffect(() => {
 
 export default ChatView
 
-const TimeAgo = ({ timestamp }: any) => {
-  const [timeAgo, setTimeAgo] = useState('');
-
-  useEffect(() => {
-    const updateAgo = () => {
-      const currentDate : any = new Date();
-      const messageDate : any = new Date(timestamp);
-
-      const timeDifference = currentDate - messageDate;
-      const seconds = Math.floor(timeDifference / 1000);
-      const minutes = Math.floor(seconds / 60);
-      const hours = Math.floor(minutes / 60);
-
-      if (seconds < 60) {
-        setTimeAgo(`${seconds} second${seconds === 1 ? '' : 's'} ago`);
-      } else if (minutes < 60) {
-        setTimeAgo(`${minutes} minute${minutes === 1 ? '' : 's'} ago`);
-      } else if (hours < 24) {
-        setTimeAgo(`${hours} hour${hours === 1 ? '' : 's'} ago`);
-      } else {
-        setTimeAgo('more than a day ago');
-      }
-    };
-
-    updateAgo();
-    const intervalId = setInterval(updateAgo, 60000);
-
-    return () => clearInterval(intervalId);
-  }, [timestamp]);
-
-  return <span className="text-gray-400 text-xs">{timeAgo}</span>;
-};

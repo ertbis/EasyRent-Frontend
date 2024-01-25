@@ -14,7 +14,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getUser } from '../../../../utils/auth';
 import HsImages from '../Images';
-import { createChats, getSingleProperty, makePayment, scheduleTourEP } from '../../../../utils/data/endpoints';
+import { createChats, deleteTour, getSingleProperty, makePayment, scheduleTourEP } from '../../../../utils/data/endpoints';
 import Loading from '@/components/Loading';
 import ErrorModal from '@/components/ErrorModal';
 import ScheduleTour from '../ScheduleTour';
@@ -56,7 +56,10 @@ const HousePage :FC<any> = ({params}) => {
        setSelectedHouse(resp.data)
        if(cookieUser.role == 'landlord'){
         setHome('/ldashboard')
-       }else {
+       }else if (cookieUser.role == 'admin'){
+        setHome('/admin')
+       }
+       else {
         setHome('/')
        }
    }
@@ -80,7 +83,7 @@ const addtoFavourite = async () => {
              const resp = await scheduleTourEP({...tourDetails ,
               propertyId : selectedHouse._id
              })
-
+             var tourID =  resp?.data.data._id
              const param = {
                 amount: 1000,
                 Id : resp.data.data._id,
@@ -96,7 +99,8 @@ const addtoFavourite = async () => {
              setErrorModal(true)
              setLoading(false)
              setError( error?.response?.data?.message || "Try Again");
-             console.log(error)   
+             console.log(error)  
+             await deleteTour(tourID) 
          }
 
      }else {
@@ -138,7 +142,7 @@ const addtoFavourite = async () => {
  }
     
     return ( 
-        <>
+        <div className=' md:w-[50vw]  md:mx-auto'>
          {tab == 'scheduleTour'  && <ScheduleTour scheduleTour={scheduleTour}setTab={setTab} tourDetails={tourDetails}/>}
         { tab == 'images' ? 
         <HsImages setTab={setTab} selectedHouse={selectedHouse}/>
@@ -152,7 +156,7 @@ const addtoFavourite = async () => {
           ) : (
             <>
             {error && errorModal && <ErrorModal setErrorModal={setErrorModal} text={error} />}
-        <div className='bg-white    w-full ' >
+        <div className='bg-white    w-full' >
 
            <div className="m-4 bg-[#F5F4F8] ">
               <div className= "relative  w-[100%] h-[25.4rem] rounded-xl ">
@@ -234,7 +238,7 @@ const addtoFavourite = async () => {
                 </div>
         </div>
 
-        <div className='m-4 w-[90vw] bg-[#F5F4F8]  p-2 rounded-lg'>
+        <div className='m-4 w-[90%] bg-[#F5F4F8]  p-2 rounded-lg'>
              <h2 className="text-blue-800 w-[70%] text-sm font-medium mt-4 ">Features and Amenities</h2>
              <p className='flex flex-wrap text-grey-light'>
                 {selectedHouse.features.map((data: any,  i:any)=> {
@@ -260,7 +264,7 @@ const addtoFavourite = async () => {
         <>
         
 
-        <div className='m-4 w-[90vw] bg-[#F5F4F8]  p-2 rounded-lg'>
+        <div className='m-4 w-[90%] bg-[#F5F4F8]  p-2 rounded-lg'>
              <h2 className="text-blue-800 w-[70%] text-sm font-medium mt-4 ">Steps to Acquire this Apartment</h2>
              <p className='flex flex-wrap text-grey-light'>
                 <span className='flex items-center mr-2'> <RxDotFilled size={15} className='mr-2'/>Book Tour</span> 
@@ -272,7 +276,7 @@ const addtoFavourite = async () => {
              </p>
         </div>
 
-        <div className='m-4 w-[90vw] bg-[#F5F4F8]  p-2 rounded-lg '>
+        <div className='m-4 w-[90%] bg-[#F5F4F8]  p-2 rounded-lg '>
              <h2 className="text-blue-800 w-[70%] text-sm font-medium mt-4 ">About This Home</h2>
             {showFullDesc ?
              <p className='flex flex-wrap text-grey-light'>
@@ -288,30 +292,36 @@ const addtoFavourite = async () => {
         
         }
         </div>
+        {!(user.role == "admin") ? 
+                    <>
+                    <div className='m-4 w-[90%]  bg-[#F5F4F8]  p-2 rounded-lg'>
+                        <h2 className="text-blue-800 w-[70%] text-sm font-medium mt-4 ">Go Tour This Home</h2>
+                        
+                    <CarouselDatePicker  tourDetails={tourDetails}  setTourDetails={setTourDetails}/>
+                    </div>
 
-        <div className='m-4 w-[90vw]  bg-[#F5F4F8]  p-2 rounded-lg'>
-             <h2 className="text-blue-800 w-[70%] text-sm font-medium mt-4 ">Go Tour This Home</h2>
-              
-          <CarouselDatePicker  tourDetails={tourDetails}  setTourDetails={setTourDetails}/>
-        </div>
+                
+                    
+                    <div className='m-4 mt-6  mb-8 flex justify-between w-[90%]'>
+                    {(!user.role || user.role == "student") &&
+                    <div className=''
+                    onClick={() => createNewChat()}>
+                            <HelpDeskIcon width="50" height="51" color="#138DA0" />
+                        </div>
+                    }
+                    {(tourDetails?.day && tourDetails.time && tourDetails.period)  ?
+                    <button onClick={() => setTab('scheduleTour')} className='font-bold flex-1 mx-2 rounded-lg w-[40%]  h-10  bg-green-700 text-white '
+                    >Proceed</button>   
+                    :
+                    <button className=' font-bold rounded-lg flex-1  h-10    bg-[transparent]  mx-2 text-gray-200 border border-gray-300' 
+                    >Proceed</button>        
+                    }
+                        
+                    </div>
+                    </> :
+                    <></>
 
-       
-        <div className='m-4 mt-6  mb-8 flex justify-between w-[90vw]'>
-        {(!user.role || user.role == "student") &&
-           <div className=''
-           onClick={() => createNewChat()}>
-                <HelpDeskIcon width="50" height="51" color="#138DA0" />
-            </div>
         }
-        {(tourDetails?.day && tourDetails.time && tourDetails.period)  ?
-        <button onClick={() => setTab('scheduleTour')} className='font-bold flex-1 mx-2 rounded-lg w-[40%]  h-10  bg-green-700 text-white '
-        >Proceed</button>   
-        :
-         <button className=' font-bold rounded-lg flex-1  h-10    bg-[transparent]  mx-2 text-gray-200 border border-gray-300' 
-         >Proceed</button>        
-        }
-              
-        </div>
         </>
         }
         </div>
@@ -329,7 +339,7 @@ const addtoFavourite = async () => {
 
         }
         
-        </>
+        </div>
         
      );
 }

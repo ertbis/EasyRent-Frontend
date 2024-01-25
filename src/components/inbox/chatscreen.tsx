@@ -6,6 +6,10 @@ import { MdOutlineSend } from "react-icons/md";
 import { getChat, getChatMessages, getMyDetails } from "../../../utils/data/endpoints";
 import { onlineUserType } from "@/types/types";
 import { SpinIcon } from "@/assets/icons";
+import { PrevIcon } from "@/assets/icons1";
+import Image from "next/image";
+import { CiLocationOn } from "react-icons/ci";
+import TimeAgo from "@/app/chatagent/TimeAgo";
 
 
 interface ScreenProps {
@@ -59,8 +63,8 @@ const ChatScreenInbox :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, me
     return ( 
         <div className="relative h-screen w-screen">
         <div className="bg-grey-light h-[6rem]  flex items-center  p-2 ">
-             <a href="/" className="flex-[0.2]">
-                 <AiOutlineLeft size={25} className='text-white '/>
+             <a href="/" className="flex-[0.2] ml-2">
+                <PrevIcon color="" width="" height=""/>
              </a>
              <div className="flex flex-1 items-center" >
                  <div className="relative rounded-full h-[3.5rem] w-[3.5rem] ">
@@ -77,9 +81,7 @@ const ChatScreenInbox :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, me
              </div>
              <div className="flex-[0.22]">
                 
-                 <FiPhone size={29}
-                
-                 className='text-green-700 cursor-pointer '/>
+                 <p>N</p>
              </div>
         </div>
        
@@ -89,9 +91,40 @@ const ChatScreenInbox :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, me
                        
                        return(
                         <div  key={data._id}  className={`w-full flex   px-6 ${data?.senderId == sender?._id ? "justify-end" : "justify-start"}`}>
-                            <div className={` md:w-[20%] my-3 min-h-[4rem] rounded-lg p-4  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] " : "bg-[#F5FEFF] text-[#343A40] "}`}>
-                                <p className="">{data.text}</p>
-                            </div>
+                                              {data?.attachment  ?
+
+<div  className={`flex md:w-[40%] w-[17.3rem] h-[7.5rem] my-3 min-h-[6rem] p-2  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] rounded-l-[1rem] rounded-br-[1rem] " : "bg-[#F5FEFF] text-[#343A40] rounded-r-[1rem]  rounded-bl-[1rem]  "}`}>
+      <div className="h-[6.5rem] w-[8rem] mr-4 relative">
+            <Image    
+             src={data?.attachment.propertyId.images[0]}
+              // alt={house.apartment}
+            
+              alt=""
+              fill
+              objectFit='cover'
+              objectPosition='center center'
+              className='w-full h-full rounded-xl'
+            />
+            <p  className="bg-white bottom-[10%] left-[10%] text-[#343A40] rounded-[0.5rem] text-[0.5rem] p-[0.5rem]  absolute">{data?.attachment?.propertyId?.location }</p>
+      </div>
+      <div className="flex flex-col justify-center items-center">
+                <a href={`/house/${data?.attachment?.propertyId?._id}`}  className="text-[1rem] text-[#fff] font-semibold ">{data?.attachment?.propertyId?.apartment }  apartment </a>
+                <div className='flex flex-[0.5] justify-start items-center text-grey-light text-sm w-full'>
+                  <CiLocationOn size={13}  className='ml-4 text-[#F5FEFF]'/>
+                  <p className=' flex text-[0.625rem] text-[#F5FEFF] lg:text-sm'> {data?.attachment?.propertyId?.location }</p>
+                </div>
+
+      </div>
+</div>
+
+:
+<>
+<div className={` md:w-[20%] my-3 min-h-[4rem] rounded-lg p-4  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] " : "bg-[#F5FEFF] text-[#343A40] "}`}>
+    <p className="">{data.text}</p>
+<TimeAgo timestamp={data.updatedAt} />
+</div>
+</>
+}
                        </div> 
                         
                        )
@@ -146,3 +179,6 @@ const ChatScreenInbox :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, me
 }
  
 export default ChatScreenInbox;
+
+
+

@@ -57,7 +57,7 @@ return (
           <a href="/">
           <PrevIcon color="" width="" height=""/>
             </a>
-           <p className='text-[1.2rem] font-[700] text-blue-800'> Popular Location</p>
+           <p className='text-[1.2rem] font-[700] text-blue-800'> Popular </p>
            <div onClick={() => setShowFilterCard(true)}  className="mr-2 cursor-pointer  border-l pl-2 border-grey-light ml-2 ">
 
            <FilterIcon color="" width="" height=""/>

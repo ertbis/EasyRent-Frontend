@@ -164,6 +164,14 @@ export const scheduleTourEP = async (param : any) => {
     return resp 
 }
 
+
+export const deleteTour = async (param : any)  => {
+    console.log(param)
+    const resp = await http.delete(`/apis/tours/${param}`,)
+    return resp
+}
+
+
 /// Payment routes
 
 export const makePayment = async( param: any ) => {

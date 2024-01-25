@@ -31,12 +31,13 @@ import { getUser } from "../../../utils/auth";
       setTab: React.Dispatch<React.SetStateAction<string>>;
       popularHouses: any ;
       nearHouses: any ;
+      cookUser: TokenUserType | null
 
     }
     
     
     
- const HomePage :FC<LpHomeProps>  = ({setTab, popularHouses,  nearHouses}) => {
+ const HomePage :FC<LpHomeProps>  = ({setTab, popularHouses,  nearHouses , cookUser}) => {
    const [isMobileView, setIsMobileView] = React.useState(true);
 
 
@@ -58,8 +59,8 @@ import { getUser } from "../../../utils/auth";
   
   return (
   <>
-    {isMobileView ? <MobileView   popularHouses={popularHouses}  nearHouses={nearHouses} setTab={setTab}/> : 
-    <DesktopView     popularHouses={popularHouses}  nearHouses={nearHouses} setTab={setTab}/> }
+    {isMobileView ? <MobileView cookUser={cookUser}  popularHouses={popularHouses}  nearHouses={nearHouses} setTab={setTab}/> : 
+    <DesktopView  cookUser={cookUser}   popularHouses={popularHouses}  nearHouses={nearHouses} setTab={setTab}/> }
   </>
       
   )
@@ -68,7 +69,7 @@ import { getUser } from "../../../utils/auth";
 
 
 
-const MobileView :FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses}) => {
+const MobileView :FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses, cookUser}) => {
    const [showFilterCard, setShowFilterCard ]  = useState(false)
    // const houses = useSelector((state: RootState) => state.houses.houses)
    const  [houses , setHouses]= useState<any>(null)
@@ -77,13 +78,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses}) => {
    const [error , setError]  = useState<string | null >(null)
    const [errorModal, setErrorModal] = useState<boolean>(false)
    
-   const [cookUser, setCookUser] = useState<TokenUserType | null>(null);
-
-   useEffect(() => {
-      const cookieUser = getUser();
-      setCookUser(cookieUser);
-      console.log(cookieUser)
-    }, []);
+   
    // Create a debounced version of the handleSearch function
    const debouncedSearch = debounce(async (searchValue : string) => {
           try {
@@ -197,19 +192,19 @@ const MobileView :FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses}) => {
          
      {popularHouses ?
       <div  id='custom-scrollbar-container' className="flex w-[85vw]  mx-auto overflow-x-hidden  ">
-         <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
+         <div className="border mx-[0.7rem] border-green-700 rounded-[0.937rem] w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
             <HomeIcon  color="#343A40" width="17" height="18"/>
             <p className="text-[0.875rem]  text-grey-light">Damico</p>
          </div>
-         <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
+         <div className="border mx-[0.7rem] border-green-700 rounded-[0.937rem] w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
          <HomeIcon  color="#343A40" width="17" height="18"/>
             <p className="text-[0.875rem]  text-grey-light">Eleyele</p>
          </div>
-         <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
+         <div className="border mx-[0.7rem] border-green-700 rounded-[0.937rem] w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
          <HomeIcon  color="#343A40" width="17" height="18"/>
             <p className="text-[0.875rem]  text-grey-light">Gate</p>
          </div>
-         <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
+         <div className="border mx-[0.7rem] border-green-700 rounded-[0.937rem] w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
          <HomeIcon  color="#343A40" width="17" height="18"/>
             <p className="text-[0.875rem]  text-grey-light">Shop</p>
          </div>
@@ -217,7 +212,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses}) => {
       </div>:
          <div id='custom-scrollbar-container' className="flex w-[85vw] mx-auto overflow-x-hidden">
          {[1, 2, 3, 4].map((item) => (
-           <div key={item} className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around items-center gap-x-2 animate-pulse">
+           <div key={item} className="border mx-[0.7rem] border-green-700 rounded-[0.937rem] w-[5.5rem] p-[0.4rem] flex justify-around items-center gap-x-2 animate-pulse">
              <div className="bg-gray-300 rounded-full w-5 h-5"></div>
              <div className="bg-gray-300 w-[4rem] h-[0.875rem] rounded"></div>
            </div>
@@ -284,7 +279,7 @@ const DesktopView:FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses})=> {
            </div>
          </div>
 
-           <div className='w-full my-4 px-16' >
+           <div className='w-full  px-16' >
               <h3  className='text-grey-light text-left my-4  font-bold text-lg'>Popular Locations</h3>
               <div className= 'flex w-full h-full'>
                     <div className='relative h-60 mx-8 flex-1  rounded-lg  w-[30%]'>
@@ -307,7 +302,7 @@ const DesktopView:FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses})=> {
                     </div> 
               </div>
            </div>
-           <div className="relative flex w-full   h-[16rem] items-center bg-cover bg-center my-4 bg-[#98ECF9]  md:px-24" >
+           <div className="relative flex w-full   h-[16rem] items-center bg-cover bg-center  bg-[#98ECF9]  md:px-24" >
                      <div className='relative  flex-[0.3] h-full  '>
                          <Image src="/Phone.png" alt="Phone image"  fill className='rounded-lg ' />
                      </div>

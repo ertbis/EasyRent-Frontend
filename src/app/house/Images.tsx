@@ -7,6 +7,7 @@ import DesktopFooter from '@/components/DesktopFooter';
 import Image from 'next/image';
 import { AiOutlineLeft } from 'react-icons/ai';
 import {  HouseType } from '@/types/types';
+import { PrevIcon } from '@/assets/icons1';
 
 type propType ={
     selectedHouse:HouseType,
@@ -22,7 +23,7 @@ const HsImages :FC<propType> = ({selectedHouse, setTab}) => {
         <div>
            <div className=' text-grey-light flex  items-center  justify-between border-b border-gray-200 px-4 rounded-md w-full h-12  '>
             <a onClick={()=> setTab('house')}>
-                        <AiOutlineLeft  size={19} className='text-green-700  '/>
+             <PrevIcon color="" width="" height=""/>
             </a>
 
        </div>
@@ -40,7 +41,8 @@ const HsImages :FC<propType> = ({selectedHouse, setTab}) => {
                 {selectedHouse.images.map((data: any, index:any) => {
                     return (
                     <div key={index} onClick={()=> setSelectedImage(data)} className=" relative m-1 w-[95%] h-[10rem]">
-                        <Image src={data} alt={selectedHouse.apartment} fill  className='w-full h-full rounded-xl bg-cover ' />
+                        <Image src={data} alt={selectedHouse.apartment} fill objectFit='cover'
+                     objectPosition='center center'  className='w-full h-full rounded-xl bg-cover ' />
                     </div>
 
                     )

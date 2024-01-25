@@ -166,7 +166,7 @@ const Lprofile = ({ user }: any) => {
           <p className="flex-1 text-[1rem] ml-4">How ERT Works</p>
         </a>
         <a href="/gethelp" className="mx-2 flex py-3 border-b border-gray-300 items-center text-gray-600" >
-        <HelpDeskIcon width="20" height="21" color="#343A40" />
+        <HelpDeskIcon width="21" height="23" color="black" />
           <p className="flex-1 text-[1rem] ml-4">Get Help</p>
         </a>
         <a href ="" className="mx-2 flex py-3 border-b border-gray-300 items-center text-gray-600" >

@@ -5,6 +5,7 @@ import {BiTime} from "react-icons/bi"
 import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineLeft } from 'react-icons/ai';
 import { FiHome } from 'react-icons/fi';
 import { SlCalender } from 'react-icons/sl';
+import { PrevIcon } from '@/assets/icons1';
 
 type propType ={
     tourDetails:any,
@@ -17,13 +18,13 @@ const ScheduleTour:FC<propType> = ({scheduleTour, tourDetails, setTab}) => {
 
 
   return (
-    <div className='z-[100] fixed w-full  bg-cover ' style={{ backgroundImage:'url("/formbg.png")'  }}>
+    <div className='z-[100] top-0 fixed w-full '>
  
     <div className="flex   items-center justify-end min-h-screen w-full ">
       <div className="flex flex-col justify-between md:pt-0 bg-white w-full m-0 h-screen md:h-[75vh]  md:w-[30%] px-8 py-4  md:rounded-xl shadow-lg  md:mr-16 md:h-full  text-grey-light">
         <div className=' text-grey-light flex   items-center  justify-start mb-2  w-full h-16  '>
                  <a onClick={() => setTab('house')}>
-                 <AiOutlineLeft size={25} className='text-gray-light  '/>
+                   <PrevIcon color="" width="" height=""/>
                </a>           
           </div>
         <h2 className="text-blue-800 text-center md:text-left w-full text-xl font-bold mt-4 ">Please review your tour</h2>

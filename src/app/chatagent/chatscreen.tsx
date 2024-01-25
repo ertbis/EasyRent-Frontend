@@ -72,7 +72,7 @@ const ChatScreen :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message
                      <div className={`h-2 w-2  rounded-full absolute right-[16%] top-[0%]  
                       ${                   onlineUsers?.some((user) => user?.userId == currentChat?.members[0]._id) ? "bg-green-700" : "bg-black"   }
                      `}></div>
-                     <img src="/adminavatar.png" className="w-full h-full rounded-full"/>
+                     <img src="/adminavatar.png" className="w-full h-full object-cover rounded-full"/>
                  </div>
                  <div className="text-white ml-2"  >
                      <h1 className="text-[1.1rem] font-semiBold">{currentChat?.members[0].firstName}</h1>

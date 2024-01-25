@@ -58,7 +58,7 @@ useEffect(()=> {
             </div>
             <div  className=" flex items-center justify-end">
                <div className='mr-2 w-[2.9rem] h-[2.9rem] rounded-full bg-cover bg-center' style={{ backgroundImage: `url("/adminavatar.png")` }}></div>
-               <p className=" hidden md:block mr-2 text-[1.25rem] ">{admin?.firstName}</p>
+               <p className=" hidden md:block mr-2 text-[black] text-[1.25rem] ">{admin?.firstName}</p>
                <DropDownIcon width="" height="" color=""/>
             </div>
         </div>

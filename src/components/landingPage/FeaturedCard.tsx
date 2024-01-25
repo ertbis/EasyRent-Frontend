@@ -66,7 +66,7 @@ const addtoFavourite = async () => {
                 </div>
              </div>
              <div className='mx-2 pb-1'>
-                <p className='flex-1 text-blue-800 w-[70%]  text-[0.875rem] lg:text-lg font-bold ' >{` #${house.amount}`}<span className=' text-[0.5rem] lg:text-sm'>/Year</span></p>
+                <p className='flex-1 text-blue-800 w-[70%]  text-[0.875rem] lg:text-lg font-bold ' >{` ₦${house.amount}`}<span className=' text-[0.5rem] lg:text-sm'>/Year</span></p>
                 <div className="flex items-center justify-between  ">
                     <p className='text-[0.625rem] md:text-sm text-grey-light  md:font-bold'>{house.apartment}</p>
                     <div className='flex flex-[0.5] justify-start items-center text-grey-light text-sm w-full'>

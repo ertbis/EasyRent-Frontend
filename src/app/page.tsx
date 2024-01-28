@@ -344,11 +344,7 @@ useEffect(()=> {
        <> {cookUser.role =="landlord" ?  <LandLordDashboard/>:
           <>
            <main className="relative flex bg-[#f5f4f8 ]  min-h-screen flex-col items-center justify-between ">
-       <Head>
-        <title>ERT website</title>
-        <meta property="og:title" content="My page title" key="title" />
-        <script src="https://kit.fontawesome.com/3b89073561.js" ></script>
-      </Head>
+    
       <div className=" hidden z-[1000] fixed md:f zplex  w-screen h-screen bg-[#fff]  justify-center  items-center  text-xl">
          This web app  only work on mobile screen, kindly switch to a smaller screen size      </div>
       {logInModal &&
@@ -385,11 +381,7 @@ useEffect(()=> {
        </>
         :
     <main className="relative flex bg-[#f5f4f8 ]  min-h-screen flex-col items-center justify-between ">
-       <Head>
-        <title>ERT website</title>
-        <meta property="og:title" content="My page title" key="title" />
-        <script src="https://kit.fontawesome.com/3b89073561.js" ></script>
-      </Head>
+    
       <div className=" hidden fixed md:flex  w-screen h-screen bg-[#fff]  justify-center  items-center  text-xl">
          This web app  only work on mobile screen, kindly switch to a smaller screen size      </div>
       {logInModal &&

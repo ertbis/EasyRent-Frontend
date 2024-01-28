@@ -207,7 +207,7 @@ const addtoFavourite = async () => {
 
                 <div className='flex flex-col justify-center items-between rounded-xl  my-2  text-grey-light bg-[#F5F4F8]  p-2 rounded-lg' >
                     <div  className='flex'>
-                        <p className='flex-[0.5] text-blue-800 w-[90%] text-xl font-bold ' > {`#${selectedHouse.amount}/Years`}</p>
+                        <p className='flex-[0.5] text-blue-800 w-[90%] text-xl font-bold ' > {`₦${selectedHouse.amount}/Years`}</p>
                     <div className='flex justify-end text-sm w-full'>
                             <CiLocationOn size={15}  className='ml-4 text-blue-800'/>
                             <p className=' flex  text-sm'> {selectedHouse.location}</p>

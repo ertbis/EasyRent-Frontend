@@ -99,7 +99,7 @@ useEffect(() => {
                 </div>
              </div>
              <div className="flex  mx-2">
-                <p className='flex-1 text-blue-800 w-[70%] text-lg font-bold' >{` #${house.amount}`}<span className=' text-sm'>/Year</span></p>
+                <p className='flex-1 text-blue-800 w-[70%] text-lg font-bold' >{` ₦${house.amount}`}<span className=' text-sm'>/Year</span></p>
                <div className='flex flex-[0.5] justify-start items-center text-grey-light text-sm w-full'>
                     <CiLocationOn size={15}  className='ml-4 text-blue-800'/>
                     <p className=' flex text-sm'> {house.location}</p>

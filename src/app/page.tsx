@@ -419,22 +419,41 @@ useEffect(()=> {
 
 
 
-const LoginModal = ({setLoginModal}:any) =>(
-<div className="fixed z-[1000] flex items-center w-full h-full bg-white bg-opacity-70">
+const LoginModal = ({setLoginModal}:any) =>{
+{/* <div className="fixed z-[1000] flex items-center w-full h-full bg-white bg-opacity-70">
     <div data-aos="zoom-in" className="relative w-[90vw] mx-auto md:p-[5rem] bg-white rounded-lg shadow dark:bg-gray-700">
         <FaTimes onClick={() => setLoginModal(false)} size={30} className="text-black  dark:text-white absolute top-3 right-2.5" />
 
-        <div className="p-6 w-full h-full">
-            <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">Ready to book a tour?</h3>
-            <a type='submit'  href="/login" className="text-center bg-blue-800 mb-4 hover:opacity-50 text-white py-2 py-3 md:py-4 rounded-md w-full">Login</a>
-            <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-                Not registered?
-            </div>
-            <a type="submit" href="/signup" className="bg-green-700 flex justify-center hover:opacity-50 text-white py-2 py-3 md:py-4 rounded-md w-full">
-                Sign Up
-            </a>
-        </div>
     </div>
+</div> */}
+
+return (
+
+<div  className="absolute  z-[1500] top-0  left-0 h-screen w-screen " >
+
+<div  onClick={() => setLoginModal(false)} className=" fixed w-full h-full  ">
+
+  </div>
+    <div data-aos="fade-up" className=' left-0  fixed rounded-t-[1.25rem] text-center bottom-0 bg-[#fff] h-[16rem] w-screen'>
+          <div className="w-[90%] z-[1200] mx-auto rounded-t-[1.25rem] bg-[#E4E4E4] mt-[-0.8rem] h-[0.8rem]"></div>
+          <div className="w-[20%] font-bold h-[0.25rem] my-3 rounded-lg mx-auto bg-[#D9D9D9] "></div>
+              <div className="flex flex-col justify-center">
+    
+                  <div className="px-8 w-full h-full ">
+                  <h3 className="mb-4 text-xl font-medium text-[#000]">Ready to book a tour?</h3>
+                  <a type='submit'  href="/login" className="bg-[#1BB81B] py-[1.1rem] px-[3.5rem] w-full text-white rounded-[0.7rem]">Login</a>
+                  <div className="text-sm text-left ml-6 my-2 font-medium text-gray-500">
+                      Not registered?
+                  </div>
+                  <a type="submit" href="/signup" className="py-[1.1rem]  text-[#343A40] px-[3.5rem] w-full border border-[#1BB81B] rounded-[0.7rem]">
+                      Sign Up
+                  </a>
+        </div>
+              </div>
+            </div>
+
 </div>
 
 )
+
+}

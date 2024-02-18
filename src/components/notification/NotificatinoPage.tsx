@@ -38,7 +38,7 @@ const NotificationPage = ({setTab}:any) => {
 
     return ( 
        
-        <div className="h-[80vh]  md:h-[100%] md:w-[100%]  w-screen">
+        <div className="h-[100vh] z-[1000] bg-[#fff] md:h-[100%] md:w-[100%]  w-screen">
             <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-12  '>
             <a className="cursor-pointer" onClick={()=> setTab('home')}>
           <PrevIcon color="" width="" height=""/>

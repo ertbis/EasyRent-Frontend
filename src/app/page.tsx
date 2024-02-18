@@ -32,6 +32,8 @@ export default function Home() {
     AOS.init();
     AOS.refresh();
   }, []);
+
+  
   const [tab , setTab] = useState<string>('home') 
    const [logInModal, setLoginModal] = useState(false)
    const [cookUser, setCookUser] = useState<TokenUserType | null>(null)
@@ -199,8 +201,6 @@ useEffect(()=>{
 
 
       setChatMessages((prev : any) => [...prev , res])
- 
-   
     } )
 
     socket.on("getNotification", (res : any ) => {
@@ -439,10 +439,10 @@ return (
           <div className="w-[20%] font-bold h-[0.25rem] my-3 rounded-lg mx-auto bg-[#D9D9D9] "></div>
               <div className="flex flex-col justify-center">
     
-                  <div className="px-8 w-full h-full ">
+                  <div className="px-6 w-full h-full ">
                   <h3 className="mb-4 text-xl font-medium text-[#000]">Ready to book a tour?</h3>
                   <a type='submit'  href="/login" className="bg-[#1BB81B] py-[1.1rem] px-[3.5rem] w-full text-white rounded-[0.7rem]">Login</a>
-                  <div className="text-sm text-left ml-6 my-2 font-medium text-gray-500">
+                  <div className="text-sm text-left my-2 font-medium text-gray-500">
                       Not registered?
                   </div>
                   <a type="submit" href="/signup" className="py-[1.1rem]  text-[#343A40] px-[3.5rem] w-full border border-[#1BB81B] rounded-[0.7rem]">

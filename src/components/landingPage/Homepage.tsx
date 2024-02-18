@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useEffect, useState, FC, useInsertionEffect} from "react"
+import React, {useEffect, useState, FC, useInsertionEffect, useRef} from "react"
 import LeftSection from '@/components/landingPage/LeftSection'
 import RightSection from '@/components/landingPage/RightSection'
 import {BsFilterRight} from "react-icons/bs"
@@ -23,6 +23,7 @@ import '../../app/globals.css'
 import { FilterIcon, HomeIcon, NotificationIcon, SearchIcon } from "@/assets/icons";
 import { TokenUserType } from "@/types/types";
 import { getUser } from "../../../utils/auth";
+import { motion } from "framer-motion";
 
 
 
@@ -78,7 +79,37 @@ const MobileView :FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses, cookU
    const [error , setError]  = useState<string | null >(null)
    const [errorModal, setErrorModal] = useState<boolean>(false)
    
+   const [cwidth, setCWidth] = useState(0)
+
+   const carousel : any = useRef()
+
+   useEffect(()=> {
+       setCWidth(carousel.current?.scrollWidth - carousel?.current?.offsetWidth)
+   },[])
+
+      const [location, setLocation] = useState<string[] | any>(null)
+      let Dhouses : any = []
+      if(nearHouses && popularHouses) {
+         Dhouses =[...nearHouses, ...popularHouses]
+      }
+       const getLocationarray = () => {
+         const locationArray:string[] =[]
+         if(Dhouses ){
+          Dhouses.forEach((key: any) => {
+            if(!locationArray.includes(key.location)){
+               locationArray.push(key.location)
+            }
+          })
+         }
+         setLocation(locationArray)
+       }
    
+       useEffect(()=> {
+         getLocationarray()
+       }, [nearHouses, ])
+   
+
+
    // Create a debounced version of the handleSearch function
    const debouncedSearch = debounce(async (searchValue : string) => {
           try {
@@ -121,17 +152,17 @@ const MobileView :FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses, cookU
 // },[])
 
    return (
-      <div className='flex flex-col overflow-x-hidden  gap-4 px-4 items-center  ' >
+      <div className='flex flex-col overflow-x-hidden  gap-4 px-3 items-center  mb-20' >
       
       
       {showFilterCard  &&    <FilterForm  setShowFilterCard={setShowFilterCard} /> }
      
 
   
-      <div className='flex justify-between col-span-2 items-center w-[100%]  p-4 ' >
+      <div className='flex justify-between col-span-2 items-center w-[100%]  p-4 px-2 ' >
            <div className='flex-1 w-full '>
               <p className='font-normal  text-sm text-grey-light mb-3' > Hey {cookUser?.name ? cookUser?.name : "You"}</p>
-            <h2 className="text-blue-800 w-full text-2xl font-bold mt-4 ">Lets start Exploring</h2>
+            <h2 className="text-blue-800 mx-0 w-full text-2xl font-bold mt-4 ">Lets start Exploring</h2>
             </div> 
               <div
                  onClick={() => setTab("notification")}
@@ -147,7 +178,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses, cookU
            id="search"
            name="search"
            placeholder='Search Apartment'
-           className=" outline-none p-4 h-[70%] w-full"
+           className=" outline-none p-4  h-[70%] w-full"
            onChange={handleSearch}
            
            />
@@ -175,7 +206,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses, cookU
          </div>
 :
    <>
-       <div className="flex p-0 m-0  px-4 w-full font-[400] text-[1rem] justify-between mx-auto">
+       <div className="flex p-0 m-0  px-3 w-full font-[400] text-[1rem] justify-between mx-auto">
          <h3 className="text-blue-800 p-0 m-0">Current Location</h3>
          <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
        </div>
@@ -183,33 +214,36 @@ const MobileView :FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses, cookU
       <LeftSection  houses={popularHouses}/>
   
       </div>
-      <div className="flex p-0 m-0 px-4  w-full font-[400] text-[1rem] justify-between mx-auto">
+      <div className="flex p-0 m-0 px-2  w-full font-[400] text-[1rem] justify-between mx-auto">
             <h3 className="text-blue-800 p-0 m-0">Top Location</h3>
             <a href="/currentlocation" className="text-green-700 p-0 m-0">See all</a>
-
          </div>
 
          
-     {popularHouses ?
-      <div  id='custom-scrollbar-container' className="flex w-[85vw]  mx-auto overflow-x-hidden  ">
-         <div className="border mx-[0.7rem] border-green-700 rounded-[0.937rem] w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
-            <HomeIcon  color="#343A40" width="17" height="18"/>
-            <p className="text-[0.875rem]  text-grey-light">Damico</p>
-         </div>
-         <div className="border mx-[0.7rem] border-green-700 rounded-[0.937rem] w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
-         <HomeIcon  color="#343A40" width="17" height="18"/>
-            <p className="text-[0.875rem]  text-grey-light">Eleyele</p>
-         </div>
-         <div className="border mx-[0.7rem] border-green-700 rounded-[0.937rem] w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
-         <HomeIcon  color="#343A40" width="17" height="18"/>
-            <p className="text-[0.875rem]  text-grey-light">Gate</p>
-         </div>
-         <div className="border mx-[0.7rem] border-green-700 rounded-[0.937rem] w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
-         <HomeIcon  color="#343A40" width="17" height="18"/>
-            <p className="text-[0.875rem]  text-grey-light">Shop</p>
-         </div>
+     {location ?
+   <motion.div ref={carousel}  className="mx-auto w-[85vw] overflow-x-hidden" >
+        <motion.div drag='x' 
+            animate={{ x: -cwidth }}
+            transition={{
+               type: "spring", // Use spring animation for smooth scrolling    
+               duration: 5, 
+               repeat: Infinity, // Repeat the animation infinitely
+               repeatType: "mirror", // Reverse the animation on each repeat
+            }}
+         dragConstraints={{  right: 0, left:-cwidth}}
+         className="flex w-[85vw]  mx-auto  ">
+         {location.map((data: string, index: number)=> {
+         return (
 
-      </div>:
+         <a  href={`houselocation/${data}`} className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
+            <HomeIcon  color="#343A40" width="17" height="18"/>
+            <p className="text-[0.875rem]  text-grey-light">{data}</p>
+         </a>
+         )
+         })}
+       </motion.div>
+     </motion.div>
+     :
          <div id='custom-scrollbar-container' className="flex w-[85vw] mx-auto overflow-x-hidden">
          {[1, 2, 3, 4].map((item) => (
            <div key={item} className="border mx-[0.7rem] border-green-700 rounded-[0.937rem] w-[5.5rem] p-[0.4rem] flex justify-around items-center gap-x-2 animate-pulse">
@@ -227,7 +261,7 @@ const MobileView :FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses, cookU
          <a href="/popularlocation" className="text-green-700 p-0 m-0">See all</a>
       </div>
 
-      <div className="w-[90vw] mx-auto p-0 m-0  mb-12 ">
+      <div className="w-[90vw] mx-auto p-0 m-0  mb-18 ">
       <LeftSection houses ={nearHouses}/>
       </div>
    </>
@@ -257,7 +291,7 @@ const DesktopView:FC<LpHomeProps>  = ({setTab, nearHouses , popularHouses})=> {
            </div> 
            <div className="relative">
 
-        <div onClick={()=> setShowFilterCard(!showFilterCard)} className=' text-grey-light cursor-pointer bg-white hidden md:flex items-center h-12 justify-center p-4'>
+        <div onClick={()=> setShowFilterCard(!showFilterCard)} className=' text-grey-light cursor-pointer bg-white hidden md:flex items-center h-12 justify-center p-4 mb-20'>
          <BsFilterRight size={25} className="mr-4 "/>
             <p className='font-bold text-sm'>Filter</p>
          </div>

@@ -11,6 +11,7 @@ const http = axios.create({
   },
 }); 
 
+
 http.interceptors.request.use(
   async (config: any) => {
     const authCredentials = await getAuthCredentials();

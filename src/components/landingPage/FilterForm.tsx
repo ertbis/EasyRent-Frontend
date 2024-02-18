@@ -78,7 +78,7 @@ const FilterForm: FC<FilterFormProp> = ({ setShowFilterCard }) => {
         <>        {(searchResult && showSearch)  ? <FilterResult houses={searchResult} setShowSearch={setShowSearch}/> :
         
         
-        <div className="fixed z-[500]  top-0 bg-[#a7a4a4b5] w-screen h-[100vh] flex justify-center items-center">
+        <div className="fixed z-[1000]  top-0 bg-[#a7a4a4b5] w-screen h-[100vh] flex justify-center items-center">
             <div data-aos="zoom-in" className="relative bg-white rounded-lg z-[10000] p-4 w-screen h-screen md:w-[20rem] md:h-[24rem]">
                 <div onClick={() => setShowFilterCard(false)}   className="absolute text-gray-700 left-4 top-4 cursor-pointer">
                     <PrevIcon color="" width="" height=""/>

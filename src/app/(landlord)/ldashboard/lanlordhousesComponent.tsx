@@ -3,11 +3,22 @@
 import { BiHomeAlt } from "react-icons/bi";
 import '../../globals.css'
 import { HomeIcon } from "@/assets/icons";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+
+
 
 const LandlordHousesComponent:FC<any> = ({houses}) => {
    const [location, setLocation] = useState<string[] | any>(null)
-    const getLocationarray = () => {
+   const [cwidth, setCWidth] = useState(0)
+
+   const carousel : any = useRef()
+
+   useEffect(()=> {
+       setCWidth(carousel.current?.scrollWidth - carousel?.current?.offsetWidth)
+   },[]) 
+   
+   const getLocationarray = () => {
       const locationArray:string[] =[]
       if(houses ){
        houses.forEach((key: any) => {
@@ -31,19 +42,29 @@ const LandlordHousesComponent:FC<any> = ({houses}) => {
          </div>
 
          {location ?
-      <div  id='custom-scrollbar-container' className="flex w-[85vw]  mx-auto overflow-x-scroll  ">
-        {location.map((data: string, index: number)=> {
-         return (
+            <motion.div ref={carousel}  className="mx-auto w-[85vw] overflow-x-hidden" >
+            <motion.div drag='x' 
+                animate={{ x: -cwidth }}
+                transition={{
+                  type: "spring", // Use spring animation for smooth scrolling    
+                  duration: 5, 
+                  repeat: Infinity, // Repeat the animation infinitely
+                  repeatType: "mirror", // Reverse the animation on each repeat
+                }}
+            dragConstraints={{  right: 0, left:-cwidth}}
+            className="flex w-[85vw]  mx-auto  ">
+            {location.map((data: string, index: number)=> {
+            return (
 
-         <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
-            <HomeIcon  color="#343A40" width="17" height="18"/>
-            <p className="text-[0.875rem]  text-grey-light">{data}</p>
-         </div>
-         )
-        })}
-        
-
-      </div>:
+            <div className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around  items-center gap-x-2">
+                <HomeIcon  color="#343A40" width="17" height="18"/>
+                <p className="text-[0.875rem]  text-grey-light">{data}</p>
+            </div>
+            )
+            })}
+          </motion.div>
+        </motion.div>
+            :
          <div id='custom-scrollbar-container' className="flex w-[85vw] mx-auto overflow-x-hidden">
          {[1, 2, 3, 4].map((item) => (
            <div key={item} className="border mx-[0.7rem] border-green-700 rounded-lg w-[5.5rem] p-[0.4rem] flex justify-around items-center gap-x-2 animate-pulse">

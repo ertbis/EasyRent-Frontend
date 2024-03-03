@@ -66,7 +66,7 @@ const ChatScreenInbox :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, me
     return ( 
         <div className="relative h-screen w-screen">
         <div className="bg-grey-light h-[6rem]  flex items-center  p-2 ">
-             <a onClick={setTab("home")} className="flex-[0.2] ml-2">
+             <a onClick={() => setTab("home")} className="flex-[0.2] ml-2">
                 <PrevIcon color="" width="" height=""/>
              </a>
              <div className="flex flex-1 items-center" >

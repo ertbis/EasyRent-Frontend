@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from "react"
 import { getMyDetails } from "../../../../utils/data/endpoints"
 import { useAdminProtect } from "@/app/useAdminProtect"
 import LogOutModal from "@/components/LogOutModal"
+import { useConnectSocket } from "@/app/useConnectSocket"
 
 interface sidebarprop {
   tab: string
@@ -15,6 +16,8 @@ const SideBar:FC<any> = ({tab, user, setUser}) => {
   useAdminProtect()
   const [openEdit, setOpenEdit] = useState(false)
   const [myDetails, setMyDetails]  = useState<any>(null)
+  const { socket, sender } = useConnectSocket();
+
   const  fetchMyDetails = async () => {
     try {
         const resp    = await  getMyDetails()

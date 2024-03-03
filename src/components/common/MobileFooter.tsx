@@ -83,7 +83,7 @@ interface LpHeaderProps {
                 
               
                 <div onClick={() => setLoginModal(true)} className='text-gray-light cursor-pointer flex justify-center items-center dropdownbutton'>
-                   <UserIcon color="#1BB81B" width="24" height="24" />
+                   <UserIcon color='#343A40' width="24" height="24" />
                   <RiArrowDropDownLine size={20} className='text-gray' />
                  
                 </div>

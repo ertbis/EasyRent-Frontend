@@ -8,6 +8,7 @@ import FeedBack from "./FeedBack";
 import { createChats } from "../../../../utils/data/endpoints";
 import ErrorModal from "@/components/ErrorModal";
 import Loading from "@/components/Loading";
+import { PrevIcon } from "@/assets/icons1";
 
 
 const GetHelp = () => {
@@ -41,7 +42,7 @@ const GetHelp = () => {
          { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
             <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-12  '>
             <a href="/">
-            <AiOutlineLeft  size={30} className='text-green-700  '/>
+              <PrevIcon color="" width="" height=""/>
             </a>
                 <p className='flex-1 text-center text-[1.2rem] font-[500] text-blue-800'> Get Help </p>
             </div> 

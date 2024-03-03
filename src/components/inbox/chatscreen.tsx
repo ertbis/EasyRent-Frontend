@@ -10,6 +10,8 @@ import { PrevIcon } from "@/assets/icons1";
 import Image from "next/image";
 import { CiLocationOn } from "react-icons/ci";
 import TimeAgo from "@/app/chatagent/TimeAgo";
+import { IconRefresh } from "@/assets/icons2";
+import RegenerateChatModal from "../modals/RegenerateChatModal";
 
 
 interface ScreenProps {
@@ -22,13 +24,13 @@ interface ScreenProps {
     writeMessage: any,
     isTyping: any,
     isLoading: boolean,
+    setTab: any
 
 } 
 
-const ChatScreenInbox :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message, chatMessages, onlineUsers, sender, sendMessage, currentChat}) => {   
+const ChatScreenInbox :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message, chatMessages, onlineUsers, sender, sendMessage, currentChat, setTab}) => {   
     const chatContainerRef = useRef<HTMLDivElement | null>(null); 
-
-
+    const [openRedirectModal,  setOpenRedirectModal] = useState<boolean>(false)
   useEffect(() => {
     // Scroll to the bottom when chatMessages update
     if (chatContainerRef.current) {
@@ -60,10 +62,11 @@ const ChatScreenInbox :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, me
   }, []); 
 
 
+
     return ( 
         <div className="relative h-screen w-screen">
         <div className="bg-grey-light h-[6rem]  flex items-center  p-2 ">
-             <a href="/" className="flex-[0.2] ml-2">
+             <a onClick={setTab("home")} className="flex-[0.2] ml-2">
                 <PrevIcon color="" width="" height=""/>
              </a>
              <div className="flex flex-1 items-center" >
@@ -81,11 +84,13 @@ const ChatScreenInbox :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, me
              </div>
              <div className="flex-[0.22]">
                 
-                 <p>N</p>
+                 <div className="" onClick={() => setOpenRedirectModal(true)} >
+                    <IconRefresh className='w-7 h-7'/>
+                 </div>
              </div>
         </div>
        
-
+        {openRedirectModal  && <RegenerateChatModal chatId={currentChat?._id}  setOpenModal={setOpenRedirectModal} />} 
         <div className= " h-[75%] pb-20 overflow-y-scroll flex-1" ref={chatContainerRef}>
                     {chatMessages && chatMessages?.map((data: any, index: any) => {
                        

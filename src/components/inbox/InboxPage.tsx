@@ -18,10 +18,11 @@ interface ScreenProps {
   message: any,
   isTyping: any,
   isLoading: boolean,
+  setTab: any
 
 } 
 
-const InboxPage: FC<ScreenProps>  = ({chatMessages, sender, sendMessage, onlineUsers, writeMessage, socket, chats ,message, isTyping, isLoading  }) => {
+const InboxPage: FC<ScreenProps>  = ({chatMessages, sender, sendMessage, onlineUsers, writeMessage, socket, chats ,message, isTyping, isLoading , setTab }) => {
         
 
     return ( 
@@ -33,7 +34,7 @@ const InboxPage: FC<ScreenProps>  = ({chatMessages, sender, sendMessage, onlineU
         chatMessages={chatMessages}   currentChat={chats}
         message={message}   sender={sender} onlineUsers={onlineUsers}
         writeMessage={writeMessage}  sendMessage={sendMessage}
-        isTyping={isTyping} isLoading={isLoading}
+        isTyping={isTyping} isLoading={isLoading} setTab={setTab}
        />
        :
 

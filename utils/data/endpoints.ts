@@ -12,7 +12,7 @@ export const createUser = async (param : signUpDetailsType)  => {
 }
 
 
-// create admin request function
+// General API endpoints
 export const createAdmin = async (param : any)  => {
     const resp = await http.post("/apis/users/admin", param )
     return resp
@@ -84,7 +84,7 @@ export const deleteUser = async (param : any)  => {
 
 
 
-//landlord endpoint
+//Landlord API endpoints
 export const uploadProperty = async (param : any)  => {
     
     const resp = await http.post("/apis/properties",  param  )
@@ -128,7 +128,7 @@ export const getFilterProperty = async (param : any)  => {
 
 
 
-//notification
+//notification API endpoint 
 
 export const deleteNotification = async (param : any)  => {
     const resp = await http.delete(`/apis/notifications/${param}`)
@@ -172,7 +172,7 @@ export const deleteTour = async (param : any)  => {
 }
 
 
-/// Payment routes
+/// Payment apI end point 
 
 export const makePayment = async( param: any ) => {
   const resp = await http.post("/apis/payments/", param);
@@ -181,9 +181,13 @@ export const makePayment = async( param: any ) => {
 
 
 
-//chat routes
+//chat API end point 
 export const createChats = async(  ) => {
     const resp = await http.post("/apis/chats/"  );
+    return resp
+}
+export const regenerateNewChat = async(param: any  ) => {
+    const resp = await http.put(`/apis/chats/regenerate/${param}` );
     return resp
 }
 
@@ -197,6 +201,10 @@ export const getChat = async( param: any ) => {
 }
 export const updateChatCount = async( param: any ) => {
     const resp = await http.put(`/apis/chats/updateUnreadMessage/${param.id}`, {unreadMessageCount : param.unreadMsgCount} );
+    return resp
+}
+export const closeChat = async( param: any ) => {
+    const resp = await http.put(`/apis/chats/close/${param}` );
     return resp
 }
 export const deleteChatEndPoint = async( param: any ) => {

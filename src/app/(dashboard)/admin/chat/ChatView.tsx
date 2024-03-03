@@ -10,6 +10,7 @@ import ErrorModal from "@/components/ErrorModal";
 import Image from "next/image";
 import { CiLocationOn } from "react-icons/ci";
 import TimeAgo from "@/app/chatagent/TimeAgo";
+import { useConnectSocket } from "@/app/useConnectSocket";
 
 
 
@@ -22,11 +23,11 @@ const ChatView = ({params} : any) => {
   const [loading , setLoading]  = useState(false)
   const [error , setError]  = useState<string | null >(null)
   const [errorModal, setErrorModal] = useState<boolean>(false)
-  const [sender, setSender]  = useState<any>(null)
+  // const [sender, setSender]  = useState<any>(null)
   const [chats, setChats]  = useState<any>(null)
   const [currentChat, setCurrentChat] = useState<any>(null)
-  const [socket, setSocket] = useState<any | null>(null)
-  const [onlineUsers, setOnlineUsers]  = useState<onlineUserType | null>(null)
+  // const [socket, setSocket] = useState<any | null>(null)
+  // const [onlineUsers, setOnlineUsers]  = useState<onlineUserType | null>(null)
   const [newMessage, setNewMessage] = useState<any>("")
   const chatContainerRef = useRef<HTMLDivElement | null>(null); 
   const [isTyping, setIsTyping] = useState<any>(false)
@@ -35,6 +36,7 @@ const ChatView = ({params} : any) => {
   const  [openOption, setOpenOption] = useState<boolean>(false)
 
 
+  const { socket, sender, onlineUsers } = useConnectSocket();
 
 
 
@@ -104,39 +106,31 @@ useEffect(()=> {
 }, [onlineUsers, currentChat ] )
 
 
-  useEffect(()=> {
-    const newSocket = io("https://easyrent-44an.onrender.com/")  
-    //const newSocket = io("http://localhost:5000/")  
+  // useEffect(()=> {
+  //   const newSocket = io("https://easyrent-44an.onrender.com/")  
+  //   //const newSocket = io("http://localhost:5000/")  
 
      
-    setSocket(newSocket)
+  //   setSocket(newSocket)
 
 
-    return () => {
-      newSocket.disconnect()
-    }
-  },[sender])
+  //   return () => {
+  //     newSocket.disconnect()
+  //   }
+  // },[sender])
    
 
-  useEffect(()=> {
-      if(socket === null) return
-      socket.emit("addNewUser", sender?._id )
-      socket.on("getOnlineUser", (res : any)=> {
-          setOnlineUsers(res)
-      })
-
-    
-    },[socket])
+ 
 
     //send Message
 
-    useEffect(()=> {
-      if(socket === null) return
-      const recipientId = currentChat?.members[0]?._id 
-      socket.emit("sendMessage", {...newMessage, recipientId } )
+    // useEffect(()=> {
+    //   if(socket === null) return
+    //   const recipientId = currentChat?.members[0]?._id 
+    //   socket.emit("sendMessage", {...newMessage, recipientId } )
 
       
-    },[newMessage])
+    // },[newMessage])
 
  //receive Message
 
@@ -206,8 +200,8 @@ const fetchChats = async () => {
        }
         const resp = await getChatMessages(params.chatId)   
         setChatMessages(resp.data)
-        const mydetails  = await getMyDetails() 
-        setSender(mydetails.data)
+        // const mydetails  = await getMyDetails() 
+        // setSender(mydetails.data)
         setChatMessages(resp.data)
         
     } catch (e : any) {

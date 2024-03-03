@@ -41,10 +41,9 @@ const NotificationPage = ({setTab}:any) => {
         <div className="h-[100vh] z-[1000] bg-[#fff] md:h-[100%] md:w-[100%]  w-screen">
             <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-12  '>
             <a className="cursor-pointer" onClick={()=> setTab('home')}>
-          <PrevIcon color="" width="" height=""/>
+              <PrevIcon color="" width="" height=""/>
             </a>
             <p className='flex-1 text-center text-[1.2rem] font-[800] text-blue-800'> Notifications</p>
-
             </div> 
           
 
@@ -55,7 +54,7 @@ const NotificationPage = ({setTab}:any) => {
 
 
                return(
-                <div  key={index} className="flex  text-gray-800 my-4 ">
+                <div  key={index}>
                   <NotificationBar data={data}/>
                </div>
          

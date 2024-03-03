@@ -1,18 +1,22 @@
+import { PrevIcon } from "@/assets/icons1";
+import { useState } from "react";
 import { AiOutlineLeft } from "react-icons/ai";
 import { BiCheck } from "react-icons/bi";
 import { FcCheckmark } from "react-icons/fc";
 
 
-const Receipt = () => {
-    return ( 
-        <div className="w-full text-gray-500">
-            <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-12  '>
-                <a href="/">
-                <AiOutlineLeft  size={30} className='text-green-700  '/>
-                </a>
-                 <p className='flex-1 text-center text-[1.2rem] font-[500] text-blue-800'> Notifications</p>
+const Receipt = ({data, setShowReceipt} : any) => {
 
-                </div> 
+
+    return ( 
+        <div className="fixed bg-white top-0 w-full z-[1000] text-gray-500">
+               <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-12  '>
+            <a className="cursor-pointer z-[2000]" onClick={()=> setShowReceipt(false)}>
+                            <PrevIcon color="" width="" height=""/>
+                                </a>
+                                <p className='flex-1 text-center text-[1.2rem] font-[800] text-blue-800'> Notifications</p>
+
+            </div> 
                 <p className="mx-4 text-sm mt-5">Payments have been confirmed, here is your receipt</p>
             
             <div className="w-[80%] mx-auto p-4 shadow-sm rounded-xl">

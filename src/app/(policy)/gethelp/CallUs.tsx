@@ -1,5 +1,6 @@
 "use client"
 
+import { PrevIcon } from "@/assets/icons1";
 import { FC } from "react";
 
 import { AiOutlineLeft } from "react-icons/ai";
@@ -13,7 +14,7 @@ const CallUs :FC<PageProps> = ({setPage}) => {
         <div className="" >
             <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-12  '>
             <a onClick={() => setPage("")}>
-            <AiOutlineLeft  size={30} className='text-green-700  '/>
+               <PrevIcon color="" width="" height=""/>
             </a>
                 <p className='flex-1 text-center text-[1.2rem] font-[500] text-blue-800'> Call Us </p>
             </div> 

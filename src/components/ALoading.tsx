@@ -14,12 +14,10 @@ const ALoading = () => {
             border-radius: 50%;
             animation: spin 1s ease-in-out infinite;
           }
-
           @keyframes spin {
             from {
               transform: rotate(0turn);
             }
-
             to {
               transform: rotate(1turn);
             }

@@ -26,6 +26,7 @@ import Lprofile from "./(landlord)/ldashboard/lprofile";
 import { useOTPConfirm } from "./useOTPConfirm";
 import ErrorModal from "@/components/ErrorModal";
 import { io } from "socket.io-client";
+import { useConnectSocket } from "./useConnectSocket";
 
 export default function Home() {
   useEffect(() => {
@@ -48,12 +49,12 @@ export default function Home() {
    const [chatMessages, setChatMessages] = useState<any | null>(null)
    const [newMessage, setNewMessage] = useState<any>("")
    const [chats, setChats]  = useState<any>(null)
-   const [sender, setSender]  = useState<any>(null)
+  //  const [sender, setSender]  = useState<any>(null)
    const [isTyping, setIsTyping] = useState<any>(false)
    const [isLoading, setIsLoading] = useState<boolean>(false);
    const [message, setMessage] = useState<string>('')
-   const [onlineUsers, setOnlineUsers]  = useState<onlineUserType | null>(null)
-   const [socket, setSocket] = useState<any | null>(null)
+  //  const [onlineUsers, setOnlineUsers]  = useState<onlineUserType | null>(null)
+  //  const [socket, setSocket] = useState<any | null>(null)
 
 
 
@@ -62,28 +63,29 @@ export default function Home() {
 
 
 
+  const { socket, sender ,onlineUsers } = useConnectSocket();
 
 
 
 
 
 
-//connect socket 
-useEffect(()=> {
-  console.log(sender)
-  if(sender){
+// //connect socket 
+// useEffect(()=> {
+//   console.log(sender)
+//   if(sender){
 
-    var newSocket = io("https://easyrent-44an.onrender.com/")  
-    //var newSocket = io("http://localhost:5000/")  
+//     var newSocket = io("https://easyrent-44an.onrender.com/")  
+//     //var newSocket = io("http://localhost:5000/")  
   
-    setSocket(newSocket)
-  }
+//     setSocket(newSocket)
+//   }
 
 
-  return () => {
-    newSocket?.disconnect()
-  }
-},[sender])
+//   return () => {
+//     newSocket?.disconnect()
+//   }
+// },[sender])
 
 
 
@@ -96,15 +98,15 @@ if(onlineUsers){
 }
 }, [onlineUsers, chats ] )
 
-    useEffect(()=> {
-        if(socket === null) return
-        socket.emit("addNewUser", sender?._id )
-        socket.on("getOnlineUser", (res : any)=> {
-            setOnlineUsers(res)
-        })
+    // useEffect(()=> {
+    //     if(socket === null) return
+    //     socket.emit("addNewUser", sender?._id )
+    //     socket.on("getOnlineUser", (res : any)=> {
+    //         setOnlineUsers(res)
+    //     })
   
       
-      },[socket])
+    //   },[socket])
 
 
 ///fetch chats and messages
@@ -117,8 +119,8 @@ const fetchChat = async () => {
          setChats(updatedChats);
          const resp = await getChatMessages(chats._id)
           setChatMessages(resp.data)
-        const mydetails  = await getMyDetails() 
-        setSender(mydetails.data)
+        // const mydetails  = await getMyDetails() 
+        // setSender(mydetails.data)
       }
 
   } catch (e : any) {
@@ -136,8 +138,8 @@ const fetchMessage = async () => {
 try {
     const resp = await getChatMessages(chats._id)
     setChatMessages(resp.data)
-    const mydetails  = await getMyDetails() 
-      setSender(mydetails.data)
+    // const mydetails  = await getMyDetails() 
+    //   setSender(mydetails.data)
   
 
 } catch (e : any) {
@@ -363,7 +365,7 @@ useEffect(()=> {
        chatMessages={chatMessages}   socket={socket} chats={chats}
        message={message}   sender={sender} onlineUsers={onlineUsers}
        writeMessage={writeMessage}  sendMessage={sendMessage}
-       isTyping={isTyping} isLoading={isLoading}
+       isTyping={isTyping} isLoading={isLoading} setTab={setTab}
       />} 
        {tab ==='notification' && <NotificationPage setTab={setTab}/>}
        {tab ==='profile' && <Lprofile user={user} />}
@@ -399,7 +401,7 @@ useEffect(()=> {
        chatMessages={chatMessages}   socket={socket} chats={chats}
        message={message}   sender={sender} onlineUsers={onlineUsers}
        writeMessage={writeMessage}  sendMessage={sendMessage}
-       isTyping={isTyping} isLoading={isLoading}
+       isTyping={isTyping} isLoading={isLoading} setTab={setTab}
       />}        {tab ==='notification' && <NotificationPage/>}
        {tab ==='profile' && <Lprofile user={user} />}
        

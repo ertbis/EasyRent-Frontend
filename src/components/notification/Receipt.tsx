@@ -4,20 +4,23 @@ import { AiOutlineLeft } from "react-icons/ai";
 import { BiCheck } from "react-icons/bi";
 import { FcCheckmark } from "react-icons/fc";
 
+const Receipt = ({data, setShowReceipt, setTab} : any) => {
 
-const Receipt = ({data, setShowReceipt} : any) => {
 
-
+    
     return ( 
-        <div className="fixed bg-white top-0 w-full z-[1000] text-gray-500">
+        <div className="fixed bg-white top-0 w-full z-[1000]  h-screen text-gray-500">
                <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-12  '>
-            <a className="cursor-pointer z-[2000]" onClick={()=> setShowReceipt(false)}>
+                    <a className="cursor-pointer px-3 z-[2000]" onClick={()=>{
+                        setShowReceipt(false)
+                        setTab('home') 
+                        }}>
                             <PrevIcon color="" width="" height=""/>
-                                </a>
+                     </a>
                                 <p className='flex-1 text-center text-[1.2rem] font-[800] text-blue-800'> Notifications</p>
 
             </div> 
-                <p className="mx-4 text-sm mt-5">Payments have been confirmed, here is your receipt</p>
+                <p className="mx-4 text-sm mt-5 text-center">{data?.content}</p>
             
             <div className="w-[80%] mx-auto p-4 shadow-sm rounded-xl">
 
@@ -38,7 +41,7 @@ const Receipt = ({data, setShowReceipt} : any) => {
                             </div>
                             <div className="flex justify-between  py-[0.4rem]">
                                 <p className="">Payment Time</p>
-                                <p className="font-medium">25-02-2023 12:23:16</p>
+                                <p className="font-medium">{data?.Date}</p>
                             </div>
 
                             <div className="flex justify-between  py-[0.4rem]">
@@ -47,7 +50,7 @@ const Receipt = ({data, setShowReceipt} : any) => {
                             </div>
                             <div className="flex justify-between  py-[0.4rem]">
                                 <p className="">Sender Name</p>
-                                <p className="font-medium">Jame Clear</p>
+                                <p className="font-medium">{data?.user_id?.firstName} {" "}{data?.user_id?.lastName} </p>
                             </div>
                             <div className="flex justify-between  py-[0.4rem]">
                                 <p className="">Amount</p>

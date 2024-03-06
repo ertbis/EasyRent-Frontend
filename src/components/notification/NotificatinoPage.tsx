@@ -23,7 +23,7 @@ const NotificationPage = ({setTab}:any) => {
 
         setNotification(resp.data)
       }
-      console.log(resp)
+      // console.log(resp)
     } catch (error) {
       console.log(error)
     }
@@ -47,7 +47,7 @@ const NotificationPage = ({setTab}:any) => {
             </div> 
           
 
-        <div className="h-[80vh] overflow-y-scroll">
+        <div className="h-[90vh] overflow-y-scroll">
           {notifications  ? 
           <>
              {notifications.map((data :any, index: any)=> {
@@ -55,7 +55,7 @@ const NotificationPage = ({setTab}:any) => {
 
                return(
                 <div  key={index}>
-                  <NotificationBar data={data}/>
+                  <NotificationBar data={data}  setTab={setTab}/>
                </div>
          
               )

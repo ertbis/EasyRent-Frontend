@@ -85,7 +85,7 @@ const ChatScreenInbox :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, me
              <div className="flex-[0.22]">
                 
                  <div className="" onClick={() => setOpenRedirectModal(true)} >
-                    <IconRefresh className='w-7 h-7'/>
+                    <IconRefresh className='w-7 h-7 text-white'/>
                  </div>
              </div>
         </div>

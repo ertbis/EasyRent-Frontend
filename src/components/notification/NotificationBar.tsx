@@ -5,7 +5,7 @@ import { RxCross2 } from "react-icons/rx"
 import Receipt from "./Receipt"
 
 
-const NotificationBar = ({data}: any)=> {
+const NotificationBar = ({data, setTab}: any)=> {
     const [deleteModal, setDeleteModal] = useState<boolean>(false)
     const [showReceipt, setShowReceipt] = useState<boolean>(false)
 
@@ -15,8 +15,8 @@ const NotificationBar = ({data}: any)=> {
           {deleteModal &&
             <DeleteModal notId={data._id}  setDeleteModal={setDeleteModal} text="Notification"/>
             }
-
-          {showReceipt  &&   <Receipt data ={data}  setShowReceipt={setShowReceipt}/>}
+      
+          {(data.type == 'receipt' &&  showReceipt ) &&   <Receipt data ={data} setTab={setTab} setShowReceipt={setShowReceipt}/>}
         <div className="flex-[0.3] flex justify-center items-center">
           { data?.picture ?
                     <div className=' w-[3rem] h-[3rem] rounded-full bg-cover bg-center' style={{ backgroundImage: `url(${data && data.picture ? data.picture : "profiledp.png"})` }}>

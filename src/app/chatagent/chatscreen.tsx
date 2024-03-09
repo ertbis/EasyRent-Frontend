@@ -46,7 +46,7 @@ const ChatScreen :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message
   useEffect(() => {
     let index = 0;
   console.log(chatMessages)
-    const typingInterval = setInterval(() => {
+      const typingInterval = setInterval(() => {
       if (index < originalText.length) {
         setText(prevText => prevText + originalText.charAt(index-1));
         index += 1;

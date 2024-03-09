@@ -94,7 +94,7 @@ const FilterForm: FC<FilterFormProp> = ({ setShowFilterCard }) => {
                             <p className="font-bold text-grey-light text-sm">Price Range</p>
                             <div className="flex mt-2 justify-between items-center">
                                 <input
-                                    placeholder="#20,000"
+                                    placeholder="₦20,000"
                                     type="text"
                                     className="h-16 border border-grey-light text-sm text-grey-light p-2 rounded-lg w-[40%]"
                                     name="minPrice"
@@ -102,7 +102,7 @@ const FilterForm: FC<FilterFormProp> = ({ setShowFilterCard }) => {
                                 />
                                 <p className="text-xs">to</p>
                                 <input
-                                    placeholder="#20,000"
+                                    placeholder="₦20,000"
                                     type="text"
                                     className="h-16 border border-grey-light text-sm text-grey-light p-2 rounded-lg w-[40%]"
                                     name="maxPrice"

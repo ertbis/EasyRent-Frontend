@@ -14,7 +14,6 @@ import { PrevIcon } from '@/assets/icons1';
 
 const FilterResult :FC<any> = ({houses, setShowSearch}) => {
 
-  console.log(houses)
   
 
 

@@ -279,16 +279,16 @@ const addtoFavourite = async () => {
         <div className='m-4 w-[90%] bg-[#F5F4F8]  p-2 rounded-lg '>
              <h2 className="text-blue-800 w-[70%] text-sm font-medium mt-4 ">About This Home</h2>
             {showFullDesc ?
-             <p className='flex flex-wrap text-grey-light'>
-             {selectedHouse.about} 
+             <p className=' text-grey-light'>
+             {selectedHouse.about}  {'    '}
              <span onClick={() => setShowFullDesc(false)} className='text-green-700 cursor-pointer text-xs' >show less</span>
              </p>
              :
-             <p className='flex flex-wrap text-grey-light'>
-             {selectedHouse.about.slice(0, 100)} ..... 
+             <p className='  text-grey-light'>
+             {selectedHouse.about.slice(0, 100)}   {'    '}
              <span onClick={() => setShowFullDesc(true)} className='text-green-700  cursor-pointer text-xs' >see more...</span>
              </p>
-        
+    
         
         }
         </div>

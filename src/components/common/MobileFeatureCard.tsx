@@ -51,6 +51,19 @@ useEffect(() => {
 }, [])
 
 
+function formatAmount(amount: any ) {
+  // Convert the amount to a string
+  let amountString = String(amount);
+  // Split the amount into integer and fractional parts (if any)
+  let parts = amountString.split('.');
+  
+  // Add commas to the integer part
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+ 
+  // Join the integer and fractional parts back together
+  return parts.join('.');
+}
+
   return ( 
         <div   className=" h-full bg-[#F5F4F8] hover:bg-[#cac8d1] rounded-xl px-2  py-4  mb-8" >
            {openEdit && <EditModal houseId={house._id} setOpenEdit={setOpenEdit}/>}
@@ -98,14 +111,14 @@ useEffect(() => {
                   />
                 </div>
              </div>
-             <div className="flex  mx-2">
-                <p className='flex-1 text-blue-800 w-[70%] text-lg font-bold' >{` ₦${house.amount}`}<span className=' text-sm'>/Year</span></p>
-               <div className='flex flex-[0.5] justify-start items-center text-grey-light text-sm w-full'>
+             <div className="flex  ">
+                <p className='flex-1 text-blue-800 w-[70%] text-lg font-bold' >{` ₦${formatAmount(house.amount)}`}<span className=' text-sm'>/Year</span></p>
+               <div className='flex flex-[0.5] justify-end items-center text-grey-light text-sm w-full'>
                     <CiLocationOn size={15}  className='ml-4 text-blue-800'/>
                     <p className=' flex text-sm'> {house.location}</p>
                </div>
             </div>
-              <p className='text-sm text-grey-light mx-2 font-bold'>{house.apartment}</p>
+              <p className='text-sm text-grey-light  font-bold'>{house.apartment}</p>
               <div className='  grid grid-cols-3 gap-1 mt-4  justify-start items-center' >
                   {house?.mainFeatures?.light &&  
                     <div className="flex h-6 bg-white w-full  mr-2  justify-center items-center rounded-xl p-[0.3rem] " >

@@ -43,6 +43,18 @@ const addtoFavourite = async () => {
   }
 };
 
+function formatAmount(amount: any ) {
+  // Convert the amount to a string
+  let amountString = String(amount);
+  // Split the amount into integer and fractional parts (if any)
+  let parts = amountString.split('.');
+  
+  // Add commas to the integer part
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+ 
+  // Join the integer and fractional parts back together
+  return parts.join('.');
+}
   return ( 
         <div  className="h-full bg-[#F5F4F8] hover:bg-[#cac8d1] rounded-xl px-2  pb-0 md:pb-4 " >
             <div className="relative w-[full]   h-[10rem]  md:h-[15rem]">
@@ -66,7 +78,7 @@ const addtoFavourite = async () => {
                 </div>
              </div>
              <div className='mx-2 pb-1'>
-                <p className='flex-1 text-blue-800 w-[70%]  text-[0.875rem] lg:text-lg font-bold ' >{` ₦${house.amount}`}<span className=' text-[0.5rem] lg:text-sm'>/Year</span></p>
+                <p className='flex-1 text-blue-800 w-[70%]  text-[0.875rem] lg:text-lg font-bold ' >{` ₦${formatAmount(house.amount)}`}<span className=' text-[0.5rem] lg:text-sm'>/Year</span></p>
                 <div className="flex items-center justify-between  ">
                     <p className='text-[0.625rem] md:text-sm text-grey-light  md:font-bold'>{house.apartment}</p>
                     <div className='flex flex-[0.5] justify-start items-center text-grey-light text-sm w-full'>

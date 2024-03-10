@@ -28,7 +28,7 @@ import ErrorModal from "@/components/ErrorModal";
 import { io } from "socket.io-client";
 import { useConnectSocket } from "./useConnectSocket";
 
-export default function Home() {
+export default function Home({searchParams} : any) {
   useEffect(() => {
     AOS.init();
     AOS.refresh();
@@ -59,7 +59,11 @@ export default function Home() {
 
 
 
-
+   useEffect(() => {
+      if(searchParams.tab){
+         setTab(searchParams.tab)
+      }
+   }, [])
 
 
 
@@ -167,20 +171,17 @@ useEffect(()=>{
     const unreadNotifications = notifications.filter((n: any) => n.isRead === false);
   
       // Check if the chat's members[0]._id matches the senderId in any unreadNotification
-      console.log(chats)
       console.log(unreadNotifications)
       const hasUnreadMessages = unreadNotifications.some((notification: any) => {
         return chats.members[0]?._id === notification.senderId;
       });
       // If there are unread messages for this chat, increment unreadMessageCount
     
-      console.log(chats)
     if(chats && chats.length > 0){
       const unreadMessageCount = hasUnreadMessages ? (chats.unreadMessageCount  + 1) : (chats.unreadMessageCount || 0)
       setChats({ ...chats,
         unreadMessageCount });
       }
-    console.log(chats)
   };
   
 
@@ -206,7 +207,7 @@ useEffect(()=>{
     } )
 
     socket.on("getNotification", (res : any ) => {
-      console.log(res)
+      // console.log(res)
      const   isChatOpen = chats?.members.some((id :any) => id._id === res.senderId)
      if(isChatOpen) {
       setNotifications((prev:any) => [{...res, isRead : true}, ...prev])

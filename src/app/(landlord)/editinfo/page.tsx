@@ -9,9 +9,10 @@ import { setName } from '@/app/GlobalRedux/Features/user/userSlice';
 import ErrorModal from '@/components/ErrorModal';
 import { useProtectedRoute } from '@/app/useProtectedRoute';
 import { PrevIcon } from '@/assets/icons1';
-import { setUser } from '../../../../utils/auth';
+import { getUser, setUser } from '../../../../utils/auth';
 
-const EditPersonalInfoForm: React.FC = () => {
+const EditPersonalInfoForm: React.FC = (params) => {
+  console.log("oo", params)
   const dispatch = useDispatch();
   const router = useRouter();
   const userHook = useProtectedRoute(['landlord', 'student']);
@@ -28,6 +29,7 @@ const EditPersonalInfoForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [home , setHome]  = useState<string>('/')
 
   useEffect(() => {
     async function fetchDetails() {
@@ -44,6 +46,24 @@ const EditPersonalInfoForm: React.FC = () => {
 
     fetchDetails();
   }, []);
+
+  const fetchUser = async()=>{
+    const cookieUser = await getUser()
+    setUser(cookieUser);
+    if(cookieUser.role == 'landlord'){
+     setHome('/ldashboard?tab=profile')
+    }else if (cookieUser.role == 'admin'){
+     setHome('/admin')
+    }
+    else {
+     setHome('/?tab=profile')
+    }
+}
+
+
+useEffect(() => {
+  fetchUser()
+}, [])
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -73,7 +93,7 @@ const EditPersonalInfoForm: React.FC = () => {
           {error && errorModal && <ErrorModal setErrorModal={setErrorModal} text={error} />}
 
           <div className="text-grey-light flex items-center justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-16">
-            <a href="/">
+            <a href={home}>
             <PrevIcon color="" width="" height=""/>
             </a>
             <p className="flex-1 text-center text-[1.4rem] font-[700] text-blue-800">Personal Information</p>

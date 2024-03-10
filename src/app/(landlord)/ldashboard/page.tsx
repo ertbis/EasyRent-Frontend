@@ -24,10 +24,16 @@ import EditModal from "@/components/EditModal";
 import { useOTPConfirm } from "@/app/useOTPConfirm";
 
 
-const LandLordDashboard = () => {
+const LandLordDashboard = ({searchParams} : any) => {
    const router = useRouter();
+   // console.log(searchParams.tab)
    // const houses = useSelector((state: RootState) => state.houses.houses)
    const [tab, setTab] = useState("home")
+   useEffect(() => {
+      if(searchParams.tab){
+         setTab(searchParams.tab)
+      }
+   }, [])
    // const [houses,  setHouses] = useState([])
    const [user, setUser] = useState<any>(null)
    const [initial, setInitial] = useState("")
@@ -116,7 +122,6 @@ const LandLordDashboard = () => {
                         {houses.map((data :any, index:any) => {
                               return (
                                  <MobileFeaturedCard  key={index} house={data} />
-
                               )
                         })}
 

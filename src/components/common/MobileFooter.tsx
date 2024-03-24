@@ -6,7 +6,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { SlHome } from "react-icons/sl";
 import { getToken } from "../../../utils/auth";
 import { FC, useEffect, useState } from "react";
-import { FavouriteIcon, HomeIcon, MessageIcon, MessageIconFill, SearchIcon, SearchIconFill, UserIcon } from "@/assets/icons";
+import { FavouriteIcon, FavouriteIconFill, HomeIcon, MessageIcon, MessageIconFill, SearchIcon, SearchIconFill, UserIcon } from "@/assets/icons";
 
 
 interface LpHeaderProps {
@@ -43,13 +43,12 @@ interface LpHeaderProps {
                    <SearchIconFill color="#1BB81B" width="24" height="24" />
                    :<SearchIcon  color="#343A40" width="24" height="24"/>
                    }
-                    <p className='text-[0.5rem] '>Search</p>
-                  
+                    <p className='text-[0.5rem] '>Search</p>                 
                 </div>
                 <div  onClick={()=> handletabClick("save")}
                     className={` ${activeButton == "save" ? "text-green-700 " : "text-grey-light"} cursor-pointer  flex flex-col justify-center items-center`} >
                    {activeButton == 'save'  ? 
-                   <FavouriteIcon color="#1BB81B" width="24" height="24" />
+                   <FavouriteIconFill color="#1BB81B" width="24" height="24" />
                    :<FavouriteIcon  color="#343A40" width="24" height="24"/>
                    }
                     <p className='text-[0.5rem] '>Save</p>

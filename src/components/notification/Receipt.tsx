@@ -13,7 +13,7 @@ const Receipt = ({data, setShowReceipt, setTab} : any) => {
                <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-12  '>
                     <a className="cursor-pointer px-3 z-[2000]" onClick={()=>{
                         setShowReceipt(false)
-                        setTab('home') 
+                        // setTab('home') 
                         }}>
                             <PrevIcon color="" width="" height=""/>
                      </a>

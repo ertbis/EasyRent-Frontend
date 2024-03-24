@@ -9,6 +9,7 @@ import ChatScreenInbox from "./chatscreen";
 
 interface ScreenProps {
   sendMessage: any,
+  sendAttachedMessage:any;
   chats : any,
   sender: any,
   onlineUsers: onlineUserType  | null,
@@ -22,7 +23,7 @@ interface ScreenProps {
 
 } 
 
-const InboxPage: FC<ScreenProps>  = ({chatMessages, sender, sendMessage, onlineUsers, writeMessage, socket, chats ,message, isTyping, isLoading , setTab }) => {
+const InboxPage: FC<ScreenProps>  = ({chatMessages, sender, sendMessage, onlineUsers, writeMessage, socket, chats ,message, isTyping, isLoading , setTab, sendAttachedMessage }) => {
         
 
     return ( 
@@ -35,7 +36,8 @@ const InboxPage: FC<ScreenProps>  = ({chatMessages, sender, sendMessage, onlineU
         message={message}   sender={sender} onlineUsers={onlineUsers}
         writeMessage={writeMessage}  sendMessage={sendMessage}
         isTyping={isTyping} isLoading={isLoading} setTab={setTab}
-       />
+        sendAttachedMessage={sendAttachedMessage}
+        />
        :
 
       <div className=" mx-4 flex flex-col items-center justify-center h-[70vh]">

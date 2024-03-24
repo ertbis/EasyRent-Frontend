@@ -9,12 +9,14 @@ import { SpinIcon } from "@/assets/icons";
 import Image from "next/image";
 import { CiLocationOn } from "react-icons/ci";
 import TimeAgo from "./TimeAgo";
-import { IconRefresh } from "@/assets/icons2";
+import { AttachmentIcon, IconRefresh } from "@/assets/icons2";
 import RegenerateChatModal from "@/components/modals/RegenerateChatModal";
 import { PrevIcon } from "@/assets/icons1";
+import AttachmentList from "@/components/inbox/AttachmentList";
 
 interface ScreenProps {
     sendMessage: any,
+    sendAttachedMessage: any,
     setScreen:React.Dispatch<React.SetStateAction<string>>,
     chatId : string,
     currentChat: any,
@@ -28,7 +30,7 @@ interface ScreenProps {
 
 } 
 
-const ChatScreen :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message, chatMessages, onlineUsers, sender, chatId, sendMessage, setScreen, currentChat}) => {   
+const ChatScreen :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message, chatMessages, onlineUsers, sender, chatId, sendMessage, setScreen, currentChat ,sendAttachedMessage}) => {   
     const chatContainerRef = useRef<HTMLDivElement | null>(null); 
     const [openRedirectModal,  setOpenRedirectModal] = useState<boolean>(false)
 
@@ -39,6 +41,7 @@ const ChatScreen :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [chatMessages, isTyping]);
+  const [openAttachment, setOpenAttachment]  =  useState(false)
 
   const [text, setText] = useState('');
   const originalText = '....';
@@ -100,47 +103,79 @@ const ChatScreen :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message
                     {chatMessages && chatMessages.map((data: any, index: any) => {
                        
                        return(
-                             <div  key={data._id}  className={`w-full flex   px-6 ${data?.senderId == sender?._id ? "justify-end" : "justify-start"}`}>
-                      
-                        {data?.attachment  ?
+                        <div  key={data._id}  className={`w-full flex   px-6 ${data?.senderId == sender?._id ? "justify-end" : "justify-start"}`}>
+                           {data?.property     ?
+                           
+                           <div  className={`flex md:w-[40%] w-[17.3rem] h-[7.5rem] my-3 min-h-[6rem] p-2  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] rounded-l-[1rem] rounded-br-[1rem] " : "bg-[#F5FEFF] text-[#343A40] rounded-r-[1rem]  rounded-bl-[1rem]  "}`}>
+                           <div className="h-[6.5rem] w-[8rem] mr-4 relative">
+                                 <Image    
+                                 src={data?.property?.images  &&  data?.property?.images[0]}
+                                   // alt={house.apartment}
+                                   alt=""
+                                   fill
+                                   objectFit='cover'
+                                   objectPosition='center center'
+                                   className='w-full h-full rounded-xl'
+                                 />
+                                 <p  className="bg-white bottom-[10%] left-[10%] text-[#343A40] rounded-[0.5rem] text-[0.5rem] p-[0.5rem]  absolute">{data?.property?.location }</p>
+                           </div>
+                           <div className="flex flex-col justify-center items-center">
+                                     <a href={`/house/${data?.property?._id}`}  className="text-[1rem] text-[#fff] font-semibold ">{data?.property?.apartment }  apartment </a>
+                                     <div className='flex flex-.[05] justify-start items-center text-grey-light text-sm w-full'>
+                                       <CiLocationOn size={13}  className='ml-4 text-[#F5FEFF]'/>
+                                       <p className=' flex text-[0.625rem] text-[#F5FEFF] lg:text-sm'> {data?.property?.location }</p>
+                                     </div>
 
-                                  <div  className={`flex md:w-[40%] w-[17.3rem] h-[7.5rem] my-3 min-h-[6rem] p-2  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] rounded-l-[1rem] rounded-br-[1rem] " : "bg-[#F5FEFF] text-[#343A40] rounded-r-[1rem]  rounded-bl-[1rem]  "}`}>
-                                        <div className="h-[6.5rem] w-[8rem] mr-4 relative">
-                                              <Image    
-                                               src={data?.attachment.propertyId.images[0]}
-                                                // alt={house.apartment}
-                                              
-                                                alt=""
-                                                fill
-                                                objectFit='cover'
-                                                objectPosition='center center'
-                                                className='w-full h-full rounded-xl'
-                                              />
-                                              <p  className="bg-white bottom-[10%] left-[10%] text-[#343A40] rounded-[0.5rem] text-[0.5rem] p-[0.5rem]  absolute">{data?.attachment?.propertyId?.location }</p>
-                                        </div>
-                                        <div className="flex flex-col justify-center items-center">
-                                                  <a href={`/house/${data?.attachment?.propertyId?._id}`}  className="text-[1rem] text-[#fff] font-semibold ">{data?.attachment?.propertyId?.apartment }  apartment </a>
-                                                  <div className='flex flex-[0.5] justify-start items-center text-grey-light text-sm w-full'>
-                                                    <CiLocationOn size={13}  className='ml-4 text-[#F5FEFF]'/>
-                                                    <p className=' flex text-[0.625rem] text-[#F5FEFF] lg:text-sm'> {data?.attachment?.propertyId?.location }</p>
-                                                  </div>
+                           </div>
+                         </div>
+                         
+                         
+                         :
+                          <>
+                          {data?.attachment  ?
 
-                                        </div>
-                                 </div>
-                        
-                            :
-                            <>
-                                  <div className={` md:w-[20%] my-3 min-h-[4rem] rounded-lg p-4  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] " : "bg-[#F5FEFF] text-[#343A40] "}`}>
-                                      <p className="">{data.text}</p>
-                                  <TimeAgo timestamp={data.updatedAt} />
-                                  </div>
-                            </>
-                        }
-                               </div> 
-                       
+                       <div  className={`flex md:w-[40%] w-[17.3rem] h-[7.5rem] my-3 min-h-[6rem] p-2  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] rounded-l-[1rem] rounded-br-[1rem] " : "bg-[#F5FEFF] text-[#343A40] rounded-r-[1rem]  rounded-bl-[1rem]  "}`}>
+                             <div className="h-[6.5rem] w-[8rem] mr-4 relative">
+                                   <Image    
+                                   src={data?.attachment.propertyId.images[0]}
+                                     // alt={house.apartment}
+                                   
+                                     alt=""
+                                     fill
+                                     objectFit='cover'
+                                     objectPosition='center center'
+                                     className='w-full h-full rounded-xl'
+                                   />
+                                   <p  className="bg-white bottom-[10%] left-[10%] text-[#343A40] rounded-[0.5rem] text-[0.5rem] p-[0.5rem]  absolute">{data?.attachment?.propertyId?.location }</p>
+                             </div>
+                             <div className="flex flex-col justify-center items-center">
+                                       <a href={`/house/${data?.attachment?.propertyId?._id}`}  className="text-[1rem] text-[#fff] font-semibold ">{data?.attachment?.propertyId?.apartment }  apartment </a>
+                                       <div className='flex flex-[0.5] justify-start items-center text-grey-light text-sm w-full'>
+                                         <CiLocationOn size={13}  className='ml-4 text-[#F5FEFF]'/>
+                                         <p className=' flex text-[0.625rem] text-[#F5FEFF] lg:text-sm'> {data?.attachment?.propertyId?.location }</p>
+                                       </div>
 
+                             </div>
+                           </div>
+
+                           :
+                           <>
+                           <div className={` md:w-[20%] my-3 min-h-[4rem] rounded-lg p-4  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] " : "bg-[#F5FEFF] text-[#343A40] "}`}>
+                               <p className="">{data.text}</p>
+                           <TimeAgo timestamp={data.updatedAt} />
+                           </div>
+                           </>
+                           }
+                          </>
+                          
+                          
+                          
+                          
+                          }   
+                       </div> 
                         
                        )
+
 
                        
                     })}
@@ -155,9 +190,10 @@ const ChatScreen :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message
         </div>
 
        <div className="fixed bottom-[1%] w-[100%]">
+       {openAttachment && <AttachmentList setOpenAttachment={setOpenAttachment} sendAttachedMessage={sendAttachedMessage} />}
 
         <div className=" bg-white p-2 px-4 rounded-[1.5rem] flex w-[90vw] mx-auto items-center ">
-            <BsCamera size={25}  className="text-blue-800"/>
+        <AttachmentIcon onClick={() => setOpenAttachment(true)} className='h-8 w-10 text-black'/>
             <input  
                type="text"
                placeholder="message"

@@ -206,11 +206,40 @@ const writeMessage =(e :any) => {
             setIsLoading(false); 
         }
     }
+
+    const sendAttachedMessage = async (param: string) => {
+      setIsLoading(true)
+        try {
+            const data ={
+              text: "A property",
+              chatId: params.chatId,
+              property : param
+            }
+            const resp = await  createMessage(data)   
+         
+            setNewMessage(resp.data.data)
+            if(chatMessages){
+              setChatMessages((prev : any) => [...prev, resp.data.data])
+            }else{
+              setChatMessages([resp.data.data])
+            }
+            setMessage("")
+            setIsLoading(false)
+    
+          } catch (error) {
+            setIsLoading(false)
+        }
+    
+        
+    }
+    
+    
+    
     return (  
         <>
        {screen ==="first"  && <FirstScreen isLoading={isLoading} currentChat={currentChat} sendMessage={sendMessage} />}
        {screen ==="chat"  && <ChatScreen  isLoading={isLoading}
-       chatMessages={chatMessages}
+       chatMessages={chatMessages}  sendAttachedMessage={sendAttachedMessage}
        message={message}  writeMessage={writeMessage}
          onlineUsers={onlineUsers}  isTyping={isTyping}
         sender={sender}  currentChat={currentChat}  chatId={params.chatId} sendMessage={sendMessage}  setScreen={setScreen} />}

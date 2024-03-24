@@ -27,9 +27,11 @@ const RegenerateChatModal = ({setOpenModal , chatId}: modalprops)=> {
   const HandleClick = async()=> {
    setLoading(true)
     try {
-    const res=   await regenerateNewChat(chatId)
-      console.log(res)
-     location.reload()
+    const res: any =   await regenerateNewChat(chatId)
+      // console.log(res.data)
+      if(res.data){
+        window.location.href = `/chatagent/${res?.data?._id}`
+      }
 
     } catch (error) {
       setLoading(false)

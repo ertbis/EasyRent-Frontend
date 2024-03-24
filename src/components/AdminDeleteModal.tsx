@@ -21,7 +21,7 @@ const AdminDeleteModal :FC<ErrorProps>  = ({setAdminDeleteModal, text, Id, prop}
   const router = useRouter();
   const [loading , setLoading]  = useState(false)
 
-  console.log(Id)
+  // console.log(Id)
 
 
   useEffect(() => {

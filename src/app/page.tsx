@@ -298,6 +298,31 @@ const sendMessage = async (param: string) => {
     
 }
 
+const sendAttachedMessage = async (param: string) => {
+  setIsLoading(true)
+    try {
+        const data ={
+          text: "A property",
+          chatId: chats._id,
+          property : param
+        }
+        const resp = await  createMessage(data)   
+     
+        setNewMessage(resp.data.data)
+        if(chatMessages){
+          setChatMessages((prev : any) => [...prev, resp.data.data])
+        }else{
+          setChatMessages([resp.data.data])
+        }
+        setMessage("")
+        setIsLoading(false)
+
+      } catch (error) {
+        setIsLoading(false)
+    }
+
+    
+}
 
 
 
@@ -365,7 +390,7 @@ useEffect(()=> {
        {tab ==='inbox' && <InboxPage 
        chatMessages={chatMessages}   socket={socket} chats={chats}
        message={message}   sender={sender} onlineUsers={onlineUsers}
-       writeMessage={writeMessage}  sendMessage={sendMessage}
+       writeMessage={writeMessage}  sendMessage={sendMessage}  sendAttachedMessage={sendAttachedMessage}
        isTyping={isTyping} isLoading={isLoading} setTab={setTab}
       />} 
        {tab ==='notification' && <NotificationPage setTab={setTab}/>}
@@ -401,7 +426,7 @@ useEffect(()=> {
        {tab ==='inbox' && <InboxPage 
        chatMessages={chatMessages}   socket={socket} chats={chats}
        message={message}   sender={sender} onlineUsers={onlineUsers}
-       writeMessage={writeMessage}  sendMessage={sendMessage}
+       writeMessage={writeMessage}  sendMessage={sendMessage}   sendAttachedMessage={sendAttachedMessage}
        isTyping={isTyping} isLoading={isLoading} setTab={setTab}
       />}        {tab ==='notification' && <NotificationPage/>}
        {tab ==='profile' && <Lprofile user={user} />}

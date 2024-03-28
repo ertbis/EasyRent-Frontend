@@ -93,7 +93,7 @@ const ChatScreenInbox :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, me
         </div>
        
         {openRedirectModal  && <RegenerateChatModal chatId={currentChat?._id}  setOpenModal={setOpenRedirectModal} />} 
-        <div className= " h-[75%] pb-20 overflow-y-scroll flex-1" ref={chatContainerRef}>
+        <div className= " h-[86vh] bg-[transparent] pb-28 overflow-y-scroll flex-1" ref={chatContainerRef}>
                     {chatMessages && chatMessages?.map((data: any, index: any) => {
                        
                        return(
@@ -182,8 +182,12 @@ const ChatScreenInbox :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, me
 
        <div className="fixed bottom-[-8%] w-[100%]">
        {openAttachment && <AttachmentList setOpenAttachment={setOpenAttachment} sendAttachedMessage={sendAttachedMessage} />}
-        <div className=" bg-white mb-20 p-2 px-4 rounded-[1.5rem] flex w-[90vw] mx-auto items-center ">
-            <AttachmentIcon onClick={() => setOpenAttachment(true)} className='h-8 w-10 text-black'/>
+        {/* <div className=" bg-white mb-20 p-2 px-4 rounded-[1.5rem] flex w-[90vw] mx-auto items-center "> */}
+        <div className=" bg-white p-2 mb-20 rounded-[1.5rem] flex w-[90vw] mx-auto items-center ">
+          <div className=" p-0">
+        <AttachmentIcon onClick={() => setOpenAttachment(true)} className='h-6 w-7 p-0 m-0 text-[black]'/>
+
+          </div>
             <input  
                type="text"
                placeholder="message"

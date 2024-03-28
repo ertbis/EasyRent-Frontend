@@ -216,8 +216,9 @@ const writeMessage =(e :any) => {
               property : param
             }
             const resp = await  createMessage(data)   
-         
-            setNewMessage(resp.data.data)
+            if(resp){
+              setNewMessage(resp.data.data)
+            }
             if(chatMessages){
               setChatMessages((prev : any) => [...prev, resp.data.data])
             }else{

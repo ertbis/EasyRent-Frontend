@@ -192,8 +192,11 @@ const ChatScreen :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message
        <div className="fixed bottom-[1%] w-[100%]">
        {openAttachment && <AttachmentList setOpenAttachment={setOpenAttachment} sendAttachedMessage={sendAttachedMessage} />}
 
-        <div className=" bg-white p-2 px-4 rounded-[1.5rem] flex w-[90vw] mx-auto items-center ">
-        <AttachmentIcon onClick={() => setOpenAttachment(true)} className='h-8 w-10 text-black'/>
+        <div className=" bg-white p-2 rounded-[1.5rem] flex w-[90vw] mx-auto items-center ">
+          <div className=" p-0">
+        <AttachmentIcon onClick={() => setOpenAttachment(true)} className='h-6 w-7 p-0 m-0 text-[black]'/>
+
+          </div>
             <input  
                type="text"
                placeholder="message"

@@ -16,14 +16,14 @@ const SuccessPage:FC<any> = ({params}) => {
         try {
             const resp = await  createChats()
             console.log(resp)
-            const data ={
-              text: "New Tour Created",
-              chatId: resp.data[0]._id,
-              attachment : params.tourId
-            }
-            console.log(data)
-            const resp1 = await  createMessage(data)
-           window.location.replace(`/chatagent/${resp.data[0]._id}`);
+            // const data ={
+            //   text: "New Tour Created",
+            //   chatId: resp.data[0]._id,
+            //   attachment : params.tourId
+            // }
+            // console.log(data)
+            // const resp1 = await  createMessage(data)
+           window.location.href =  `/chatagent/${resp.data[0]._id}`;
 
         } catch (e : any) {
             setErrorModal(true)

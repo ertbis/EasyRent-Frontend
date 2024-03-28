@@ -14,7 +14,7 @@ const NotificationBar = ({data, setTab}: any)=> {
       setShowReceipt(!showReceipt)
       if(data.type == 'chat' ){
         setloading(true)
-        window.location.href = `/chatagent${data.chat}`
+        window.location.href = `/chatagent/${data.chat}`
       }
     }
     

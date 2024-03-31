@@ -100,7 +100,7 @@ const ChatScreenInbox :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, me
                         <div  key={data._id}  className={`w-full flex   px-6 ${data?.senderId == sender?._id ? "justify-end" : "justify-start"}`}>
                            {data?.property     ?
                            
-                           <div  className={`flex md:w-[40%] w-[17.3rem] h-[7.5rem] my-3 min-h-[6rem] p-2  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] rounded-l-[1rem] rounded-br-[1rem] " : "bg-[#F5FEFF] text-[#343A40] rounded-r-[1rem]  rounded-bl-[1rem]  "}`}>
+                           <div  className={`flex  w-[17.3rem] h-[7.5rem] my-3 min-h-[6rem] p-2  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] rounded-l-[1rem] rounded-br-[1rem] " : "bg-[#1BB81B] text-[#343A40] rounded-r-[1rem]  rounded-bl-[1rem]  "}`}>
                            <div className="h-[6.5rem] w-[8rem] mr-4 relative">
                                  <Image    
                                  src={data?.property?.images  &&  data?.property?.images[0]}
@@ -115,7 +115,7 @@ const ChatScreenInbox :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, me
                            </div>
                            <div className="flex flex-col justify-center items-center">
                                      <a href={`/house/${data?.property?._id}`}  className="text-[1rem] text-[#fff] font-semibold ">{data?.property?.apartment }  apartment </a>
-                                     <div className='flex flex-.[05] justify-start items-center text-grey-light text-sm w-full'>
+                                     <div className='flex flex-[05] justify-start items-center text-grey-light text-sm w-full'>
                                        <CiLocationOn size={13}  className='ml-4 text-[#F5FEFF]'/>
                                        <p className=' flex text-[0.625rem] text-[#F5FEFF] lg:text-sm'> {data?.property?.location }</p>
                                      </div>
@@ -194,7 +194,6 @@ const ChatScreenInbox :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, me
                value={message}
                className="outline-none text-[#343A40] flex-1 h-8 bg-transparent ml-2 "
                onChange={e  => writeMessage(e)}
-
            />
            {isLoading ?
                <div 

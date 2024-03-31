@@ -62,12 +62,12 @@ const AttachmentList:FC<ErrorProps>  = ({setOpenAttachment, sendAttachedMessage}
 
     return (
 
-      <div  className="absolute  z-[1500] top-0  left-0 min-h-screen w-screen " >
+      <div  className="fixed  z-[1500] top-0  left-0 min-h-screen w-screen " >
  
-     <div onClick={() => setOpenAttachment(false)}  className=" fixed w-full h-full   ">
+     <div onClick={() => setOpenAttachment(false)}  className=" fixed w-full h-full  bg-[transparent] ">
 
      </div>
-     <div data-aos="fade-up" className='left-0  fixed rounded-t-[1.25rem] text-center bottom-0 bg-[#fff] h-[25rem]  w-screen'>
+     <div data-aos="fade-up" className='left-0  fixed rounded-t-[1.25rem] text-center bottom-0 bg-[#fff] h-[83vh]  w-screen'>
              <div className="w-[90%] z-[1200] mx-auto rounded-t-[1.25rem] bg-[#E4E4E4] mt-[-0.8rem] h-[0.8rem]"></div>
              <div className="w-[20%] font-bold h-[0.25rem] my-3 rounded-lg mx-auto bg-[#D9D9D9]  "></div>
                  <div className="  h-[83%] pt-4   flex flex-col justify-center items-center">

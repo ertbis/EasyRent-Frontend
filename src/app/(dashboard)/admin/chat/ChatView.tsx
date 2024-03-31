@@ -450,8 +450,8 @@ useEffect(() => {
                                 <>
                                 {data?.attachment  ?
       
-                             <div  className={`flex md:w-[40%] w-[17.3rem] h-[7.5rem] my-3 min-h-[6rem] p-2  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] rounded-l-[1rem] rounded-br-[1rem] " : "bg-[#F5FEFF] text-[#343A40] rounded-r-[1rem]  rounded-bl-[1rem]  "}`}>
-                                   <div className="h-[6.5rem] w-[8rem] mr-4 relative">
+                                    <div  className={`flex  w-[17.3rem] h-[7.5rem] my-3 min-h-[6rem] p-2  ${data?.senderId == sender?._id ? "bg-[#343A40] text-[#fff] rounded-l-[1rem] rounded-br-[1rem] " : "bg-[#1BB81B] text-[#343A40] rounded-r-[1rem]  rounded-bl-[1rem]  "}`}>
+                                    <div className="h-[6.5rem] w-[8rem] mr-4 relative">
                                          <Image    
                                          src={data?.attachment.propertyId.images[0]}
                                            // alt={house.apartment}

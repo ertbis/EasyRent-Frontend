@@ -2,13 +2,14 @@
 
 import { AiOutlineLeft } from "react-icons/ai";
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import CallUs from "./CallUs";
 import FeedBack from "./FeedBack";
 import { createChats } from "../../../../utils/data/endpoints";
 import ErrorModal from "@/components/ErrorModal";
 import Loading from "@/components/Loading";
 import { PrevIcon } from "@/assets/icons1";
+import { getUser } from "../../../../utils/auth";
 
 
 const GetHelp = () => {
@@ -16,7 +17,8 @@ const GetHelp = () => {
     const [loading , setLoading]  = useState(false)
     const [error , setError]  = useState<string | null >(null)
     const [errorModal, setErrorModal] = useState<boolean>(false)
-  
+    const [home , setHome]  = useState<string  >('/')
+
   
 
     const createNewChat = async() => {
@@ -33,6 +35,24 @@ const GetHelp = () => {
              setError( e?.response?.data?.message || "Try Again");
          }
      }
+
+     const fetchUser = async()=>{
+        const cookieUser = await getUser()
+        if(cookieUser.role == 'landlord'){
+         setHome('/ldashboard?tab=profile')
+        }else if (cookieUser.role == 'admin'){
+         setHome('/admin')
+        }
+        else {
+         setHome('/?tab=profile')
+        }
+    }
+
+    useEffect(() => {
+        fetchUser()
+      }, [])
+      
+      
     return ( 
         <div className="">
              
@@ -41,7 +61,7 @@ const GetHelp = () => {
            {loading  && <Loading/>}
          { (error && errorModal)  &&    <ErrorModal setErrorModal={setErrorModal} text={error}/>}
             <div className=' text-grey-light flex  items-center  justify-between border-b-[0.4px] border-gray-300 px-4 rounded-md w-full h-12  '>
-            <a href="/">
+            <a href={home}>
               <PrevIcon color="" width="" height=""/>
             </a>
                 <p className='flex-1 text-center text-[1.2rem] font-[500] text-blue-800'> Get Help </p>

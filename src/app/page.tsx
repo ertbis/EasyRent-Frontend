@@ -60,6 +60,7 @@ export default function Home({searchParams} : any) {
 
 
    useEffect(() => {
+    console.log(searchParams)
       if(searchParams.tab){
          setTab(searchParams.tab)
       }
@@ -324,8 +325,6 @@ const sendAttachedMessage = async (param: string) => {
 
     
 }
-
-
 
 
 

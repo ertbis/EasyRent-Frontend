@@ -48,8 +48,7 @@ const InboxPage: FC<ScreenProps>  = ({chatMessages, sender, sendMessage, onlineU
           <p className="text-blue-800 text-center w-56 mt-4 text-xl">You have no messages at the moment</p>
       </div>
       }
-     
-        
+
       </>
        
      );

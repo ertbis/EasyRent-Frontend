@@ -149,7 +149,7 @@ const ChatScreen :FC<ScreenProps> = ({isLoading, isTyping, writeMessage, message
                                    <p  className="bg-white bottom-[10%] left-[10%] text-[#343A40] rounded-[0.5rem] text-[0.5rem] p-[0.5rem]  absolute">{data?.attachment?.propertyId?.location }</p>
                              </div>
                              <div className="flex flex-col justify-center items-center">
-                                       <a href={`/house/${data?.attachment?.propertyId?._id}`}  className="text-[1rem] text-[#fff] font-semibold ">{data?.attachment?.propertyId?.apartment }  apartment </a>
+                                       <a href={`/tour/${data?.attachment?._id}`}  className="text-[1rem] text-[#fff] font-semibold ">{data?.attachment?.propertyId?.apartment }  apartment </a>
                                        <div className='flex flex-[0.5] justify-start items-center text-grey-light text-sm w-full'>
                                          <CiLocationOn size={13}  className='ml-4 text-[#F5FEFF]'/>
                                          <p className=' flex text-[0.625rem] text-[#F5FEFF] lg:text-sm'> {data?.attachment?.propertyId?.location }</p>

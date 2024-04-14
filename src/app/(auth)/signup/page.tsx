@@ -80,6 +80,14 @@ const SignUp = () => {
     }));
   };
 
+  
+  const handleGoogleLogin = () => {
+    const serverURL = process.env.NEXT_PUBLIC_SERVER_URL
+    // window.location.href = 'https://easyrent-44an.onrender.com/auth/google/callback';
+    window.location.href = `${serverURL}auth/google/callback` ;
+
+  };
+
   return (
 
     <>
@@ -202,7 +210,7 @@ const SignUp = () => {
               
 
                 <button
-                  type="submit"
+                  type="submit" 
                   className="bg-green-700 text-white py-2 py-3 md:py-2 rounded-md w-full"
                 >
                   Sign Up
@@ -217,9 +225,9 @@ const SignUp = () => {
                 <hr className="w-full border-grey-light" />
               </div>
               <div className="flex   flex-col md:flex-row justify-center mt-2">
-              <button onClick={() => {
-                setErrorModal(true)
-                setError('Google OAUTH not avalable - log in with email')}}  className="flex justify-center bg-transparent w-full md:w-[5rem] my-2 md:my-0 md:mx-2  p-3 px-6 md:p-2 border border-green-700 border-solid rounded-lg">
+              <button onClick={() => handleGoogleLogin()}             
+                className="flex justify-center bg-transparent w-full md:w-[5rem] my-2 md:my-0 md:mx-2  p-3 px-6 md:p-2 border border-green-700 border-solid rounded-lg"
+                >
                 <FcGoogle size={27}  />
                 <p className='md:hidden  text-left text-grey-light ml-4 flex-1' >Continue With Google</p>
               </button>

@@ -30,8 +30,8 @@ const LandLordDashboard = ({searchParams} : any) => {
    // const houses = useSelector((state: RootState) => state.houses.houses)
    const [tab, setTab] = useState("home")
    useEffect(() => {
-      if(searchParams.tab){
-         setTab(searchParams.tab)
+      if(searchParams?.tab){
+         setTab(searchParams?.tab)
       }
    }, [])
    // const [houses,  setHouses] = useState([])

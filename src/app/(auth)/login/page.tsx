@@ -85,7 +85,10 @@ const Login = () => {
     }
   
     const handleGoogleLogin = () => {
-      window.location.href = 'https://easyrent-44an.onrender.com/auth/google/callback';
+      const serverURL = process.env.NEXT_PUBLIC_SERVER_URL
+      // window.location.href = 'https://easyrent-44an.onrender.com/auth/google/callback';
+      window.location.href = `${serverURL}auth/google/callback` ;
+
     };
     
   

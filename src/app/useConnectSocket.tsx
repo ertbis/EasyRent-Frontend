@@ -21,8 +21,10 @@ export const useConnectSocket = () => {
         useEffect(()=>{
             fetchUser()
         }, [])
+    
     useEffect(()=> {
-        const newSocket = io("https://easyrent-44an.onrender.com/")  
+        const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
+        const newSocket = io(`${serverUrl}`)  
         //const newSocket = io("http://localhost:5000/")  
   
         setSocket(newSocket)

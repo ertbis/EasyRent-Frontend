@@ -20,7 +20,7 @@ const HsImages :FC<propType> = ({selectedHouse, setTab}) => {
     const [selectedImage, setSelectedImage] = useState<string | null>(null)
     return ( 
         
-        <div>
+        <div >
            <div className=' text-grey-light flex  items-center  justify-between border-b border-gray-200 px-4 rounded-md w-full h-12  '>
             <a onClick={()=> setTab('house')}>
              <PrevIcon color="" width="" height=""/>

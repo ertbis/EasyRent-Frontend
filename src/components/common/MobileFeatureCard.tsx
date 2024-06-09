@@ -122,12 +122,12 @@ function formatAmount(amount: any ) {
               <div className='  grid grid-cols-3 gap-1 mt-4  justify-start items-center' >
               {(house?.propertyStatus === "pending")   &&  
                     <div className="flex h-6 bg-grey-light w-full  mr-2  justify-center items-center rounded-xl p-[0.3rem] " >
-                        <p className="text-white text-xs"> Pending Approval</p>
+                        <p className="text-white text-[0.6rem]"> Pending Approval</p>
                     </div>
                   } 
                    {(house?.propertyStatus === "rejected")   &&  
                     <div className="flex h-6 bg-[red] w-full  mr-2  justify-center items-center rounded-xl p-[0.3rem] " >
-                        <p className="text-white text-xs"> Pending Approval</p>
+                        <p className="text-white text-xs"> Rejected </p>
                     </div>
                   } 
                   {house?.mainFeatures?.light &&  

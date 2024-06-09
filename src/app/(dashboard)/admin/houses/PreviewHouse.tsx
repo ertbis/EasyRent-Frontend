@@ -76,7 +76,7 @@ const PreviewPendingHouse :FC<any> = ({selectedHouse , setPreviewHouse}) => {
             console.log(error)
             setError(error.message)
             setLoading(false)
-
+            setErrorModal(true)
         }
       }
  
@@ -91,6 +91,7 @@ const PreviewPendingHouse :FC<any> = ({selectedHouse , setPreviewHouse}) => {
         } catch (error :any) {
             console.log(error)
             setError(error.message)
+            setErrorModal(true)
             setLoading(false)
 
         }}
@@ -103,7 +104,9 @@ const PreviewPendingHouse :FC<any> = ({selectedHouse , setPreviewHouse}) => {
 
 
     return ( 
-        <div    ref={modalRef} className='absolute top-0  w-full  md:mx-auto'>
+        <div ref={modalRef}>
+
+        <div     className='absolute top-0  w-full  md:mx-auto'>
 
         { tab == 'images' ? 
         <HsImages setTab={setTab} selectedHouse={selectedHouse}/>
@@ -167,8 +170,8 @@ const PreviewPendingHouse :FC<any> = ({selectedHouse , setPreviewHouse}) => {
                  </div>
 
         </div>
-              <button  className='w-[90%] mx-2 border border-green-700 p-2 rounded-xl' >
-              <a onClick={showImages} className='text-green-700 text-sm font-semibold'>Show All Images  +{selectedHouse.images.length}</a>
+              <button onClick={()=>showImages()}  className='w-[90%] mx-2 border border-green-700 p-2 rounded-xl' >
+              <a className='text-green-700 text-sm font-semibold'>Show All Images  +{selectedHouse.images.length}</a>
 
               </button>
          
@@ -228,6 +231,8 @@ const PreviewPendingHouse :FC<any> = ({selectedHouse , setPreviewHouse}) => {
         }
         
         </div>
+        </div>        
+
         
      );
 }

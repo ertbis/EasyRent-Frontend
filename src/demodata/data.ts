@@ -23,6 +23,7 @@ export const housesData:HouseType[] =[
       bedroom:0,
       status: "",
       owner: "",
+      propertyStatus: "accepted"
     },
 
     { apartment:"Self Contain",
@@ -46,7 +47,7 @@ export const housesData:HouseType[] =[
       status: "",
       owner: "",
       bedroom:0,
-      propertyStatus: 'accepted'
+      propertyStatus: 'accepted',
   },
 
 ]

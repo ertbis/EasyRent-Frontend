@@ -101,7 +101,6 @@ const PreviewPendingHouse :FC<any> = ({selectedHouse , setPreviewHouse}) => {
         setTab('images')
    }
 
-  console.log(selectedHouse)
 
     return ( 
         <div    ref={modalRef} className='absolute top-0  w-full  md:mx-auto'>

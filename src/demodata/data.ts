@@ -46,7 +46,7 @@ export const housesData:HouseType[] =[
       status: "",
       owner: "",
       bedroom:0,
-    
+      propertyStatus: 'accepted'
   },
 
 ]

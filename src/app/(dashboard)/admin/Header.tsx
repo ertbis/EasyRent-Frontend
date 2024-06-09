@@ -1,3 +1,4 @@
+'use client'
 import { NotificationIcon, SearchIcon } from "@/assets/icons"
 import { DropDownIcon, MessageActiveIcon } from "@/assets/icons1"
 import { AnyAaaaRecord } from "dns"

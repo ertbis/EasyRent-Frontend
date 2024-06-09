@@ -363,7 +363,7 @@ useEffect(()=> {
 
  fetchbyLocationAndPopularity()
 
-},[popularHouses])
+},[])
 
 
   return (

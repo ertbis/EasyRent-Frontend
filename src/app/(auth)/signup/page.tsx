@@ -84,7 +84,7 @@ const SignUp = () => {
   const handleGoogleLogin = () => {
     const serverURL = process.env.NEXT_PUBLIC_SERVER_URL
     // window.location.href = 'https://easyrent-44an.onrender.com/auth/google/callback';
-    window.location.href = `${serverURL}auth/google/callback` ;
+    window.location.href = `${serverURL}auth/google/callback?role=${inputData.role}` ;
 
   };
 
@@ -219,6 +219,10 @@ const SignUp = () => {
                   By signing up you agree to our Terms of Use and Privacy Policy
                 </p>
               </form>
+   
+   {inputData.role == "student"    &&
+   
+<>
               <div className="flex items-center mt-4">
                 <hr className="w-full border-grey-light" />
                 <p className="mx-2 text-xs text-grey-light">Or</p>
@@ -252,6 +256,13 @@ const SignUp = () => {
                   <a href="/login" className="text-green-700 cursor-pointer">Login</a>
                 </p>
               </div>
+</>
+   
+   
+   
+   
+   }
+
             </>
           )}
         </div>

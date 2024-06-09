@@ -105,6 +105,12 @@ export const getAllPropertyForAdmin = async ()  => {
     const resp = await http.get(`/apis/properties/getall`)
     return resp
 } 
+
+export const getAllPendingPropertyForAdmin = async ()  => {
+    const resp = await http.get(`/apis/properties/getpending`)
+    return resp
+} 
+
 export const deleteProperty = async (param: string)  => {    
     const resp = await http.delete(`/apis/properties/${param}`)
     return resp

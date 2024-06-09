@@ -17,6 +17,7 @@ export interface HouseType {
       school: boolean;
       carPack: boolean;
     };
+  propertyStatus : string;
 
 }
 

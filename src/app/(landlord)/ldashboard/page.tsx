@@ -82,6 +82,7 @@ const LandLordDashboard = ({searchParams} : any) => {
     
    }, [])
    
+   console.log(houses)
 
     return ( 
         <div className='relative  flex flex-col h-[100vh]  overflow-x-hidden   ' >

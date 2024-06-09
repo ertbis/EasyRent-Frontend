@@ -6,19 +6,23 @@ import { HouseListProps, HouseType } from "@/types/types"
 import { FC, useState } from "react"
 
 interface adminHouseViewProp {
-   houseData: HouseListProps | null
+   houseData: HouseListProps | null,
+   setPendingPage : any ,
 }
 
-const AdminHousesView:FC<adminHouseViewProp> = ({houseData}) => {
- 
+const AdminHousesView:FC<adminHouseViewProp> = ({houseData , setPendingPage}) => {
 
     return(
         <div className="relative bg-[#F8F9FB] text-[#343A40] p-[3rem]">
             <div className="flex w-full justify-between mb-[3rem]">
                 <p className="text-[1.25rem] font-bold ">houses</p>
-                <div className="flex gap-x-[1rem] cursor-pointer p-[0.6rem] px-[1rem]  bg-[#fff] rounded-[1.25rem] border border-[rgba(0, 0, 0, 0.20)]">
-                    <FilterIcon width="" height="" color=""/>
-                    <p className="">Filter</p>
+                <div className="flex items-center">
+                     <p onClick={() => setPendingPage(true)} 
+                     className="text-green-700 px-2 cursor-pointer" >Pending Approval Houses</p>
+                  <div className="flex gap-x-[1rem] cursor-pointer p-[0.6rem] px-[1rem]  bg-[#fff] rounded-[1.25rem] border border-[rgba(0, 0, 0, 0.20)]">
+                      <FilterIcon width="" height="" color=""/>
+                      <p className="">Filter</p>
+                  </div>
                 </div>
             </div>
             <div className="container mx-auto mt-8">
@@ -30,8 +34,8 @@ const AdminHousesView:FC<adminHouseViewProp> = ({houseData}) => {
             <th className="py-2 font-medium px-4 border border-gray-300">S/N</th>
             <th className="py-2 font-medium px-4 border border-gray-300">Location</th>
             <th className="py-2  font-medium px-4 border border-gray-300">Apartment</th>
-            <th className="py-2 font-medium px-4 border border-gray-300">Hostel Name</th>
-            <th className="py-2 font-medium px-4 border border-gray-300">Landlord Email</th>
+            <th className="py-2 font-medium px-4 borde border-gray-300">Hostel Name</th>
+            <th className="py-2 font-medium px-4 borderr border-gray-300">Landlord Email</th>
             <th className="py-2 font-medium px-4 border border-gray-300">Free /Occupied</th>
             <th className="py-2 font-medium px-4 border border-gray-300">Actions</th>
           </tr>

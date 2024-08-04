@@ -113,7 +113,7 @@ const PreviewPendingHouse :FC<any> = ({selectedHouse , setPreviewHouse}) => {
         :
         <>
          
-         
+            {loading  && <Loading/>  }
             {error && errorModal && <ErrorModal setErrorModal={setErrorModal} text={error} />}
         <div className='bg-white    w-[90%] p-4' >
            <div className='flex  justify-between items-center'>
@@ -212,12 +212,13 @@ const PreviewPendingHouse :FC<any> = ({selectedHouse , setPreviewHouse}) => {
         </div>
        </div>
         
-         <button   onClick={()=>approveHouse()}
+         <button   onClick={()=>approveHouse()}  disabled ={loading}
         className=' font-bold rounded-lg   h-10  w-[90%]  bg-green-700  mx-2 text-white ' 
         >Approve Apartment</button>        
 
        <button   onClick={()=>rejectedHouse()}
         className=' font-bold rounded-lg  my-4  h-10  w-[90%]  border border-green-700  mx-2 text-green-700 ' 
+        disabled ={loading}
         >Reject Apartment</button>       
      
         </div>

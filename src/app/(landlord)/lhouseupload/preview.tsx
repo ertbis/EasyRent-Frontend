@@ -36,19 +36,24 @@ interface PreviewProps {
 
     const postProperty = async() => {
         setLoading(true)
+        if(houseData.images.length !> 3){
+            setError( "Minimum of 3 images is required for a new apartment");
+            setLoading(false)
+        }else {
+                try {
+                    console.log(houseData)
+                    const resp = await uploadProperty(houseData);
+                    console.log(resp)
+                    router.push('/ldashboard');
+                
+                } catch (error: any) {
+                setErrorModal(true)
+                setLoading(false)
+                setError( error?.response?.data?.message || "Try Again");
+                console.log(error)   
+                }
 
-       try {
-           console.log(houseData)
-           const resp = await uploadProperty(houseData);
-           console.log(resp)
-           router.push('/ldashboard');
-        
-       } catch (error: any) {
-        setErrorModal(true)
-        setLoading(false)
-        setError( error?.response?.data?.message || "Try Again");
-        console.log(error)   
-       }
+        }
          
     }
 
